@@ -1646,8 +1646,8 @@ window.showNotification = function(msg, type){
 // CRITICAL HITS SYSTEM
 // ============================================
 let criticalHitsCount = 0;
-let critChance = 0.15 + getSkillBonus('critChance');
-let critDamageMultiplier = 2 + getSkillBonus('critDamage');
+let critChance = 0.15;
+let critDamageMultiplier = 2;
 let totalDamageDealt = 0;
 
 function isCriticalHit(){
@@ -4495,6 +4495,9 @@ function getSkillBonus(type) {
     }
     return total;
 }
+
+critChance = 0.15 + getSkillBonus('critChance');
+critDamageMultiplier = 2 + getSkillBonus('critDamage');
 
 function awardSkillPoints() {
     let earned = Math.floor(level / 5) + Math.floor(kills / 500);
