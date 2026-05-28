@@ -352,7 +352,7 @@
             <h2 style="color:#00d2ff;">GALACTIC DEFENDER</h2>
             <p>המשחק הקלאסי! יריות, בוסים, אירועים והישגים</p>
             <p style="color:#00ffaa;font-size:12px;margin-top:10px;">▶ לחץ כדי לשחק</p>
-            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ עדכון 10.5: 40 אירועים + 310+ הישגים + מערכת סקינים + פרס יומי!</div>
+            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.6: Skill Tree, New Events, Bug Fixes!</div>
         </div>
         <div class="game-select-card coming-soon" onclick="showCustomAlert('משחק זה עדיין בפיתוח! יגיע בקרוב...')">
             <div style="font-size:48px;">❓</div>
@@ -589,7 +589,7 @@
 </div>
 
 <div id="events-screen" class="overlay">
-    <h2 style="color:#ff00ff;" data-i18n="events">📋 EVENT LIST (40 EVENTS)</h2>
+    <h2 style="color:#ff00ff;" data-i18n="events">📋 EVENT LIST (42 EVENTS)</h2>
     <div class="events-grid" id="events-list-container"></div>
     <button class="btn" onclick="closeEvents()" style="margin-bottom:30px;">BACK</button>
 </div>
@@ -4886,7 +4886,6 @@ function updateShopUI(){
     }
 
     document.getElementById('shop-money').innerHTML="CREDITS: "+formatNumber(totalCoins);
-}
 }
 function openShop(){
     document.getElementById('start-screen').style.display='none';
