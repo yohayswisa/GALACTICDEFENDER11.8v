@@ -1860,7 +1860,6 @@ let timeDistortionPurchased = localStorage.getItem('timeDistortionPurchased') ==
 let crystalHeartPurchased = localStorage.getItem('crystalHeartPurchased') === 'true';
 let guardianAngelUsed = false;
 let damageReduction = ironWillPurchased ? 0.5 : 1;
-damageReduction *= (1 - getSkillBonus('dmgReduction'));
 let enemySlow = timeDistortionPurchased ? 0.7 : 1;
 let gemMultiplier = crystalHeartPurchased ? 2 : 1;
 let resourceCollectionLevel = parseInt(localStorage.getItem('resourceCollectionLevel')) || 0;
@@ -4332,46 +4331,46 @@ function checkEventTrigger(){
     } else {
         if(wave>0 && wave%40===0 && !activeEvent){ triggerCosmicCollapse(); return; }
     }
-    if(wave>=22 && !activeEvent && Math.random()<0.0006){ triggerDoppelganger(); return; }
-    if(wave>=30 && !activeEvent && Math.random()<0.00001){ triggerSupernova(); return; }
-    if(wave>=10 && !activeEvent && Math.random()<0.00173){ triggerStarfall(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.0008){ triggerInferno(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0006){ triggerChainLightning(); return; }
-    if(wave>=12 && !activeEvent && Math.random()<0.002){ triggerBarrier(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.0002){ triggerSoulReaper(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.0001){ triggerGambler(); return; }
-    if(wave>=22 && !activeEvent && Math.random()<0.0004){ triggerVortex(); return; }
-    if(wave>=30 && !activeEvent && Math.random()<0.00003){ triggerKingsBlessing(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0005){ triggerPrism(); return; }
-    if(wave>=35 && !activeEvent && Math.random()<0.00002){ triggerAbyss(); return; }
-    if(wave>=12 && !activeEvent && Math.random()<0.001){ triggerLightningStorm(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.0005){ triggerLuckyDraw(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0003){ triggerMysteryBox(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.0025){ triggerDoomsDay(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.00005){ triggerRoyalBlessing(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.002){ triggerFrozenTime(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0015){ triggerCrystalRain(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.0008){ triggerShadowClone(); return; }
-    if(wave>=30 && !activeEvent && Math.random()<0.000000009){ triggerDivineIntervention(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.000005){ triggerGoldRush(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.00001){ triggerBugEvent(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.00004){ triggerTimeWarp(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.00002){ triggerReapersCall(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.001){ triggerSoulHarvest(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.003){ triggerMasquerade(); return; }
-    if(wave>=12 && !activeEvent && Math.random()<0.005){ triggerTidalWave(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.00005){ triggerDeathTouch(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.00008){ triggerChaosRealm(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.00003){ triggerPrimordialRage(); return; }
-    if(wave>0 && wave%9===0 && !activeEvent && Math.random()<0.45){ triggerSpaceTreasure(); return; }
-    if(wave>=4 && wave%4===0 && Math.random()<0.6 && !activeEvent){ triggerMeteorShower(); return; }
-    if(wave>=10 && !activeEvent && Math.random()<0.03){ triggerDimensionRift(); return; }
-    if(wave>=5 && wave%5===0 && !activeEvent && Math.random()<0.005){ triggerApocalypseMode(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.003){ triggerVoidMode(); return; }
-    if(wave>=16 && !activeEvent && Math.random()<0.001){ triggerAsteroidBelt(); return; }
-    if(wave>=14 && !activeEvent && Math.random()<0.0008){ triggerSupplyDrop(); return; }
-    if(!endlessMode && wave>=20 && !activeEvent && !guardian && Math.random()<0.001){ triggerGuardian(); return; }
-    if(endlessMode && wave>=20 && !activeEvent && !guardian && Math.random()<0.0005){ triggerGuardian(); return; }
+    if(wave>=22 && Math.random()<0.0006){ queueEvent(triggerDoppelganger); return; }
+    if(wave>=30 && Math.random()<0.00001){ queueEvent(triggerSupernova); return; }
+    if(wave>=10 && Math.random()<0.00173){ queueEvent(triggerStarfall); return; }
+    if(wave>=15 && Math.random()<0.0008){ queueEvent(triggerInferno); return; }
+    if(wave>=18 && Math.random()<0.0006){ queueEvent(triggerChainLightning); return; }
+    if(wave>=12 && Math.random()<0.002){ queueEvent(triggerBarrier); return; }
+    if(wave>=25 && Math.random()<0.0002){ queueEvent(triggerSoulReaper); return; }
+    if(wave>=20 && Math.random()<0.0001){ queueEvent(triggerGambler); return; }
+    if(wave>=22 && Math.random()<0.0004){ queueEvent(triggerVortex); return; }
+    if(wave>=30 && Math.random()<0.00003){ queueEvent(triggerKingsBlessing); return; }
+    if(wave>=18 && Math.random()<0.0005){ queueEvent(triggerPrism); return; }
+    if(wave>=35 && Math.random()<0.00002){ queueEvent(triggerAbyss); return; }
+    if(wave>=12 && Math.random()<0.001){ queueEvent(triggerLightningStorm); return; }
+    if(wave>=15 && Math.random()<0.0005){ queueEvent(triggerLuckyDraw); return; }
+    if(wave>=18 && Math.random()<0.0003){ queueEvent(triggerMysteryBox); return; }
+    if(wave>=20 && Math.random()<0.0025){ queueEvent(triggerDoomsDay); return; }
+    if(wave>=25 && Math.random()<0.00005){ queueEvent(triggerRoyalBlessing); return; }
+    if(wave>=15 && Math.random()<0.002){ queueEvent(triggerFrozenTime); return; }
+    if(wave>=18 && Math.random()<0.0015){ queueEvent(triggerCrystalRain); return; }
+    if(wave>=25 && Math.random()<0.0008){ queueEvent(triggerShadowClone); return; }
+    if(wave>=30 && Math.random()<0.000000009){ queueEvent(triggerDivineIntervention); return; }
+    if(wave>=25 && Math.random()<0.000005){ queueEvent(triggerGoldRush); return; }
+    if(wave>=20 && Math.random()<0.00001){ queueEvent(triggerBugEvent); return; }
+    if(wave>=20 && Math.random()<0.00004){ queueEvent(triggerTimeWarp); return; }
+    if(wave>=20 && Math.random()<0.00002){ queueEvent(triggerReapersCall); return; }
+    if(wave>=20 && Math.random()<0.001){ queueEvent(triggerSoulHarvest); return; }
+    if(wave>=15 && Math.random()<0.003){ queueEvent(triggerMasquerade); return; }
+    if(wave>=12 && Math.random()<0.005){ queueEvent(triggerTidalWave); return; }
+    if(wave>=25 && Math.random()<0.00005){ queueEvent(triggerDeathTouch); return; }
+    if(wave>=25 && Math.random()<0.00008){ queueEvent(triggerChaosRealm); return; }
+    if(wave>=15 && Math.random()<0.00003){ queueEvent(triggerPrimordialRage); return; }
+    if(wave>0 && wave%9===0 && Math.random()<0.45){ queueEvent(triggerSpaceTreasure); return; }
+    if(wave>=4 && wave%4===0 && Math.random()<0.6){ queueEvent(triggerMeteorShower); return; }
+    if(wave>=10 && Math.random()<0.03){ queueEvent(triggerDimensionRift); return; }
+    if(wave>=5 && wave%5===0 && Math.random()<0.005){ queueEvent(triggerApocalypseMode); return; }
+    if(wave>=15 && Math.random()<0.003){ queueEvent(triggerVoidMode); return; }
+    if(wave>=16 && Math.random()<0.001){ queueEvent(triggerAsteroidBelt); return; }
+    if(wave>=14 && Math.random()<0.0008){ queueEvent(triggerSupplyDrop); return; }
+    if(!endlessMode && wave>=20 && !guardian && Math.random()<0.001){ queueEvent(triggerGuardian); return; }
+    if(endlessMode && wave>=20 && !guardian && Math.random()<0.0005){ queueEvent(triggerGuardian); return; }
 }
 
 function activateSynapse(){
@@ -4498,6 +4497,7 @@ function getSkillBonus(type) {
 
 critChance = 0.15 + getSkillBonus('critChance');
 critDamageMultiplier = 2 + getSkillBonus('critDamage');
+damageReduction *= (1 - getSkillBonus('dmgReduction'));
 
 function awardSkillPoints() {
     let earned = Math.floor(level / 5) + Math.floor(kills / 500);
@@ -5133,7 +5133,7 @@ function startGame(){
     soulReaperActive=false;soulReaperSoul=null;gamblerActive=false;vortexActive=false;kingsBlessingActive=false;prismActive=false;abyssActive=false;
     doppelgangerActive=false;doppelgangerClone=null;supernovaActive=false;
     spaceTreasureActive=false;spaceTreasureCrates=[];
-    asteroidBeltActive=false;asteroids=[];supplyDropActive=false;supplyDropCrate=null;greenAuraActive=false;divineFlashTimer=0;eventQueue=[];
+    divineFlashTimer=0;eventQueue=[];
     shockwaveActive=false;shockwaveTimer=0;shockwaveRadius=0;
     timeSlowActive=false;timeSlowTimer=0;
     gravityBombActive=false;gravityBombTimer=0;gravityBombPhase=0;
@@ -5388,7 +5388,6 @@ function loop(){
         stableCycleActive=false; tidalWaveActive=false; masqueradeActive=false; soulHarvestActive=false; frozenTimeActive=false; crystalRainActive=false; shadowCloneActive=false;
         lightningStormActive=false; doomsDayActive=false; royalBlessingActive=false; starfallActive=false; infernoActive=false; chainLightningActive=false; barrierActive=false;
         soulReaperActive=false; vortexActive=false; kingsBlessingActive=false; prismActive=false; abyssActive=false; doppelgangerActive=false; supernovaActive=false; spaceTreasureActive=false; asteroidBeltActive=false; asteroids=[]; supplyDropActive=false; supplyDropCrate=null; greenAuraActive=false;
-        asteroidBeltActive=false; asteroids=[]; supplyDropActive=false; supplyDropCrate=null; greenAuraActive=false;
         riftMultiplier=1;
         document.getElementById('event-banner').style.display='none'; startEventCooldown();
         processEventQueue();
