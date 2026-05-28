@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.0</title>
+    <title>Galactic Defender - UPDATE 11.4</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -292,7 +292,7 @@
 <!-- MAIN HUB -->
 <div id="main-hub" class="overlay">
     <h1 class="hub-title" style="font-size:52px;margin-bottom:5px;color:#00d2ff;">✨ GALACTIC DEFENDER ✨</h1>
-    <div class="hub-version-badge">UPDATE 11.0</div>
+    <div class="hub-version-badge">UPDATE 11.4</div>
     <div class="hub-divider"></div>
     <div style="margin:15px 0;">
         <button class="hub-btn-hero" onclick="openGameSelect()">🚀 PLAY NOW</button>
@@ -327,7 +327,7 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.0 - Language System + Hub Redesign + Space Treasure Event + QOL!</p>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.4 - 3 New Abilities + Equipment System + Lootbox Probabilities + Shop Upgrades!</p>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
@@ -451,12 +451,12 @@
     <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 LOOTBOXES & REWARDS 🎲</h2>
     <div style="margin:10px;">💎 <span data-i18n="your_gemstones">YOUR GEMSTONES</span>: <span id="rng-gems" style="color:#ffcc00;font-size:24px;">0</span></div>
     <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;">
-        <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div>COMMON LOOTBOX</div><div style="color:#4287f5;">🔵 COMMON</div><div style="color:gold;">50 💎</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div></div>
-        <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div>RARE LOOTBOX</div><div style="color:#42f5b6;">🟢 RARE</div><div style="color:gold;">150 💎</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div></div>
-        <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div>EPIC LOOTBOX</div><div style="color:#f5a742;">🟡 EPIC</div><div style="color:gold;">400 💎</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div></div>
-        <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div>LEGENDARY LOOTBOX</div><div style="color:#f542d1;">🟠 LEGENDARY</div><div style="color:gold;">1000 💎</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div></div>
-        <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div>MYTHIC LOOTBOX</div><div style="color:#f54242;">🔴 MYTHIC</div><div style="color:gold;">2500 💎</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div></div>
-        <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div>ULTRA MYTHIC BOX</div><div style="color:#f5e642;">💎 ULTRA MYTHIC</div><div style="color:gold;">10000 💎</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div></div>
+        <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div>COMMON LOOTBOX</div><div style="color:#4287f5;">🔵 COMMON</div><div style="color:gold;">50 💎</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('common')">📊 PROBS</button></div>
+        <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div>RARE LOOTBOX</div><div style="color:#42f5b6;">🟢 RARE</div><div style="color:gold;">150 💎</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('rare')">📊 PROBS</button></div>
+        <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div>EPIC LOOTBOX</div><div style="color:#f5a742;">🟡 EPIC</div><div style="color:gold;">400 💎</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('epic')">📊 PROBS</button></div>
+        <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div>LEGENDARY LOOTBOX</div><div style="color:#f542d1;">🟠 LEGENDARY</div><div style="color:gold;">1000 💎</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('legendary')">📊 PROBS</button></div>
+        <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div>MYTHIC LOOTBOX</div><div style="color:#f54242;">🔴 MYTHIC</div><div style="color:gold;">2500 💎</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('mythic')">📊 PROBS</button></div>
+        <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div>ULTRA MYTHIC BOX</div><div style="color:#f5e642;">💎 ULTRA MYTHIC</div><div style="color:gold;">10000 💎</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('ultra')">📊 PROBS</button></div>
     </div>
     <h3 style="margin-top:20px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
     <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
@@ -597,6 +597,8 @@
 <div id="event-banner"></div>
 <div id="od-btn" onclick="activateOverdrive()">OVER<br>DRIVE</div>
 <div id="ability-btns" class="ability-btn"></div>
+<button id="ability-select-btn" style="position:absolute;right:10px;top:55px;z-index:60;width:40px;height:40px;border-radius:50%;background:rgba(0,30,60,0.8);border:1px solid #ffcc00;color:#fff;font-size:18px;display:none;cursor:pointer;pointer-events:all;transition:0.2s;" onclick="openAbilitySelectionPanel()" title="Select Abilities">🎯</button>
+<div id="ability-selection-panel" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,10,30,0.96);border:2px solid #00d2ff;border-radius:16px;padding:20px;z-index:200;display:none;flex-direction:column;align-items:center;min-width:280px;max-width:360px;max-height:80vh;overflow-y:auto;backdrop-filter:blur(10px);pointer-events:all;"></div>
 <button id="pause-btn" onclick="togglePause()">⏸</button>
 <div id="achievement-popup" class="achievement-popup-fixed">
     <div class="title">🏆 ACHIEVEMENT UNLOCKED</div>
@@ -1497,8 +1499,14 @@ function setGraphicsQuality(quality){
 }
 
 function openSettings(){
-    settingsOpenedFrom = 'start-screen';
-    document.getElementById('start-screen').style.display='none';
+    // Detect which screen is currently visible
+    if(document.getElementById('pause-screen').style.display === 'flex'){
+        settingsOpenedFrom = 'pause-screen';
+        document.getElementById('pause-screen').style.display='none';
+    } else {
+        settingsOpenedFrom = 'start-screen';
+        document.getElementById('start-screen').style.display='none';
+    }
     document.getElementById('settings-screen').style.display='flex';
     initSettingsUI();
 }
@@ -1506,7 +1514,9 @@ let settingsOpenedFrom = 'start-screen';
 
 function closeSettings(){
     document.getElementById('settings-screen').style.display='none';
-    document.getElementById(settingsOpenedFrom).style.display='flex';
+    const targetScreen = settingsOpenedFrom;
+    settingsOpenedFrom = 'start-screen'; // Reset to default after use
+    document.getElementById(targetScreen).style.display='flex';
     updateMainMenuUI();
 }
 
@@ -1545,7 +1555,7 @@ function openPauseSettings(){
     document.getElementById('settings-screen').style.display='flex';
     initSettingsUI();
 }
-// Normal closeSettings behavior (restored by backToHub when overridden by openPauseSettings)
+// closeSettings uses settingsOpenedFrom to return to the correct screen
 
 // FPS COUNTER
 let fpsFrameCount = 0;
@@ -1684,6 +1694,8 @@ function autoSave(){
     localStorage.setItem('dmgLevel', damageLevel);
     localStorage.setItem('droneCount', droneCount);
     localStorage.setItem('bombCount', bombCount);
+    localStorage.setItem('resourceCollectionLevel', resourceCollectionLevel);
+    localStorage.setItem('weaponEnhancementLevel', weaponEnhancementLevel);
     localStorage.setItem('gemstones', gemstones);
     localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
     localStorage.setItem('achievements', JSON.stringify(achievements));
@@ -1826,6 +1838,8 @@ let guardianAngelUsed = false;
 let damageReduction = ironWillPurchased ? 0.5 : 1;
 let enemySlow = timeDistortionPurchased ? 0.7 : 1;
 let gemMultiplier = crystalHeartPurchased ? 2 : 1;
+let resourceCollectionLevel = parseInt(localStorage.getItem('resourceCollectionLevel')) || 0;
+let weaponEnhancementLevel = parseInt(localStorage.getItem('weaponEnhancementLevel')) || 0;
 
 // ============================================
 // RARE SPECIAL ABILITIES SYSTEM
@@ -1872,6 +1886,30 @@ const RARE_ABILITIES = {
         unlockReq: () => wave >= 30,
         unlockDesc: 'Reach wave 30',
         purchased: false, lastUsed: 0, active: false
+    },
+    resourceMagnet: {
+        id: 'resourceMagnet', name: '🧲 RESOURCE MAGNET', icon: '🧲',
+        desc: 'Automatically attracts all dropped loot on screen for 15 seconds',
+        cost: 3000, cooldown: 45000, category: 'shields',
+        unlockReq: () => totalCoins >= 5000,
+        unlockDesc: 'Accumulate 5000 coins',
+        purchased: false, lastUsed: 0, active: false
+    },
+    timeWarp: {
+        id: 'timeWarp', name: '🕐 TIME WARP', icon: '🕐',
+        desc: 'Slows all enemies by 50% for 10 seconds',
+        cost: 12000, cooldown: 90000, category: 'shields',
+        unlockReq: () => totalKills >= 3000,
+        unlockDesc: 'Accumulate 3000 kills',
+        purchased: false, lastUsed: 0, active: false
+    },
+    ultimateAnnihilation: {
+        id: 'ultimateAnnihilation', name: '💀 ULTIMATE ANNIHILATION', icon: '💀',
+        desc: 'Clears all enemies on screen + invincibility for 5 seconds',
+        cost: 25000, cooldown: 180000, category: 'weapons',
+        unlockReq: () => totalKills >= 10000,
+        unlockDesc: 'Accumulate 10000 kills',
+        purchased: false, lastUsed: 0, active: false
     }
 };
 
@@ -1892,6 +1930,73 @@ let gravityBombCenter = {x:0, y:0};
 let gravityBombPhase = 0; // 0=pull, 1=exploded
 let regenAuraTimer = 0;
 let lightningStrikeEffect = null; // {x, y, timer}
+let resourceMagnetActive = false;
+let resourceMagnetTimer = 0;
+let abilityTimeWarpActive = false;
+let abilityTimeWarpTimer = 0;
+let ultimateAnnihilationActive = false;
+let ultimateAnnihilationTimer = 0;
+
+// Ability Equipment Selection (max 3 per game)
+let selectedAbilities = JSON.parse(localStorage.getItem('selectedAbilities') || '[]');
+if(!Array.isArray(selectedAbilities)) selectedAbilities = [];
+// Validate: only keep purchased abilities
+selectedAbilities = selectedAbilities.filter(key => RARE_ABILITIES[key] && RARE_ABILITIES[key].purchased);
+if(selectedAbilities.length > 3) selectedAbilities = selectedAbilities.slice(0, 3);
+
+function saveSelectedAbilities(){
+    localStorage.setItem('selectedAbilities', JSON.stringify(selectedAbilities));
+}
+
+function toggleAbilitySelection(abilityId){
+    if(!RARE_ABILITIES[abilityId] || !RARE_ABILITIES[abilityId].purchased) return;
+    const idx = selectedAbilities.indexOf(abilityId);
+    if(idx >= 0){
+        selectedAbilities.splice(idx, 1);
+    } else {
+        if(selectedAbilities.length >= 3){
+            showNotification('⚠ Max 3 abilities can be equipped!', 'warning');
+            return;
+        }
+        selectedAbilities.push(abilityId);
+    }
+    saveSelectedAbilities();
+    renderAbilitySelectionPanel();
+}
+
+function renderAbilitySelectionPanel(){
+    const panel = document.getElementById('ability-selection-panel');
+    if(!panel) return;
+    let html = '<h3 style="color:#00d2ff;margin-bottom:10px;">🎯 SELECT ABILITIES (Max 3)</h3>';
+    for(let key of Object.keys(RARE_ABILITIES)){
+        const ab = RARE_ABILITIES[key];
+        if(!ab.purchased) continue;
+        const isSelected = selectedAbilities.includes(key);
+        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : key === 'resourceMagnet' ? '#ffcc00' : key === 'timeWarp' ? '#00ccff' : key === 'ultimateAnnihilation' ? '#ff0000' : key === 'lightningStrike' ? '#ffff00' : '#42f5b6';
+        html += `<div style="display:flex;align-items:center;gap:8px;padding:6px;margin:3px 0;background:rgba(0,0,0,0.4);border-radius:8px;border:1px solid ${isSelected ? bgColor : '#444'};cursor:pointer;" onclick="toggleAbilitySelection('${key}')">
+            <input type="checkbox" ${isSelected ? 'checked' : ''} style="pointer-events:none;accent-color:${bgColor};" />
+            <span style="font-size:16px;">${ab.icon}</span>
+            <span style="font-size:11px;color:#ccc;">${ab.name.replace(ab.icon+' ','')}</span>
+            ${isSelected ? '<span style="margin-left:auto;font-size:10px;color:#00ffaa;">✅</span>' : ''}
+        </div>`;
+    }
+    html += '<div style="font-size:10px;color:#aaa;margin-top:8px;">Equipped: ' + selectedAbilities.length + '/3</div>';
+    html += '<button class="btn" style="margin-top:10px;" onclick="closeAbilitySelectionPanel()">DONE</button>';
+    panel.innerHTML = html;
+}
+
+function openAbilitySelectionPanel(){
+    const panel = document.getElementById('ability-selection-panel');
+    if(!panel) return;
+    panel.style.display = 'flex';
+    renderAbilitySelectionPanel();
+}
+
+function closeAbilitySelectionPanel(){
+    const panel = document.getElementById('ability-selection-panel');
+    if(panel) panel.style.display = 'none';
+    updateAbilityButtons();
+}
 
 function buyRareAbility(id){
     const ability = RARE_ABILITIES[id];
@@ -1987,6 +2092,38 @@ function activateRareAbility(id){
             showNotification('⚡ No enemies to strike!', 'warning');
         }
     }
+    else if(id === 'resourceMagnet'){
+        resourceMagnetActive = true;
+        resourceMagnetTimer = Date.now() + 15000;
+        if(player && player.x && player.y) floats.push({txt:'🧲 RESOURCE MAGNET!',x:player.x-60,y:player.y-40,l:1.5,c:'#ffcc00',size:24});
+        showNotification('🧲 Resource Magnet activated! All loot attracted for 15s!', 'success');
+    }
+    else if(id === 'timeWarp'){
+        abilityTimeWarpActive = true;
+        abilityTimeWarpTimer = Date.now() + 10000;
+        if(player && player.x && player.y) floats.push({txt:'🕐 TIME WARP!',x:player.x-50,y:player.y-40,l:1.5,c:'#00ccff',size:24});
+        showNotification('🕐 Time Warp activated! Enemies slowed 50% for 10s!', 'success');
+    }
+    else if(id === 'ultimateAnnihilation'){
+        ultimateAnnihilationActive = true;
+        ultimateAnnihilationTimer = Date.now() + 5000;
+        if(player) player.invincibleTimer = 300; // ~5 seconds at 60fps
+        // Clear all enemies on screen
+        let annihilatedCount = 0;
+        for(let i = enemies.length-1; i >= 0; i--){
+            let e = enemies[i];
+            let pointBonus = e.isBoss ? 100000 : 10000 * combo;
+            pointBonus *= skinCreditMultiplier;
+            score += pointBonus; kills++; waveKills++; annihilatedCount++;
+            if(e.isBoss) bossesKilled++;
+            for(let k=0;k<15;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ff0000',1));
+            enemies.splice(i,1);
+        }
+        boss = null;
+        eBullets.length = 0;
+        if(player && player.x && player.y) floats.push({txt:'💀 ANNIHILATION! +' + annihilatedCount, x:player.x-70,y:player.y-40,l:2,c:'#ff0000',size:28});
+        showNotification(`💀 Ultimate Annihilation! ${annihilatedCount} enemies destroyed! Invincible for 5s!`, 'success');
+    }
     updateAbilityButtons();
 }
 
@@ -2003,11 +2140,12 @@ function updateAbilityButtons(){
     for(let key of Object.keys(RARE_ABILITIES)){
         const ab = RARE_ABILITIES[key];
         if(!ab.purchased || ab.cooldown === 0) continue; // Skip passive abilities
+        if(selectedAbilities.length > 0 && !selectedAbilities.includes(key)) continue; // Skip non-selected abilities
         hasAny = true;
         const cdRemaining = Math.max(0, ab.cooldown - (now - ab.lastUsed));
         const onCooldown = cdRemaining > 0;
         const cdSec = Math.ceil(cdRemaining / 1000);
-        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : '#ffff00';
+        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : key === 'resourceMagnet' ? '#ffcc00' : key === 'timeWarp' ? '#00ccff' : key === 'ultimateAnnihilation' ? '#ff0000' : '#ffff00';
         html += `<div class="ability-icon ${onCooldown ? 'on-cooldown' : ''}" style="border-color:${bgColor};background:rgba(0,0,0,0.6);" onclick="activateRareAbility('${key}')">
             ${ab.icon}
             ${onCooldown ? `<div class="ability-cooldown-overlay">${cdSec}s</div>` : ''}
@@ -2022,8 +2160,24 @@ function updateAbilityButtons(){
 // ============================================
 let updateLogData = [
     {
+        version: 'v11.4',
+        changes: [
+            'Fixed Settings Back Button bug - now correctly returns to pause screen when opened from pause menu',
+            'NEW ABILITY: Resource Magnet - attracts all dropped loot for 15s (5000 coins to unlock)',
+            'NEW ABILITY: Time Warp - slows all enemies 50% for 10s (3000 kills to unlock)',
+            'NEW ABILITY: Ultimate Annihilation - clears all enemies + 5s invincibility (10000 kills to unlock)',
+            'Ability Equipment System - select max 3 abilities per game via new selection panel',
+            'Lootbox Probability Viewer - view drop rates and rarity for every lootbox reward',
+            'Drone/Weapon purchase maximum reduced to 180',
+            'NEW UPGRADE: Resource Collection - increases auto-pickup range (+15 per level, max 20)',
+            'NEW UPGRADE: Weapon Enhancement - increases damage and fire rate (+5% per level, max 20)',
+            'Bug fix: Settings back navigation state leak resolved',
+            'Bug fix: closeSettings no longer overridden by backToHub',
+            'Removed date fields from all update log entries'
+        ]
+    },
+    {
         version: 'v11.0',
-        date: new Date().toLocaleDateString(),
         changes: [
             'LANGUAGE SYSTEM! English, Hebrew, Russian!',
             'Main Hub UI completely redesigned!',
@@ -2048,7 +2202,6 @@ let updateLogData = [
     },
     {
         version: 'v2.0',
-        date: '2024-12-01',
         changes: [
             'Site fixed and deployed',
             'Added 5 new rare abilities: Shockwave Blast, Regeneration Aura, Time Slow/Phase, Gravity Bomb, Lightning Strike',
@@ -2058,7 +2211,6 @@ let updateLogData = [
     },
     {
         version: 'v10.5',
-        date: '2025-01-15',
         changes: [
             '2 new events! DOPPELGANGER + SUPERNOVA!',
             '15 new achievements! (310+ total!)',
@@ -2072,7 +2224,6 @@ let updateLogData = [
     },
     {
         version: 'v10.0',
-        date: '2025-01-01',
         changes: [
             '10 new events! STARFALL, INFERNO, CHAIN LIGHTNING, BARRIER, SOUL REAPER, GAMBLER, VORTEX, KING\'S BLESSING, PRISM, ABYSS!',
             '30 new achievements!',
@@ -2082,17 +2233,14 @@ let updateLogData = [
     },
     {
         version: 'v9.1',
-        date: '2024-11-20',
         changes: ['Game crash bug fix']
     },
     {
         version: 'v8.0',
-        date: '2024-11-01',
         changes: ['Daily reward + 3 new events']
     },
     {
         version: 'v1.0',
-        date: '2024-10-01',
         changes: ['Initial launch! 9 events, 100 achievements']
     }
 ];
@@ -2105,13 +2253,13 @@ function renderUpdateLog(){
         const div = document.createElement('div');
         div.className = 'update-item';
         let changesHtml = entry.changes.map(c => '• ' + c).join('<br>');
-        div.innerHTML = `<div class="update-version">⚡ ${entry.version}${entry.date ? ' - ' + entry.date : ''}</div><div class="update-desc">${changesHtml}</div>`;
+        div.innerHTML = `<div class="update-version">⚡ ${entry.version}</div><div class="update-desc">${changesHtml}</div>`;
         container.appendChild(div);
     }
 }
 
 function addUpdateLogEntry(version, changes){
-    updateLogData.unshift({ version, date: new Date().toLocaleDateString(), changes });
+    updateLogData.unshift({ version, changes });
     renderUpdateLog();
 }
 
@@ -2326,51 +2474,51 @@ function flashScreen(){
 // LOOTBOX REWARDS
 const LOOTBOX_REWARDS = {
     common: [
-        {name:"50 GEMSTONES", type:"gem", amount:50, rarity:"common", icon:"💎"},
-        {name:"100 GEMSTONES", type:"gem", amount:100, rarity:"common", icon:"💎"},
-        {name:"500 CREDITS", type:"credit", amount:500, rarity:"common", icon:"💰"},
-        {name:"TEMPORARY SPEED BOOST", type:"boost", effect:"speed", duration:60, rarity:"common", icon:"⚡"},
-        {name:"1 BOMB", type:"bomb", amount:1, rarity:"common", icon:"💣"}
+        {name:"50 GEMSTONES", type:"gem", amount:50, rarity:"common", icon:"💎", probability:25, stars:1},
+        {name:"100 GEMSTONES", type:"gem", amount:100, rarity:"common", icon:"💎", probability:20, stars:1},
+        {name:"500 CREDITS", type:"credit", amount:500, rarity:"common", icon:"💰", probability:25, stars:1},
+        {name:"TEMPORARY SPEED BOOST", type:"boost", effect:"speed", duration:60, rarity:"common", icon:"⚡", probability:20, stars:1},
+        {name:"1 BOMB", type:"bomb", amount:1, rarity:"common", icon:"💣", probability:10, stars:1}
     ],
     rare: [
-        {name:"150 GEMSTONES", type:"gem", amount:150, rarity:"rare", icon:"💎"},
-        {name:"250 GEMSTONES", type:"gem", amount:250, rarity:"rare", icon:"💎"},
-        {name:"1000 CREDITS", type:"credit", amount:1000, rarity:"rare", icon:"💰"},
-        {name:"TEMPORARY DAMAGE BOOST", type:"boost", effect:"damage", duration:90, rarity:"rare", icon:"💪"},
-        {name:"2 BOMBS", type:"bomb", amount:2, rarity:"rare", icon:"💣"},
-        {name:"COMMON SKIN", type:"skin", skin:"blue", rarity:"rare", icon:"🎨"}
+        {name:"150 GEMSTONES", type:"gem", amount:150, rarity:"rare", icon:"💎", probability:22, stars:2},
+        {name:"250 GEMSTONES", type:"gem", amount:250, rarity:"rare", icon:"💎", probability:18, stars:2},
+        {name:"1000 CREDITS", type:"credit", amount:1000, rarity:"rare", icon:"💰", probability:22, stars:2},
+        {name:"TEMPORARY DAMAGE BOOST", type:"boost", effect:"damage", duration:90, rarity:"rare", icon:"💪", probability:18, stars:2},
+        {name:"2 BOMBS", type:"bomb", amount:2, rarity:"rare", icon:"💣", probability:12, stars:2},
+        {name:"COMMON SKIN", type:"skin", skin:"blue", rarity:"rare", icon:"🎨", probability:8, stars:2}
     ],
     epic: [
-        {name:"300 GEMSTONES", type:"gem", amount:300, rarity:"epic", icon:"💎"},
-        {name:"500 GEMSTONES", type:"gem", amount:500, rarity:"epic", icon:"💎"},
-        {name:"2500 CREDITS", type:"credit", amount:2500, rarity:"epic", icon:"💰"},
-        {name:"PERMANENT DAMAGE UPGRADE", type:"perm_upgrade", stat:"damage", amount:1, rarity:"epic", icon:"🔰"},
-        {name:"3 BOMBS", type:"bomb", amount:3, rarity:"epic", icon:"💣"},
-        {name:"RARE SKIN", type:"skin", skin:"purple", rarity:"epic", icon:"🎨"}
+        {name:"300 GEMSTONES", type:"gem", amount:300, rarity:"epic", icon:"💎", probability:20, stars:3},
+        {name:"500 GEMSTONES", type:"gem", amount:500, rarity:"epic", icon:"💎", probability:15, stars:3},
+        {name:"2500 CREDITS", type:"credit", amount:2500, rarity:"epic", icon:"💰", probability:20, stars:3},
+        {name:"PERMANENT DAMAGE UPGRADE", type:"perm_upgrade", stat:"damage", amount:1, rarity:"epic", icon:"🔰", probability:18, stars:3},
+        {name:"3 BOMBS", type:"bomb", amount:3, rarity:"epic", icon:"💣", probability:15, stars:3},
+        {name:"RARE SKIN", type:"skin", skin:"purple", rarity:"epic", icon:"🎨", probability:12, stars:3}
     ],
     legendary: [
-        {name:"600 GEMSTONES", type:"gem", amount:600, rarity:"legendary", icon:"💎"},
-        {name:"1000 GEMSTONES", type:"gem", amount:1000, rarity:"legendary", icon:"💎"},
-        {name:"5000 CREDITS", type:"credit", amount:5000, rarity:"legendary", icon:"💰"},
-        {name:"PERMANENT FIRE RATE UPGRADE", type:"perm_upgrade", stat:"fire", amount:2, rarity:"legendary", icon:"🔥"},
-        {name:"5 BOMBS", type:"bomb", amount:5, rarity:"legendary", icon:"💣"},
-        {name:"LEGENDARY SKIN", type:"skin", skin:"gold", rarity:"legendary", icon:"👑"}
+        {name:"600 GEMSTONES", type:"gem", amount:600, rarity:"legendary", icon:"💎", probability:18, stars:4},
+        {name:"1000 GEMSTONES", type:"gem", amount:1000, rarity:"legendary", icon:"💎", probability:14, stars:4},
+        {name:"5000 CREDITS", type:"credit", amount:5000, rarity:"legendary", icon:"💰", probability:18, stars:4},
+        {name:"PERMANENT FIRE RATE UPGRADE", type:"perm_upgrade", stat:"fire", amount:2, rarity:"legendary", icon:"🔥", probability:18, stars:4},
+        {name:"5 BOMBS", type:"bomb", amount:5, rarity:"legendary", icon:"💣", probability:16, stars:4},
+        {name:"LEGENDARY SKIN", type:"skin", skin:"gold", rarity:"legendary", icon:"👑", probability:16, stars:4}
     ],
     mythic: [
-        {name:"1500 GEMSTONES", type:"gem", amount:1500, rarity:"mythic", icon:"💎"},
-        {name:"2500 GEMSTONES", type:"gem", amount:2500, rarity:"mythic", icon:"💎"},
-        {name:"10000 CREDITS", type:"credit", amount:10000, rarity:"mythic", icon:"💰"},
-        {name:"PERMANENT DAMAGE UPGRADE x3", type:"perm_upgrade", stat:"damage", amount:3, rarity:"mythic", icon:"🔰🔰"},
-        {name:"7 BOMBS", type:"bomb", amount:7, rarity:"mythic", icon:"💣"},
-        {name:"MYTHIC SKIN", type:"skin", skin:"rainbow", rarity:"mythic", icon:"🌈"}
+        {name:"1500 GEMSTONES", type:"gem", amount:1500, rarity:"mythic", icon:"💎", probability:16, stars:5},
+        {name:"2500 GEMSTONES", type:"gem", amount:2500, rarity:"mythic", icon:"💎", probability:12, stars:5},
+        {name:"10000 CREDITS", type:"credit", amount:10000, rarity:"mythic", icon:"💰", probability:16, stars:5},
+        {name:"PERMANENT DAMAGE UPGRADE x3", type:"perm_upgrade", stat:"damage", amount:3, rarity:"mythic", icon:"🔰🔰", probability:18, stars:5},
+        {name:"7 BOMBS", type:"bomb", amount:7, rarity:"mythic", icon:"💣", probability:18, stars:5},
+        {name:"MYTHIC SKIN", type:"skin", skin:"rainbow", rarity:"mythic", icon:"🌈", probability:20, stars:5}
     ],
     ultra: [
-        {name:"5000 GEMSTONES", type:"gem", amount:5000, rarity:"ultra", icon:"💎💎"},
-        {name:"10000 GEMSTONES", type:"gem", amount:10000, rarity:"ultra", icon:"💎💎"},
-        {name:"50000 CREDITS", type:"credit", amount:50000, rarity:"ultra", icon:"💰💰"},
-        {name:"ULTRA MYTHIC SKIN (LIMITED)", type:"skin", skin:"ultra", rarity:"ultra", icon:"👑👑", limited:true},
-        {name:"15 BOMBS", type:"bomb", amount:15, rarity:"ultra", icon:"💣💣"},
-        {name:"ALL PERMANENT UPGRADES +5", type:"perm_upgrade_all", amount:5, rarity:"ultra", icon:"⭐"}
+        {name:"5000 GEMSTONES", type:"gem", amount:5000, rarity:"ultra", icon:"💎💎", probability:14, stars:6},
+        {name:"10000 GEMSTONES", type:"gem", amount:10000, rarity:"ultra", icon:"💎💎", probability:10, stars:6},
+        {name:"50000 CREDITS", type:"credit", amount:50000, rarity:"ultra", icon:"💰💰", probability:14, stars:6},
+        {name:"ULTRA MYTHIC SKIN (LIMITED)", type:"skin", skin:"ultra", rarity:"ultra", icon:"👑👑", limited:true, probability:12, stars:6},
+        {name:"15 BOMBS", type:"bomb", amount:15, rarity:"ultra", icon:"💣💣", probability:20, stars:6},
+        {name:"ALL PERMANENT UPGRADES +5", type:"perm_upgrade_all", amount:5, rarity:"ultra", icon:"⭐", probability:30, stars:6}
     ]
 };
 
@@ -2615,6 +2763,31 @@ function closeLootboxAnimation(){
     currentReward = null;
 }
 
+function viewLootboxProbabilities(type){
+    const rewards = LOOTBOX_REWARDS[type];
+    if(!rewards) return;
+    const rarityColors = {common:'#4287f5',rare:'#42f5b6',epic:'#f5a742',legendary:'#f542d1',mythic:'#f54242',ultra:'#ffd700'};
+    const rarityNames = {common:'COMMON',rare:'RARE',epic:'EPIC',legendary:'LEGENDARY',mythic:'MYTHIC',ultra:'ULTRA MYTHIC'};
+    let html = `<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:2000;display:flex;justify-content:center;align-items:center;" onclick="if(event.target===this)this.remove()">
+        <div style="background:linear-gradient(135deg,#001a33,#000);border:2px solid ${rarityColors[type]||'#00d2ff'};border-radius:16px;padding:20px;min-width:300px;max-width:420px;max-height:80vh;overflow-y:auto;">
+            <h3 style="color:${rarityColors[type]||'#00d2ff'};text-align:center;margin-bottom:12px;">📦 ${rarityNames[type]||type.toUpperCase()} LOOTBOX DROPS</h3>`;
+    for(const r of rewards){
+        const starStr = '⭐'.repeat(r.stars || 1);
+        html += `<div style="background:rgba(0,0,0,0.5);border:1px solid ${rarityColors[r.rarity]||'#444'};border-radius:8px;padding:8px;margin:6px 0;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:18px;">${r.icon}</span>
+            <div style="flex:1;">
+                <div style="font-size:11px;color:#fff;">${r.name}</div>
+                <div style="font-size:9px;color:${rarityColors[r.rarity]||'#888'};">${starStr} ${rarityNames[r.rarity]||r.rarity.toUpperCase()}</div>
+            </div>
+            <div style="font-size:13px;color:#ffcc00;font-weight:bold;">${r.probability || '—'}%</div>
+        </div>`;
+    }
+    html += `<button class="btn" style="margin-top:12px;width:100%;" onclick="this.closest('div[style]').parentElement.remove()">CLOSE</button></div></div>`;
+    const overlay = document.createElement('div');
+    overlay.innerHTML = html;
+    document.body.appendChild(overlay);
+}
+
 function openRNGShop(){
     document.getElementById('start-screen').style.display='none';
     document.getElementById('rng-shop-screen').style.display='flex';
@@ -2715,11 +2888,8 @@ function backToHub(){
     document.getElementById('settings-screen').style.display='none';
     document.getElementById('tutorial-screen').style.display='none';
     document.getElementById('reset-modal').style.display='none';
-    // Restore normal closeSettings behavior
-    closeSettings = function(){
-        document.getElementById('settings-screen').style.display='none';
-        document.getElementById('start-screen').style.display='flex';
-    };
+    // Restore normal settings origin
+    settingsOpenedFrom = 'start-screen';
     updateHubUI();
 }
 function updateHubUI(){
@@ -2758,6 +2928,8 @@ function backToGameSelect(){
         if(el) el.style.display='none';
     });
     document.getElementById('ability-btns').style.display='none';
+    document.getElementById('ability-select-btn').style.display='none';
+    document.getElementById('ability-selection-panel').style.display='none';
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -2786,6 +2958,8 @@ function resetUpgradesOnly(){
     refund += (damageLevel - 1) * 200;
     refund += droneCount * 500;
     refund += bombCount * 300;
+    refund += resourceCollectionLevel * 350;
+    refund += weaponEnhancementLevel * 450;
     if(hasShieldUpgrade) refund += 250;
     if(hasSpreadShot) refund += 350;
     if(hasLaser) refund += 600;
@@ -2794,6 +2968,8 @@ function resetUpgradesOnly(){
     damageLevel = 1;
     droneCount = 0;
     bombCount = 0;
+    resourceCollectionLevel = 0;
+    weaponEnhancementLevel = 0;
     hasShieldUpgrade = false;
     hasSpreadShot = false;
     hasLaser = false;
@@ -2802,6 +2978,8 @@ function resetUpgradesOnly(){
     localStorage.setItem('dmgLevel', damageLevel);
     localStorage.setItem('droneCount', droneCount);
     localStorage.setItem('bombCount', bombCount);
+    localStorage.setItem('resourceCollectionLevel', resourceCollectionLevel);
+    localStorage.setItem('weaponEnhancementLevel', weaponEnhancementLevel);
     localStorage.setItem('hasShieldUpgrade', hasShieldUpgrade);
     localStorage.setItem('hasSpreadShot', hasSpreadShot);
     localStorage.setItem('hasLaser', hasLaser);
@@ -2825,7 +3003,7 @@ let damageLevel=parseInt(localStorage.getItem('dmgLevel'))||1;
 let hasShieldUpgrade=localStorage.getItem('hasShieldUpgrade')==='true';
 let hasSpreadShot=localStorage.getItem('hasSpreadShot')==='true';
 let hasLaser=localStorage.getItem('hasLaser')==='true';
-let droneCount=Math.min(400, parseInt(localStorage.getItem('droneCount'))||0);
+let droneCount=Math.min(180, parseInt(localStorage.getItem('droneCount'))||0);
 let bombCount=parseInt(localStorage.getItem('bombCount'))||0;
 let achievements; try { achievements = JSON.parse(localStorage.getItem('achievements')||'{}'); } catch(e) { achievements = {}; }
 let skinUnlocked=localStorage.getItem('skinUnlocked')==='true';
@@ -3122,7 +3300,7 @@ const ACHIEVEMENTS_LIST = [
     {id:'drone_master', name:'DRONE MASTER', desc:'Own 10 drones', gems:50, difficulty:'hard'},
     {id:'fire_god', name:'FIRE GOD', desc:'Fire Rate level 30', gems:60, difficulty:'hard'},
     {id:'damage_god', name:'DAMAGE GOD', desc:'Damage level 30', gems:60, difficulty:'hard'},
-    {id:'drone_overlord', name:'DRONE OVERLORD', desc:'Own 400 drones (max)', gems:100, difficulty:'extreme'},
+    {id:'drone_overlord', name:'DRONE OVERLORD', desc:'Own 180 drones (max)', gems:100, difficulty:'extreme'},
     {id:'apocalypse_survivor', name:'APOCALYPSE SURVIVOR', desc:'Survive Apocalypse Mode 3 times', gems:60, difficulty:'hard'},
     {id:'void_walker', name:'VOID WALKER', desc:'Trigger Void Mode 5 times', gems:70, difficulty:'hard'},
     {id:'guardian_slayer', name:'GUARDIAN SLAYER', desc:'Defeat The Guardian', gems:200, difficulty:'mythic'},
@@ -3154,7 +3332,7 @@ const ACHIEVEMENTS_LIST = [
     {id:'speed_100', name:'SPEED 100', desc:'Complete 100 waves in under 30 minutes', gems:200, difficulty:'mythic'},
     {id:'overdrive_1000', name:'OVERDRIVE 1000', desc:'Activate Overdrive 1000 times', gems:300, difficulty:'mythic'},
     {id:'bomb_1000', name:'BOMB 1000', desc:'Use 1000 bombs total', gems:200, difficulty:'mythic'},
-    {id:'drone_400', name:'DRONE 400', desc:'Own 400 drones', gems:150, difficulty:'mythic'},
+    {id:'drone_400', name:'DRONE 180', desc:'Own 180 drones (max)', gems:150, difficulty:'mythic'},
     {id:'fire_100', name:'FIRE 100', desc:'Fire Rate level 100', gems:200, difficulty:'mythic'},
     {id:'damage_100', name:'DAMAGE 100', desc:'Damage level 100', gems:200, difficulty:'mythic'},
     {id:'death_touch', name:'DEATH\'S TOUCH', desc:'Experience Death\'s Touch event', gems:250, difficulty:'mythic'},
@@ -3273,7 +3451,7 @@ function getAchievementProgressValue(id){
     if(id==='drone_master') return droneCount>=10;
     if(id==='fire_god') return fireLevel>=30;
     if(id==='damage_god') return damageLevel>=30;
-    if(id==='drone_overlord') return droneCount>=400;
+    if(id==='drone_overlord') return droneCount>=180;
     if(id==='apocalypse_survivor') return apocalypseTriggers>=3;
     if(id==='void_walker') return voidTriggers>=5;
     if(id==='guardian_slayer') return guardianDefeated===true;
@@ -3305,7 +3483,7 @@ function getAchievementProgressValue(id){
     if(id==='speed_100') return (wave>=100 && (Date.now()-startTime)<1800000);
     if(id==='overdrive_1000') return totalOverdriveUses>=1000;
     if(id==='bomb_1000') return totalBombsUsed>=1000;
-    if(id==='drone_400') return droneCount>=400;
+    if(id==='drone_400') return droneCount>=180;
     if(id==='fire_100') return fireLevel>=100;
     if(id==='damage_100') return damageLevel>=100;
     if(id==='endless_master') return endlessMode && wave>=200;
@@ -3466,8 +3644,8 @@ function getAchievementProgress(achId){
         'damage_100': {current: damageLevel, target: 100},
         'drone_army': {current: droneCount, target: 5},
         'drone_master': {current: droneCount, target: 10},
-        'drone_overlord': {current: droneCount, target: 400},
-        'drone_400': {current: droneCount, target: 400},
+        'drone_overlord': {current: droneCount, target: 180},
+        'drone_400': {current: droneCount, target: 180},
         'shopaholic': {current: totalUpgradesBought, target: 50},
         'legendary': {current: level, target: 15},
         'true_god': {current: level, target: 30},
@@ -4127,15 +4305,19 @@ function useBomb(){
 // SHOP FUNCTIONS
 function buyUpgrade(type, amount=1){
     initAudio();
-    const prices={fire:150,dmg:200,shield:250,drone:500,heal:100,spread:350,laser:600,bomb:300};
+    const prices={fire:150,dmg:200,shield:250,drone:500,heal:100,spread:350,laser:600,bomb:300,resourceCollection:350,weaponEnhancement:450};
     if(type==='shield'&&hasShieldUpgrade) return;
     if(type==='spread'&&hasSpreadShot) return;
     if(type==='laser'&&hasLaser) return;
+    if(type==='resourceCollection'&&resourceCollectionLevel>=20) return;
+    if(type==='weaponEnhancement'&&weaponEnhancementLevel>=20) return;
     let totalCost=0;
     if(type==='fire') totalCost=prices.fire*amount;
     else if(type==='dmg') totalCost=prices.dmg*amount;
     else if(type==='drone') totalCost=prices.drone*amount;
     else if(type==='bomb') totalCost=prices.bomb*amount;
+    else if(type==='resourceCollection') totalCost=prices.resourceCollection*amount;
+    else if(type==='weaponEnhancement') totalCost=prices.weaponEnhancement*amount;
     else totalCost=prices[type];
     if(totalCoins<totalCost) return;
     totalCoins-=totalCost;
@@ -4143,11 +4325,13 @@ function buyUpgrade(type, amount=1){
     if(type==='fire'){fireLevel+=amount;localStorage.setItem('fireLevel',fireLevel);}
     if(type==='dmg'){damageLevel+=amount;localStorage.setItem('dmgLevel',damageLevel);}
     if(type==='shield'){hasShieldUpgrade=true;localStorage.setItem('hasShieldUpgrade',true);}
-    if(type==='drone'){droneCount=Math.min(400, droneCount+amount);localStorage.setItem('droneCount',droneCount);}
+    if(type==='drone'){droneCount=Math.min(180, droneCount+amount);localStorage.setItem('droneCount',droneCount);}
     if(type==='heal'){health=Math.min(maxHealth,health+25);}
     if(type==='spread'){hasSpreadShot=true;localStorage.setItem('hasSpreadShot',true);}
     if(type==='laser'){hasLaser=true;localStorage.setItem('hasLaser',true);}
     if(type==='bomb'){bombCount+=amount;localStorage.setItem('bombCount',bombCount);}
+    if(type==='resourceCollection'){resourceCollectionLevel+=amount;localStorage.setItem('resourceCollectionLevel',resourceCollectionLevel);}
+    if(type==='weaponEnhancement'){weaponEnhancementLevel+=amount;localStorage.setItem('weaponEnhancementLevel',weaponEnhancementLevel);}
     localStorage.setItem('totalCoins',totalCoins);
     localStorage.setItem('totalUpgradesBought',totalUpgradesBought);
     sfxCoin();
@@ -4158,7 +4342,7 @@ function buyUpgrade(type, amount=1){
 function setQuantity(type, qty){ selectedQuantities[type]=Math.max(1, Math.min(99, qty)); updateShopUI(); }
 function maxOutUpgrade(type,pricePer){
     let canBuy=Math.floor(totalCoins/pricePer);
-    if(type==='drone') canBuy=Math.min(canBuy, 400-droneCount);
+    if(type==='drone') canBuy=Math.min(canBuy, 180-droneCount);
     if(canBuy>0) buyUpgrade(type,canBuy);
 }
 function updateShopUI(){
@@ -4170,11 +4354,13 @@ function updateShopUI(){
         {id:'fire', name:'🔥 FIRE RATE', level:fireLevel, price:150, type:'fire', infinite:true, category:'weapons'},
         {id:'dmg', name:'💥 DAMAGE', level:damageLevel, price:200, type:'dmg', infinite:true, category:'weapons'},
         {id:'shield', name:'🛡️ SHIELD', owned:hasShieldUpgrade, price:250, type:'shield', category:'shields'},
-        {id:'drone', name:'🤖 DRONE', level:droneCount, price:500, type:'drone', infinite:true, maxLimit:400, category:'weapons'},
+        {id:'drone', name:'🤖 DRONE', level:droneCount, price:500, type:'drone', infinite:true, maxLimit:180, category:'weapons'},
         {id:'heal', name:'❤️ REPAIR', price:100, type:'heal', category:'shields'},
         {id:'spread', name:'🎯 SPREAD', owned:hasSpreadShot, price:350, type:'spread', category:'weapons'},
         {id:'laser', name:'⚡ LASER', owned:hasLaser, price:600, type:'laser', category:'weapons'},
-        {id:'bomb', name:'💣 BOMB', level:bombCount, price:300, type:'bomb', infinite:true, category:'weapons'}
+        {id:'bomb', name:'💣 BOMB', level:bombCount, price:300, type:'bomb', infinite:true, category:'weapons'},
+        {id:'resourceCollection', name:'📡 RESOURCE COLLECTION', level:resourceCollectionLevel, price:350, type:'resourceCollection', infinite:true, maxLimit:20, category:'shields'},
+        {id:'weaponEnhancement', name:'⚔️ WEAPON ENHANCEMENT', level:weaponEnhancementLevel, price:450, type:'weaponEnhancement', infinite:true, maxLimit:20, category:'weapons'}
     ];
 
     // Filter by tab
@@ -4203,11 +4389,11 @@ function updateShopUI(){
                 <span style="margin-right:5px;">x${qty}</span>
             </div>`;
         }
-        let tooltipText = it.type==='fire' ? 'מגדיל את מהירות הירי' : it.type==='dmg' ? 'מגדיל את הנזק' : it.type==='shield' ? 'מוסיף מגן סביב החללית' : it.type==='drone' ? 'מוסיף רחפן שיורה אוטומטית' : it.type==='heal' ? 'מרפא 25 נקודות חיים' : it.type==='spread' ? 'מוסיף כדור נוסף לכל ירייה' : it.type==='laser' ? 'מוסיף לייזר חזק' : 'מוסיף פצצות לניקוי מסך';
+        let tooltipText = it.type==='fire' ? 'מגדיל את מהירות הירי' : it.type==='dmg' ? 'מגדיל את הנזק' : it.type==='shield' ? 'מוסיף מגן סביב החללית' : it.type==='drone' ? 'מוסיף רחפן שיורה אוטומטית' : it.type==='heal' ? 'מרפא 25 נקודות חיים' : it.type==='spread' ? 'מוסיף כדור נוסף לכל ירייה' : it.type==='laser' ? 'מוסיף לייזר חזק' : it.type==='resourceCollection' ? 'מגדיל את טווח איסוף אוטומטי של פריטים (+15 לרמה)' : it.type==='weaponEnhancement' ? 'מגדיל נזק וקצב אש (+5% לרמה)' : 'מוסיף פצצות לניקוי מסך';
         card.innerHTML = content + `<div class="tooltip-text">${tooltipText}</div>`;
         if(!(it.owned===true)){
             let qty=selectedQuantities[it.type]||1;
-            let atMax=(it.type==='drone' && droneCount+qty>400);
+            let atMax=(it.type==='drone' && droneCount+qty>180);
             if(!atMax) card.onclick=()=>buyUpgrade(it.type, selectedQuantities[it.type]||1);
             else card.onclick=null;
         }
@@ -4358,7 +4544,7 @@ class Player{
             ctx.translate((Math.random()-0.5)*10, (Math.random()-0.5)*10);
         }
         ctx.translate(this.x,this.y);
-        let maxDrones = Math.min(400, droneCount);
+        let maxDrones = Math.min(180, droneCount);
         for(let i=0;i<maxDrones;i++){
             const a=(Date.now()/400)+(i*Math.PI*2/maxDrones);
             const dx=Math.cos(a)*55,dy=Math.sin(a)*45;
@@ -4422,6 +4608,7 @@ class Enemy{
         this.r=isBoss?90:this.type==='tank'?35:25;
         let speedMulti = synapseActive ? 0.45 : (cosmicCollapseActive?1.2:(apocalypseActive?1.6:(riftActive?1.2:1)));
         if(timeWarpActive) speedMulti *= 0.2;
+        if(abilityTimeWarpActive) speedMulti *= 0.5;
         if(frozenTimeActive) speedMulti = 0;
         if(doomsDayActive) speedMulti *= 0.5;
         if(timeDistortionPurchased) speedMulti *= enemySlow;
@@ -4572,6 +4759,9 @@ function startGame(){
     timeSlowActive=false;timeSlowTimer=0;
     gravityBombActive=false;gravityBombTimer=0;gravityBombPhase=0;
     regenAuraTimer=0;lightningStrikeEffect=null;
+    resourceMagnetActive=false;resourceMagnetTimer=0;
+    abilityTimeWarpActive=false;abilityTimeWarpTimer=0;
+    ultimateAnnihilationActive=false;ultimateAnnihilationTimer=0;
     blackHolePieces=0; eventCooldown=0;
     startTime=Date.now();
     enemies=[];bullets=[];eBullets=[];particles=[];items=[];floats=[];boss=null;activePowerUps={};
@@ -4581,6 +4771,7 @@ function startGame(){
     ['ui-hud','score-hud','combo-small','powerup-bar','pause-btn','game-timer','rank-badge','combo-meter','wave-progress'].forEach(id=>document.getElementById(id).style.display='block');
     document.getElementById('od-btn').style.display='none';
     document.getElementById('ability-btns').style.display='none';
+    document.getElementById('ability-select-btn').style.display='block';
     document.getElementById('crosshair').style.display='block';
     // New UI elements
     document.getElementById('auto-fire-btn').style.display = 'block';
@@ -4614,7 +4805,7 @@ function startGame(){
 }
 
 function togglePause(){
-    if(gameState==='PLAYING'){gameState='PAUSED';isPaused=true;document.getElementById('pause-screen').style.display='flex';document.getElementById('pause-btn').innerText='▶';}
+    if(gameState==='PLAYING'){gameState='PAUSED';isPaused=true;document.getElementById('pause-screen').style.display='flex';document.getElementById('pause-btn').innerText='▶';document.getElementById('ability-selection-panel').style.display='none';}
     else if(gameState==='PAUSED'){gameState='PLAYING';isPaused=false;document.getElementById('pause-screen').style.display='none';document.getElementById('pause-btn').innerText='⏸';}
 }
 
@@ -4643,6 +4834,8 @@ function quitToMenu(){
         if(el) el.style.display='none';
     });
     document.getElementById('ability-btns').style.display='none';
+    document.getElementById('ability-select-btn').style.display='none';
+    document.getElementById('ability-selection-panel').style.display='none';
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -4710,7 +4903,10 @@ function gameOver(){
     if(animationId) cancelAnimationFrame(animationId);
     ['ui-hud','score-hud','od-btn','combo-small','pause-btn','powerup-bar','boss-warning','wave-banner','event-banner','ascend-screen','game-timer','rank-badge','combo-meter','wave-progress'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('ability-btns').style.display='none';
+    document.getElementById('ability-select-btn').style.display='none';
+    document.getElementById('ability-selection-panel').style.display='none';
     document.getElementById('vignette').style.display='none';
+    document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
     document.getElementById('fps-counter').style.display='none';
     document.getElementById('game-over').style.display='flex';
@@ -4729,6 +4925,7 @@ function fireBullets(){
     let power = damageLevel*(isPower?2:1);
     power = applyCriticalHit(power);
     power *= skinDamageMultiplier;
+    power *= (1 + weaponEnhancementLevel * 0.05);
     if(synapseActive) power *= 2.5;
     if(voidActive) power *= 10;
     if(primordialRageActive) power *= 20;
@@ -4951,7 +5148,7 @@ function loop(){
         if(Math.random()<spawnChance && enemies.length<20+wave) enemies.push(new Enemy());
 
         const isRapid=!!activePowerUps.rapidfire;
-        let fr=isOD||isRapid?40:Math.max(65,240-fireLevel*38);
+        let fr=isOD||isRapid?40:Math.max(65,240-fireLevel*38 - weaponEnhancementLevel*2);
         if(synapseActive) fr*=0.55; if(primordialRageActive) fr*=0.3; if(chaosRealmActive) fr*=0.2;
         if(apocalypseActive) fr*=0.7; if(cosmicCollapseActive) fr*=0.5; if(riftActive) fr*=0.9;
         if(bugEventActive) fr*=0.3; if(stableCycleActive) fr*=0.7;
@@ -4960,7 +5157,7 @@ function loop(){
         if(doppelgangerActive) fr*=0.8;
         fr /= skinFireRateMultiplier;
         // Auto-fire: if enabled, fire automatically; otherwise only fire on click/tap
-        if(settings.autoFire && Date.now()-lastFire>fr){ if(player){fireBullets(); let maxDrones=Math.min(400, droneCount); for(let i=0;i<maxDrones;i++){ const a=(Date.now()/400)+(i*Math.PI*2/maxDrones); if(Math.random()<0.3) bullets.push(new Bullet(player.x+Math.cos(a)*55,player.y+Math.sin(a)*45,Math.ceil(damageLevel*0.55),'#00ffaa')); }} }
+        if(settings.autoFire && Date.now()-lastFire>fr){ if(player){fireBullets(); let maxDrones=Math.min(180, droneCount); for(let i=0;i<maxDrones;i++){ const a=(Date.now()/400)+(i*Math.PI*2/maxDrones); if(Math.random()<0.3) bullets.push(new Bullet(player.x+Math.cos(a)*55,player.y+Math.sin(a)*45,Math.ceil(damageLevel*0.55*(1+weaponEnhancementLevel*0.05)),'#00ffaa')); }} }
 
         checkEventTrigger();
 
@@ -5177,7 +5374,7 @@ function loop(){
         eBullets.length=0; eBullets.push(...nextEBullets);
 
         for(const it of items){ it.y+=it.vy||2;
-            const d=Math.hypot(it.x-player.x,it.y-player.y); const pull=magnetActive?280:100;
+            const d=Math.hypot(it.x-player.x,it.y-player.y); const pull=magnetActive?280:(100+resourceCollectionLevel*15);
             if(d<pull){ it.x+=(player.x-it.x)*0.16; it.y+=(player.y-it.y)*0.16; }
             let keep=true;
             if(d<30){
@@ -5304,6 +5501,42 @@ function loop(){
             }
             ctx.lineWidth=1; ctx.shadowBlur=0;
         } else { lightningStrikeEffect = null; }
+        // Resource Magnet effect - attract all items on screen
+        if(resourceMagnetActive && Date.now() < resourceMagnetTimer){
+            for(const it of items){
+                if(player){
+                    const dx = player.x - it.x, dy = player.y - it.y;
+                    const dist = Math.hypot(dx, dy);
+                    if(dist > 5){ it.x += dx/dist * 12; it.y += dy/dist * 12; }
+                }
+            }
+            if(player){
+                ctx.strokeStyle = `rgba(255,204,0,${0.4 + Math.sin(Date.now()/100)*0.2})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 150+Math.sin(Date.now()/150)*20, 0, Math.PI*2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        } else { resourceMagnetActive = false; }
+        // Time Warp ability effect - slow enemies
+        if(abilityTimeWarpActive && Date.now() < abilityTimeWarpTimer){
+            if(player){
+                ctx.strokeStyle = `rgba(0,204,255,${0.3 + Math.sin(Date.now()/100)*0.2})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 80+Math.sin(Date.now()/150)*10, 0, Math.PI*2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        } else { abilityTimeWarpActive = false; }
+        // Ultimate Annihilation invincibility effect
+        if(ultimateAnnihilationActive && Date.now() < ultimateAnnihilationTimer){
+            if(player){
+                ctx.strokeStyle = `rgba(255,0,0,${0.5 + Math.sin(Date.now()/80)*0.3})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 45+Math.sin(Date.now()/100)*8, 0, Math.PI*2); ctx.stroke();
+                ctx.strokeStyle = `rgba(255,100,0,${0.3 + Math.sin(Date.now()/120)*0.2})`;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 55+Math.sin(Date.now()/80)*10, 0, Math.PI*2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        } else { ultimateAnnihilationActive = false; }
         // Update ability buttons
         updateAbilityButtons();
 
@@ -5370,6 +5603,9 @@ window.addEventListener('keydown',e=>{
     if(e.key==='3' && gameState==='PLAYING') activateRareAbility('timeSlow');
     if(e.key==='4' && gameState==='PLAYING') activateRareAbility('gravityBomb');
     if(e.key==='5' && gameState==='PLAYING') activateRareAbility('lightningStrike');
+    if(e.key==='6' && gameState==='PLAYING') activateRareAbility('resourceMagnet');
+    if(e.key==='7' && gameState==='PLAYING') activateRareAbility('timeWarp');
+    if(e.key==='8' && gameState==='PLAYING') activateRareAbility('ultimateAnnihilation');
 });
 
 // INIT
@@ -5502,6 +5738,5 @@ document.body.addEventListener('touchstart', initMusicOnFirstInteraction);
     <div id="streak-popup-rewards"></div>
     <button class="streak-claim-btn" onclick="claimStreakReward()" id="streak-claim-btn">CLAIM REWARD</button>
 </div>
-</script>
 </body>
 </html>
