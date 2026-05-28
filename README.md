@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.4</title>
+    <title>Galactic Defender - UPDATE 11.5</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -72,13 +72,12 @@
         .lootbox-opening { animation: openBox 0.5s forwards; }
         @keyframes openBox { 0%{transform:scale(1);} 50%{transform:scale(1.2);background:#ffaa00;} 100%{transform:scale(0);opacity:0;} }
         .reward-display { font-size: 24px; margin-top: 20px; animation: fadeIn 0.5s; text-align: center; }
-        .lootbox.rarity-common { box-shadow: 0 0 20px rgba(66,135,245,0.6); }
-        .lootbox.rarity-rare { box-shadow: 0 0 20px rgba(66,245,182,0.6); }
-        .lootbox.rarity-epic { box-shadow: 0 0 25px rgba(245,167,66,0.6); }
-        .lootbox.rarity-legendary { box-shadow: 0 0 30px rgba(245,66,209,0.7); }
-        .lootbox.rarity-mythic { box-shadow: 0 0 35px rgba(245,66,66,0.8); }
-        .lootbox.rarity-ultra { box-shadow: 0 0 40px rgba(245,230,66,1); animation: ultraGlow 0.3s infinite alternate; }
-        @keyframes ultraGlow { from { box-shadow: 0 0 40px gold; } to { box-shadow: 0 0 60px gold, 0 0 80px #ff6600; } }
+        .lootbox.rarity-common { box-shadow: 0 0 10px rgba(66,135,245,0.3); }
+        .lootbox.rarity-rare { box-shadow: 0 0 10px rgba(66,245,182,0.3); }
+        .lootbox.rarity-epic { box-shadow: 0 0 12px rgba(245,167,66,0.3); }
+        .lootbox.rarity-legendary { box-shadow: 0 0 12px rgba(245,66,209,0.3); }
+        .lootbox.rarity-mythic { box-shadow: 0 0 14px rgba(245,66,66,0.3); }
+        .lootbox.rarity-ultra { box-shadow: 0 0 14px rgba(245,230,66,0.4); }
         @keyframes lootboxShake { 0%{transform:rotate(0deg) scale(1);} 10%{transform:rotate(-8deg) scale(1.02);} 20%{transform:rotate(8deg) scale(1.04);} 30%{transform:rotate(-6deg) scale(1.06);} 40%{transform:rotate(6deg) scale(1.08);} 50%{transform:rotate(-4deg) scale(1.1);} 60%{transform:rotate(4deg) scale(1.12);} 70%{transform:rotate(-2deg) scale(1.14);} 80%{transform:rotate(2deg) scale(1.16);} 90%{transform:rotate(-1deg) scale(1.18);} 100%{transform:rotate(0deg) scale(1.2);} }
         @keyframes lootboxOpen { 0%{transform:scale(1.2);opacity:1;} 30%{transform:scale(1.5);opacity:1;} 60%{transform:scale(1.8);opacity:0.8;} 100%{transform:scale(0);opacity:0;} }
         @keyframes rewardReveal { 0%{opacity:0;transform:scale(0.3) rotate(-10deg);} 50%{opacity:1;transform:scale(1.15) rotate(3deg);} 70%{transform:scale(0.95) rotate(-1deg);} 100%{opacity:1;transform:scale(1) rotate(0deg);} }
@@ -88,10 +87,9 @@
         .reward-card.rarity-common { border-color: #4287f5; }
         .reward-card.rarity-rare { border-color: #42f5b6; }
         .reward-card.rarity-epic { border-color: #f5a742; }
-        .reward-card.rarity-legendary { border-color: #f542d1; box-shadow: 0 0 20px rgba(245,66,209,0.5); }
-        .reward-card.rarity-mythic { border-color: #f54242; box-shadow: 0 0 25px rgba(245,66,66,0.6); }
-        .reward-card.rarity-ultra { border-color: gold; box-shadow: 0 0 30px rgba(255,215,0,0.7); animation: rewardReveal 0.6s ease-out, ultraRewardGlow 1s infinite alternate; }
-        @keyframes ultraRewardGlow { from { box-shadow: 0 0 30px gold; } to { box-shadow: 0 0 50px gold, 0 0 70px #ff6600; } }
+        .reward-card.rarity-legendary { border-color: #f542d1; }
+        .reward-card.rarity-mythic { border-color: #f54242; }
+        .reward-card.rarity-ultra { border-color: gold; }
         @keyframes fadeIn { from{opacity:0;transform:scale(0.5);} to{opacity:1;transform:scale(1);} }
         .btn { background: rgba(0,30,60,0.7); color:#fff; border:1px solid #00d2ff; padding:8px 20px; border-radius:25px; font-weight:bold; cursor:pointer; margin:5px; font-size:12px; transition:0.2s; backdrop-filter:blur(3px); }
         .btn:hover { background: rgba(0,80,120,0.8); transform:scale(1.02); }
@@ -119,7 +117,7 @@
         .rarity-epic { border-color:#f5a742; background:rgba(245,167,66,0.2); }
         .rarity-legendary { border-color:#f542d1; background:rgba(245,66,209,0.2); }
         .rarity-mythic { border-color:#f54242; background:rgba(245,66,66,0.2); }
-        .rarity-ultra { border-color:#f5e642; background:rgba(245,230,66,0.2); box-shadow:0 0 15px gold; }
+        .rarity-ultra { border-color:#f5e642; background:rgba(245,230,66,0.2); }
         .gem-counter { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); border-radius:20px; padding:5px 12px; font-size:14px; color:#ff66ff; border:1px solid #ff66ff; z-index:200; }
         .gem-counter span { color:#ffcc00; font-weight:bold; }
         .update-item { background:rgba(0,0,0,0.5); border-radius:10px; padding:10px; margin:8px; text-align:right; border-right:3px solid #00ffaa; width: 90%; max-width: 500px; }
@@ -235,11 +233,9 @@
         .pause-quick-toggle.music-on { background: #ff66ff; }
         .pause-quick-toggle:after { content: ""; position: absolute; width: 14px; height: 14px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
         .pause-quick-toggle.on:after, .pause-quick-toggle.music-on:after { left: 20px; }
-        .hub-title { animation: hubTitleGlow 3s ease-in-out infinite; }
-@keyframes hubTitleGlow { 0%,100% { text-shadow: 0 0 20px #00d2ff, 0 0 40px #00d2ff; } 50% { text-shadow: 0 0 30px #00d2ff, 0 0 60px #00d2ff, 0 0 80px #0066ff; } }
-.hub-btn-hero { background: linear-gradient(135deg, #00d2ff, #00ffaa); color: #000; font-size: 20px; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; cursor: pointer; margin: 8px; transition: 0.3s; box-shadow: 0 0 20px rgba(0,210,255,0.5); animation: heroBtnPulse 2s ease-in-out infinite; }
-.hub-btn-hero:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(0,255,170,0.7); }
-@keyframes heroBtnPulse { 0%,100% { box-shadow: 0 0 20px rgba(0,210,255,0.5); } 50% { box-shadow: 0 0 30px rgba(0,255,170,0.8); } }
+        .hub-title { color: #00d2ff; }
+.hub-btn-hero { background: linear-gradient(135deg, #00d2ff, #00ffaa); color: #000; font-size: 20px; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; cursor: pointer; margin: 8px; transition: 0.3s; }
+.hub-btn-hero:hover { transform: scale(1.08); }
 .hub-stat-card { background: rgba(0,0,0,0.6); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; border-left: 3px solid; }
 .hub-stat-card.stat-record { border-left-color: gold; }
 .hub-stat-card.stat-credits { border-left-color: #00ffaa; }
@@ -249,19 +245,17 @@
 .hub-section { background: rgba(0,0,0,0.4); border-radius: 15px; padding: 15px; margin: 10px auto; width: 90%; max-width: 450px; }
 .hub-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, #00d2ff, transparent); margin: 15px auto; }
 .hub-btn { background: rgba(0,30,60,0.7); color: #fff; border: 1px solid #00d2ff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: 0.3s; }
-.hub-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); box-shadow: 0 0 10px rgba(0,210,255,0.4); }
+.hub-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); }
 .hub-btn-reward { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: 0.3s; }
 .hub-btn-reward:hover { transform: scale(1.05); }
-.hub-version-badge { display: inline-block; background: linear-gradient(135deg, #ff66ff, #8e44ad); border-radius: 15px; padding: 3px 15px; font-size: 12px; font-weight: bold; animation: versionPulse 3s ease-in-out infinite; }
-@keyframes versionPulse { 0%,100% { box-shadow: 0 0 5px #ff66ff; } 50% { box-shadow: 0 0 15px #ff66ff; } }
-.streak-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(255,100,0,0.3), rgba(255,50,0,0.2)); border: 1px solid #ff6600; border-radius: 20px; padding: 6px 14px; font-size: 14px; font-weight: bold; color: #ffaa00; animation: streakGlow 2s ease-in-out infinite; margin: 8px 0; }
-@keyframes streakGlow { 0%,100% { box-shadow: 0 0 8px rgba(255,100,0,0.4); } 50% { box-shadow: 0 0 16px rgba(255,150,0,0.7); } }
+.hub-version-badge { display: inline-block; background: linear-gradient(135deg, #ff66ff, #8e44ad); border-radius: 15px; padding: 3px 15px; font-size: 12px; font-weight: bold; }
+.streak-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(255,100,0,0.3), rgba(255,50,0,0.2)); border: 1px solid #ff6600; border-radius: 20px; padding: 6px 14px; font-size: 14px; font-weight: bold; color: #ffaa00; margin: 8px 0; }
 .streak-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg, #1a0800, #000); border: 2px solid #ff6600; border-radius: 16px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; display: none; flex-direction: column; gap: 10px; animation: streakPopIn 0.4s ease-out; }
 @keyframes streakPopIn { 0% { transform: translate(-50%,-50%) scale(0.5); opacity:0; } 100% { transform: translate(-50%,-50%) scale(1); opacity:1; } }
 .streak-popup h2 { color: #ffaa00; margin: 0; }
 .streak-reward-item { background: rgba(255,100,0,0.15); border: 1px solid #ff660066; border-radius: 8px; padding: 6px 12px; margin: 4px 0; font-size: 13px; color: #ffcc00; }
 .streak-claim-btn { background: linear-gradient(135deg, #ff6600, #ff9900); border: none; color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 900; cursor: pointer; font-size: 14px; transition: 0.2s; margin-top: 5px; }
-.streak-claim-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(255,100,0,0.5); }
+.streak-claim-btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -292,7 +286,7 @@
 <!-- MAIN HUB -->
 <div id="main-hub" class="overlay">
     <h1 class="hub-title" style="font-size:52px;margin-bottom:5px;color:#00d2ff;">✨ GALACTIC DEFENDER ✨</h1>
-    <div class="hub-version-badge">UPDATE 11.4</div>
+    <div class="hub-version-badge">UPDATE 11.5</div>
     <div class="hub-divider"></div>
     <div style="margin:15px 0;">
         <button class="hub-btn-hero" onclick="openGameSelect()">🚀 PLAY NOW</button>
@@ -300,6 +294,7 @@
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:10px;">
         <button class="hub-btn" onclick="openUpdateLog()" data-i18n="update_log">📜 UPDATE LOG</button>
         <button class="hub-btn" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
+        <button class="hub-btn" style="border-color:#ffcc00;" onclick="openHomeAbilityPanel()">🎯 ABILITIES</button>
         <button class="hub-btn-reward" onclick="claimDailyReward()" data-i18n="daily_reward">🎁 DAILY REWARD</button>
     </div>
     <div class="hub-divider"></div>
@@ -327,13 +322,18 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.4 - 3 New Abilities + Equipment System + Lootbox Probabilities + Shop Upgrades!</p>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.5 - Abilities on Home Screen + Ultra-Rare Lootbox Items + UI Cleanup!</p>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
 
+<!-- HOME ABILITIES PANEL OVERLAY -->
+<div id="home-abilities-panel" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:500;display:none;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
+    <div id="home-abilities-content" style="background:linear-gradient(135deg,#001a33,#000);border:2px solid #00d2ff;border-radius:16px;padding:20px;min-width:300px;max-width:420px;max-height:85vh;overflow-y:auto;text-align:center;"></div>
+</div>
+
 <div id="game-select-screen" class="overlay">
-    <h1 style="font-size:48px;margin-bottom:10px;text-shadow:0 0 20px #00d2ff;">🎮 GAME SELECT</h1>
+    <h1 style="font-size:48px;margin-bottom:10px;">🎮 GAME SELECT</h1>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin:20px;">
         <div class="game-select-card" onclick="selectGame('defender')">
             <div style="font-size:48px;">🚀</div>
@@ -597,8 +597,6 @@
 <div id="event-banner"></div>
 <div id="od-btn" onclick="activateOverdrive()">OVER<br>DRIVE</div>
 <div id="ability-btns" class="ability-btn"></div>
-<button id="ability-select-btn" style="position:absolute;right:10px;top:55px;z-index:60;width:40px;height:40px;border-radius:50%;background:rgba(0,30,60,0.8);border:1px solid #ffcc00;color:#fff;font-size:18px;display:none;cursor:pointer;pointer-events:all;transition:0.2s;" onclick="openAbilitySelectionPanel()" title="Select Abilities">🎯</button>
-<div id="ability-selection-panel" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,10,30,0.96);border:2px solid #00d2ff;border-radius:16px;padding:20px;z-index:200;display:none;flex-direction:column;align-items:center;min-width:280px;max-width:360px;max-height:80vh;overflow-y:auto;backdrop-filter:blur(10px);pointer-events:all;"></div>
 <button id="pause-btn" onclick="togglePause()">⏸</button>
 <div id="achievement-popup" class="achievement-popup-fixed">
     <div class="title">🏆 ACHIEVEMENT UNLOCKED</div>
@@ -1965,37 +1963,81 @@ function toggleAbilitySelection(abilityId){
 }
 
 function renderAbilitySelectionPanel(){
-    const panel = document.getElementById('ability-selection-panel');
-    if(!panel) return;
-    let html = '<h3 style="color:#00d2ff;margin-bottom:10px;">🎯 SELECT ABILITIES (Max 3)</h3>';
-    for(let key of Object.keys(RARE_ABILITIES)){
-        const ab = RARE_ABILITIES[key];
-        if(!ab.purchased) continue;
-        const isSelected = selectedAbilities.includes(key);
-        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : key === 'resourceMagnet' ? '#ffcc00' : key === 'timeWarp' ? '#00ccff' : key === 'ultimateAnnihilation' ? '#ff0000' : key === 'lightningStrike' ? '#ffff00' : '#42f5b6';
-        html += `<div style="display:flex;align-items:center;gap:8px;padding:6px;margin:3px 0;background:rgba(0,0,0,0.4);border-radius:8px;border:1px solid ${isSelected ? bgColor : '#444'};cursor:pointer;" onclick="toggleAbilitySelection('${key}')">
-            <input type="checkbox" ${isSelected ? 'checked' : ''} style="pointer-events:none;accent-color:${bgColor};" />
-            <span style="font-size:16px;">${ab.icon}</span>
-            <span style="font-size:11px;color:#ccc;">${ab.name.replace(ab.icon+' ','')}</span>
-            ${isSelected ? '<span style="margin-left:auto;font-size:10px;color:#00ffaa;">✅</span>' : ''}
-        </div>`;
-    }
-    html += '<div style="font-size:10px;color:#aaa;margin-top:8px;">Equipped: ' + selectedAbilities.length + '/3</div>';
-    html += '<button class="btn" style="margin-top:10px;" onclick="closeAbilitySelectionPanel()">DONE</button>';
-    panel.innerHTML = html;
+    renderHomeAbilityPanel();
 }
 
 function openAbilitySelectionPanel(){
-    const panel = document.getElementById('ability-selection-panel');
-    if(!panel) return;
-    panel.style.display = 'flex';
-    renderAbilitySelectionPanel();
+    openHomeAbilityPanel();
 }
 
 function closeAbilitySelectionPanel(){
-    const panel = document.getElementById('ability-selection-panel');
-    if(panel) panel.style.display = 'none';
+    closeHomeAbilityPanel();
     updateAbilityButtons();
+}
+
+function openHomeAbilityPanel(){
+    const panel = document.getElementById('home-abilities-panel');
+    if(!panel) return;
+    panel.style.display = 'flex';
+    renderHomeAbilityPanel();
+}
+
+function closeHomeAbilityPanel(){
+    const panel = document.getElementById('home-abilities-panel');
+    if(panel) panel.style.display = 'none';
+}
+
+function renderHomeAbilityPanel(){
+    const content = document.getElementById('home-abilities-content');
+    if(!content) return;
+    let html = '<h3 style="color:#00d2ff;margin-bottom:12px;">🎯 ABILITIES</h3>';
+    html += '<div style="font-size:11px;color:#aaa;margin-bottom:12px;">Select up to 3 abilities to equip for your next game</div>';
+    for(let key of Object.keys(RARE_ABILITIES)){
+        const ab = RARE_ABILITIES[key];
+        const isUnlocked = ab.purchased;
+        const isEligible = ab.unlockReq();
+        const isSelected = selectedAbilities.includes(key);
+        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : key === 'resourceMagnet' ? '#ffcc00' : key === 'timeWarp' ? '#00ccff' : key === 'ultimateAnnihilation' ? '#ff0000' : key === 'lightningStrike' ? '#ffff00' : '#42f5b6';
+        if(!isUnlocked){
+            html += `<div style="display:flex;align-items:center;gap:8px;padding:8px;margin:4px 0;background:rgba(0,0,0,0.4);border-radius:10px;border:1px solid #444;opacity:0.5;">
+                <span style="font-size:20px;">🔒</span>
+                <div style="flex:1;text-align:right;">
+                    <div style="font-size:12px;color:#888;">${ab.name}</div>
+                    <div style="font-size:10px;color:#aaa;margin-top:2px;">${ab.desc}</div>
+                    <div style="font-size:9px;color:#ff0044;margin-top:3px;">🔒 ${isEligible ? 'Requirement met - Buy in Upgrades shop!' : ab.unlockDesc}</div>
+                </div>
+            </div>`;
+        } else {
+            html += `<div style="display:flex;align-items:center;gap:8px;padding:8px;margin:4px 0;background:rgba(0,0,0,0.4);border-radius:10px;border:1px solid ${isSelected ? bgColor : '#444'};cursor:pointer;transition:0.2s;" onclick="toggleHomeAbility('${key}')">
+                <input type="checkbox" ${isSelected ? 'checked' : ''} style="pointer-events:none;accent-color:${bgColor};" />
+                <span style="font-size:20px;">${ab.icon}</span>
+                <div style="flex:1;text-align:right;">
+                    <div style="font-size:12px;color:#ccc;">${ab.name.replace(ab.icon+' ','')}</div>
+                    <div style="font-size:10px;color:#aaa;margin-top:2px;">${ab.desc}</div>
+                </div>
+                ${isSelected ? '<span style="font-size:10px;color:#00ffaa;font-weight:bold;">✅ Equipped</span>' : ''}
+            </div>`;
+        }
+    }
+    html += '<div style="font-size:11px;color:#ffcc00;margin-top:12px;">Equipped: ' + selectedAbilities.length + '/3</div>';
+    html += '<button class="btn" style="margin-top:12px;" onclick="closeHomeAbilityPanel()">DONE</button>';
+    content.innerHTML = html;
+}
+
+function toggleHomeAbility(abilityId){
+    if(!RARE_ABILITIES[abilityId] || !RARE_ABILITIES[abilityId].purchased) return;
+    const idx = selectedAbilities.indexOf(abilityId);
+    if(idx >= 0){
+        selectedAbilities.splice(idx, 1);
+    } else {
+        if(selectedAbilities.length >= 3){
+            showNotification('⚠ Max 3 abilities can be equipped!', 'warning');
+            return;
+        }
+        selectedAbilities.push(abilityId);
+    }
+    saveSelectedAbilities();
+    renderHomeAbilityPanel();
 }
 
 function buyRareAbility(id){
@@ -2159,6 +2201,24 @@ function updateAbilityButtons(){
 // DYNAMIC UPDATE LOG SYSTEM
 // ============================================
 let updateLogData = [
+    {
+        version: 'v11.5',
+        changes: [
+            'Bug fix: TypeError crash when accessing guardian.y after guardian was destroyed',
+            'Bug fix: Particle crash when guardian was null after defeat (coordinates captured before null)',
+            'Abilities screen moved to Home Screen - equip up to 3 abilities before starting a game',
+            'All abilities now visible in the panel (locked, unlocked, equipped status)',
+            'Removed ability selection button from game screen - no selection during gameplay',
+            'Lootbox Shop UI cleanup - removed all glow/sparkle/shimmer animations for clean flat design',
+            'Home Screen UI cleanup - removed all glow/shimmer text animations for readable flat typography',
+            'Ultra-Rare items added to every lootbox type with very low drop chance (1-3%)',
+            'Ultra-Rare: Golden Treasure (Basic) - 5000 credits at 1.5% chance',
+            'Ultra-Rare: Legendary Weapon Core (Premium) - permanent weapon damage boost at 2% chance',
+            'Ultra-Rare: Cosmic Shard (Mythic/Ultra) - instantly unlocks a locked ability at 2.5-3% chance',
+            'Probability Viewer updated to display ultra-rare items with distinct purple ULTRA-RARE label',
+            'Cosmic Shard reward type: unlocks first eligible locked ability or gives 2000 gemstones fallback'
+        ]
+    },
     {
         version: 'v11.4',
         changes: [
@@ -2474,51 +2534,57 @@ function flashScreen(){
 // LOOTBOX REWARDS
 const LOOTBOX_REWARDS = {
     common: [
-        {name:"50 GEMSTONES", type:"gem", amount:50, rarity:"common", icon:"💎", probability:25, stars:1},
-        {name:"100 GEMSTONES", type:"gem", amount:100, rarity:"common", icon:"💎", probability:20, stars:1},
-        {name:"500 CREDITS", type:"credit", amount:500, rarity:"common", icon:"💰", probability:25, stars:1},
-        {name:"TEMPORARY SPEED BOOST", type:"boost", effect:"speed", duration:60, rarity:"common", icon:"⚡", probability:20, stars:1},
-        {name:"1 BOMB", type:"bomb", amount:1, rarity:"common", icon:"💣", probability:10, stars:1}
+        {name:"50 GEMSTONES", type:"gem", amount:50, rarity:"common", icon:"💎", probability:24.5, stars:1},
+        {name:"100 GEMSTONES", type:"gem", amount:100, rarity:"common", icon:"💎", probability:19.5, stars:1},
+        {name:"500 CREDITS", type:"credit", amount:500, rarity:"common", icon:"💰", probability:24.5, stars:1},
+        {name:"TEMPORARY SPEED BOOST", type:"boost", effect:"speed", duration:60, rarity:"common", icon:"⚡", probability:19.5, stars:1},
+        {name:"1 BOMB", type:"bomb", amount:1, rarity:"common", icon:"💣", probability:10.5, stars:1},
+        {name:"🌟 GOLDEN TREASURE", type:"credit", amount:5000, rarity:"legendary", icon:"🌟", probability:1.5, stars:4, ultraRare:true}
     ],
     rare: [
-        {name:"150 GEMSTONES", type:"gem", amount:150, rarity:"rare", icon:"💎", probability:22, stars:2},
-        {name:"250 GEMSTONES", type:"gem", amount:250, rarity:"rare", icon:"💎", probability:18, stars:2},
-        {name:"1000 CREDITS", type:"credit", amount:1000, rarity:"rare", icon:"💰", probability:22, stars:2},
-        {name:"TEMPORARY DAMAGE BOOST", type:"boost", effect:"damage", duration:90, rarity:"rare", icon:"💪", probability:18, stars:2},
-        {name:"2 BOMBS", type:"bomb", amount:2, rarity:"rare", icon:"💣", probability:12, stars:2},
-        {name:"COMMON SKIN", type:"skin", skin:"blue", rarity:"rare", icon:"🎨", probability:8, stars:2}
+        {name:"150 GEMSTONES", type:"gem", amount:150, rarity:"rare", icon:"💎", probability:21.5, stars:2},
+        {name:"250 GEMSTONES", type:"gem", amount:250, rarity:"rare", icon:"💎", probability:17.5, stars:2},
+        {name:"1000 CREDITS", type:"credit", amount:1000, rarity:"rare", icon:"💰", probability:21.5, stars:2},
+        {name:"TEMPORARY DAMAGE BOOST", type:"boost", effect:"damage", duration:90, rarity:"rare", icon:"💪", probability:17.5, stars:2},
+        {name:"2 BOMBS", type:"bomb", amount:2, rarity:"rare", icon:"💣", probability:11.5, stars:2},
+        {name:"COMMON SKIN", type:"skin", skin:"blue", rarity:"rare", icon:"🎨", probability:7.5, stars:2},
+        {name:"🌟 GOLDEN TREASURE", type:"credit", amount:5000, rarity:"legendary", icon:"🌟", probability:2, stars:4, ultraRare:true}
     ],
     epic: [
-        {name:"300 GEMSTONES", type:"gem", amount:300, rarity:"epic", icon:"💎", probability:20, stars:3},
-        {name:"500 GEMSTONES", type:"gem", amount:500, rarity:"epic", icon:"💎", probability:15, stars:3},
-        {name:"2500 CREDITS", type:"credit", amount:2500, rarity:"epic", icon:"💰", probability:20, stars:3},
-        {name:"PERMANENT DAMAGE UPGRADE", type:"perm_upgrade", stat:"damage", amount:1, rarity:"epic", icon:"🔰", probability:18, stars:3},
-        {name:"3 BOMBS", type:"bomb", amount:3, rarity:"epic", icon:"💣", probability:15, stars:3},
-        {name:"RARE SKIN", type:"skin", skin:"purple", rarity:"epic", icon:"🎨", probability:12, stars:3}
+        {name:"300 GEMSTONES", type:"gem", amount:300, rarity:"epic", icon:"💎", probability:19.5, stars:3},
+        {name:"500 GEMSTONES", type:"gem", amount:500, rarity:"epic", icon:"💎", probability:14.5, stars:3},
+        {name:"2500 CREDITS", type:"credit", amount:2500, rarity:"epic", icon:"💰", probability:19.5, stars:3},
+        {name:"PERMANENT DAMAGE UPGRADE", type:"perm_upgrade", stat:"damage", amount:1, rarity:"epic", icon:"🔰", probability:17.5, stars:3},
+        {name:"3 BOMBS", type:"bomb", amount:3, rarity:"epic", icon:"💣", probability:14.5, stars:3},
+        {name:"RARE SKIN", type:"skin", skin:"purple", rarity:"epic", icon:"🎨", probability:11.5, stars:3},
+        {name:"🌟 LEGENDARY WEAPON CORE", type:"perm_upgrade", stat:"damage", amount:2, rarity:"legendary", icon:"⚔️", probability:2, stars:4, ultraRare:true}
     ],
     legendary: [
-        {name:"600 GEMSTONES", type:"gem", amount:600, rarity:"legendary", icon:"💎", probability:18, stars:4},
-        {name:"1000 GEMSTONES", type:"gem", amount:1000, rarity:"legendary", icon:"💎", probability:14, stars:4},
-        {name:"5000 CREDITS", type:"credit", amount:5000, rarity:"legendary", icon:"💰", probability:18, stars:4},
-        {name:"PERMANENT FIRE RATE UPGRADE", type:"perm_upgrade", stat:"fire", amount:2, rarity:"legendary", icon:"🔥", probability:18, stars:4},
-        {name:"5 BOMBS", type:"bomb", amount:5, rarity:"legendary", icon:"💣", probability:16, stars:4},
-        {name:"LEGENDARY SKIN", type:"skin", skin:"gold", rarity:"legendary", icon:"👑", probability:16, stars:4}
+        {name:"600 GEMSTONES", type:"gem", amount:600, rarity:"legendary", icon:"💎", probability:17.5, stars:4},
+        {name:"1000 GEMSTONES", type:"gem", amount:1000, rarity:"legendary", icon:"💎", probability:13.5, stars:4},
+        {name:"5000 CREDITS", type:"credit", amount:5000, rarity:"legendary", icon:"💰", probability:17.5, stars:4},
+        {name:"PERMANENT FIRE RATE UPGRADE", type:"perm_upgrade", stat:"fire", amount:2, rarity:"legendary", icon:"🔥", probability:17.5, stars:4},
+        {name:"5 BOMBS", type:"bomb", amount:5, rarity:"legendary", icon:"💣", probability:15.5, stars:4},
+        {name:"LEGENDARY SKIN", type:"skin", skin:"gold", rarity:"legendary", icon:"👑", probability:15.5, stars:4},
+        {name:"🌟 LEGENDARY WEAPON CORE", type:"perm_upgrade", stat:"damage", amount:3, rarity:"legendary", icon:"⚔️", probability:2, stars:4, ultraRare:true}
     ],
     mythic: [
-        {name:"1500 GEMSTONES", type:"gem", amount:1500, rarity:"mythic", icon:"💎", probability:16, stars:5},
-        {name:"2500 GEMSTONES", type:"gem", amount:2500, rarity:"mythic", icon:"💎", probability:12, stars:5},
-        {name:"10000 CREDITS", type:"credit", amount:10000, rarity:"mythic", icon:"💰", probability:16, stars:5},
-        {name:"PERMANENT DAMAGE UPGRADE x3", type:"perm_upgrade", stat:"damage", amount:3, rarity:"mythic", icon:"🔰🔰", probability:18, stars:5},
-        {name:"7 BOMBS", type:"bomb", amount:7, rarity:"mythic", icon:"💣", probability:18, stars:5},
-        {name:"MYTHIC SKIN", type:"skin", skin:"rainbow", rarity:"mythic", icon:"🌈", probability:20, stars:5}
+        {name:"1500 GEMSTONES", type:"gem", amount:1500, rarity:"mythic", icon:"💎", probability:15.5, stars:5},
+        {name:"2500 GEMSTONES", type:"gem", amount:2500, rarity:"mythic", icon:"💎", probability:11.5, stars:5},
+        {name:"10000 CREDITS", type:"credit", amount:10000, rarity:"mythic", icon:"💰", probability:15.5, stars:5},
+        {name:"PERMANENT DAMAGE UPGRADE x3", type:"perm_upgrade", stat:"damage", amount:3, rarity:"mythic", icon:"🔰🔰", probability:17.5, stars:5},
+        {name:"7 BOMBS", type:"bomb", amount:7, rarity:"mythic", icon:"💣", probability:17.5, stars:5},
+        {name:"MYTHIC SKIN", type:"skin", skin:"rainbow", rarity:"mythic", icon:"🌈", probability:19.5, stars:5},
+        {name:"🌟 COSMIC SHARD", type:"unlock_ability", rarity:"legendary", icon:"💠", probability:2.5, stars:6, ultraRare:true}
     ],
     ultra: [
-        {name:"5000 GEMSTONES", type:"gem", amount:5000, rarity:"ultra", icon:"💎💎", probability:14, stars:6},
-        {name:"10000 GEMSTONES", type:"gem", amount:10000, rarity:"ultra", icon:"💎💎", probability:10, stars:6},
-        {name:"50000 CREDITS", type:"credit", amount:50000, rarity:"ultra", icon:"💰💰", probability:14, stars:6},
-        {name:"ULTRA MYTHIC SKIN (LIMITED)", type:"skin", skin:"ultra", rarity:"ultra", icon:"👑👑", limited:true, probability:12, stars:6},
-        {name:"15 BOMBS", type:"bomb", amount:15, rarity:"ultra", icon:"💣💣", probability:20, stars:6},
-        {name:"ALL PERMANENT UPGRADES +5", type:"perm_upgrade_all", amount:5, rarity:"ultra", icon:"⭐", probability:30, stars:6}
+        {name:"5000 GEMSTONES", type:"gem", amount:5000, rarity:"ultra", icon:"💎💎", probability:13.5, stars:6},
+        {name:"10000 GEMSTONES", type:"gem", amount:10000, rarity:"ultra", icon:"💎💎", probability:9.5, stars:6},
+        {name:"50000 CREDITS", type:"credit", amount:50000, rarity:"ultra", icon:"💰💰", probability:13.5, stars:6},
+        {name:"ULTRA MYTHIC SKIN (LIMITED)", type:"skin", skin:"ultra", rarity:"ultra", icon:"👑👑", limited:true, probability:11.5, stars:6},
+        {name:"15 BOMBS", type:"bomb", amount:15, rarity:"ultra", icon:"💣💣", probability:19.5, stars:6},
+        {name:"ALL PERMANENT UPGRADES +5", type:"perm_upgrade_all", amount:5, rarity:"ultra", icon:"⭐", probability:29.5, stars:6},
+        {name:"🌟 COSMIC SHARD", type:"unlock_ability", rarity:"legendary", icon:"💠", probability:3, stars:7, ultraRare:true}
     ]
 };
 
@@ -2742,9 +2808,31 @@ function applyReward(reward){
                 showNotification(`🎨 Duplicate skin! +${duplicateGems} GEMSTONES`, 'info');
             }
             break;
+        case 'unlock_ability':
+            let unlockedOne = false;
+            for(let key of Object.keys(RARE_ABILITIES)){
+                const ab = RARE_ABILITIES[key];
+                if(!ab.purchased && ab.unlockReq()){
+                    ab.purchased = true;
+                    localStorage.setItem('rareAbility_'+key, 'true');
+                    resultText = `💠 COSMIC SHARD unlocked: ${ab.name}! 💠`;
+                    showNotification(`💠 ${ab.name} unlocked by Cosmic Shard!`, 'success');
+                    unlockedOne = true;
+                    break;
+                }
+            }
+            if(!unlockedOne){
+                gemstones += 2000;
+                saveGemstones();
+                resultText = `💠 No locked abilities to unlock - received 2000 GEMSTONES instead! 💠`;
+                showNotification(`💠 Cosmic Shard: +2000 GEMSTONES (no locked abilities)`, 'info');
+            }
+            break;
     }
     let isNewSkin = reward.type === 'skin' && !ownedSkins[reward.skin];
-    document.getElementById('lootbox-result').innerHTML = `<div class="reward-card rarity-${currentLootboxType}"><div style="font-size:28px;margin-bottom:10px;">${reward.icon}</div><div style="font-size:16px;font-weight:bold;">${resultText}</div><div style="font-size:13px;color:#ffaa00;margin-top:10px;">${reward.name}</div><div style="font-size:11px;margin-top:4px;">${reward.rarity.toUpperCase()}</div>${isNewSkin ? '<div style="color:#00ffaa;font-weight:bold;margin-top:8px;font-size:14px;">✨ NEW!</div>' : ''}</div>`;
+    const rewardRarityClass = reward.ultraRare ? 'rarity-ultra' : `rarity-${currentLootboxType}`;
+    const ultraRareLabel = reward.ultraRare ? '<div style="color:#9b59b6;font-weight:bold;margin-top:6px;font-size:12px;">💠 ULTRA-RARE DROP 💠</div>' : '';
+    document.getElementById('lootbox-result').innerHTML = `<div class="reward-card ${rewardRarityClass}"><div style="font-size:28px;margin-bottom:10px;">${reward.icon}</div><div style="font-size:16px;font-weight:bold;">${resultText}</div><div style="font-size:13px;color:#ffaa00;margin-top:10px;">${reward.name}</div><div style="font-size:11px;margin-top:4px;">${reward.rarity.toUpperCase()}</div>${ultraRareLabel}${isNewSkin ? '<div style="color:#00ffaa;font-weight:bold;margin-top:8px;font-size:14px;">✨ NEW!</div>' : ''}</div>`;
     updateShopUI();
     updateIndividualRewardsUI();
     checkAchievements();
@@ -2773,13 +2861,16 @@ function viewLootboxProbabilities(type){
             <h3 style="color:${rarityColors[type]||'#00d2ff'};text-align:center;margin-bottom:12px;">📦 ${rarityNames[type]||type.toUpperCase()} LOOTBOX DROPS</h3>`;
     for(const r of rewards){
         const starStr = '⭐'.repeat(r.stars || 1);
-        html += `<div style="background:rgba(0,0,0,0.5);border:1px solid ${rarityColors[r.rarity]||'#444'};border-radius:8px;padding:8px;margin:6px 0;display:flex;align-items:center;gap:8px;">
+        const isUltraRare = r.ultraRare;
+        const ultraRareTag = isUltraRare ? '<span style="background:#9b59b6;color:#fff;font-size:8px;padding:1px 6px;border-radius:8px;margin-left:4px;">ULTRA-RARE</span>' : '';
+        const borderStyle = isUltraRare ? 'border:2px solid #9b59b6;' : `border:1px solid ${rarityColors[r.rarity]||'#444'};`;
+        html += `<div style="background:rgba(0,0,0,0.5);${borderStyle}border-radius:8px;padding:8px;margin:6px 0;display:flex;align-items:center;gap:8px;${isUltraRare ? 'background:rgba(155,89,182,0.15);' : ''}">
             <span style="font-size:18px;">${r.icon}</span>
             <div style="flex:1;">
-                <div style="font-size:11px;color:#fff;">${r.name}</div>
+                <div style="font-size:11px;color:#fff;">${r.name} ${ultraRareTag}</div>
                 <div style="font-size:9px;color:${rarityColors[r.rarity]||'#888'};">${starStr} ${rarityNames[r.rarity]||r.rarity.toUpperCase()}</div>
             </div>
-            <div style="font-size:13px;color:#ffcc00;font-weight:bold;">${r.probability || '—'}%</div>
+            <div style="font-size:13px;color:${isUltraRare ? '#9b59b6' : '#ffcc00'};font-weight:bold;">${r.probability || '—'}%</div>
         </div>`;
     }
     html += `<button class="btn" style="margin-top:12px;width:100%;" onclick="this.closest('div[style]').parentElement.remove()">CLOSE</button></div></div>`;
@@ -2928,8 +3019,7 @@ function backToGameSelect(){
         if(el) el.style.display='none';
     });
     document.getElementById('ability-btns').style.display='none';
-    document.getElementById('ability-select-btn').style.display='none';
-    document.getElementById('ability-selection-panel').style.display='none';
+    closeHomeAbilityPanel();
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -4771,7 +4861,6 @@ function startGame(){
     ['ui-hud','score-hud','combo-small','powerup-bar','pause-btn','game-timer','rank-badge','combo-meter','wave-progress'].forEach(id=>document.getElementById(id).style.display='block');
     document.getElementById('od-btn').style.display='none';
     document.getElementById('ability-btns').style.display='none';
-    document.getElementById('ability-select-btn').style.display='block';
     document.getElementById('crosshair').style.display='block';
     // New UI elements
     document.getElementById('auto-fire-btn').style.display = 'block';
@@ -4805,7 +4894,7 @@ function startGame(){
 }
 
 function togglePause(){
-    if(gameState==='PLAYING'){gameState='PAUSED';isPaused=true;document.getElementById('pause-screen').style.display='flex';document.getElementById('pause-btn').innerText='▶';document.getElementById('ability-selection-panel').style.display='none';}
+    if(gameState==='PLAYING'){gameState='PAUSED';isPaused=true;document.getElementById('pause-screen').style.display='flex';document.getElementById('pause-btn').innerText='▶';closeHomeAbilityPanel();}
     else if(gameState==='PAUSED'){gameState='PLAYING';isPaused=false;document.getElementById('pause-screen').style.display='none';document.getElementById('pause-btn').innerText='⏸';}
 }
 
@@ -4834,8 +4923,7 @@ function quitToMenu(){
         if(el) el.style.display='none';
     });
     document.getElementById('ability-btns').style.display='none';
-    document.getElementById('ability-select-btn').style.display='none';
-    document.getElementById('ability-selection-panel').style.display='none';
+    closeHomeAbilityPanel();
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -4903,8 +4991,7 @@ function gameOver(){
     if(animationId) cancelAnimationFrame(animationId);
     ['ui-hud','score-hud','od-btn','combo-small','pause-btn','powerup-bar','boss-warning','wave-banner','event-banner','ascend-screen','game-timer','rank-badge','combo-meter','wave-progress'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('ability-btns').style.display='none';
-    document.getElementById('ability-select-btn').style.display='none';
-    document.getElementById('ability-selection-panel').style.display='none';
+    closeHomeAbilityPanel();
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -5225,7 +5312,7 @@ function loop(){
                     if(health>maxHealth) health = maxHealth;
                 }
             }
-            if(guardian.y>height+200){ guardian=null; activeEvent=null; }
+            if(guardian && guardian.y>height+200){ guardian=null; activeEvent=null; }
         }
 
         const magnetActive=!!activePowerUps.magnet;
@@ -5330,7 +5417,7 @@ function loop(){
         if(guardian){ for(let j=0;j<bullets.length;j++){ if(hitBullets.has(j)) continue; const b=bullets[j];
             if(Math.hypot(b.x-guardian.x,b.y-guardian.y)<guardian.r){
                 hitBullets.add(j); guardian.hp-=b.p;
-                if(guardian.hp<=0){ guardian=null; activeEvent=null; 
+                if(guardian.hp<=0){ let gx=guardian.x,gy=guardian.y; guardian=null; activeEvent=null; 
                     let pointBonus = 50000;
                     if(goldRushActive) pointBonus*=10;
                     if(bugEventActive) pointBonus*=5;
@@ -5341,7 +5428,7 @@ function loop(){
                     score+=pointBonus; totalCoins+=5000;
                     if(!skinUnlocked){ skinUnlocked=true; localStorage.setItem('skinUnlocked','true'); showAchievementPopup('👑 GUARDIAN DEFEATED', 'Golden skin unlocked!'); }
                     let count=parseInt(localStorage.getItem('guardianDefeatedCount')||0)+1; localStorage.setItem('guardianDefeatedCount',count);
-                    guardianDefeated=true; for(let k=0;k<50;k++) particles.push(new Particle(guardian.x,guardian.y,(Math.random()-0.5)*20,(Math.random()-0.5)*20,'gold',1));
+                    guardianDefeated=true; for(let k=0;k<50;k++) particles.push(new Particle(gx,gy,(Math.random()-0.5)*20,(Math.random()-0.5)*20,'gold',1));
                     checkAchievements();
                 } break;
             }}
