@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.6</title>
+    <title>Galactic Defender - UPDATE 11.7</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -37,10 +37,9 @@
         #ascend-screen { background: rgba(0,0,0,0.95); border: 2px solid gold; justify-content: center; }
         .side-btn { position: absolute; right: 10px; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,30,60,0.8); border: 1px solid #00d2ff; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 60; transition: 0.2s; }
         .side-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); }
-        #ach-side-btn { top: 80px; }
-        #events-side-btn { top: 130px; }
-        #skins-side-btn { top: 180px; }
-        #settings-side-btn { top: 230px; }
+        #ea-combined-side-btn { top: 80px; }
+        #skins-side-btn { top: 130px; }
+        #settings-side-btn { top: 180px; }
         .settings-option { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px; margin: 8px; display: flex; justify-content: space-between; align-items: center; width: 300px; }
         .settings-toggle { width: 50px; height: 25px; background: #333; border-radius: 25px; cursor: pointer; transition: 0.2s; position: relative; }
         .settings-toggle.on { background: #00ffaa; }
@@ -268,6 +267,32 @@
 .streak-reward-item { background: rgba(255,100,0,0.15); border: 1px solid #ff660066; border-radius: 8px; padding: 6px 12px; margin: 4px 0; font-size: 13px; color: #ffcc00; }
 .streak-claim-btn { background: linear-gradient(135deg, #ff6600, #ff9900); border: none; color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 900; cursor: pointer; font-size: 14px; transition: 0.2s; margin-top: 5px; }
 .streak-claim-btn:hover { transform: scale(1.05); }
+        /* === COMBINED EVENTS+ACHIEVEMENTS SCREEN === */
+        #events-achievements-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff66ff; overflow-y: auto; justify-content: flex-start; }
+        .ea-tab-bar { display: flex; gap: 4px; margin: 8px 0; justify-content: center; }
+        .ea-tab-btn { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .ea-tab-btn:hover { border-color: #ff66ff; color: #fff; }
+        .ea-tab-btn.active { background: rgba(120,0,120,0.7); border-color: #ff66ff; color: #fff; }
+        .ea-tab-panel { display: none; width: 100%; flex-direction: column; align-items: center; }
+        .ea-tab-panel.active { display: flex; }
+        /* === COSMETICS SHOP === */
+        .cosmetic-card { background: rgba(0,0,0,0.6); border: 2px solid #555; border-radius: 12px; padding: 10px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
+        .cosmetic-card:hover { background: rgba(100,0,150,0.2); border-color: #ff66ff; transform: scale(1.02); }
+        .cosmetic-card.owned { border-color: gold; background: rgba(255,215,0,0.1); }
+        .cosmetic-card.equipped { border-color: #00ffaa; box-shadow: 0 0 12px #00ffaa; }
+        .cosmetic-card.cant-afford { opacity: 0.4; cursor: not-allowed; }
+        .cosmetic-icon { font-size: 36px; margin-bottom: 6px; }
+        .cosmetic-name { font-weight: bold; font-size: 12px; margin-bottom: 2px; }
+        .cosmetic-price { color: #ff66ff; font-size: 11px; }
+        /* === TIPS SYSTEM === */
+        .tips-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 10px 0; width: 95%; max-width: 500px; }
+        .tip-card-wrapper { perspective: 600px; width: 140px; height: 120px; }
+        .tip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .tip-card-inner.flipped { transform: rotateY(180deg); }
+        .tip-card-front, .tip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; }
+        .tip-card-front { background: linear-gradient(135deg, #001a33, #002244); border: 1px solid #00d2ff; cursor: pointer; }
+        .tip-card-front:hover { border-color: #00ffaa; }
+        .tip-card-back { background: linear-gradient(135deg, #002244, #001a33); border: 1px solid #00ffaa; transform: rotateY(180deg); font-size: 10px; color: #ccc; text-align: center; }
     </style>
 </head>
 <body>
@@ -298,7 +323,7 @@
 <!-- MAIN HUB -->
 <div id="main-hub" class="overlay">
     <h1 class="hub-title" style="font-size:52px;margin-bottom:5px;color:#00d2ff;">✨ GALACTIC DEFENDER ✨</h1>
-    <div class="hub-version-badge">UPDATE 11.6</div>
+    <div class="hub-version-badge">UPDATE 11.7</div>
     <div class="hub-divider"></div>
     <div style="margin:15px 0;">
         <button class="hub-btn-hero" onclick="openGameSelect()">🚀 PLAY NOW</button>
@@ -334,7 +359,11 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.6 - Skill Tree + Event Queue + New Events + Divine Mega Buff!</p>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.7 - Cosmetics, Combined Panels, New Rare Skins, Tips & More!</p>
+    </div>
+    <div class="hub-section" style="margin-bottom:10px;">
+        <h3 style="color:#00d2ff;margin-bottom:8px;">💡 TIPS</h3>
+        <div id="tips-container" class="tips-container"></div>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
@@ -352,7 +381,7 @@
             <h2 style="color:#00d2ff;">GALACTIC DEFENDER</h2>
             <p>המשחק הקלאסי! יריות, בוסים, אירועים והישגים</p>
             <p style="color:#00ffaa;font-size:12px;margin-top:10px;">▶ לחץ כדי לשחק</p>
-            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.6: Skill Tree, New Events, Bug Fixes!</div>
+            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.7: Cosmetics, Combined Panels, Rare Skins, Tips!</div>
         </div>
         <div class="game-select-card coming-soon" onclick="showCustomAlert('משחק זה עדיין בפיתוח! יגיע בקרוב...')">
             <div style="font-size:48px;">❓</div>
@@ -447,11 +476,10 @@
     <button class="btn" style="border-color:#00d2ff;" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
     <button class="btn" style="border-color:#888;margin-bottom:30px;" onclick="backToGameSelect()" data-i18n="back">← BACK</button>
     <div style="color:#888;font-size:8px;margin-top:8px;margin-bottom:20px;">MOUSE/TOUCH | ESC | Q bomb | O overdrive</div>
-    <div id="ach-side-btn" class="side-btn" onclick="openAchievements()">🏆</div>
-    <div id="events-side-btn" class="side-btn" onclick="openEvents()">📋</div>
+    <div id="ea-combined-side-btn" class="side-btn" onclick="openEventsAchievements()">🏆</div>
     <div id="skins-side-btn" class="side-btn" onclick="openSkins()">🎨</div>
     <div id="settings-side-btn" class="side-btn" onclick="openSettings()">⚙️</div>
-    <div id="skill-tree-side-btn" class="side-btn" style="top:280px;" onclick="openSkillTree()">🌳</div>
+    <div id="skill-tree-side-btn" class="side-btn" style="top:230px;" onclick="openSkillTree()">🌳</div>
 </div>
 
 <div id="skins-screen" class="overlay">
@@ -485,6 +513,12 @@
     </div>
     <h3 style="margin-top:20px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
     <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
+    <h3 style="margin-top:20px;color:#ff66ff;">🎨 COSMETICS SHOP</h3>
+    <div style="font-size:11px;color:#aaa;margin:4px 0;">✨ Auras & Titles are purely cosmetic - no gameplay effect!</div>
+    <h4 style="color:#ff8800;margin:8px 0 4px;">🔥 SHIP AURAS</h4>
+    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-auras-grid"></div>
+    <h4 style="color:#ffcc00;margin:12px 0 4px;">🏷️ PLAYER TITLES</h4>
+    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-titles-grid"></div>
     <button class="btn" onclick="closeRNGShop()" style="margin-bottom:30px;" data-i18n="back">← BACK</button>
 </div>
 
@@ -592,6 +626,32 @@
     <h2 style="color:#ff00ff;" data-i18n="events">📋 EVENT LIST (42 EVENTS)</h2>
     <div class="events-grid" id="events-list-container"></div>
     <button class="btn" onclick="closeEvents()" style="margin-bottom:30px;">BACK</button>
+</div>
+
+<!-- COMBINED EVENTS & ACHIEVEMENTS SCREEN -->
+<div id="events-achievements-screen" class="overlay">
+    <h2 style="color:#ff66ff;">🏆 EVENTS & ACHIEVEMENTS 🏆</h2>
+    <div class="ea-tab-bar">
+        <button class="ea-tab-btn active" onclick="switchEATab('events')">📋 EVENTS</button>
+        <button class="ea-tab-btn" onclick="switchEATab('achievements')">🏆 ACHIEVEMENTS</button>
+    </div>
+    <div id="ea-events-panel" class="ea-tab-panel active">
+        <div class="events-grid" id="ea-events-list-container"></div>
+    </div>
+    <div id="ea-achievements-panel" class="ea-tab-panel">
+        <div class="ach-unlocked-count" id="ea-ach-unlocked-text">🏆 <span id="ea-ach-unlocked-num">0</span> / <span id="ea-ach-total-num">0</span> UNLOCKED</div>
+        <div class="ach-progress-bar-total"><div class="ach-progress-fill-total" id="ea-ach-total-progress-fill"></div></div>
+        <div class="ach-filter-tabs" id="ea-ach-filter-tabs">
+            <button class="ach-filter-tab active" onclick="filterAchievementsEA('all')">ALL</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('easy')">EASY</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('medium')">MEDIUM</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('hard')">HARD</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('extreme')">EXTREME</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('mythic')">MYTHIC</button>
+        </div>
+        <div id="ea-ach-list" class="achievements-grid"></div>
+    </div>
+    <button class="btn" onclick="closeEventsAchievements()" style="margin-bottom:30px;">← BACK</button>
 </div>
 
 <div id="pause-screen" class="overlay">
@@ -2228,6 +2288,22 @@ function updateAbilityButtons(){
 // ============================================
 let updateLogData = [
     {
+        version: 'v11.7',
+        changes: [
+            'Skill Tree temporarily disabled for maintenance - will return in a future update',
+            'Events and Achievements combined into one panel with tabs (📋 EVENTS / 🏆 ACHIEVEMENTS)',
+            'NEW: Cosmetics Shop - Ship Auras (Fire, Ice, Lightning, Shadow, Rainbow) and Player Titles',
+            'Auras are purely visual particle effects around your ship during gameplay',
+            'Titles are decorative text shown above your ship - zero gameplay effect',
+            '2 new rare skins: PHANTOM (👻 10,000 total kills) and CELESTIAL (✨ reach wave 50)',
+            'Phantom skin: semi-transparent ghostly appearance - cosmetic only',
+            'Celestial skin: glowing divine appearance - cosmetic only',
+            'Tips system added to the Hub - purchase strategic tips with credits',
+            'Tips reveal with a card-flip animation and offer gameplay advice',
+            'Combined Events & Achievements button replaces separate buttons'
+        ]
+    },
+    {
         version: 'v11.6',
         changes: [
             'Bug fix: SyntaxError - missing closing brace for updateShopUI() function caused Unexpected token error',
@@ -2540,7 +2616,9 @@ const SKINS = [
     { id: 'gold', name: 'GOLDEN LEGEND', icon: '👑', desc: 'סקין זהב אגדי! מראה את השליטה שלך!', effect: '+25% CREDITS, +20% DAMAGE', requirement: 40, owned: false },
     { id: 'rainbow', name: 'RAINBOW MYTHIC', icon: '🌈', desc: 'צבעי הקשת! מסנוור את האויבים ביופי!', effect: null, requirement: 'lootbox', owned: false },
     { id: 'ultra', name: 'ULTRA MYTHIC', icon: '💎', desc: 'הסקין הנדיר ביותר ביקום! רק לעילא ולעלא!', effect: '+50% CREDITS, +50% DAMAGE, +20% FIRE RATE', requirement: 'ultra_lootbox', owned: false, limited: true },
-    { id: 'legend', name: 'LEGEND RANK 50', icon: '🏆', desc: 'סקין אגדי! מושג רק על ידי הטובים ביותר!', effect: '+100% CREDITS, +100% DAMAGE, +50% FIRE RATE', requirement: 'rank50', owned: false }
+    { id: 'legend', name: 'LEGEND RANK 50', icon: '🏆', desc: 'סקין אגדי! מושג רק על ידי הטובים ביותר!', effect: '+100% CREDITS, +100% DAMAGE, +50% FIRE RATE', requirement: 'rank50', owned: false },
+    { id: 'phantom', name: 'PHANTOM', icon: '👻', desc: 'רוח רפאים! מרחף מעבר למוות. 10,000 הריגות.', effect: null, requirement: 'kills10000', owned: false },
+    { id: 'celestial', name: 'CELESTIAL', icon: '✨', desc: 'אלוהי וזוהר! גל קוסמי 50 במשחק אחד.', effect: null, requirement: 'wave50', owned: false }
 ];
 
 // EVENT COUNTERS
@@ -2656,7 +2734,50 @@ const INDIVIDUAL_REWARDS = [
     {name:"5000 CREDITS", type:"credit", amount:5000, price:600, rarity:"epic", icon:"💰"}
 ];
 
-let ownedSkins; try { ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false}; } catch(e) { ownedSkins = {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false}; }
+let ownedSkins; try { ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false, phantom:false, celestial:false}; } catch(e) { ownedSkins = {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false, phantom:false, celestial:false}; }
+let maxWaveReached = parseInt(localStorage.getItem('maxWaveReached')) || 0;
+
+// COSMETIC DEFINITIONS
+const COSMETIC_AURAS = [
+    { id: 'fire', name: 'FIRE AURA', icon: '🔥', price: 500, desc: 'Orange/red particles around ship' },
+    { id: 'ice', name: 'ICE AURA', icon: '❄️', price: 800, desc: 'Blue/white frost particles' },
+    { id: 'lightning', name: 'LIGHTNING AURA', icon: '⚡', price: 1200, desc: 'Yellow electric sparks' },
+    { id: 'shadow', name: 'SHADOW AURA', icon: '🌑', price: 2000, desc: 'Dark purple smoke trail' },
+    { id: 'rainbow', name: 'RAINBOW AURA', icon: '🌈', price: 5000, desc: 'Multicolor particle rainbow' }
+];
+const COSMETIC_TITLES = [
+    { id: 'the_brave', name: 'The Brave', icon: '🛡️', price: 200 },
+    { id: 'star_destroyer', name: 'Star Destroyer', icon: '💫', price: 500 },
+    { id: 'cosmic_guardian', name: 'Cosmic Guardian', icon: '🌌', price: 1000 },
+    { id: 'the_legend', name: 'The Legend', icon: '👑', price: 2000 },
+    { id: 'galactic_emperor', name: 'Galactic Emperor', icon: '🏆', price: 3000 }
+];
+let ownedCosmetics; try { ownedCosmetics = JSON.parse(localStorage.getItem('ownedCosmetics')) || {}; } catch(e) { ownedCosmetics = {}; }
+let activeAura = localStorage.getItem('activeAura') || 'none';
+let activeTitle = localStorage.getItem('activeTitle') || 'none';
+
+// TIPS POOL
+const TIPS_POOL = [
+    'Upgrade fire rate first - it gives the best DPS per credit!',
+    'Save gemstones for Epic lootboxes - best value ratio',
+    'Equip Resource Magnet before long runs for more loot',
+    'Doomsday events spawn more enemies = more loot!',
+    "Don't forget to claim daily streak rewards!",
+    'The Guardian event is rare but gives massive rewards',
+    'Overdrive charges faster with more kills - stay aggressive!',
+    'Combo multiplier affects both score AND credit rewards',
+    'Boss enemies drop Elite items - always fight them!',
+    'Bomb conservation: save bombs for boss waves',
+    'Cosmetic auras are purely visual - no gameplay advantage',
+    'Phantom skin unlocks at 10,000 total kills - keep grinding!',
+    'Celestial skin unlocks at wave 50 - survive that far!',
+    'Rare abilities combo well together - experiment!',
+    'Check achievements for free gemstone rewards',
+    'Auto-fire is great for focusing on dodging',
+    'Daily missions reset every day - complete them for bonus credits',
+    'Spread shot + laser = maximum screen coverage'
+];
+let sessionTipsPurchased = {};
 let ultraMythicCount = parseInt(localStorage.getItem('ultraMythicCount')) || 0;
 const ULTRA_MYTHIC_LIMIT = 5;
 
@@ -2691,6 +2812,8 @@ function updateSkinsUI(){
         else if(skin.id === 'rainbow') isOwned = ownedSkins.rainbow;
         else if(skin.id === 'ultra') isOwned = ownedSkins.ultra;
         else if(skin.id === 'legend') isOwned = currentRank >= 50;
+        else if(skin.id === 'phantom') isOwned = totalKills >= 10000;
+        else if(skin.id === 'celestial') isOwned = maxWaveReached >= 50;
         
         const isEquipped = currentSkin === skin.id;
         const card = document.createElement('div');
@@ -2700,7 +2823,7 @@ function updateSkinsUI(){
             <div class="skin-name">${skin.name}</div>
             <div class="skin-desc">${skin.desc}</div>
             ${skin.effect ? `<div class="skin-effect">✨ ${skin.effect}</div>` : '<div class="skin-effect">😴 ללא יכולת מיוחדת</div>'}
-            ${!isOwned ? `<div style="font-size:9px;color:#ffaa00;margin-top:5px;">🔒 ${skin.requirement === 'lootbox' ? 'נפתח בתיבות' : skin.requirement === 'ultra_lootbox' ? 'נפתח בתיבות ULTRA MYTHIC' : skin.requirement === 'rank50' ? 'דורש RANK 50' : `דורש ${skin.requirement} הישגים`}</div>` : ''}
+            ${!isOwned ? `<div style="font-size:9px;color:#ffaa00;margin-top:5px;">🔒 ${skin.requirement === 'lootbox' ? 'נפתח בתיבות' : skin.requirement === 'ultra_lootbox' ? 'נפתח בתיבות ULTRA MYTHIC' : skin.requirement === 'rank50' ? 'דורש RANK 50' : skin.requirement === 'kills10000' ? 'דורש 10,000 הריגות' : skin.requirement === 'wave50' ? 'דורש WAVE 50' : `דורש ${skin.requirement} הישגים`}</div>` : ''}
             ${isEquipped ? '<div style="font-size:9px;color:#ff66ff;margin-top:5px;">✅ מצויד כעת</div>' : ''}
         `;
         if(isOwned && !isEquipped){
@@ -3025,6 +3148,115 @@ function updateIndividualRewardsUI(){
         card.onclick = () => buyIndividualReward(reward);
         container.appendChild(card);
     }
+    updateCosmeticsUI();
+}
+
+// === COSMETICS SHOP ===
+function updateCosmeticsUI(){
+    const aurasGrid = document.getElementById('cosmetic-auras-grid');
+    const titlesGrid = document.getElementById('cosmetic-titles-grid');
+    if(aurasGrid){
+        aurasGrid.innerHTML = '';
+        for(const aura of COSMETIC_AURAS){
+            const isOwned = !!ownedCosmetics['aura_'+aura.id];
+            const isActive = activeAura === aura.id;
+            const card = document.createElement('div');
+            card.className = `cosmetic-card ${isOwned ? (isActive ? 'equipped' : 'owned') : (gemstones < aura.price ? 'cant-afford' : '')}`;
+            card.innerHTML = `<div class="cosmetic-icon">${aura.icon}</div>
+                <div class="cosmetic-name">${aura.name}</div>
+                <div style="font-size:9px;color:#aaa;">${aura.desc}</div>
+                ${isOwned ? (isActive ? '<div style="font-size:9px;color:#00ffaa;">✅ ACTIVE</div>' : '<div style="font-size:9px;color:gold;">OWNED - EQUIP</div>') : `<div class="cosmetic-price">${aura.price} 💎</div>`}`;
+            if(isOwned && !isActive){
+                card.onclick = () => { activeAura = aura.id; localStorage.setItem('activeAura', activeAura); updateCosmeticsUI(); showNotification(`${aura.icon} ${aura.name} equipped!`, 'success'); };
+            } else if(!isOwned) {
+                card.onclick = () => buyCosmetic('aura', aura);
+            }
+            aurasGrid.appendChild(card);
+        }
+    }
+    if(titlesGrid){
+        titlesGrid.innerHTML = '';
+        for(const title of COSMETIC_TITLES){
+            const isOwned = !!ownedCosmetics['title_'+title.id];
+            const isActive = activeTitle === title.id;
+            const card = document.createElement('div');
+            card.className = `cosmetic-card ${isOwned ? (isActive ? 'equipped' : 'owned') : (gemstones < title.price ? 'cant-afford' : '')}`;
+            card.innerHTML = `<div class="cosmetic-icon">${title.icon}</div>
+                <div class="cosmetic-name">${title.name}</div>
+                ${isOwned ? (isActive ? '<div style="font-size:9px;color:#00ffaa;">✅ ACTIVE</div>' : '<div style="font-size:9px;color:gold;">OWNED - EQUIP</div>') : `<div class="cosmetic-price">${title.price} 💎</div>`}`;
+            if(isOwned && !isActive){
+                card.onclick = () => { activeTitle = title.id; localStorage.setItem('activeTitle', activeTitle); updateCosmeticsUI(); showNotification(`${title.icon} "${title.name}" equipped!`, 'success'); };
+            } else if(!isOwned) {
+                card.onclick = () => buyCosmetic('title', title);
+            }
+            titlesGrid.appendChild(card);
+        }
+    }
+}
+
+function buyCosmetic(type, item){
+    if(gemstones < item.price){
+        showNotification(`Not enough GEMSTONES! Need ${item.price} 💎`, 'warning');
+        return;
+    }
+    gemstones -= item.price;
+    saveGemstones();
+    ownedCosmetics[type+'_'+item.id] = true;
+    localStorage.setItem('ownedCosmetics', JSON.stringify(ownedCosmetics));
+    showNotification(`🎨 ${item.name} purchased!`, 'success');
+    if(type === 'aura'){ activeAura = item.id; localStorage.setItem('activeAura', activeAura); }
+    else { activeTitle = item.id; localStorage.setItem('activeTitle', activeTitle); }
+    updateCosmeticsUI();
+}
+
+// === TIPS SYSTEM ===
+let sessionSelectedTips = [];
+function initTips(){
+    const container = document.getElementById('tips-container');
+    if(!container) return;
+    container.innerHTML = '';
+    // Pick 3 random tips
+    let pool = [...TIPS_POOL];
+    sessionSelectedTips = [];
+    for(let i=0;i<3&&pool.length>0;i++){
+        const idx=Math.floor(Math.random()*pool.length);
+        sessionSelectedTips.push({text:pool[idx], cost:[5000,8000,15000][i], purchased:false});
+        pool.splice(idx,1);
+    }
+    for(let i=0;i<sessionSelectedTips.length;i++){
+        const tip = sessionSelectedTips[i];
+        const wrapper = document.createElement('div');
+        wrapper.className = 'tip-card-wrapper';
+        wrapper.innerHTML = `<div class="tip-card-inner" id="tip-card-${i}">
+            <div class="tip-card-front" onclick="buyTip(${i})">
+                <div style="font-size:24px;">💡</div>
+                <div style="font-size:11px;color:#00d2ff;font-weight:bold;">TIP #${i+1}</div>
+                <div style="font-size:10px;color:#ffaa00;margin-top:4px;">${tip.cost} 💰</div>
+            </div>
+            <div class="tip-card-back">
+                <div style="font-size:11px;color:#00ffaa;">💡 TIP</div>
+                <div style="margin-top:4px;">${tip.text}</div>
+            </div>
+        </div>`;
+        container.appendChild(wrapper);
+    }
+}
+
+function buyTip(idx){
+    if(idx < 0 || idx >= sessionSelectedTips.length) return;
+    const tip = sessionSelectedTips[idx];
+    if(tip.purchased) return;
+    if(totalCoins < tip.cost){
+        showNotification(`Not enough credits! Need ${tip.cost} 💰`, 'warning');
+        return;
+    }
+    totalCoins -= tip.cost;
+    localStorage.setItem('totalCoins', totalCoins);
+    tip.purchased = true;
+    const card = document.getElementById('tip-card-'+idx);
+    if(card) card.classList.add('flipped');
+    showNotification(`💡 Tip #${idx+1} revealed!`, 'success');
+    updateHubUI();
 }
 
 // HUB FUNCTIONS
@@ -3172,6 +3404,7 @@ let odCharge=0,isOD=false,odTimer=0;
 let lastFire=0,shake=0,combo=1,comboTimer=0;
 let bossWarningTimer=0,waveBannerTimer=0;
 let wave=1,waveKillGoal=12,waveKills=0,waveTriggered=false;
+let waveStartTime = Date.now();
 let player=null;
 let stars=[],bullets=[],enemies=[],eBullets=[],particles=[],items=[],floats=[];
 let boss=null,isPaused=false;
@@ -3750,6 +3983,18 @@ function checkSkinUnlock(){
         showAchievementPopup('🏆 LEGEND SKIN UNLOCKED', 'You reached Rank 50! Legend skin is yours!');
         updateSkinsUI();
     }
+    if(totalKills >= 10000 && !ownedSkins.phantom){
+        ownedSkins.phantom = true;
+        localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
+        showAchievementPopup('👻 PHANTOM SKIN UNLOCKED', '10,000 total kills! Phantom skin is yours!');
+        updateSkinsUI();
+    }
+    if(maxWaveReached >= 50 && !ownedSkins.celestial){
+        ownedSkins.celestial = true;
+        localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
+        showAchievementPopup('✨ CELESTIAL SKIN UNLOCKED', 'Reached Wave 50! Celestial skin is yours!');
+        updateSkinsUI();
+    }
 }
 
 function updateSkinProgressUI(){
@@ -3938,6 +4183,81 @@ function openEvents(){
 function closeEvents(){
     document.getElementById('events-screen').style.display='none';
     document.getElementById('start-screen').style.display='flex';
+}
+
+// === COMBINED EVENTS & ACHIEVEMENTS SCREEN ===
+function openEventsAchievements(){
+    document.getElementById('start-screen').style.display='none';
+    document.getElementById('events-achievements-screen').style.display='flex';
+    switchEATab('events');
+}
+function closeEventsAchievements(){
+    document.getElementById('events-achievements-screen').style.display='none';
+    document.getElementById('start-screen').style.display='flex';
+}
+function switchEATab(tab){
+    document.querySelectorAll('.ea-tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ea-tab-panel').forEach(p=>p.classList.remove('active'));
+    if(tab==='events'){
+        document.querySelectorAll('.ea-tab-btn')[0].classList.add('active');
+        document.getElementById('ea-events-panel').classList.add('active');
+        updateEventsUIEA();
+    } else {
+        document.querySelectorAll('.ea-tab-btn')[1].classList.add('active');
+        document.getElementById('ea-achievements-panel').classList.add('active');
+        updateAchievementsUIEA();
+    }
+}
+function updateEventsUIEA(){
+    const container=document.getElementById('ea-events-list-container');
+    if(!container)return;
+    // Reuse the same content as updateEventsUI
+    const origContainer=document.getElementById('events-list-container');
+    if(origContainer && origContainer.innerHTML){
+        container.innerHTML = origContainer.innerHTML;
+    } else {
+        // Build it directly if original hasn't been built yet
+        updateEventsUI();
+        container.innerHTML = origContainer ? origContainer.innerHTML : '';
+    }
+}
+function updateAchievementsUIEA(filter='all'){
+    const container=document.getElementById('ea-ach-list');
+    if(!container)return;
+    container.innerHTML='';
+    let filteredList = ACHIEVEMENTS_LIST;
+    if(filter !== 'all'){
+        filteredList = ACHIEVEMENTS_LIST.filter(a => a.difficulty === filter);
+    }
+    const totalUnlocked = ACHIEVEMENTS_LIST.filter(a => achievements[a.id]===true).length;
+    const totalAchievements = ACHIEVEMENTS_LIST.length;
+    const unlockedNumEl = document.getElementById('ea-ach-unlocked-num');
+    const totalNumEl = document.getElementById('ea-ach-total-num');
+    const progressFillEl = document.getElementById('ea-ach-total-progress-fill');
+    if(unlockedNumEl) unlockedNumEl.textContent = totalUnlocked;
+    if(totalNumEl) totalNumEl.textContent = totalAchievements;
+    if(progressFillEl) progressFillEl.style.width = ((totalUnlocked / totalAchievements) * 100) + '%';
+    for(const a of filteredList){
+        const unlocked=achievements[a.id]===true;
+        const progress = getAchievementProgress(a.id);
+        const percent = Math.min(100, (progress.current/progress.target)*100);
+        const diffClass = a.difficulty ? ' ach-'+a.difficulty : '';
+        const div=document.createElement('div');
+        div.className='ach-card '+(unlocked?'':'locked')+diffClass;
+        div.innerHTML=`<div class="ach-status" style="float:left;">${unlocked?'✅':'🔒'}</div>
+                       <div class="ach-name">${a.name}</div>
+                       <div class="ach-desc">${a.desc}</div>
+                       ${!unlocked && progress.target>1 ? `<div class="ach-progress-bar"><div class="ach-progress-fill" style="width:${percent}%"></div></div>
+                       <div class="ach-progress-text">${formatNumber(progress.current)}/${formatNumber(progress.target)}</div>` : ''}
+                       ${unlocked ? '<div class="ach-progress-text" style="color:gold;">✓ COMPLETED +'+a.gems+'💎</div>' : '<div class="ach-progress-text" style="color:#ffaa00;">🎁 '+a.gems+'💎</div>'}`;
+        container.appendChild(div);
+    }
+}
+function filterAchievementsEA(difficulty){
+    const tabs = document.querySelectorAll('#ea-ach-filter-tabs .ach-filter-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    if(event && event.target) event.target.classList.add('active');
+    updateAchievementsUIEA(difficulty);
 }
 function updateEventsUI(){
     const container=document.getElementById('events-list-container');
@@ -4386,6 +4706,7 @@ function activateSynapse(){
 
 function startWave(n){
     wave=n;waveKills=0;waveNoDamage=true;waveTriggered=false;
+    waveStartTime = Date.now();
     if(endlessMode) waveKillGoal = 5 + wave * 2;
     else waveKillGoal = 5 + wave * 3;
     const banner=document.getElementById('wave-banner');
@@ -4569,9 +4890,7 @@ function renderSkillTree() {
 }
 
 function openSkillTree() {
-    document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('skill-tree-screen').style.display = 'flex';
-    renderSkillTree();
+    showNotification('🌳 Skill Tree is currently under maintenance by the creator. It will return in a future update!', 'info');
 }
 function closeSkillTree() {
     document.getElementById('skill-tree-screen').style.display = 'none';
@@ -4943,18 +5262,41 @@ class Player{
         if(currentSkin === 'rainbow' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive && currentSkin !== 'gold' && currentSkin !== 'blue' && currentSkin !== 'purple') col=`hsl(${Date.now()/10 % 360},100%,60%)`;
         if(currentSkin === 'ultra' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive && currentSkin !== 'gold' && currentSkin !== 'blue' && currentSkin !== 'purple' && currentSkin !== 'rainbow') col='#f5e642';
         if(currentSkin === 'legend' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive) col='#ff6600';
-        
+        if(currentSkin === 'phantom' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive) col='#aaaadd';
+        if(currentSkin === 'celestial' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive) col='#ffffcc';
+
+        // Aura particles (cosmetic)
+        if(activeAura !== 'none' && Math.random() < 0.4){
+            let ac,as,avx,avy;
+            if(activeAura==='fire'){ ac='#ff4400'; as=3; avx=(Math.random()-0.5)*2; avy=-Math.random()*3-1; }
+            else if(activeAura==='ice'){ ac='#aaddff'; as=2; avx=(Math.random()-0.5)*1.5; avy=-Math.random()*2-0.5; }
+            else if(activeAura==='lightning'){ ac='#ffff00'; as=2; avx=(Math.random()-0.5)*6; avy=(Math.random()-0.5)*6; }
+            else if(activeAura==='shadow'){ ac='#440066'; as=4; avx=(Math.random()-0.5)*1; avy=Math.random()*2+0.5; }
+            else if(activeAura==='rainbow'){ ac=`hsl(${Math.random()*360},100%,60%)`; as=3; avx=(Math.random()-0.5)*3; avy=(Math.random()-0.5)*3; }
+            particles.push(new Particle(this.x+(Math.random()-0.5)*40,this.y+(Math.random()-0.5)*40,avx,avy,ac,0.5+Math.random()*0.3));
+        }
+
         ctx.fillStyle=col;ctx.shadowBlur=15;
+        if(currentSkin === 'celestial' && !isOD && !synapseActive && !voidActive) ctx.shadowBlur=35;
         if(primordialRageActive) ctx.scale(2,2);
+        if(currentSkin === 'phantom' && !isOD && !synapseActive && !voidActive) ctx.globalAlpha=0.45;
         ctx.beginPath();
         ctx.moveTo(0,-32);ctx.lineTo(28,18);ctx.lineTo(10,18);ctx.lineTo(10,32);
         ctx.lineTo(-10,32);ctx.lineTo(-10,18);ctx.lineTo(-28,18);ctx.closePath();ctx.fill();
         ctx.fillStyle='rgba(255,255,255,0.3)';
         ctx.beginPath();ctx.ellipse(0,-6,5,12,0,0,Math.PI*2);ctx.fill();
-        if(currentSkin === 'gold' || currentSkin === 'ultra' || currentSkin === 'legend'){
-            ctx.strokeStyle='gold';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,38,0,Math.PI*2);ctx.stroke();
+        if(currentSkin === 'gold' || currentSkin === 'ultra' || currentSkin === 'legend' || currentSkin === 'celestial'){
+            ctx.strokeStyle= currentSkin==='celestial'?'#ffffaa':'gold';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,38,0,Math.PI*2);ctx.stroke();
         }
         if(primordialRageActive) ctx.scale(0.5,0.5);
+        ctx.globalAlpha=1;
+        // Draw active title above ship
+        if(activeTitle !== 'none'){
+            ctx.font='bold 8px sans-serif';ctx.textAlign='center';ctx.shadowBlur=4;
+            let titleObj = COSMETIC_TITLES.find(t=>t.id===activeTitle);
+            if(titleObj) ctx.fillText(titleObj.icon+' '+titleObj.name, 0, -42);
+            ctx.textAlign='start';ctx.shadowBlur=0;
+        }
         ctx.restore();
     }
 }
@@ -5193,13 +5535,15 @@ function quitToMenu(){
     gameState='MENU';isPaused=false;
 
     // Save earned credits before quitting
-    const earned = Math.floor(score / 10);
+    const earned = Math.floor(score / 10 * (function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })());
     totalCoins += earned;
     totalKills += kills;
     if(score > hiScore) hiScore = score;
     localStorage.setItem('totalCoins', totalCoins);
     localStorage.setItem('hiScore', hiScore);
     localStorage.setItem('totalKills', totalKills);
+    maxWaveReached = Math.max(maxWaveReached, wave);
+    localStorage.setItem('maxWaveReached', maxWaveReached);
     if(earned > 0) tn('noti_credits_saved', 'success', formatNumber(earned));
 
     gameLoopRunning = false;
@@ -5271,10 +5615,12 @@ function gameOver(){
     
     gameState='GAMEOVER';
     gameLoopRunning = false;
-    const earned=Math.floor(score/10);
+    const earned=Math.floor(score/10*(function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })());
     totalCoins+=earned;totalKills+=kills;
     if(score>hiScore)hiScore=score;
     localStorage.setItem('totalCoins',totalCoins);localStorage.setItem('hiScore',hiScore);localStorage.setItem('totalKills',totalKills);
+    maxWaveReached = Math.max(maxWaveReached, wave);
+    localStorage.setItem('maxWaveReached', maxWaveReached);
     if(timerInterval) clearInterval(timerInterval);
     if(animationId) cancelAnimationFrame(animationId);
     ['ui-hud','score-hud','od-btn','combo-small','pause-btn','powerup-bar','boss-warning','wave-banner','event-banner','ascend-screen','game-timer','rank-badge','combo-meter','wave-progress'].forEach(id=>document.getElementById(id).style.display='none');
@@ -5858,6 +6204,7 @@ function loop(){
                     if(royalBlessingActive) bonus*=3;
                     if(kingsBlessingActive) bonus*=5;
                     bonus *= skinCreditMultiplier;
+                    { let _wd=Date.now()-waveStartTime; if(_wd<15000) bonus*=(0.5+0.5*(_wd/15000)); }
                     totalCoins+=bonus; sfxCoin(); floats.push({txt:'+'+bonus+'c',x:it.x,y:it.y,l:0.8,c:'gold',size:12}); }
                 keep=false;
             }
@@ -6180,6 +6527,7 @@ runLoader('loader-init','init-fill',()=>{
     updateRankUI();
     initSettingsUI();
     checkDailyStreak();
+    initTips();
 });
 
 // Initialize music on first user interaction
