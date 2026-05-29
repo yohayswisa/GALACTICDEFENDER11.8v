@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.7</title>
+    <title>Galactic Defender - UPDATE 11.8</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -359,11 +359,7 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.7 - Cosmetics, Combined Panels, New Rare Skins, Tips & More!</p>
-    </div>
-    <div class="hub-section" style="margin-bottom:10px;">
-        <h3 style="color:#00d2ff;margin-bottom:8px;">💡 TIPS</h3>
-        <div id="tips-container" class="tips-container"></div>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.8 - Event Buffs, Divine Ultra-Buff, Shop Tabs, Tips & More!</p>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
@@ -381,7 +377,7 @@
             <h2 style="color:#00d2ff;">GALACTIC DEFENDER</h2>
             <p>המשחק הקלאסי! יריות, בוסים, אירועים והישגים</p>
             <p style="color:#00ffaa;font-size:12px;margin-top:10px;">▶ לחץ כדי לשחק</p>
-            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.7: Cosmetics, Combined Panels, Rare Skins, Tips!</div>
+            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.8: Event Buffs, Divine Ultra-Buff, Shop Tabs, Tips!</div>
         </div>
         <div class="game-select-card coming-soon" onclick="showCustomAlert('משחק זה עדיין בפיתוח! יגיע בקרוב...')">
             <div style="font-size:48px;">❓</div>
@@ -501,24 +497,37 @@
 </div>
 
 <div id="rng-shop-screen" class="overlay">
-    <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 LOOTBOXES & REWARDS 🎲</h2>
+    <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 GEMSTONE SHOP 🎲</h2>
     <div style="margin:10px;">💎 <span data-i18n="your_gemstones">YOUR GEMSTONES</span>: <span id="rng-gems" style="color:#ffcc00;font-size:24px;">0</span></div>
-    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;">
-        <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div>COMMON LOOTBOX</div><div style="color:#4287f5;">🔵 COMMON</div><div style="color:gold;">50 💎</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('common')">📊 PROBS</button></div>
-        <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div>RARE LOOTBOX</div><div style="color:#42f5b6;">🟢 RARE</div><div style="color:gold;">150 💎</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('rare')">📊 PROBS</button></div>
-        <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div>EPIC LOOTBOX</div><div style="color:#f5a742;">🟡 EPIC</div><div style="color:gold;">400 💎</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('epic')">📊 PROBS</button></div>
-        <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div>LEGENDARY LOOTBOX</div><div style="color:#f542d1;">🟠 LEGENDARY</div><div style="color:gold;">1000 💎</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('legendary')">📊 PROBS</button></div>
-        <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div>MYTHIC LOOTBOX</div><div style="color:#f54242;">🔴 MYTHIC</div><div style="color:gold;">2500 💎</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('mythic')">📊 PROBS</button></div>
-        <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div>ULTRA MYTHIC BOX</div><div style="color:#f5e642;">💎 ULTRA MYTHIC</div><div style="color:gold;">10000 💎</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('ultra')">📊 PROBS</button></div>
+    <div class="shop-tabs">
+        <button class="shop-tab active" onclick="switchGemShopTab('lootbox')">📦 LOOTBOXES & REWARDS</button>
+        <button class="shop-tab" onclick="switchGemShopTab('cosmetics')">🎨 COSMETICS</button>
+        <button class="shop-tab" onclick="switchGemShopTab('tips')">💡 TIPS</button>
     </div>
-    <h3 style="margin-top:20px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
-    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
-    <h3 style="margin-top:20px;color:#ff66ff;">🎨 COSMETICS SHOP</h3>
-    <div style="font-size:11px;color:#aaa;margin:4px 0;">✨ Auras & Titles are purely cosmetic - no gameplay effect!</div>
-    <h4 style="color:#ff8800;margin:8px 0 4px;">🔥 SHIP AURAS</h4>
-    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-auras-grid"></div>
-    <h4 style="color:#ffcc00;margin:12px 0 4px;">🏷️ PLAYER TITLES</h4>
-    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-titles-grid"></div>
+    <div id="gem-shop-lootbox-section">
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;">
+            <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div>COMMON LOOTBOX</div><div style="color:#4287f5;">🔵 COMMON</div><div style="color:gold;">50 💎</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('common')">📊 PROBS</button></div>
+            <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div>RARE LOOTBOX</div><div style="color:#42f5b6;">🟢 RARE</div><div style="color:gold;">150 💎</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('rare')">📊 PROBS</button></div>
+            <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div>EPIC LOOTBOX</div><div style="color:#f5a742;">🟡 EPIC</div><div style="color:gold;">400 💎</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('epic')">📊 PROBS</button></div>
+            <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div>LEGENDARY LOOTBOX</div><div style="color:#f542d1;">🟠 LEGENDARY</div><div style="color:gold;">1000 💎</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('legendary')">📊 PROBS</button></div>
+            <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div>MYTHIC LOOTBOX</div><div style="color:#f54242;">🔴 MYTHIC</div><div style="color:gold;">2500 💎</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('mythic')">📊 PROBS</button></div>
+            <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div>ULTRA MYTHIC BOX</div><div style="color:#f5e642;">💎 ULTRA MYTHIC</div><div style="color:gold;">10000 💎</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('ultra')">📊 PROBS</button></div>
+        </div>
+        <h3 style="margin-top:20px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
+    </div>
+    <div id="gem-shop-cosmetics-section" style="display:none;">
+        <div style="font-size:11px;color:#aaa;margin:4px 0;">✨ Auras & Titles are purely cosmetic - no gameplay effect!</div>
+        <h4 style="color:#ff8800;margin:8px 0 4px;">🔥 SHIP AURAS</h4>
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-auras-grid"></div>
+        <h4 style="color:#ffcc00;margin:12px 0 4px;">🏷️ PLAYER TITLES</h4>
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-titles-grid"></div>
+    </div>
+    <div id="gem-shop-tips-section" style="display:none;">
+        <h3 style="color:#00d2ff;margin:8px 0;">💡 TIPS</h3>
+        <div style="font-size:11px;color:#aaa;margin:4px 0;">Click a card to flip it and reveal the tip for FREE! Then claim the hidden prize!</div>
+        <div id="tips-container" class="tips-container"></div>
+    </div>
     <button class="btn" onclick="closeRNGShop()" style="margin-bottom:30px;" data-i18n="back">← BACK</button>
 </div>
 
@@ -1973,7 +1982,7 @@ const RARE_ABILITIES = {
     },
     resourceMagnet: {
         id: 'resourceMagnet', name: '🧲 RESOURCE MAGNET', icon: '🧲',
-        desc: 'Automatically attracts all dropped loot on screen for 15 seconds',
+        desc: 'Automatically attracts all dropped loot on screen for 20 seconds',
         cost: 3000, cooldown: 45000, category: 'shields',
         unlockReq: () => totalCoins >= 5000,
         unlockDesc: 'Accumulate 5000 coins',
@@ -2222,9 +2231,9 @@ function activateRareAbility(id){
     }
     else if(id === 'resourceMagnet'){
         resourceMagnetActive = true;
-        resourceMagnetTimer = Date.now() + 15000;
+        resourceMagnetTimer = Date.now() + 20000;
         if(player && player.x && player.y) floats.push({txt:'🧲 RESOURCE MAGNET!',x:player.x-60,y:player.y-40,l:1.5,c:'#ffcc00',size:24});
-        showNotification('🧲 Resource Magnet activated! All loot attracted for 15s!', 'success');
+        showNotification('🧲 Resource Magnet activated! All loot attracted for 20s!', 'success');
     }
     else if(id === 'timeWarp'){
         abilityTimeWarpActive = true;
@@ -2287,6 +2296,23 @@ function updateAbilityButtons(){
 // DYNAMIC UPDATE LOG SYSTEM
 // ============================================
 let updateLogData = [
+    {
+        version: 'v11.8',
+        changes: [
+            'Fixed TypeError with guardian null property access',
+            'Divine Intervention: 90x rarer but INSANELY broken - 2min duration, 200,000x DMG, +100,000💎, +600x coins, full invincibility, golden overlay, 50 particles per enemy',
+            'Tips moved from Hub to Gemstone Shop as a new tab (💡 TIPS)',
+            'Tips are now FREE to flip - claim the hidden prize behind each tip for credits!',
+            'Skill Tree now shows a proper on-screen modal instead of a side notification',
+            'Gemstone Shop split into 3 tabs: 📦 Lootboxes & Rewards, 🎨 Cosmetics, 💡 Tips',
+            'ALL events BUFFED: Apocalypse 3x, Cosmic Collapse 5x, Gold Rush 3x, Bug 8x, Stable 2.5x, Royal Blessing 5x, King\'s Blessing 8x, Primordial Rage 30x, Chaos Realm 5x, Synapse 4x, Void 15x',
+            'Event durations increased ~20% across the board',
+            'Enemy spawn counts in wave events increased by 30%',
+            'Starfall: 15 stars (up from 10) with doubled star values',
+            'Resource Magnet: 20s duration (up from 15s) and larger attraction radius',
+            'Event credit/gemstone bonuses increased by 50%'
+        ]
+    },
     {
         version: 'v11.7',
         changes: [
@@ -2356,7 +2382,7 @@ let updateLogData = [
         version: 'v11.4',
         changes: [
             'Fixed Settings Back Button bug - now correctly returns to pause screen when opened from pause menu',
-            'NEW ABILITY: Resource Magnet - attracts all dropped loot for 15s (5000 coins to unlock)',
+            'NEW ABILITY: Resource Magnet - attracts all dropped loot for 20s (5000 coins to unlock)',
             'NEW ABILITY: Time Warp - slows all enemies 50% for 10s (3000 kills to unlock)',
             'NEW ABILITY: Ultimate Annihilation - clears all enemies + 5s invincibility (10000 kills to unlock)',
             'Ability Equipment System - select max 3 abilities per game via new selection panel',
@@ -2760,7 +2786,7 @@ let activeTitle = localStorage.getItem('activeTitle') || 'none';
 const TIPS_POOL = [
     'Upgrade fire rate first - it gives the best DPS per credit!',
     'Save gemstones for Epic lootboxes - best value ratio',
-    'Equip Resource Magnet before long runs for more loot',
+    'Equip Resource Magnet before long runs for more loot (20s duration!)',
     'Doomsday events spawn more enemies = more loot!',
     "Don't forget to claim daily streak rewards!",
     'The Guardian event is rare but gives massive rewards',
@@ -3073,11 +3099,26 @@ function openRNGShop(){
     document.getElementById('rng-shop-screen').style.display='flex';
     updateGemUI();
     updateIndividualRewardsUI();
+    switchGemShopTab('lootbox');
+    initTips();
 }
 
 function closeRNGShop(){
     document.getElementById('rng-shop-screen').style.display='none';
     document.getElementById('start-screen').style.display='flex';
+}
+
+let currentGemShopTab = 'lootbox';
+function switchGemShopTab(tab){
+    currentGemShopTab = tab;
+    document.getElementById('gem-shop-lootbox-section').style.display = (tab==='lootbox') ? 'block' : 'none';
+    document.getElementById('gem-shop-cosmetics-section').style.display = (tab==='cosmetics') ? 'block' : 'none';
+    document.getElementById('gem-shop-tips-section').style.display = (tab==='tips') ? 'block' : 'none';
+    const tabs = document.querySelectorAll('#rng-shop-screen .shop-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    const tabMap = {'lootbox':0, 'cosmetics':1, 'tips':2};
+    if(tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
+    if(tab === 'tips') initTips();
 }
 
 function buyIndividualReward(reward){
@@ -3211,16 +3252,31 @@ function buyCosmetic(type, item){
 
 // === TIPS SYSTEM ===
 let sessionSelectedTips = [];
+const TIP_PRIZES = [
+    { type: 'credits', amount: 3000, label: '3,000 💰 CREDITS', cost: 2000 },
+    { type: 'gemstones', amount: 50, label: '50 💎 GEMSTONES', cost: 30 },
+    { type: 'credits', amount: 5000, label: '5,000 💰 CREDITS', cost: 3500 },
+    { type: 'gemstones', amount: 100, label: '100 💎 GEMSTONES', cost: 60 },
+    { type: 'credits', amount: 10000, label: '10,000 💰 CREDITS', cost: 7000 },
+    { type: 'upgrade', amount: 1, label: 'FREE DAMAGE UPGRADE +1', cost: 4000 },
+    { type: 'upgrade', amount: 1, label: 'FREE FIRE RATE UPGRADE +1', cost: 4000 },
+    { type: 'gemstones', amount: 200, label: '200 💎 GEMSTONES', cost: 100 },
+    { type: 'credits', amount: 20000, label: '20,000 💰 CREDITS', cost: 12000 },
+    { type: 'bombs', amount: 3, label: '3 💣 BOMBS', cost: 1500 }
+];
+
 function initTips(){
     const container = document.getElementById('tips-container');
     if(!container) return;
     container.innerHTML = '';
-    // Pick 3 random tips
+    // Pick 3 random tips with prizes
     let pool = [...TIPS_POOL];
+    let prizePool = [...TIP_PRIZES];
     sessionSelectedTips = [];
     for(let i=0;i<3&&pool.length>0;i++){
         const idx=Math.floor(Math.random()*pool.length);
-        sessionSelectedTips.push({text:pool[idx], cost:[5000,8000,15000][i], purchased:false});
+        const pidx=Math.floor(Math.random()*prizePool.length);
+        sessionSelectedTips.push({text:pool[idx], prize:prizePool[pidx], flipped:false, claimed:false});
         pool.splice(idx,1);
     }
     for(let i=0;i<sessionSelectedTips.length;i++){
@@ -3228,34 +3284,64 @@ function initTips(){
         const wrapper = document.createElement('div');
         wrapper.className = 'tip-card-wrapper';
         wrapper.innerHTML = `<div class="tip-card-inner" id="tip-card-${i}">
-            <div class="tip-card-front" onclick="buyTip(${i})">
+            <div class="tip-card-front" onclick="flipTip(${i})">
                 <div style="font-size:24px;">💡</div>
                 <div style="font-size:11px;color:#00d2ff;font-weight:bold;">TIP #${i+1}</div>
-                <div style="font-size:10px;color:#ffaa00;margin-top:4px;">${tip.cost} 💰</div>
+                <div style="font-size:10px;color:#ffaa00;margin-top:4px;">CLICK TO FLIP!</div>
             </div>
             <div class="tip-card-back">
                 <div style="font-size:11px;color:#00ffaa;">💡 TIP</div>
                 <div style="margin-top:4px;">${tip.text}</div>
+                <div style="margin-top:6px;font-size:10px;color:#ffaa00;">🎁 PRIZE: ${tip.prize.label}</div>
+                <button id="tip-claim-${i}" class="btn" style="padding:3px 8px;font-size:9px;margin-top:6px;" onclick="claimTipPrize(${i})">CLAIM PRIZE - ${tip.prize.cost}💰</button>
             </div>
         </div>`;
         container.appendChild(wrapper);
     }
 }
 
-function buyTip(idx){
+function flipTip(idx){
     if(idx < 0 || idx >= sessionSelectedTips.length) return;
     const tip = sessionSelectedTips[idx];
-    if(tip.purchased) return;
-    if(totalCoins < tip.cost){
-        showNotification(`Not enough credits! Need ${tip.cost} 💰`, 'warning');
-        return;
-    }
-    totalCoins -= tip.cost;
-    localStorage.setItem('totalCoins', totalCoins);
-    tip.purchased = true;
+    if(tip.flipped) return;
+    tip.flipped = true;
     const card = document.getElementById('tip-card-'+idx);
     if(card) card.classList.add('flipped');
-    showNotification(`💡 Tip #${idx+1} revealed!`, 'success');
+    showNotification(`💡 Tip #${idx+1} revealed! Check the prize!`, 'success');
+}
+
+function claimTipPrize(idx){
+    if(idx < 0 || idx >= sessionSelectedTips.length) return;
+    const tip = sessionSelectedTips[idx];
+    if(!tip.flipped) return;
+    if(tip.claimed) return;
+    if(totalCoins < tip.prize.cost){
+        showNotification(`Not enough credits! Need ${tip.prize.cost} 💰`, 'warning');
+        return;
+    }
+    totalCoins -= tip.prize.cost;
+    localStorage.setItem('totalCoins', totalCoins);
+    tip.claimed = true;
+    const btn = document.getElementById('tip-claim-'+idx);
+    if(btn){ btn.disabled = true; btn.textContent = '✅ CLAIMED'; btn.style.opacity = '0.5'; }
+    // Grant prize
+    if(tip.prize.type === 'credits'){
+        totalCoins += tip.prize.amount;
+        localStorage.setItem('totalCoins', totalCoins);
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    } else if(tip.prize.type === 'gemstones'){
+        gemstones += tip.prize.amount;
+        saveGemstones();
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    } else if(tip.prize.type === 'upgrade'){
+        damageLevel += tip.prize.amount;
+        localStorage.setItem('dmgLevel', damageLevel);
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    } else if(tip.prize.type === 'bombs'){
+        bombCount += tip.prize.amount;
+        localStorage.setItem('bombCount', bombCount);
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    }
     updateHubUI();
 }
 
@@ -4264,22 +4350,22 @@ function updateEventsUI(){
     if(!container)return;
     container.innerHTML=`
         <div class="event-card"><div class="event-name">☄️ METEOR SHOWER</div><div class="event-chance">Chance: 60% every 4 waves (wave≥4)</div><div class="event-desc">Meteors fall from the sky. Destroy them for +200 points each. Meteor hit = 15 damage.</div></div>
-        <div class="event-card"><div class="event-name">🌀 DIMENSION RIFT</div><div class="event-chance">Chance: 3% after wave 10</div><div class="event-desc">Double enemies, 2x points and credits for 15 seconds.</div></div>
-        <div class="event-card"><div class="event-name">🧠 SYNAPSE MODE</div><div class="event-chance">Collect 8 Psychedelia (🧠) items</div><div class="event-desc">Time slows, 2.5x damage, trippy background for 10 seconds.</div></div>
-        <div class="event-card"><div class="event-name">🔴 APOCALYPSE MODE</div><div class="event-chance">~0.5% every 5 waves (rare!)</div><div class="event-desc">Enemies doubled, faster, but 5x points. Lasts 15 seconds.</div></div>
-        <div class="event-card"><div class="event-name">💜 VOID MODE</div><div class="event-chance">~0.3% after wave 15 (ultra rare!)</div><div class="event-desc">Become invincible, 10x damage for 15 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🌀 DIMENSION RIFT</div><div class="event-chance">~3% after wave 10</div><div class="event-desc">Double enemies, 2.5x points and credits for 18 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🧠 SYNAPSE MODE</div><div class="event-chance">Collect 8 Psychedelia (🧠) items</div><div class="event-desc">Time slows, 4x damage, trippy background for 12 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🔴 APOCALYPSE MODE</div><div class="event-chance">~0.5% every 5 waves (rare!)</div><div class="event-desc">Enemies doubled, faster, but 3x points. Lasts 18 seconds.</div></div>
+        <div class="event-card"><div class="event-name">💜 VOID MODE</div><div class="event-chance">~0.3% after wave 15 (ultra rare!)</div><div class="event-desc">Become invincible, 15x damage for 18 seconds.</div></div>
         <div class="event-card"><div class="event-name">👑 THE GUARDIAN</div><div class="event-chance">~0.1% after wave 20 (legendary!)</div><div class="event-desc">Giant golden boss with 10,000 HP. Rewards: 50,000 points, 5,000 credits, and GUARANTEES golden skin!</div></div>
-        <div class="event-card"><div class="event-name">🌌 COSMIC COLLAPSE</div><div class="event-chance">GUARANTEED every 40 waves!</div><div class="event-desc">Screen fills with enemies, 10x points, 5x credits for 20 seconds.</div></div>
-        <div class="event-card"><div class="event-name">⚡ PRIMORDIAL RAGE</div><div class="event-chance">~0.003% (1 in 33,333) - EXTREMELY RARE!</div><div class="event-desc">Become giant red, invincible, massive bullet storms for 10 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🌌 COSMIC COLLAPSE</div><div class="event-chance">GUARANTEED every 40 waves!</div><div class="event-desc">Screen fills with enemies, 5x points, 5x credits for 24 seconds.</div></div>
+        <div class="event-card"><div class="event-name">⚡ PRIMORDIAL RAGE</div><div class="event-chance">~0.003% (1 in 33,333) - EXTREMELY RARE!</div><div class="event-desc">Become giant red, invincible, massive bullet storms for 12 seconds. 30x damage!</div></div>
         <div class="event-card"><div class="event-name">🕳️ BLACK HOLE</div><div class="event-chance">Collect 6 Black Hole pieces (⭐) to activate</div><div class="event-desc">Sucks in all enemies, instantly killing them. All points and credits rewarded!</div></div>
         <div class="event-card"><div class="event-name">💀 DEATH'S TOUCH</div><div class="event-chance">~0.005% (1 in 20,000) - MYTHIC RARE!</div><div class="event-desc">All enemies on screen die instantly! 50x points for each enemy!</div></div>
-        <div class="event-card"><div class="event-name">🌈 CHAOS REALM</div><div class="event-chance">~0.008% (1 in 12,500) - MYTHIC RARE!</div><div class="event-desc">Rainbow bullets, 5x fire rate, trippy rainbow background for 12 seconds!</div></div>
+        <div class="event-card"><div class="event-name">🌈 CHAOS REALM</div><div class="event-chance">~0.008% (1 in 12,500) - MYTHIC RARE!</div><div class="event-desc">Rainbow bullets, 5x fire rate, 5x damage, trippy rainbow background for 14 seconds!</div></div>
         <div class="event-card"><div class="event-name">💀 REAPER'S CALL</div><div class="event-chance">~0.002% (1 in 50,000) - MYTHIC RARE!</div><div class="event-desc">Reapers appear and automatically kill enemies for 10 seconds!</div></div>
         <div class="event-card"><div class="event-name">🌀 TIME WARP</div><div class="event-chance">~0.004% (1 in 25,000) - MYTHIC RARE!</div><div class="event-desc">All enemies slowed by 80% for 10 seconds!</div></div>
-        <div class="event-card"><div class="event-name">💰 GOLD RUSH</div><div class="event-chance">~0.0005% (1 in 200,000) - LEGENDARY RARE!</div><div class="event-desc">10x credits and gemstones from all sources for 15 seconds!</div></div>
-        <div class="event-card"><div class="event-name">⚡ DIVINE INTERVENTION</div><div class="event-chance">~0.000003% (1 in 33,000,000) - ULTRA GODLY RARE!</div><div class="event-desc">Full health & shield restore, +300% damage for 60s, screen-clear all enemies, 5s invincibility, golden light rays! Once-in-a-lifetime event!</div></div>
-        <div class="event-card"><div class="event-name">🐛 BUG EVENT</div><div class="event-chance">~0.001% (1 in 100,000) - MYSTERY EVENT!</div><div class="event-desc">The game glitches out... then rewards you with massive bonuses!</div></div>
-        <div class="event-card"><div class="event-name">💫 STABLE CYCLE</div><div class="event-chance">GUARANTEED every 7 waves!</div><div class="event-desc">3x points and credits for 10 seconds!</div></div>
+        <div class="event-card"><div class="event-name">💰 GOLD RUSH</div><div class="event-chance">~0.0005% (1 in 200,000) - LEGENDARY RARE!</div><div class="event-desc">10x credits, 3x points and gemstones from all sources for 18 seconds!</div></div>
+        <div class="event-card"><div class="event-name">⚡ DIVINE INTERVENTION</div><div class="event-chance">~0.00000001% (1 in 10,000,000,000) - ULTRA GODLY RARE!</div><div class="event-desc">GOD MODE for 2 minutes! Full heal + invincible! 200,000x DMG! +100,000💎! +600x coins! Screen cleared! Golden overlay!</div></div>
+        <div class="event-card"><div class="event-name">🐛 BUG EVENT</div><div class="event-chance">~0.001% (1 in 100,000) - MYSTERY EVENT!</div><div class="event-desc">The game glitches out... then rewards you with 8x damage and massive bonuses!</div></div>
+        <div class="event-card"><div class="event-name">💫 STABLE CYCLE</div><div class="event-chance">GUARANTEED every 7 waves!</div><div class="event-desc">2.5x points and credits for 12 seconds!</div></div>
         <div class="event-card"><div class="event-name">🌊 TIDAL WAVE</div><div class="event-chance">~0.5% after wave 12 (rare!)</div><div class="event-desc">Massive wave of enemies, but 5x points per kill!</div></div>
         <div class="event-card"><div class="event-name">🎭 MASQUERADE</div><div class="event-chance">~0.3% after wave 15 (rare!)</div><div class="event-desc">Enemies disguise as items, but give 10x points!</div></div>
         <div class="event-card"><div class="event-name">💀 SOUL HARVEST</div><div class="event-chance">~0.1% after wave 20 (legendary!)</div><div class="event-desc">Defeated enemies release souls that attack other enemies!</div></div>
@@ -4290,15 +4376,15 @@ function updateEventsUI(){
         <div class="event-card"><div class="event-name">🍀 LUCKY DRAW</div><div class="event-chance">~0.05% after wave 15 (rare!)</div><div class="event-desc">Get a random shop item for free!</div></div>
         <div class="event-card"><div class="event-name">🔮 MYSTERY BOX</div><div class="event-chance">~0.03% after wave 18 (rare!)</div><div class="event-desc">Open a mystery box with random rewards!</div></div>
         <div class="event-card"><div class="event-name">💀 DOOM'S DAY</div><div class="event-chance">~0.05% after wave 20 (legendary!)</div><div class="event-desc">Massive wave of weakened enemies! 3x points, 15% chance for Green Aura that damages nearby enemies!</div></div>
-        <div class="event-card"><div class="event-name">👑 ROYAL BLESSING</div><div class="event-chance">~0.005% after wave 25 (mythic!)</div><div class="event-desc">3x to everything for 20 seconds!</div></div>
-        <div class="event-card"><div class="event-name">🌟 STARFALL</div><div class="event-chance">~0.14% after wave 10 (rare!)</div><div class="event-desc">Stars fall from the sky! Collect them for gemstones! (Reduced stars & rewards)</div></div>
+        <div class="event-card"><div class="event-name">👑 ROYAL BLESSING</div><div class="event-chance">~0.005% after wave 25 (mythic!)</div><div class="event-desc">5x to everything for 24 seconds!</div></div>
+        <div class="event-card"><div class="event-name">🌟 STARFALL</div><div class="event-chance">~0.14% after wave 10 (rare!)</div><div class="event-desc">Stars fall from the sky! Collect them for gemstones! 15 stars with boosted values!</div></div>
         <div class="event-card"><div class="event-name">🔥 INFERNO</div><div class="event-chance">~0.08% after wave 15 (rare!)</div><div class="event-desc">Flames spread across the screen, burning enemies!</div></div>
         <div class="event-card"><div class="event-name">⚡ CHAIN LIGHTNING</div><div class="event-chance">~0.06% after wave 18 (rare!)</div><div class="event-desc">Lightning chains between enemies, dealing massive damage!</div></div>
         <div class="event-card"><div class="event-name">🛡️ BARRIER</div><div class="event-chance">~0.2% after wave 12 (rare!)</div><div class="event-desc">Create a barrier that absorbs all damage for 10 seconds!</div></div>
         <div class="event-card"><div class="event-name">💀 SOUL REAPER</div><div class="event-chance">~0.02% after wave 25 (legendary!)</div><div class="event-desc">A giant reaper appears and harvests enemy souls!</div></div>
         <div class="event-card"><div class="event-name">🎲 GAMBLER</div><div class="event-chance">~0.01% after wave 20 (legendary!)</div><div class="event-desc">Gamble your credits for a chance to win big!</div></div>
         <div class="event-card"><div class="event-name">🌀 VORTEX</div><div class="event-chance">~0.04% after wave 22 (rare!)</div><div class="event-desc">A vortex sucks in and destroys enemies!</div></div>
-        <div class="event-card"><div class="event-name">👑 KING'S BLESSING</div><div class="event-chance">~0.003% after wave 30 (mythic!)</div><div class="event-desc">The king blesses you with 5x everything for 15 seconds!</div></div>
+        <div class="event-card"><div class="event-name">👑 KING'S BLESSING</div><div class="event-chance">~0.003% after wave 30 (mythic!)</div><div class="event-desc">The king blesses you with 8x everything for 18 seconds!</div></div>
         <div class="event-card"><div class="event-name">🌈 PRISM</div><div class="event-chance">~0.05% after wave 18 (rare!)</div><div class="event-desc">Split your bullets into rainbow colors for massive coverage!</div></div>
         <div class="event-card"><div class="event-name">🕳️ ABYSS</div><div class="event-chance">~0.002% after wave 35 (mythic!)</div><div class="event-desc">An abyss opens, swallowing all enemies!</div></div>
         <div class="event-card"><div class="event-name">🎭 DOPPELGANGER</div><div class="event-chance">~0.06% after wave 22 (rare!)</div><div class="event-desc">A clone of you appears and fights alongside you for 15 seconds!</div></div>
@@ -4531,22 +4617,22 @@ function triggerSupernova(){
 }
 
 function triggerMeteorShower(){ if(!canTriggerEvent()) return; activeEvent='meteor'; eventTimer=Date.now()+10000; totalEventsTriggered++; sfxEvent(); const banner=document.getElementById('event-banner'); banner.innerHTML='☄️ METEOR SHOWER ☄️'; banner.style.display='block'; banner.style.color='#ffaa44'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<15+Math.floor(Math.random()*15);i++) meteors.push(new Meteor(Math.random()*width, -50)); startEventCooldown(); checkAchievements(); showNotification('☄️ Meteor Shower event started!', 'event'); }
-function triggerDimensionRift(){ if(!canTriggerEvent()) return; activeEvent='rift'; eventTimer=Date.now()+15000; riftActive=true; riftMultiplier=2; totalEventsTriggered++; totalRiftsTriggered++; sfxEvent(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 DIMENSION RIFT 🌀'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<8;i++) enemies.push(new Enemy()); startEventCooldown(); checkAchievements(); showNotification('🌀 Dimension Rift event started! 2x points!', 'event'); }
-function triggerApocalypseMode(){ if(!canTriggerEvent()) return; apocalypseActive=true; activeEvent='apocalypse'; eventTimer=Date.now()+15000; apocalypseTriggers++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='🔴 APOCALYPSE MODE 🔴'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<12;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🔴 APOCALYPSE!',x:width/2-60,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('🔴 Apocalypse Mode event started! 5x points!', 'event'); }
-function triggerVoidMode(){ if(!canTriggerEvent()) return; voidActive=true; voidTimer=Date.now()+15000; activeEvent='void'; eventTimer=Date.now()+15000; voidTriggers++; totalEventsTriggered++; sfxVoid(); const banner=document.getElementById('event-banner'); banner.innerHTML='💜 VOID MODE 💜'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💜 VOID MODE!',x:width/2-50,y:height/2-40,l:1.5,c:'#aa66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💜 Void Mode event started! Invincible!', 'event'); }
+function triggerDimensionRift(){ if(!canTriggerEvent()) return; activeEvent='rift'; eventTimer=Date.now()+18000; riftActive=true; riftMultiplier=2.5; totalEventsTriggered++; totalRiftsTriggered++; sfxEvent(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 DIMENSION RIFT 🌀'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<10;i++) enemies.push(new Enemy()); startEventCooldown(); checkAchievements(); showNotification('🌀 Dimension Rift event started! 2.5x points!', 'event'); }
+function triggerApocalypseMode(){ if(!canTriggerEvent()) return; apocalypseActive=true; activeEvent='apocalypse'; eventTimer=Date.now()+18000; apocalypseTriggers++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='🔴 APOCALYPSE MODE 🔴'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<16;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🔴 APOCALYPSE!',x:width/2-60,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('🔴 Apocalypse Mode event started! 3x points!', 'event'); }
+function triggerVoidMode(){ if(!canTriggerEvent()) return; voidActive=true; voidTimer=Date.now()+18000; activeEvent='void'; eventTimer=Date.now()+18000; voidTriggers++; totalEventsTriggered++; sfxVoid(); const banner=document.getElementById('event-banner'); banner.innerHTML='💜 VOID MODE 💜'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💜 VOID MODE!',x:width/2-50,y:height/2-40,l:1.5,c:'#aa66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💜 Void Mode event started! Invincible!', 'event'); }
 function triggerGuardian(){ if(!canTriggerEvent()) return; guardian=new Guardian(); activeEvent='guardian'; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='👑 THE GUARDIAN AWAKENS 👑'; banner.style.display='block'; banner.style.color='gold'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'👑 GUARDIAN!',x:width/2-50,y:height/2-50,l:2,c:'gold',size:32}); startEventCooldown(); showNotification('👑 The Guardian has awakened!', 'warning'); }
-function triggerCosmicCollapse(){ if(!canTriggerEvent()) return; activeEvent='cosmic'; eventTimer=Date.now()+20000; cosmicCollapseActive=true; cosmicCollapseCount++; totalEventsTriggered++; sfxCosmic(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌌 COSMIC COLLAPSE 🌌'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<30;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌌 COSMIC COLLAPSE!',x:width/2-70,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌌 Cosmic Collapse event started! 10x points!', 'event'); }
-function triggerPrimordialRage(){ if(!canTriggerEvent()) return; activeEvent='primordial'; eventTimer=Date.now()+10000; primordialRageActive=true; primordialRageCount++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ PRIMORDIAL RAGE ⚡'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player) player.r = 60; if(player && player.x && player.y) floats.push({txt:'⚡ PRIMORDIAL RAGE!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('⚡ Primordial Rage event started! Massive damage!', 'event'); }
+function triggerCosmicCollapse(){ if(!canTriggerEvent()) return; activeEvent='cosmic'; eventTimer=Date.now()+24000; cosmicCollapseActive=true; cosmicCollapseCount++; totalEventsTriggered++; sfxCosmic(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌌 COSMIC COLLAPSE 🌌'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<39;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌌 COSMIC COLLAPSE!',x:width/2-70,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌌 Cosmic Collapse event started! 5x points!', 'event'); }
+function triggerPrimordialRage(){ if(!canTriggerEvent()) return; activeEvent='primordial'; eventTimer=Date.now()+12000; primordialRageActive=true; primordialRageCount++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ PRIMORDIAL RAGE ⚡'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player) player.r = 60; if(player && player.x && player.y) floats.push({txt:'⚡ PRIMORDIAL RAGE!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('⚡ Primordial Rage event started! Massive damage!', 'event'); }
 function triggerBlackHole(){ if(!canTriggerEvent()) return; activeEvent='blackhole'; eventTimer=Date.now()+8000; blackHoleActive=true; blackHoleCenter={x:width/2, y:height/2}; totalEventsTriggered++; sfxCosmic(); const banner=document.getElementById('event-banner'); banner.innerHTML='🕳️ BLACK HOLE 🕳️'; banner.style.display='block'; banner.style.color='#4400aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); let activations=parseInt(localStorage.getItem('blackHoleActivations')||0)+1; localStorage.setItem('blackHoleActivations',activations); if(player && player.x && player.y) floats.push({txt:'🕳️ BLACK HOLE!',x:width/2-50,y:height/2-40,l:1.5,c:'#4400aa',size:24}); startEventCooldown(); checkAchievements(); showNotification('🕳️ Black Hole event started!', 'event'); }
 function triggerDeathTouch(){ if(!canTriggerEvent()) return; activeEvent='deathtouch'; eventTimer=Date.now()+3000; deathTouchCount++; totalEventsTriggered++; sfxDeathTouch(); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 DEATH\'S TOUCH 💀'; banner.style.display='block'; banner.style.color='#440044'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); let enemiesKilled=0; for(let i=0;i<enemies.length;i++){ let e=enemies[i]; let pointBonus = e.isBoss?90000:3500*combo; if(goldRushActive) pointBonus*=10; if(stableCycleActive) pointBonus*=3; if(royalBlessingActive) pointBonus*=3; if(kingsBlessingActive) pointBonus*=5; score+=pointBonus; kills++; waveKills++; if(e.isBoss) bossesKilled++; enemiesKilled++; for(let k=0;k<20;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#440044',0.9)); } enemies=[]; boss=null; if(player && player.x && player.y) floats.push({txt:`💀 ${enemiesKilled} ENEMIES DIED!`,x:width/2-100,y:height/2-40,l:1.8,c:'#440044',size:28}); startEventCooldown(); checkAchievements(); showNotification(`💀 Death's Touch killed ${enemiesKilled} enemies!`, 'event'); }
-function triggerChaosRealm(){ if(!canTriggerEvent()) return; activeEvent='chaos'; eventTimer=Date.now()+12000; chaosRealmActive=true; chaosRealmCount++; totalEventsTriggered++; sfxChaosRealm(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌈 CHAOS REALM 🌈'; banner.style.display='block'; banner.style.color='#ff66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌈 CHAOS REALM!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌈 Chaos Realm event started! Rainbow bullets!', 'event'); }
+function triggerChaosRealm(){ if(!canTriggerEvent()) return; activeEvent='chaos'; eventTimer=Date.now()+14000; chaosRealmActive=true; chaosRealmCount++; totalEventsTriggered++; sfxChaosRealm(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌈 CHAOS REALM 🌈'; banner.style.display='block'; banner.style.color='#ff66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌈 CHAOS REALM!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌈 Chaos Realm event started! Rainbow bullets!', 'event'); }
 function triggerReapersCall(){ if(!canTriggerEvent()) return; activeEvent='reaper'; eventTimer=Date.now()+10000; reaperCalls++; totalEventsTriggered++; sfxReaper(); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 REAPER\'S CALL 💀'; banner.style.display='block'; banner.style.color='#880044'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 REAPER\'S CALL!',x:width/2-70,y:height/2-40,l:1.5,c:'#880044',size:24}); startEventCooldown(); checkAchievements(); showNotification('💀 Reaper\'s Call event started!', 'event'); }
 function triggerTimeWarp(){ if(!canTriggerEvent()) return; activeEvent='timewarp'; eventTimer=Date.now()+10000; timeWarps++; totalEventsTriggered++; sfxTimeWarp(); timeWarpActive=true; timeWarpTimer=Date.now()+10000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 TIME WARP 🌀'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌀 TIME WARP!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌀 Time Warp event started! Enemies slowed!', 'event'); }
-function triggerGoldRush(){ if(!canTriggerEvent()) return; activeEvent='goldrush'; eventTimer=Date.now()+15000; goldRushes++; totalEventsTriggered++; sfxGoldRush(); goldRushActive=true; goldRushTimer=Date.now()+15000; const banner=document.getElementById('event-banner'); banner.innerHTML='💰 GOLD RUSH 💰'; banner.style.display='block'; banner.style.color='#ffaa00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💰 GOLD RUSH!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffaa00',size:24}); startEventCooldown(); checkAchievements(); showNotification('💰 Gold Rush event started! 10x credits!', 'event'); }
-function triggerDivineIntervention(){ if(!canTriggerEvent()) return; activeEvent='divine'; eventTimer=Date.now()+60000; divineInterventions++; totalEventsTriggered++; sfxDivine(); divineActive=true; divineTimer=Date.now()+60000; divineFlashTimer=Date.now()+3000; health = maxHealth; if(hasShieldUpgrade) shieldHp = maxShieldHp; if(player) player.invincibleTimer = 300; /* 5 seconds invincibility */ /* Screen clear all enemies */ for(let i=0;i<enemies.length;i++){ let e=enemies[i]; let pointBonus = e.isBoss?50000:5000*combo; score+=pointBonus; kills++; waveKills++; if(e.isBoss) bossesKilled++; for(let k=0;k<25;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffdd00',1)); } enemies=[]; boss=null; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ DIVINE INTERVENTION ⚡'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},5000); if(player && player.x && player.y) floats.push({txt:'⚡ DIVINE INTERVENTION! +300% DMG!',x:width/2-100,y:height/2-40,l:2.5,c:'#ffdd00',size:32}); showNotification('⚡ DIVINE INTERVENTION! Full heal! +300% damage! Screen cleared!', 'event'); startEventCooldown(); checkAchievements(); }
-function triggerBugEvent(){ if(!canTriggerEvent()) return; activeEvent='bug'; eventTimer=Date.now()+5000; bugEvents++; totalEventsTriggered++; sfxBug(); bugEventActive=true; bugEventGlitch=true; const banner=document.getElementById('event-banner'); banner.innerHTML='🐛 BUG EVENT 🐛'; banner.style.display='block'; banner.style.color='#00ff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🐛 BUG EVENT!',x:width/2-60,y:height/2-40,l:1.5,c:'#00ff00',size:24}); setTimeout(() => { if(gameState === 'PLAYING'){ let reward = 777 * gemMultiplier; gemstones += reward; saveGemstones(); totalCoins += 7777; localStorage.setItem('totalCoins', totalCoins); showAchievementPopup('🐛 BUG EVENT RESOLVED', `You received ${reward} GEMSTONES and 7,777 CREDITS!`, reward); bugEventActive = false; bugEventGlitch = false; } }, 3000); startEventCooldown(); checkAchievements(); showNotification('🐛 Bug Event triggered! Glitch incoming...', 'event'); }
-function triggerStableCycle(){ if(!canTriggerEvent()) return; activeEvent='stable'; eventTimer=Date.now()+10000; stableCycleCount++; totalEventsTriggered++; sfxStable(); stableCycleActive=true; stableCycleTimer=Date.now()+10000; const banner=document.getElementById('event-banner'); banner.innerHTML='💫 STABLE CYCLE 💫'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💫 STABLE CYCLE!',x:width/2-60,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💫 Stable Cycle event started! 3x points!', 'event'); }
-function triggerTidalWave(){ if(!canTriggerEvent()) return; activeEvent='tidal'; eventTimer=Date.now()+12000; tidalWaveCount++; totalEventsTriggered++; sfxTidal(); tidalWaveActive=true; tidalWaveTimer=Date.now()+12000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌊 TIDAL WAVE 🌊'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<20;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌊 TIDAL WAVE!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌊 Tidal Wave event started! Many enemies!', 'event'); }
+function triggerGoldRush(){ if(!canTriggerEvent()) return; activeEvent='goldrush'; eventTimer=Date.now()+18000; goldRushes++; totalEventsTriggered++; sfxGoldRush(); goldRushActive=true; goldRushTimer=Date.now()+18000; const banner=document.getElementById('event-banner'); banner.innerHTML='💰 GOLD RUSH 💰'; banner.style.display='block'; banner.style.color='#ffaa00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💰 GOLD RUSH!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffaa00',size:24}); startEventCooldown(); checkAchievements(); showNotification('💰 Gold Rush event started! 10x credits!', 'event'); }
+function triggerDivineIntervention(){ if(!canTriggerEvent()) return; activeEvent='divine'; eventTimer=Date.now()+120000; divineInterventions++; totalEventsTriggered++; sfxDivine(); divineActive=true; divineTimer=Date.now()+120000; divineFlashTimer=Date.now()+120000; health = maxHealth; if(hasShieldUpgrade) shieldHp = maxShieldHp; if(player) player.invincibleTimer = 999999; /* Full invincibility for entire duration */ gemstones += 100000; saveGemstones(); totalCoins += Math.floor(score * 600); localStorage.setItem('totalCoins', totalCoins); /* Screen clear all enemies with 50 particles each */ for(let i=0;i<enemies.length;i++){ let e=enemies[i]; let pointBonus = e.isBoss?50000:5000*combo; score+=pointBonus; kills++; waveKills++; if(e.isBoss) bossesKilled++; for(let k=0;k<50;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffdd00',1)); } enemies=[]; boss=null; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ DIVINE INTERVENTION ⚡'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},5000); if(player && player.x && player.y) floats.push({txt:'⚡ DIVINE INTERVENTION! GOD MODE ACTIVATED! ⚡',x:width/2-140,y:height/2-40,l:3,c:'#ffdd00',size:36}); showNotification('⚡ DIVINE INTERVENTION! GOD MODE! Full heal + invincible! +200,000x DMG! +100,000💎! +600x coins! Screen cleared!', 'event'); startEventCooldown(); checkAchievements(); }
+function triggerBugEvent(){ if(!canTriggerEvent()) return; activeEvent='bug'; eventTimer=Date.now()+5000; bugEvents++; totalEventsTriggered++; sfxBug(); bugEventActive=true; bugEventGlitch=true; const banner=document.getElementById('event-banner'); banner.innerHTML='🐛 BUG EVENT 🐛'; banner.style.display='block'; banner.style.color='#00ff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🐛 BUG EVENT!',x:width/2-60,y:height/2-40,l:1.5,c:'#00ff00',size:24}); setTimeout(() => { if(gameState === 'PLAYING'){ let reward = 1165 * gemMultiplier; gemstones += reward; saveGemstones(); totalCoins += 11665; localStorage.setItem('totalCoins', totalCoins); showAchievementPopup('🐛 BUG EVENT RESOLVED', `You received ${reward} GEMSTONES and 11,665 CREDITS!`, reward); bugEventActive = false; bugEventGlitch = false; } }, 3000); startEventCooldown(); checkAchievements(); showNotification('🐛 Bug Event triggered! Glitch incoming...', 'event'); }
+function triggerStableCycle(){ if(!canTriggerEvent()) return; activeEvent='stable'; eventTimer=Date.now()+12000; stableCycleCount++; totalEventsTriggered++; sfxStable(); stableCycleActive=true; stableCycleTimer=Date.now()+12000; const banner=document.getElementById('event-banner'); banner.innerHTML='💫 STABLE CYCLE 💫'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💫 STABLE CYCLE!',x:width/2-60,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💫 Stable Cycle event started! 2.5x points!', 'event'); }
+function triggerTidalWave(){ if(!canTriggerEvent()) return; activeEvent='tidal'; eventTimer=Date.now()+14000; tidalWaveCount++; totalEventsTriggered++; sfxTidal(); tidalWaveActive=true; tidalWaveTimer=Date.now()+14000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌊 TIDAL WAVE 🌊'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<26;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌊 TIDAL WAVE!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌊 Tidal Wave event started! Many enemies!', 'event'); }
 function triggerMasquerade(){ if(!canTriggerEvent()) return; activeEvent='masquerade'; eventTimer=Date.now()+15000; masqueradeCount++; totalEventsTriggered++; sfxMasquerade(); masqueradeActive=true; masqueradeTimer=Date.now()+15000; const banner=document.getElementById('event-banner'); banner.innerHTML='🎭 MASQUERADE 🎭'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🎭 MASQUERADE!',x:width/2-60,y:height/2-40,l:1.5,c:'#aa66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🎭 Masquerade event started! Disguised enemies!', 'event'); }
 function triggerSoulHarvest(){ if(!canTriggerEvent()) return; activeEvent='soul'; eventTimer=Date.now()+15000; soulHarvestCount++; totalEventsTriggered++; sfxSoul(); soulHarvestActive=true; soulHarvestTimer=Date.now()+15000; soulHarvestSouls = []; const banner=document.getElementById('event-banner'); banner.innerHTML='💀 SOUL HARVEST 💀'; banner.style.display='block'; banner.style.color='#8800aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 SOUL HARVEST!',x:width/2-70,y:height/2-40,l:1.5,c:'#8800aa',size:24}); startEventCooldown(); checkAchievements(); showNotification('💀 Soul Harvest event started! Souls attack!', 'event'); }
 function triggerFrozenTime(){ if(!canTriggerEvent()) return; activeEvent='frozen'; eventTimer=Date.now()+8000; frozenTimeCount++; totalEventsTriggered++; sfxFrozen(); frozenTimeActive=true; frozenTimeTimer=Date.now()+8000; const banner=document.getElementById('event-banner'); banner.innerHTML='❄️ FROZEN TIME ❄️'; banner.style.display='block'; banner.style.color='#88ccff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'❄️ FROZEN TIME!',x:width/2-60,y:height/2-40,l:1.5,c:'#88ccff',size:24}); startEventCooldown(); checkAchievements(); showNotification('❄️ Frozen Time event started! Enemies frozen!', 'event'); }
@@ -4555,16 +4641,16 @@ function triggerShadowClone(){ if(!canTriggerEvent()) return; activeEvent='shado
 function triggerLightningStorm(){ if(!canTriggerEvent()) return; activeEvent='lightning'; eventTimer=Date.now()+8000; lightningStormCount++; totalEventsTriggered++; sfxLightning(); lightningStormActive=true; lightningStormTimer=Date.now()+8000; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ LIGHTNING STORM ⚡'; banner.style.display='block'; banner.style.color='#ffff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'⚡ LIGHTNING STORM!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffff00',size:24}); startEventCooldown(); checkAchievements(); showNotification('⚡ Lightning Storm event started! Lightning strikes enemies!', 'event'); }
 function triggerLuckyDraw(){ if(!canTriggerEvent()) return; activeEvent='lucky'; eventTimer=Date.now()+3000; luckyDrawCount++; totalEventsTriggered++; sfxLucky(); const banner=document.getElementById('event-banner'); banner.innerHTML='🍀 LUCKY DRAW 🍀'; banner.style.display='block'; banner.style.color='#88ff88'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); const shopItems = ['fire', 'dmg', 'shield', 'drone', 'heal', 'spread', 'laser', 'bomb']; const randomItem = shopItems[Math.floor(Math.random() * shopItems.length)]; buyUpgrade(randomItem, 1); if(player && player.x && player.y) floats.push({txt:'🍀 LUCKY DRAW! Free upgrade!',x:width/2-70,y:height/2-40,l:1.5,c:'#88ff88',size:24}); startEventCooldown(); checkAchievements(); showNotification('🍀 Lucky Draw event! Free upgrade!', 'event'); }
 function triggerMysteryBox(){ if(!canTriggerEvent()) return; activeEvent='mystery'; eventTimer=Date.now()+3000; mysteryBoxCount++; totalEventsTriggered++; sfxMystery(); const banner=document.getElementById('event-banner'); banner.innerHTML='🔮 MYSTERY BOX 🔮'; banner.style.display='block'; banner.style.color='#ff88ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); const rewards = [ () => { let reward = 500 * gemMultiplier; gemstones += reward; saveGemstones(); return `${reward} GEMSTONES!`; }, () => { let reward = 10000; totalCoins += reward; localStorage.setItem('totalCoins', totalCoins); return `${reward} CREDITS!`; }, () => { bombCount += 5; localStorage.setItem('bombCount', bombCount); return "5 BOMBS!"; }, () => { damageLevel += 2; localStorage.setItem('dmgLevel', damageLevel); return "PERMANENT DAMAGE +2!"; }, () => { fireLevel += 3; localStorage.setItem('fireLevel', fireLevel); return "PERMANENT FIRE RATE +3!"; } ]; const reward = rewards[Math.floor(Math.random() * rewards.length)](); if(player && player.x && player.y) floats.push({txt:`🔮 MYSTERY BOX! ${reward}`,x:width/2-80,y:height/2-40,l:1.5,c:'#ff88ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🔮 Mystery Box event! Random reward!', 'event'); }
-function triggerDoomsDay(){ if(!canTriggerEvent()) return; activeEvent='doom'; eventTimer=Date.now()+15000; doomsDayCount++; totalEventsTriggered++; sfxDoom(); doomsDayActive=true; greenAuraActive=Math.random()<0.15; for(let i=0;i<30;i++) enemies.push(new Enemy()); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 DOOM\'S DAY 💀'; banner.style.display='block'; banner.style.color='#440000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 DOOM\'S DAY!',x:width/2-60,y:height/2-40,l:1.5,c:'#440000',size:24}); if(greenAuraActive) floats.push({txt:'💚 GREEN AURA!',x:width/2-50,y:height/2+10,l:1.5,c:'#00ff00',size:20}); startEventCooldown(); checkAchievements(); showNotification('💀 Doom\'s Day event started! More enemies = more loot!' + (greenAuraActive ? ' 💚 Green Aura active!' : ''), 'event'); }
-function triggerRoyalBlessing(){ if(!canTriggerEvent()) return; activeEvent='royal'; eventTimer=Date.now()+20000; royalBlessingCount++; totalEventsTriggered++; sfxRoyal(); royalBlessingActive=true; royalBlessingTimer=Date.now()+20000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 ROYAL BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'👑 ROYAL BLESSING!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffdd00',size:24}); startEventCooldown(); checkAchievements(); showNotification('👑 Royal Blessing event started! 3x everything!', 'event'); }
-function triggerStarfall(){ if(!canTriggerEvent()) return; activeEvent='starfall'; eventTimer=Date.now()+9000; starfallCount++; totalEventsTriggered++; sfxStarfall(); starfallActive=true; starfallTimer=Date.now()+9000; starfallStars = []; const banner=document.getElementById('event-banner'); banner.innerHTML='🌟 STARFALL 🌟'; banner.style.display='block'; banner.style.color='#ffffaa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<10;i++){ starfallStars.push(new StarfallStar(Math.random()*width, -20, 8+Math.random()*8, 20+Math.floor(Math.random()*40))); } if(player && player.x && player.y) floats.push({txt:'🌟 STARFALL!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffffaa',size:24}); showNotification('🌟 STARFALL event started! Catch falling stars!', 'event'); startEventCooldown(); checkAchievements(); }
+function triggerDoomsDay(){ if(!canTriggerEvent()) return; activeEvent='doom'; eventTimer=Date.now()+18000; doomsDayCount++; totalEventsTriggered++; sfxDoom(); doomsDayActive=true; greenAuraActive=Math.random()<0.15; for(let i=0;i<39;i++) enemies.push(new Enemy()); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 DOOM\'S DAY 💀'; banner.style.display='block'; banner.style.color='#440000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 DOOM\'S DAY!',x:width/2-60,y:height/2-40,l:1.5,c:'#440000',size:24}); if(greenAuraActive) floats.push({txt:'💚 GREEN AURA!',x:width/2-50,y:height/2+10,l:1.5,c:'#00ff00',size:20}); startEventCooldown(); checkAchievements(); showNotification('💀 Doom\'s Day event started! More enemies = more loot!' + (greenAuraActive ? ' 💚 Green Aura active!' : ''), 'event'); }
+function triggerRoyalBlessing(){ if(!canTriggerEvent()) return; activeEvent='royal'; eventTimer=Date.now()+24000; royalBlessingCount++; totalEventsTriggered++; sfxRoyal(); royalBlessingActive=true; royalBlessingTimer=Date.now()+24000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 ROYAL BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'👑 ROYAL BLESSING!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffdd00',size:24}); startEventCooldown(); checkAchievements(); showNotification('👑 Royal Blessing event started! 5x everything!', 'event'); }
+function triggerStarfall(){ if(!canTriggerEvent()) return; activeEvent='starfall'; eventTimer=Date.now()+11000; starfallCount++; totalEventsTriggered++; sfxStarfall(); starfallActive=true; starfallTimer=Date.now()+11000; starfallStars = []; const banner=document.getElementById('event-banner'); banner.innerHTML='🌟 STARFALL 🌟'; banner.style.display='block'; banner.style.color='#ffffaa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<15;i++){ starfallStars.push(new StarfallStar(Math.random()*width, -20, 8+Math.random()*8, 40+Math.floor(Math.random()*80))); } if(player && player.x && player.y) floats.push({txt:'🌟 STARFALL!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffffaa',size:24}); showNotification('🌟 STARFALL event started! Catch falling stars!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerInferno(){ if(!canTriggerEvent()) return; activeEvent='inferno'; eventTimer=Date.now()+8000; infernoCount++; totalEventsTriggered++; sfxInferno(); infernoActive=true; infernoTimer=Date.now()+8000; const banner=document.getElementById('event-banner'); banner.innerHTML='🔥 INFERNO 🔥'; banner.style.display='block'; banner.style.color='#ff4400'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🔥 INFERNO!',x:width/2-60,y:height/2-40,l:1.5,c:'#ff4400',size:24}); showNotification('🔥 INFERNO event started! Flames will burn enemies!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerChainLightning(){ if(!canTriggerEvent()) return; activeEvent='chain'; eventTimer=Date.now()+10000; chainLightningCount++; totalEventsTriggered++; sfxChain(); chainLightningActive=true; chainLightningTimer=Date.now()+10000; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ CHAIN LIGHTNING ⚡'; banner.style.display='block'; banner.style.color='#ffff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'⚡ CHAIN LIGHTNING!',x:width/2-70,y:height/2-40,l:1.5,c:'#ffff00',size:24}); showNotification('⚡ CHAIN LIGHTNING event started! Lightning will chain between enemies!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerBarrier(){ if(!canTriggerEvent()) return; activeEvent='barrier'; eventTimer=Date.now()+10000; barrierCount++; totalEventsTriggered++; sfxBarrier(); barrierActive=true; barrierTimer=Date.now()+10000; barrierHp = 500; const banner=document.getElementById('event-banner'); banner.innerHTML='🛡️ BARRIER 🛡️'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🛡️ BARRIER!',x:width/2-60,y:height/2-40,l:1.5,c:'#88aaff',size:24}); showNotification('🛡️ BARRIER event started! Damage absorption active!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerSoulReaper(){ if(!canTriggerEvent()) return; activeEvent='soulreaper'; eventTimer=Date.now()+12000; soulReaperCount++; totalEventsTriggered++; sfxSoulReaper(); soulReaperActive=true; soulReaperTimer=Date.now()+12000; soulReaperSoul = {x:width/2, y:-100, hp:500, maxHp:500}; const banner=document.getElementById('event-banner'); banner.innerHTML='💀 SOUL REAPER 💀'; banner.style.display='block'; banner.style.color='#8800aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'💀 SOUL REAPER!',x:width/2-70,y:height/2-40,l:1.5,c:'#8800aa',size:28}); showNotification('💀 SOUL REAPER event started! A powerful reaper appears!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerGambler(){ if(!canTriggerEvent()) return; activeEvent='gambler'; eventTimer=Date.now()+5000; gamblerCount++; totalEventsTriggered++; sfxGambler(); gamblerActive=true; const banner=document.getElementById('event-banner'); banner.innerHTML='🎲 GAMBLER 🎲'; banner.style.display='block'; banner.style.color='#ffaa00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); const outcome = Math.random(); if(outcome < 0.3){ totalCoins = Math.floor(totalCoins * 0.5); localStorage.setItem('totalCoins', totalCoins); if(player && player.x && player.y) floats.push({txt:'🎲 GAMBLER: YOU LOST 50% CREDITS!',x:width/2-100,y:height/2-40,l:1.5,c:'#ff0000',size:22}); showNotification('🎲 GAMBLER: You lost 50% of your credits!', 'warning'); } else if(outcome < 0.7){ let win = 5000; totalCoins += win; localStorage.setItem('totalCoins', totalCoins); if(player && player.x && player.y) floats.push({txt:`🎲 GAMBLER: +${win} CREDITS!`,x:width/2-100,y:height/2-40,l:1.5,c:'#00ffaa',size:22}); showNotification(`🎲 GAMBLER: You won ${win} CREDITS!`, 'success'); } else { let win = 20000; totalCoins += win; localStorage.setItem('totalCoins', totalCoins); if(player && player.x && player.y) floats.push({txt:`🎲 GAMBLER: +${win} CREDITS! JACKPOT!`,x:width/2-110,y:height/2-40,l:1.5,c:'#ffaa00',size:24}); showNotification(`🎲 GAMBLER: JACKPOT! +${win} CREDITS!`, 'success'); } startEventCooldown(); checkAchievements(); }
 function triggerVortex(){ if(!canTriggerEvent()) return; activeEvent='vortex'; eventTimer=Date.now()+10000; vortexCount++; totalEventsTriggered++; sfxVortex(); vortexActive=true; vortexTimer=Date.now()+10000; vortexCenter={x:width/2, y:height/2}; const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 VORTEX 🌀'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌀 VORTEX!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); showNotification('🌀 VORTEX event started! Enemies will be pulled into the vortex!', 'event'); startEventCooldown(); checkAchievements(); }
-function triggerKingsBlessing(){ if(!canTriggerEvent()) return; activeEvent='kings'; eventTimer=Date.now()+15000; kingsBlessingCount++; totalEventsTriggered++; sfxKings(); kingsBlessingActive=true; kingsBlessingTimer=Date.now()+15000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 KING\'S BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'👑 KING\'S BLESSING! 5x EVERYTHING!',x:width/2-100,y:height/2-40,l:1.5,c:'#ffdd00',size:26}); showNotification('👑 KING\'S BLESSING event started! 5x points and credits!', 'event'); startEventCooldown(); checkAchievements(); }
+function triggerKingsBlessing(){ if(!canTriggerEvent()) return; activeEvent='kings'; eventTimer=Date.now()+18000; kingsBlessingCount++; totalEventsTriggered++; sfxKings(); kingsBlessingActive=true; kingsBlessingTimer=Date.now()+18000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 KING\'S BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'👑 KING\'S BLESSING! 8x EVERYTHING!',x:width/2-100,y:height/2-40,l:1.5,c:'#ffdd00',size:26}); showNotification('👑 KING\'S BLESSING event started! 8x points and credits!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerPrism(){ if(!canTriggerEvent()) return; activeEvent='prism'; eventTimer=Date.now()+12000; prismCount++; totalEventsTriggered++; sfxPrism(); prismActive=true; prismTimer=Date.now()+12000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌈 PRISM 🌈'; banner.style.display='block'; banner.style.color='#ff88ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌈 PRISM! Bullets split into colors!',x:width/2-80,y:height/2-40,l:1.5,c:'#ff88ff',size:24}); showNotification('🌈 PRISM event started! Bullets split into rainbow colors!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerAbyss(){ if(!canTriggerEvent()) return; activeEvent='abyss'; eventTimer=Date.now()+8000; abyssCount++; totalEventsTriggered++; sfxAbyss(); abyssActive=true; abyssTimer=Date.now()+8000; abyssCenter={x:width/2, y:height/2}; const banner=document.getElementById('event-banner'); banner.innerHTML='🕳️ ABYSS 🕳️'; banner.style.display='block'; banner.style.color='#4400aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🕳️ ABYSS!',x:width/2-60,y:height/2-40,l:1.5,c:'#4400aa',size:24}); showNotification('🕳️ ABYSS event started! Enemies will be swallowed by the abyss!', 'event'); startEventCooldown(); checkAchievements(); }
 
@@ -4671,7 +4757,7 @@ function checkEventTrigger(){
     if(wave>=15 && Math.random()<0.002){ queueEvent(triggerFrozenTime); return; }
     if(wave>=18 && Math.random()<0.0015){ queueEvent(triggerCrystalRain); return; }
     if(wave>=25 && Math.random()<0.0008){ queueEvent(triggerShadowClone); return; }
-    if(wave>=30 && Math.random()<0.000000009){ queueEvent(triggerDivineIntervention); return; }
+    if(wave>=30 && Math.random()<0.0000000001){ queueEvent(triggerDivineIntervention); return; }
     if(wave>=25 && Math.random()<0.000005){ queueEvent(triggerGoldRush); return; }
     if(wave>=20 && Math.random()<0.00001){ queueEvent(triggerBugEvent); return; }
     if(wave>=20 && Math.random()<0.00004){ queueEvent(triggerTimeWarp); return; }
@@ -4695,7 +4781,7 @@ function checkEventTrigger(){
 
 function activateSynapse(){
     if(synapseActive) return;
-    synapseActive=true; synapseTimer=Date.now()+10000; totalSynapseActivations++; sfxSynapse();
+    synapseActive=true; synapseTimer=Date.now()+12000; totalSynapseActivations++; sfxSynapse();
     const banner=document.getElementById('event-banner');
     banner.innerHTML='🌀 SYNAPSE MODE 🌀'; banner.style.display='block'; banner.style.color='#ff66ff';
     setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},2500);
@@ -4890,7 +4976,21 @@ function renderSkillTree() {
 }
 
 function openSkillTree() {
-    showNotification('🌳 Skill Tree is currently under maintenance by the creator. It will return in a future update!', 'info');
+    let modal = document.getElementById('skill-tree-modal');
+    if(!modal){
+        modal = document.createElement('div');
+        modal.id = 'skill-tree-modal';
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;display:flex;justify-content:center;align-items:center;';
+        modal.innerHTML = `<div style="background:linear-gradient(135deg,#001a33,#000);border:2px solid #00ffaa;border-radius:16px;padding:30px 25px;min-width:280px;max-width:400px;text-align:center;">
+            <div style="font-size:48px;margin-bottom:12px;">🌳</div>
+            <h2 style="color:#00ffaa;margin:0 0 12px;">SKILL TREE</h2>
+            <p style="color:#ccc;font-size:14px;margin:0 0 20px;">🌳 Skill Tree is currently under maintenance by the creator. It will return in a future update!</p>
+            <button class="btn" style="border-color:#00ffaa;padding:8px 25px;font-size:14px;" onclick="document.getElementById('skill-tree-modal').style.display='none'">CLOSE</button>
+        </div>`;
+        document.body.appendChild(modal);
+    } else {
+        modal.style.display = 'flex';
+    }
 }
 function closeSkillTree() {
     document.getElementById('skill-tree-screen').style.display = 'none';
@@ -5648,19 +5748,19 @@ function fireBullets(){
     power *= skinDamageMultiplier;
     power *= (1 + weaponEnhancementLevel * 0.05);
     power *= (1 + getSkillBonus('damage'));
-    if(synapseActive) power *= 2.5;
-    if(voidActive) power *= 10;
-    if(divineActive) power *= 4; // +300% damage during Divine Intervention
-    if(primordialRageActive) power *= 20;
-    if(chaosRealmActive) power *= 3;
-    if(apocalypseActive) power *= 2;
-    if(cosmicCollapseActive) power *= 3;
+    if(synapseActive) power *= 4;
+    if(voidActive) power *= 15;
+    if(divineActive) power *= 200000; // GOD MODE damage during Divine Intervention
+    if(primordialRageActive) power *= 30;
+    if(chaosRealmActive) power *= 5;
+    if(apocalypseActive) power *= 3;
+    if(cosmicCollapseActive) power *= 5;
     if(riftActive) power *= riftMultiplier;
-    if(goldRushActive) power *= 2;
-    if(bugEventActive) power *= 5;
-    if(stableCycleActive) power *= 1.5;
-    if(royalBlessingActive) power *= 3;
-    if(kingsBlessingActive) power *= 5;
+    if(goldRushActive) power *= 3;
+    if(bugEventActive) power *= 8;
+    if(stableCycleActive) power *= 2.5;
+    if(royalBlessingActive) power *= 5;
+    if(kingsBlessingActive) power *= 8;
     if(prismActive) power *= 1.5;
     let color=isOD?'#ff00ff':synapseActive?'#ff66ff':voidActive?'#aa66ff':primordialRageActive?'#ff0000':chaosRealmActive?`hsl(${chaosHue},100%,60%)`:apocalypseActive?'#ff0000':cosmicCollapseActive?'#88aaff':riftActive?'#aa66ff':bugEventActive?'#00ff00':stableCycleActive?'#88aaff':lightningStormActive?'#ffff00':royalBlessingActive?'#ffdd00':kingsBlessingActive?'#ffaa00':prismActive?'#ff88ff':doppelgangerActive?'#ff88ff':isRapid?'#00ffff':'#00d2ff';
     const px=player.x,py=player.y-28;
@@ -5712,7 +5812,7 @@ function loop(){
     if(soulHarvestActive && Date.now()>soulHarvestTimer) soulHarvestActive=false;
     if(timeWarpActive && Date.now()>timeWarpTimer) timeWarpActive=false;
     if(goldRushActive && Date.now()>goldRushTimer) goldRushActive=false;
-    if(divineActive && Date.now()>divineTimer) divineActive=false;
+    if(divineActive && Date.now()>divineTimer){ divineActive=false; if(player) player.invincibleTimer=0; }
     if(bugEventActive && Date.now()>eventTimer) { bugEventActive=false; bugEventGlitch=false; }
     if(frozenTimeActive && Date.now()>eventTimer) frozenTimeActive=false;
     if(crystalRainActive && Date.now()>eventTimer) crystalRainActive=false;
@@ -5917,11 +6017,18 @@ function loop(){
     } else if(doppelgangerActive){ ctx.fillStyle = `rgba(127,68,127,0.2)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else { ctx.clearRect(0,0,width,height); ctx.fillStyle='#000'; ctx.fillRect(0,0,width,height); drawNebula(); }
 
-    // Divine flash overlay
-    if(divineFlashTimer && Date.now()<divineFlashTimer){
+    // Divine flash overlay - golden screen for entire duration
+    if(divineActive && Date.now()<divineTimer){
+        const elapsed = (Date.now() - (divineTimer - 120000)) / 120000;
+        const pulse = 0.15 + Math.sin(Date.now()/300)*0.08;
+        ctx.fillStyle=`rgba(255,220,0,${pulse})`; ctx.fillRect(0,0,width,height);
+        // Golden light rays
+        ctx.save(); ctx.globalAlpha=0.25+Math.sin(Date.now()/500)*0.1;
+        for(let r=0;r<12;r++){ const a=r*Math.PI/6+Date.now()/2000; ctx.fillStyle='#ffdd00'; ctx.beginPath(); ctx.moveTo(width/2,height/2); ctx.lineTo(width/2+Math.cos(a)*width,height/2+Math.sin(a)*width); ctx.lineTo(width/2+Math.cos(a+0.1)*width,height/2+Math.sin(a+0.1)*width); ctx.fill(); }
+        ctx.restore();
+    } else if(divineFlashTimer && Date.now()<divineFlashTimer){
         const fade = (divineFlashTimer-Date.now())/3000;
         ctx.fillStyle=`rgba(255,220,0,${fade*0.7})`; ctx.fillRect(0,0,width,height);
-        // Golden light rays
         ctx.save(); ctx.globalAlpha=fade*0.4;
         for(let r=0;r<12;r++){ const a=r*Math.PI/6+Date.now()/2000; ctx.fillStyle='#ffdd00'; ctx.beginPath(); ctx.moveTo(width/2,height/2); ctx.lineTo(width/2+Math.cos(a)*width,height/2+Math.sin(a)*width); ctx.lineTo(width/2+Math.cos(a+0.1)*width,height/2+Math.sin(a+0.1)*width); ctx.fill(); }
         ctx.restore();
@@ -6039,7 +6146,7 @@ function loop(){
                     if(health>maxHealth) health = maxHealth;
                 }
             }
-            if(guardian && guardian.y>height+200){ guardian=null; activeEvent=null; }
+            if(guardian && guardian.y!==undefined && guardian.y>height+200){ guardian=null; activeEvent=null; }
         }
 
         const magnetActive=!!activePowerUps.magnet;
@@ -6322,13 +6429,13 @@ function loop(){
                 if(player){
                     const dx = player.x - it.x, dy = player.y - it.y;
                     const dist = Math.hypot(dx, dy);
-                    if(dist > 5){ it.x += dx/dist * 12; it.y += dy/dist * 12; }
+                    if(dist > 5){ it.x += dx/dist * 16; it.y += dy/dist * 16; }
                 }
             }
             if(player){
                 ctx.strokeStyle = `rgba(255,204,0,${0.4 + Math.sin(Date.now()/100)*0.2})`;
                 ctx.lineWidth = 2;
-                ctx.beginPath(); ctx.arc(player.x, player.y, 150+Math.sin(Date.now()/150)*20, 0, Math.PI*2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(player.x, player.y, 200+Math.sin(Date.now()/150)*25, 0, Math.PI*2); ctx.stroke();
                 ctx.lineWidth = 1;
             }
         } else { resourceMagnetActive = false; }
@@ -6527,7 +6634,6 @@ runLoader('loader-init','init-fill',()=>{
     updateRankUI();
     initSettingsUI();
     checkDailyStreak();
-    initTips();
 });
 
 // Initialize music on first user interaction
