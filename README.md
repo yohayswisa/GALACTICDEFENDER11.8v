@@ -5919,7 +5919,7 @@ function gameOver(){
             prestigeBtn.style.display = 'none';
         }
     }
-}}
+}
 
 function fireBullets(){
     if(!player || !player.x || !player.y) return;
