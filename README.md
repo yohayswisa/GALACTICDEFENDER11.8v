@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.8</title>
+    <title>Galactic Defender - UPDATE 11.9</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -323,7 +323,7 @@
 <!-- MAIN HUB -->
 <div id="main-hub" class="overlay">
     <h1 class="hub-title" style="font-size:52px;margin-bottom:5px;color:#00d2ff;">✨ GALACTIC DEFENDER ✨</h1>
-    <div class="hub-version-badge">UPDATE 11.7</div>
+    <div class="hub-version-badge">UPDATE 11.9</div>
     <div class="hub-divider"></div>
     <div style="margin:15px 0;">
         <button class="hub-btn-hero" onclick="openGameSelect()">🚀 PLAY NOW</button>
@@ -340,6 +340,7 @@
         <div class="hub-stat-card stat-credits" style="margin:5px 0;font-size:14px;"><span>💰</span> CREDITS: <span id="hub-coins" style="color:#00ffaa;margin-left:auto;">0</span></div>
         <div class="hub-stat-card stat-gems" style="margin:5px 0;font-size:14px;"><span>💎</span> GEMSTONES: <span id="hub-gems" style="color:#ff66ff;margin-left:auto;">0</span></div>
         <div class="hub-stat-card stat-kills" style="margin:5px 0;font-size:14px;"><span>💀</span> KILLS: <span id="hub-kills" style="color:#ff4444;margin-left:auto;">0</span></div>
+        <div id="hub-prestige-info" style="margin:5px 0;font-size:14px;"><span>⭐</span> PRESTIGE: <span id="hub-prestige" style="color:#ffdd00;margin-left:auto;">0 (0 pts)</span></div>
         <div class="hub-stat-card stat-skin" style="margin:5px 0;font-size:14px;"><span>🌟</span> SKIN: <span id="hub-skin" style="color:gold;margin-left:auto;">LOCKED</span></div>
         <div id="hub-skin-progress-bar" style="width:100%;height:6px;background:#333;border-radius:3px;margin:8px auto;overflow:hidden;"><div id="hub-skin-progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,gold,#ffcc44);transition:width 0.3s;"></div></div>
         <div id="hub-skin-percent" style="font-size:10px;color:#aaa;">0/40 ACHIEVEMENTS</div>
@@ -359,7 +360,7 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.8 - Event Buffs, Divine Ultra-Buff, Shop Tabs, Tips & More!</p>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.9 - Prestige System, All Special Abilities Buffed!</p>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
@@ -377,7 +378,7 @@
             <h2 style="color:#00d2ff;">GALACTIC DEFENDER</h2>
             <p>המשחק הקלאסי! יריות, בוסים, אירועים והישגים</p>
             <p style="color:#00ffaa;font-size:12px;margin-top:10px;">▶ לחץ כדי לשחק</p>
-            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.8: Event Buffs, Divine Ultra-Buff, Shop Tabs, Tips!</div>
+            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.9: Prestige System, Ability Buffs!</div>
         </div>
         <div class="game-select-card coming-soon" onclick="showCustomAlert('משחק זה עדיין בפיתוח! יגיע בקרוב...')">
             <div style="font-size:48px;">❓</div>
@@ -554,6 +555,7 @@
     <div class="stat-group"><div class="stat-label">⭐ XP</div><div class="bar-bg"><div id="xp-fill" class="bar-fill"></div></div></div>
     <div class="stat-group"><div class="stat-label">⚡ OD</div><div class="bar-bg"><div id="od-fill" class="bar-fill"></div></div></div>
     <div style="font-size:9px;">💣 <span id="bomb-count" style="color:#ffcc00;">0</span></div>
+    <div id="prestige-hud" style="font-size:9px;color:#FFD700;display:none;">⭐ P0</div>
 </div>
 <div id="score-hud">
     <div class="score-main">SCORE: <span id="score-val">0</span></div>
@@ -578,6 +580,15 @@
     <div style="display:flex;gap:10px;justify-content:center;margin-top:8px;">
         <button class="btn btn-danger" onclick="confirmResetAction()">🔄 CONFIRM RESET</button>
         <button class="btn" onclick="closeResetModal()">CANCEL</button>
+    </div>
+</div>
+
+<div id="prestige-modal" class="reset-modal" style="border-color:#FFD700;">
+    <p style="color:#FFD700;font-weight:bold;font-size:16px;">⭐ PRESTIGE ⭐</p>
+    <p id="prestige-modal-text" style="font-size:12px;color:#ccc;"></p>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:8px;">
+        <button class="btn" style="background:linear-gradient(45deg,#8B6914,#FFD700);border-color:#FFD700;color:#000;font-weight:bold;" onclick="confirmPrestige()">⭐ CONFIRM PRESTIGE</button>
+        <button class="btn" onclick="closePrestigeModal()">CANCEL</button>
     </div>
 </div>
 
@@ -606,6 +617,7 @@
         <button class="shop-tab active" onclick="switchShopTab('weapons')" data-i18n="weapons">🔫 Weapons</button>
         <button class="shop-tab" onclick="switchShopTab('shields')" data-i18n="shields">🛡️ Shields</button>
         <button class="shop-tab" onclick="switchShopTab('special')" data-i18n="special_abilities">✨ Special Abilities</button>
+        <button class="shop-tab" onclick="switchShopTab('prestige')" style="border-color:#ffdd00;color:#ffdd00;">⭐ PRESTIGE</button>
     </div>
     <div class="shop-grid" id="shop-grid-container"></div>
     <div id="shop-special-section"></div>
@@ -681,6 +693,7 @@
     <div id="final-stats" style="font-size:12px;margin-bottom:12px;"></div>
     <button class="btn" onclick="triggerReboot()" data-i18n="re_initialize">RE-INITIALIZE</button>
     <button class="btn" onclick="quitToMenu()" data-i18n="main_menu">MAIN MENU</button>
+    <button id="prestige-btn" class="btn" style="display:none;background:linear-gradient(45deg,#8B6914,#FFD700);border:2px solid #FFD700;color:#000;font-weight:900;font-size:14px;padding:10px 25px;" onclick="showPrestigeConfirm()">⭐ PRESTIGE</button>
 </div>
 
 <canvas id="gameCanvas"></canvas>
@@ -1950,7 +1963,7 @@ const RARE_ABILITIES = {
     },
     regenAura: {
         id: 'regenAura', name: '💚 REGENERATION AURA', icon: '💚',
-        desc: 'Passive HP regeneration (+1 HP every 5 seconds)',
+        desc: 'Passive HP regeneration (+1 HP every 3 seconds)',
         cost: 8000, cooldown: 0, category: 'shields',
         unlockReq: () => wave >= 25,
         unlockDesc: 'Reach wave 25',
@@ -1958,7 +1971,7 @@ const RARE_ABILITIES = {
     },
     timeSlow: {
         id: 'timeSlow', name: '👻 TIME SLOW/PHASE', icon: '👻',
-        desc: 'Become intangible for 3 seconds, phasing through enemies and projectiles',
+        desc: 'Become intangible for 5 seconds, phasing through enemies and projectiles',
         cost: 6000, cooldown: 45000, category: 'shields',
         unlockReq: () => perfectWavesCount >= 5,
         unlockDesc: 'Survive 5 boss fights without taking damage (5 perfect waves)',
@@ -1982,7 +1995,7 @@ const RARE_ABILITIES = {
     },
     resourceMagnet: {
         id: 'resourceMagnet', name: '🧲 RESOURCE MAGNET', icon: '🧲',
-        desc: 'Automatically attracts all dropped loot on screen for 20 seconds',
+        desc: 'Automatically attracts all dropped loot on screen for 30 seconds',
         cost: 3000, cooldown: 45000, category: 'shields',
         unlockReq: () => totalCoins >= 5000,
         unlockDesc: 'Accumulate 5000 coins',
@@ -1990,7 +2003,7 @@ const RARE_ABILITIES = {
     },
     timeWarp: {
         id: 'timeWarp', name: '🕐 TIME WARP', icon: '🕐',
-        desc: 'Slows all enemies by 50% for 10 seconds',
+        desc: 'Slows all enemies by 70% for 15 seconds',
         cost: 12000, cooldown: 90000, category: 'shields',
         unlockReq: () => totalKills >= 3000,
         unlockDesc: 'Accumulate 3000 kills',
@@ -1998,7 +2011,7 @@ const RARE_ABILITIES = {
     },
     ultimateAnnihilation: {
         id: 'ultimateAnnihilation', name: '💀 ULTIMATE ANNIHILATION', icon: '💀',
-        desc: 'Clears all enemies on screen + invincibility for 5 seconds',
+        desc: 'Clears all enemies on screen + invincibility for 8 seconds',
         cost: 25000, cooldown: 180000, category: 'weapons',
         unlockReq: () => totalKills >= 10000,
         unlockDesc: 'Accumulate 10000 kills',
@@ -2172,7 +2185,7 @@ function activateRareAbility(id){
         shockwaveTimer = Date.now() + 800;
         shockwaveRadius = 0;
         // Destroy nearby enemies and projectiles
-        let radius = 200;
+        let radius = 300;
         for(let i = enemies.length-1; i >= 0; i--){
             let e = enemies[i];
             if(player && Math.hypot(e.x - player.x, e.y - player.y) < radius){
@@ -2185,7 +2198,7 @@ function activateRareAbility(id){
             }
         }
         if(boss && player && Math.hypot(boss.x - player.x, boss.y - player.y) < radius){
-            boss.hp -= 500;
+            boss.hp -= 800;
             if(boss.hp <= 0){ boss = null; bossesKilled++; }
         }
         eBullets.length = 0;
@@ -2194,18 +2207,18 @@ function activateRareAbility(id){
     }
     else if(id === 'regenAura'){
         // Passive - no activation needed, handled in game loop
-        showCustomAlert('💚 Regeneration Aura is always active! +1 HP every 5 seconds.');
+        showCustomAlert('💚 Regeneration Aura is always active! +1 HP every 3 seconds.');
     }
     else if(id === 'timeSlow'){
         timeSlowActive = true;
-        timeSlowTimer = Date.now() + 3000;
-        if(player) player.invincibleTimer = 180; // ~3 seconds at 60fps
+        timeSlowTimer = Date.now() + 5000;
+        if(player) player.invincibleTimer = 300; // ~5 seconds at 60fps
         if(player && player.x && player.y) floats.push({txt:'👻 PHASE MODE!',x:player.x-50,y:player.y-40,l:1.5,c:'#aa66ff',size:24});
-        showNotification('👻 Time Slow/Phase activated! Intangible for 3 seconds!', 'success');
+        showNotification('👻 Time Slow/Phase activated! Intangible for 5 seconds!', 'success');
     }
     else if(id === 'gravityBomb'){
         gravityBombActive = true;
-        gravityBombTimer = Date.now() + 3000;
+        gravityBombTimer = Date.now() + 5000;
         gravityBombCenter = player ? {x: player.x, y: player.y} : {x: width/2, y: height/2};
         gravityBombPhase = 0;
         if(player && player.x && player.y) floats.push({txt:'🌀 GRAVITY BOMB!',x:player.x-60,y:player.y-40,l:1.5,c:'#4400aa',size:24});
@@ -2213,17 +2226,20 @@ function activateRareAbility(id){
     }
     else if(id === 'lightningStrike'){
         if(enemies.length > 0){
-            let targetIdx = Math.floor(Math.random() * enemies.length);
-            let target = enemies[targetIdx];
-            lightningStrikeEffect = {x: target.x, y: target.y, timer: Date.now() + 600};
-            let pointBonus = target.isBoss ? 50000 : 5000 * combo;
-            pointBonus *= skinCreditMultiplier;
-            score += pointBonus; kills++; waveKills++;
-            if(target.isBoss){ bossesKilled++; boss = null; }
-            for(let k=0;k<25;k++) particles.push(new Particle(target.x,target.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffff00',1));
-            enemies.splice(targetIdx, 1);
-            if(player && player.x && player.y) floats.push({txt:'⚡ LIGHTNING STRIKE!',x:target.x-60,y:target.y-40,l:1.5,c:'#ffff00',size:24});
-            showNotification('⚡ Lightning Strike! Enemy destroyed!', 'success');
+            let strikeCount = Math.min(3, enemies.length);
+            for(let s=0; s<strikeCount; s++){
+                let targetIdx = Math.floor(Math.random() * enemies.length);
+                let target = enemies[targetIdx];
+                if(s === 0) lightningStrikeEffect = {x: target.x, y: target.y, timer: Date.now() + 600};
+                let pointBonus = target.isBoss ? 80000 : 8000 * combo;
+                pointBonus *= skinCreditMultiplier;
+                score += pointBonus; kills++; waveKills++;
+                if(target.isBoss){ bossesKilled++; boss = null; }
+                for(let k=0;k<25;k++) particles.push(new Particle(target.x,target.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffff00',1));
+                enemies.splice(targetIdx, 1);
+            }
+            if(player && player.x && player.y) floats.push({txt:'⚡ LIGHTNING STRIKE x'+strikeCount+'!',x:player.x-70,y:player.y-40,l:1.5,c:'#ffff00',size:24});
+            showNotification('⚡ Lightning Strike! '+strikeCount+' enemies destroyed!', 'success');
         } else {
             ability.lastUsed = 0; // Refund cooldown if no enemies
             showNotification('⚡ No enemies to strike!', 'warning');
@@ -2231,25 +2247,25 @@ function activateRareAbility(id){
     }
     else if(id === 'resourceMagnet'){
         resourceMagnetActive = true;
-        resourceMagnetTimer = Date.now() + 20000;
+        resourceMagnetTimer = Date.now() + 30000;
         if(player && player.x && player.y) floats.push({txt:'🧲 RESOURCE MAGNET!',x:player.x-60,y:player.y-40,l:1.5,c:'#ffcc00',size:24});
-        showNotification('🧲 Resource Magnet activated! All loot attracted for 20s!', 'success');
+        showNotification('🧲 Resource Magnet activated! All loot attracted for 30s!', 'success');
     }
     else if(id === 'timeWarp'){
         abilityTimeWarpActive = true;
-        abilityTimeWarpTimer = Date.now() + 10000;
+        abilityTimeWarpTimer = Date.now() + 15000;
         if(player && player.x && player.y) floats.push({txt:'🕐 TIME WARP!',x:player.x-50,y:player.y-40,l:1.5,c:'#00ccff',size:24});
-        showNotification('🕐 Time Warp activated! Enemies slowed 50% for 10s!', 'success');
+        showNotification('🕐 Time Warp activated! Enemies slowed 70% for 15s!', 'success');
     }
     else if(id === 'ultimateAnnihilation'){
         ultimateAnnihilationActive = true;
-        ultimateAnnihilationTimer = Date.now() + 5000;
-        if(player) player.invincibleTimer = 300; // ~5 seconds at 60fps
+        ultimateAnnihilationTimer = Date.now() + 8000;
+        if(player) player.invincibleTimer = 480; // ~8 seconds at 60fps
         // Clear all enemies on screen
         let annihilatedCount = 0;
         for(let i = enemies.length-1; i >= 0; i--){
             let e = enemies[i];
-            let pointBonus = e.isBoss ? 100000 : 10000 * combo;
+            let pointBonus = e.isBoss ? 200000 : 20000 * combo;
             pointBonus *= skinCreditMultiplier;
             score += pointBonus; kills++; waveKills++; annihilatedCount++;
             if(e.isBoss) bossesKilled++;
@@ -2296,6 +2312,24 @@ function updateAbilityButtons(){
 // DYNAMIC UPDATE LOG SYSTEM
 // ============================================
 let updateLogData = [
+    {
+        version: 'v11.9',
+        changes: [
+            'NEW: Prestige System - reset for permanent bonuses! Earn prestige points based on max wave reached',
+            'Prestige Shop with 4 upgrades: Starting Bonus, Overcharge, Lucky Start, Resilience',
+            'Each prestige point gives +2% to credits, damage, and health permanently',
+            'Prestige button appears on game-over screen at wave 20+',
+            'Prestige multiplier displayed on home hub and in-game HUD',
+            'BUFF: Shockwave Blast radius 200→300, boss damage 500→800',
+            'BUFF: Regeneration Aura +1HP/5s → +1HP/3s',
+            'BUFF: Time Slow/Phase invincibility 3s→5s (180→300 frames)',
+            'BUFF: Gravity Bomb pull duration 3s→5s with explosion damage to all pulled enemies',
+            'BUFF: Lightning Strike now hits 3 enemies (up from 1), boss score 50000→80000, regular 5000→8000/combo',
+            'BUFF: Resource Magnet duration 20s→30s, increased attraction radius and speed',
+            'BUFF: Time Warp duration 10s→15s, slow effect 50%→70% (enemies at 30% speed)',
+            'BUFF: Ultimate Annihilation invincibility 5s→8s (300→480 frames), score 10000→20000/combo, boss 100000→200000'
+        ]
+    },
     {
         version: 'v11.8',
         changes: [
@@ -2488,10 +2522,82 @@ function addUpdateLogEntry(version, changes){
 function switchShopTab(tab){
     currentShopTab = tab;
     document.querySelectorAll('.shop-tab').forEach(btn => btn.classList.remove('active'));
-    const tabMap = {'weapons':0, 'shields':1, 'special':2};
+    const tabMap = {'weapons':0, 'shields':1, 'special':2, 'prestige':3};
     const tabs = document.querySelectorAll('.shop-tab');
     if(tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
     updateShopUI();
+}
+
+// ============================================
+// PRESTIGE SYSTEM FUNCTIONS
+// ============================================
+function buyPrestigeUpgrade(upgradeId){
+    const upgradeCosts = {startingBonus:1, overcharge:2, luckyStart:3, resilience:2};
+    const cost = upgradeCosts[upgradeId] || 1;
+    const maxLevels = {startingBonus:10, overcharge:5, luckyStart:5, resilience:10};
+    const currentLevel = prestigeUpgrades[upgradeId] || 0;
+    if(currentLevel >= maxLevels[upgradeId]){
+        showCustomAlert('⭐ Already at max level!');
+        return;
+    }
+    if(prestigePoints < cost){
+        showCustomAlert(`Not enough prestige points! Need ⭐${cost}, you have ⭐${prestigePoints}`);
+        return;
+    }
+    prestigePoints -= cost;
+    prestigeUpgrades[upgradeId] = currentLevel + 1;
+    localStorage.setItem('prestigePoints', prestigePoints);
+    localStorage.setItem('prestigeUpgrades', JSON.stringify(prestigeUpgrades));
+    updateSkinEffects();
+    showCustomAlert(`⭐ ${upgradeId.toUpperCase()} upgraded to level ${prestigeUpgrades[upgradeId]}!`);
+    showNotification(`⭐ Prestige upgrade: ${upgradeId} level ${prestigeUpgrades[upgradeId]}!`, 'success');
+    updateShopUI();
+}
+
+function showPrestigeConfirm(){
+    const pointsToEarn = Math.floor(wave / 10);
+    const modal = document.getElementById('prestige-modal');
+    document.getElementById('prestige-modal-text').innerHTML =
+        `PRESTIGE will reset your current game progress.<br><br>` +
+        `You will earn <span style="color:#FFD700;font-weight:bold;">${pointsToEarn}</span> Prestige Points (based on wave ${wave}).<br><br>` +
+        `Each point gives <span style="color:#00ffaa;">+2%</span> to credits, damage, and health permanently!<br><br>` +
+        `Are you sure?`;
+    modal.style.display = 'flex';
+}
+
+function closePrestigeModal(){
+    document.getElementById('prestige-modal').style.display = 'none';
+}
+
+function confirmPrestige(){
+    closePrestigeModal();
+    const pointsToEarn = Math.floor(wave / 10);
+    if(pointsToEarn <= 0){
+        showCustomAlert('Not enough progress to prestige!');
+        return;
+    }
+    prestigePoints += pointsToEarn;
+    prestigeLevel++;
+    prestigeMultiplier = 1 + (prestigePoints * 0.02);
+    localStorage.setItem('prestigeLevel', prestigeLevel);
+    localStorage.setItem('prestigePoints', prestigePoints);
+    localStorage.setItem('prestigeUpgrades', JSON.stringify(prestigeUpgrades));
+    updateSkinEffects();
+    showCustomAlert(`⭐ PRESTIGE LEVEL ${prestigeLevel}! ⭐\nEarned ${pointsToEarn} prestige points!\nTotal: ${prestigePoints} points (+${Math.floor(prestigeMultiplier*100-100)}% bonus)`);
+    showNotification(`⭐ Prestige Level ${prestigeLevel}! +${pointsToEarn} points!`, 'success');
+    // Go back to main hub
+    document.getElementById('game-over').style.display = 'none';
+    document.getElementById('main-hub').style.display = 'flex';
+    updateHubUI();
+    updateMainMenuUI();
+}
+
+function savePrestigeData(){
+    localStorage.setItem('prestigeLevel', prestigeLevel);
+    localStorage.setItem('prestigePoints', prestigePoints);
+    localStorage.setItem('prestigeUpgrades', JSON.stringify(prestigeUpgrades));
+    maxWaveReached = Math.max(maxWaveReached, wave);
+    localStorage.setItem('maxWaveReached', maxWaveReached);
 }
 
 const SPECIAL_ITEMS_DATA = [
@@ -3372,6 +3478,7 @@ function updateHubUI(){
     document.getElementById('hub-coins').innerText = formatNumber(totalCoins);
     document.getElementById('hub-gems').innerText = formatNumber(gemstones);
     document.getElementById('hub-kills').innerText = formatNumber(totalKills);
+    document.getElementById('hub-prestige').innerText = prestigeLevel + ' (' + prestigePoints + ' pts) | +' + Math.floor(prestigeMultiplier * 100 - 100) + '%';
     document.getElementById('hub-skin').innerText = skinUnlocked ? t('unlocked') + ' (GOLDEN)' : t('locked');
     const unlockedCount = ACHIEVEMENTS_LIST.filter(a => achievements[a.id]===true).length;
     const percent = Math.min(100, (unlockedCount/40)*100);
@@ -3486,6 +3593,11 @@ let guardianDefeated=localStorage.getItem('guardianDefeated')==='true';
 let endlessMode=false;
 let gameState='LOADING';
 let score=0,health=100,maxHealth=100,xp=0,level=1;
+// PRESTIGE SYSTEM
+let prestigeLevel = parseInt(localStorage.getItem('prestigeLevel')) || 0;
+let prestigePoints = parseInt(localStorage.getItem('prestigePoints')) || 0;
+let prestigeUpgrades = JSON.parse(localStorage.getItem('prestigeUpgrades')) || {startingBonus:0, overcharge:0, luckyStart:0, resilience:0};
+let prestigeMultiplier = 1 + (prestigePoints * 0.02);
 let odCharge=0,isOD=false,odTimer=0;
 let lastFire=0,shake=0,combo=1,comboTimer=0;
 let bossWarningTimer=0,waveBannerTimer=0;
@@ -3541,6 +3653,10 @@ function updateSkinEffects(){
     skinCreditMultiplier = 1 + (rankBonus / 100);
     skinDamageMultiplier = 1 + (rankBonus / 100);
     skinFireRateMultiplier = 1 + (rankBonus / 100);
+    // Apply prestige multiplier to credit and damage
+    prestigeMultiplier = 1 + (prestigePoints * 0.02);
+    skinCreditMultiplier *= prestigeMultiplier;
+    skinDamageMultiplier *= prestigeMultiplier;
     if(currentSkin === 'gold'){
         skinCreditMultiplier *= 1.25;
         skinDamageMultiplier *= 1.2;
@@ -5301,6 +5417,34 @@ function updateShopUI(){
             }
             specialHtml += '</div>';
         }
+        else if(currentShopTab === 'prestige'){
+            specialHtml = `<div style="text-align:center;margin:10px 0;">
+                <h3 style="color:#FFD700;">⭐ PRESTIGE SHOP ⭐</h3>
+                <div style="color:#FFD700;font-size:14px;">Level: ${prestigeLevel} | Points: ${prestigePoints}</div>
+                <div style="color:#ffaa00;font-size:12px;">Multiplier: +${Math.floor(prestigeMultiplier * 100 - 100)}% to credits, damage & health</div>
+                <div style="color:#aaa;font-size:10px;margin-top:4px;">Max Wave Reached: ${maxWaveReached} | Next prestige at wave ${Math.ceil((Math.floor(maxWaveReached/10)+1)*10)}+</div>
+            </div><div class="shop-grid" style="margin-top:8px;">`;
+            // Prestige upgrades
+            const prestigeShopItems = [
+                {id:'startingBonus', name:'🚀 STARTING BONUS', desc:'+500 credits per level at game start', cost:1, maxLevel:10, currentLevel: prestigeUpgrades.startingBonus||0},
+                {id:'overcharge', name:'⚡ OVERCHARGE', desc:'Overdrive charges 20% faster per level', cost:2, maxLevel:5, currentLevel: prestigeUpgrades.overcharge||0},
+                {id:'luckyStart', name:'🍀 LUCKY START', desc:'10% chance per level to start with a random rare ability', cost:3, maxLevel:5, currentLevel: prestigeUpgrades.luckyStart||0},
+                {id:'resilience', name:'💪 RESILIENCE', desc:'+10% max health per level', cost:2, maxLevel:10, currentLevel: prestigeUpgrades.resilience||0}
+            ];
+            for(const pi of prestigeShopItems){
+                const atMax = pi.currentLevel >= pi.maxLevel;
+                const canAfford = prestigePoints >= pi.cost;
+                specialHtml += `<div class="card tooltip ${atMax?'cant-afford':''}" style="border-color:#FFD700;background:rgba(255,215,0,0.1);" onclick="${atMax?'':`buyPrestigeUpgrade('${pi.id}')`}">
+                    <div style="font-size:14px;">${pi.name}</div>
+                    <div style="color:#ffaa00;font-size:9px;">${pi.desc}</div>
+                    <div style="color:#FFD700;font-size:10px;">LVL: ${pi.currentLevel}/${pi.maxLevel}</div>
+                    <div style="color:#FFD700;">⭐ ${pi.cost} pts</div>
+                    ${atMax ? '<div style="font-size:9px;color:#00ffaa;">✅ MAX</div>' : (!canAfford ? '<div style="font-size:9px;color:#ff4444;">🔒 Need more pts</div>' : '<div style="font-size:9px;color:#00ffaa;">🔓 Available</div>')}
+                    <div class="tooltip-text">Costs ${pi.cost} prestige points per level. Max ${pi.maxLevel} levels.</div>
+                </div>`;
+            }
+            specialHtml += '</div>';
+        }
         specialSection.innerHTML = specialHtml;
     }
 
@@ -5427,7 +5571,7 @@ class Enemy{
         this.r=isBoss?90:this.type==='tank'?35:25;
         let speedMulti = synapseActive ? 0.45 : (cosmicCollapseActive?1.2:(apocalypseActive?1.6:(riftActive?1.2:1)));
         if(timeWarpActive) speedMulti *= 0.2;
-        if(abilityTimeWarpActive) speedMulti *= 0.5;
+        if(abilityTimeWarpActive) speedMulti *= 0.3;
         if(frozenTimeActive) speedMulti = 0;
         if(doomsDayActive) speedMulti *= 0.7;
         if(timeDistortionPurchased) speedMulti *= enemySlow;
@@ -5557,7 +5701,7 @@ function startGame(){
     updateMusicBasedOnGameState(); // MUSIC
     
     gameState='PLAYING'; endlessMode=false; ascendTriggered=false;
-    score=0;health=100+getSkillBonus('maxHealth');maxHealth=100+getSkillBonus('maxHealth');xp=0;level=1;odCharge=0;combo=1;kills=0;
+    score=0;health=Math.floor((100+getSkillBonus('maxHealth'))*prestigeMultiplier*(1+0.1*(prestigeUpgrades.resilience||0)));maxHealth=Math.floor((100+getSkillBonus('maxHealth'))*prestigeMultiplier*(1+0.1*(prestigeUpgrades.resilience||0)));xp=0;level=1;odCharge=0;combo=1;kills=0;
     bossWarningTimer=0;waveBannerTimer=0;isPaused=false;
     wave=1;waveKills=0;waveTriggered=false;
     odActivations=0;bossesKilled=0;waveNoDamage=true;perfectWavesCount=0;
@@ -5592,6 +5736,9 @@ function startGame(){
     document.getElementById('od-btn').style.display='none';
     document.getElementById('ability-btns').style.display='none';
     document.getElementById('crosshair').style.display='block';
+    // Show prestige star in HUD if prestiged
+    const prestigeHud = document.getElementById('prestige-hud');
+    if(prestigeHud && prestigeLevel > 0){ prestigeHud.style.display='block'; prestigeHud.innerText='⭐ P'+prestigeLevel; }
     // New UI elements
     document.getElementById('auto-fire-btn').style.display = 'block';
     if(settings.autoFire) document.getElementById('auto-fire-btn').classList.add('active');
@@ -5599,6 +5746,30 @@ function startGame(){
     if(settings.showFPS) document.getElementById('fps-counter').style.display = 'block';
     else document.getElementById('fps-counter').style.display = 'none';
     startWave(1);
+
+    // Prestige starting bonus credits
+    if(prestigeUpgrades.startingBonus > 0){
+        let bonusCredits = prestigeUpgrades.startingBonus * 500;
+        totalCoins += bonusCredits;
+        localStorage.setItem('totalCoins', totalCoins);
+    }
+
+    // Prestige lucky start - chance to start with a random rare ability unlocked
+    if(prestigeUpgrades.luckyStart > 0){
+        let luckyChance = prestigeUpgrades.luckyStart * 0.1;
+        if(Math.random() < luckyChance){
+            let availableAbilities = Object.keys(RARE_ABILITIES).filter(k => !RARE_ABILITIES[k].purchased);
+            if(availableAbilities.length > 0){
+                let luckyKey = availableAbilities[Math.floor(Math.random() * availableAbilities.length)];
+                RARE_ABILITIES[luckyKey].purchased = true;
+                if(!selectedAbilities.includes(luckyKey) && selectedAbilities.length < 3){
+                    selectedAbilities.push(luckyKey);
+                    saveSelectedAbilities();
+                }
+                showNotification(`⭐ Lucky Start! ${RARE_ABILITIES[luckyKey].name} unlocked for this game!`, 'success');
+            }
+        }
+    }
     
     if(timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
@@ -5635,7 +5806,7 @@ function quitToMenu(){
     gameState='MENU';isPaused=false;
 
     // Save earned credits before quitting
-    const earned = Math.floor(score / 10 * (function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })());
+    const earned = Math.floor(score / 10 * (function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })() * prestigeMultiplier);
     totalCoins += earned;
     totalKills += kills;
     if(score > hiScore) hiScore = score;
@@ -5715,7 +5886,7 @@ function gameOver(){
     
     gameState='GAMEOVER';
     gameLoopRunning = false;
-    const earned=Math.floor(score/10*(function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })());
+    const earned=Math.floor(score/10*(function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })()*prestigeMultiplier);
     totalCoins+=earned;totalKills+=kills;
     if(score>hiScore)hiScore=score;
     localStorage.setItem('totalCoins',totalCoins);localStorage.setItem('hiScore',hiScore);localStorage.setItem('totalKills',totalKills);
@@ -5738,7 +5909,17 @@ function gameOver(){
          <div>WAVE: <span style="color:#00ffaa">${wave}</span></div>
          <div>RANK: <span style="color:#00ffaa">${level}</span></div>
          <div style="color:gold">CREDITS: +${formatNumber(earned)}</div>`;
-}
+
+    // Show prestige button if wave >= 20
+    const prestigeBtn = document.getElementById('prestige-btn');
+    if(prestigeBtn){
+        if(wave >= 20){
+            prestigeBtn.style.display = 'inline-block';
+        } else {
+            prestigeBtn.style.display = 'none';
+        }
+    }
+}}
 
 function fireBullets(){
     if(!player || !player.x || !player.y) return;
@@ -5746,6 +5927,7 @@ function fireBullets(){
     let power = damageLevel*(isPower?2:1);
     power = applyCriticalHit(power);
     power *= skinDamageMultiplier;
+    power *= prestigeMultiplier;
     power *= (1 + weaponEnhancementLevel * 0.05);
     power *= (1 + getSkillBonus('damage'));
     if(synapseActive) power *= 4;
@@ -6201,7 +6383,7 @@ function loop(){
                         if(synapseActive) synapseKills++;
                         xp+=e.isBoss?35:10;
                         if(xp>=100){ xp=0; level++; sfxLevelUp(); floats.push({txt:'▲ RANK UP!',x:player.x-40,y:player.y-25,l:1.5,c:'#00ffaa',size:20}); awardSkillPoints(); }
-                        odCharge=Math.min(100,odCharge+(e.isBoss?45:3));
+                        odCharge=Math.min(100,odCharge+(e.isBoss?45:3)*(1+0.2*(prestigeUpgrades.overcharge||0)));
                         if(e.isBoss){ bossesKilled++; boss=null;
                             // Elite rare drop for Gravity Bomb unlock
                             if(Math.random() < 0.3){
@@ -6342,7 +6524,7 @@ function loop(){
         // Regeneration Aura
         if(RARE_ABILITIES.regenAura.purchased){
             regenAuraTimer++;
-            if(regenAuraTimer >= 300){ // ~5 seconds at 60fps
+            if(regenAuraTimer >= 180){ // ~3 seconds at 60fps
                 regenAuraTimer = 0;
                 health = Math.min(maxHealth, health + 1);
                 if(player && player.x && player.y) particles.push(new Particle(player.x, player.y-20, 0, -2, '#00ffaa', 0.6));
@@ -6369,7 +6551,6 @@ function loop(){
         if(gravityBombActive && Date.now() < gravityBombTimer){
             const elapsed = gravityBombTimer - Date.now();
             if(elapsed > 1500){
-                // Pull phase
                 gravityBombPhase = 0;
                 for(let i=0;i<enemies.length;i++){
                     let e=enemies[i];
@@ -6385,7 +6566,7 @@ function loop(){
                 }
                 ctx.fillStyle='rgba(68,0,170,0.4)'; ctx.beginPath(); ctx.arc(gravityBombCenter.x,gravityBombCenter.y,30,0,Math.PI*2); ctx.fill();
             } else if(gravityBombPhase === 0){
-                // Explode!
+                // Explode! Deal damage to all pulled enemies
                 gravityBombPhase = 1;
                 for(let i=enemies.length-1;i>=0;i--){
                     let e=enemies[i];
@@ -6429,13 +6610,13 @@ function loop(){
                 if(player){
                     const dx = player.x - it.x, dy = player.y - it.y;
                     const dist = Math.hypot(dx, dy);
-                    if(dist > 5){ it.x += dx/dist * 16; it.y += dy/dist * 16; }
+                    if(dist > 5){ it.x += dx/dist * 20; it.y += dy/dist * 20; }
                 }
             }
             if(player){
                 ctx.strokeStyle = `rgba(255,204,0,${0.4 + Math.sin(Date.now()/100)*0.2})`;
                 ctx.lineWidth = 2;
-                ctx.beginPath(); ctx.arc(player.x, player.y, 200+Math.sin(Date.now()/150)*25, 0, Math.PI*2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(player.x, player.y, 280+Math.sin(Date.now()/150)*30, 0, Math.PI*2); ctx.stroke();
                 ctx.lineWidth = 1;
             }
         } else { resourceMagnetActive = false; }
