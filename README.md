@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.0</title>
+    <title>Galactic Defender - UPDATE 12.0</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -24,34 +24,33 @@
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: flex-start; align-items: center; z-index: 100; text-align: center; backdrop-filter: blur(6px); overflow-y: auto; padding: 20px 10px; }
         #main-hub { display: flex; background: radial-gradient(circle at center, #001533 0%, #010005 100%); z-index: 150; justify-content: flex-start; }
         #game-select-screen { display: none; background: radial-gradient(circle at center, #001533 0%, #010005 100%); z-index: 140; justify-content: flex-start; }
-        #start-screen { display: none; background: radial-gradient(circle at center, #001533 0%, #010005 100%); justify-content: flex-start; position: relative; }
-        #shop-screen { background: rgba(0,10,30,0.96); border: 1px solid #00d2ff; overflow-y: auto; justify-content: flex-start; }
-        #rng-shop-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff00ff; overflow-y: auto; justify-content: flex-start; }
-        #achievements-screen { background: rgba(0,10,30,0.96); border: 1px solid gold; overflow-y: auto; justify-content: flex-start; }
-        #events-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff00ff; overflow-y: auto; justify-content: flex-start; }
-        #skins-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff66ff; overflow-y: auto; justify-content: flex-start; }
-        #settings-screen { background: rgba(0,10,30,0.96); border: 1px solid #00ffaa; overflow-y: auto; justify-content: flex-start; }
-        #update-log-screen { background: rgba(0,10,30,0.96); border: 1px solid #00ffaa; overflow-y: auto; justify-content: flex-start; }
-        #game-over { background: rgba(40,0,0,0.96); justify-content: center; }
-        #pause-screen { background: rgba(0,10,30,0.94); justify-content: center; }
-        #ascend-screen { background: rgba(0,0,0,0.95); border: 2px solid gold; justify-content: center; }
+        #start-screen { display: none; background: radial-gradient(circle at center, #001533 0%, #010005 100%); z-index: 140; justify-content: flex-start; position: relative; }
+        #shop-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(0,210,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #rng-shop-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,0,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #achievements-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,215,0,0.3); overflow-y: auto; justify-content: flex-start; }
+        #events-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,0,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #skins-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,102,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #settings-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(0,255,170,0.3); overflow-y: auto; justify-content: flex-start; }
+        #update-log-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(0,255,170,0.3); overflow-y: auto; justify-content: flex-start; }
+        #game-over { background: rgba(40,0,0,0.95); justify-content: center; }
+        #pause-screen { background: rgba(0,10,20,0.95); justify-content: center; }
+        #ascend-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,215,0,0.3); justify-content: center; }
         .side-btn { position: absolute; right: 10px; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,30,60,0.8); border: 1px solid #00d2ff; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 60; transition: 0.2s; }
         .side-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); }
-        #ach-side-btn { top: 80px; }
-        #events-side-btn { top: 130px; }
-        #skins-side-btn { top: 180px; }
-        #settings-side-btn { top: 230px; }
-        .settings-option { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px; margin: 8px; display: flex; justify-content: space-between; align-items: center; width: 300px; }
+        #ea-combined-side-btn { top: 80px; }
+        #skins-side-btn { top: 130px; }
+        #settings-side-btn { top: 180px; }
+        .settings-option { background: rgba(0,20,40,0.5); border-radius: 10px; padding: 10px; margin: 8px; display: flex; justify-content: space-between; align-items: center; width: 300px; border: 1px solid rgba(255,255,255,0.08); }
         .settings-toggle { width: 50px; height: 25px; background: #333; border-radius: 25px; cursor: pointer; transition: 0.2s; position: relative; }
         .settings-toggle.on { background: #00ffaa; }
         .settings-toggle.on.music-toggle-on { background: #ff66ff; }
         .settings-toggle:after { content: ""; position: absolute; width: 21px; height: 21px; background: #fff; border-radius: 50%; top: 2px; left: 3px; transition: 0.2s; }
         .settings-toggle.on:after { left: 26px; }
-        .custom-alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #001a33, #000); border: 2px solid #00d2ff; border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 15px; }
+        .custom-alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,20,40,0.95); border: 1px solid rgba(0,210,255,0.3); border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 15px; }
         .custom-alert p { margin: 0; font-size: 16px; }
         .custom-alert button { background: #00d2ff; border: none; padding: 8px 20px; border-radius: 25px; color: #000; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .notification-area { position: fixed; top: 80px; right: 20px; width: 280px; z-index: 2500; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
-        .notification { background: linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,10,30,0.95)); border-right: 4px solid; border-radius: 10px; padding: 10px 15px; animation: slideInRight 0.3s ease-out, fadeOut 0.5s ease-out 4.5s forwards; transform-origin: right; pointer-events: none; }
+        .notification { background: rgba(0,20,40,0.92); border-right: 4px solid; border-radius: 10px; padding: 10px 15px; animation: slideInRight 0.3s ease-out, fadeOut 0.5s ease-out 4.5s forwards; transform-origin: right; pointer-events: none; border: 1px solid rgba(255,255,255,0.08); }
         @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; transform: translateX(100%); } }
         .notification-warning { border-right-color: #ff0044; }
@@ -65,64 +64,76 @@
         @keyframes gemPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -80%) scale(0.8); } }
         #game-timer { position: absolute; bottom: 12px; left: 12px; font-size: 10px; color: #aaa; background: rgba(0,0,0,0.5); padding: 2px 8px; border-radius: 10px; z-index: 50; display: none; pointer-events: none; }
         .daily-reward-btn { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 8px 15px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 12px; }
-        .daily-mission-card { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 8px 12px; margin: 5px; border-right: 3px solid #ffaa00; text-align: right; }
+        .daily-mission-card { background: rgba(0,20,40,0.5); border-radius: 10px; padding: 8px 12px; margin: 5px; border-right: 3px solid #ffaa00; text-align: right; border: 1px solid rgba(255,255,255,0.08); border-right: 3px solid #ffaa00; }
         .lootbox-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; justify-content: center; align-items: center; flex-direction: column; }
         .lootbox { width: 200px; height: 200px; background: #8B4513; border-radius: 20px; display: flex; justify-content: center; align-items: center; font-size: 80px; animation: shake 0.5s infinite; cursor: pointer; }
         @keyframes shake { 0%{transform:rotate(0deg);} 25%{transform:rotate(10deg);} 75%{transform:rotate(-10deg);} 100%{transform:rotate(0deg);} }
         .lootbox-opening { animation: openBox 0.5s forwards; }
         @keyframes openBox { 0%{transform:scale(1);} 50%{transform:scale(1.2);background:#ffaa00;} 100%{transform:scale(0);opacity:0;} }
         .reward-display { font-size: 24px; margin-top: 20px; animation: fadeIn 0.5s; text-align: center; }
-        .lootbox.rarity-common { box-shadow: 0 0 20px rgba(66,135,245,0.6); }
-        .lootbox.rarity-rare { box-shadow: 0 0 20px rgba(66,245,182,0.6); }
-        .lootbox.rarity-epic { box-shadow: 0 0 25px rgba(245,167,66,0.6); }
-        .lootbox.rarity-legendary { box-shadow: 0 0 30px rgba(245,66,209,0.7); }
-        .lootbox.rarity-mythic { box-shadow: 0 0 35px rgba(245,66,66,0.8); }
-        .lootbox.rarity-ultra { box-shadow: 0 0 40px rgba(245,230,66,1); animation: ultraGlow 0.3s infinite alternate; }
-        @keyframes ultraGlow { from { box-shadow: 0 0 40px gold; } to { box-shadow: 0 0 60px gold, 0 0 80px #ff6600; } }
+        .lootbox.rarity-common { box-shadow: 0 0 10px rgba(66,135,245,0.3); }
+        .lootbox.rarity-rare { box-shadow: 0 0 10px rgba(66,245,182,0.3); }
+        .lootbox.rarity-epic { box-shadow: 0 0 12px rgba(245,167,66,0.3); }
+        .lootbox.rarity-legendary { box-shadow: 0 0 12px rgba(245,66,209,0.3); }
+        .lootbox.rarity-mythic { box-shadow: 0 0 14px rgba(245,66,66,0.3); }
+        .lootbox.rarity-ultra { box-shadow: 0 0 14px rgba(245,230,66,0.4); }
         @keyframes lootboxShake { 0%{transform:rotate(0deg) scale(1);} 10%{transform:rotate(-8deg) scale(1.02);} 20%{transform:rotate(8deg) scale(1.04);} 30%{transform:rotate(-6deg) scale(1.06);} 40%{transform:rotate(6deg) scale(1.08);} 50%{transform:rotate(-4deg) scale(1.1);} 60%{transform:rotate(4deg) scale(1.12);} 70%{transform:rotate(-2deg) scale(1.14);} 80%{transform:rotate(2deg) scale(1.16);} 90%{transform:rotate(-1deg) scale(1.18);} 100%{transform:rotate(0deg) scale(1.2);} }
         @keyframes lootboxOpen { 0%{transform:scale(1.2);opacity:1;} 30%{transform:scale(1.5);opacity:1;} 60%{transform:scale(1.8);opacity:0.8;} 100%{transform:scale(0);opacity:0;} }
         @keyframes rewardReveal { 0%{opacity:0;transform:scale(0.3) rotate(-10deg);} 50%{opacity:1;transform:scale(1.15) rotate(3deg);} 70%{transform:scale(0.95) rotate(-1deg);} 100%{opacity:1;transform:scale(1) rotate(0deg);} }
         .lootbox-particle { position: absolute; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; animation: particleBurst 0.8s ease-out forwards; }
         @keyframes particleBurst { 0%{opacity:1;transform:translate(0,0) scale(1);} 100%{opacity:0;transform:translate(var(--px),var(--py)) scale(0);} }
-        .reward-card { background: linear-gradient(135deg, rgba(0,20,40,0.95), rgba(0,10,30,0.95)); border: 2px solid #00d2ff; border-radius: 16px; padding: 20px 25px; animation: rewardReveal 0.6s ease-out; }
+        .reward-card { background: rgba(0,20,40,0.9); border: 2px solid #00d2ff; border-radius: 16px; padding: 20px 25px; animation: rewardReveal 0.6s ease-out; }
         .reward-card.rarity-common { border-color: #4287f5; }
         .reward-card.rarity-rare { border-color: #42f5b6; }
         .reward-card.rarity-epic { border-color: #f5a742; }
-        .reward-card.rarity-legendary { border-color: #f542d1; box-shadow: 0 0 20px rgba(245,66,209,0.5); }
-        .reward-card.rarity-mythic { border-color: #f54242; box-shadow: 0 0 25px rgba(245,66,66,0.6); }
-        .reward-card.rarity-ultra { border-color: gold; box-shadow: 0 0 30px rgba(255,215,0,0.7); animation: rewardReveal 0.6s ease-out, ultraRewardGlow 1s infinite alternate; }
-        @keyframes ultraRewardGlow { from { box-shadow: 0 0 30px gold; } to { box-shadow: 0 0 50px gold, 0 0 70px #ff6600; } }
+        .reward-card.rarity-legendary { border-color: #f542d1; }
+        .reward-card.rarity-mythic { border-color: #f54242; }
+        .reward-card.rarity-ultra { border-color: gold; }
         @keyframes fadeIn { from{opacity:0;transform:scale(0.5);} to{opacity:1;transform:scale(1);} }
-        .btn { background: rgba(0,30,60,0.7); color:#fff; border:1px solid #00d2ff; padding:8px 20px; border-radius:25px; font-weight:bold; cursor:pointer; margin:5px; font-size:12px; transition:0.2s; backdrop-filter:blur(3px); }
-        .btn:hover { background: rgba(0,80,120,0.8); transform:scale(1.02); }
+        .btn { background: rgba(0,20,40,0.7); color:#fff; border:1px solid rgba(255,255,255,0.15); padding:8px 20px; border-radius:25px; font-weight:bold; cursor:pointer; margin:5px; font-size:12px; transition:background 0.2s,border-color 0.2s,transform 0.2s; backdrop-filter:blur(3px); }
+        .btn:hover { background: rgba(0,50,80,0.8); border-color:rgba(0,210,255,0.5); transform:scale(1.02); }
         .btn-danger { border-color:#ff0044; background:rgba(80,0,0,0.7); }
+        .btn-danger:hover { border-color:#ff3366; background:rgba(100,0,0,0.8); }
         .btn-gem { border-color:#ff66ff; background:linear-gradient(45deg,#8e44ad,#ff00ff); }
-        .game-select-card { background:rgba(0,30,60,0.8); border:2px solid #00d2ff; border-radius:20px; padding:25px; margin:15px; width:280px; cursor:pointer; transition:0.3s; }
-        .game-select-card:hover { transform:scale(1.05); border-color:#ff00ff; background:rgba(0,50,100,0.9); }
-        .game-select-card.coming-soon { opacity:0.6; border-color:#888; cursor:not-allowed; }
+        .game-select-card { background:rgba(0,20,40,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:25px; margin:15px; width:280px; cursor:pointer; transition:transform 0.2s,border-color 0.2s; }
+        .game-select-card:hover { transform:scale(1.03); border-color:rgba(0,210,255,0.5); background:rgba(0,30,60,0.8); }
+        .game-select-card.coming-soon { opacity:0.6; border-color:rgba(255,255,255,0.05); cursor:not-allowed; }
+        #skill-tree-screen { background:rgba(0,10,20,0.95); border:1px solid rgba(0,255,170,0.3); overflow-y:auto; justify-content:flex-start; }
+        .skill-path { display:flex; flex-direction:column; align-items:center; margin:8px; min-width:120px; }
+        .skill-path-title { font-size:14px; font-weight:bold; margin-bottom:8px; text-align:center; }
+        .skill-node { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; margin:4px 0; transition:0.2s; position:relative; }
+        .skill-node.locked { background:rgba(60,60,60,0.6); border:2px solid #555; opacity:0.5; cursor:not-allowed; }
+        .skill-node.available { background:rgba(0,80,120,0.7); border:2px solid #00d2ff; animation:pulse 1.5s infinite; }
+        .skill-node.unlocked { background:rgba(0,180,80,0.6); border:2px solid #00ffaa; box-shadow:none; }
+        .skill-connector { width:2px; height:12px; background:#444; }
+        .skill-connector.active { background:#00ffaa; }
+        @keyframes pulse { 0%{box-shadow:0 0 5px rgba(0,210,255,0.2)} 50%{box-shadow:0 0 8px rgba(0,210,255,0.4)} 100%{box-shadow:0 0 5px rgba(0,210,255,0.2)} }
+        .skill-tooltip { position:absolute; bottom:110%; left:50%; transform:translateX(-50%); background:#001a33; border:1px solid #00d2ff; border-radius:8px; padding:6px 10px; font-size:10px; white-space:nowrap; pointer-events:none; z-index:10; display:none; }
+        .skill-node:hover .skill-tooltip { display:block; }
         .game-select-card.coming-soon:hover { transform:none; }
-        .shop-tabs { display: flex; gap: 4px; margin: 8px 0; justify-content: center; flex-wrap: wrap; }
-        .shop-tab { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.2s; }
-        .shop-tab:hover { border-color: #00d2ff; color: #fff; }
-        .shop-tab.active { background: rgba(0,80,120,0.9); border-color: #00d2ff; color: #fff; }
+        .shop-tabs { display: flex; gap: 6px; margin: 10px 0; justify-content: center; flex-wrap: wrap; }
+        .shop-tab { background: rgba(0,20,40,0.7); color: #aaa; border: 1px solid rgba(255,255,255,0.1); padding: 7px 16px; border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: bold; transition: background 0.25s, border-color 0.25s, color 0.25s; }
+        .shop-tab:hover { border-color: rgba(0,210,255,0.5); color: #fff; background: rgba(0,40,70,0.7); }
+        .shop-tab.active { background: rgba(0,80,120,0.8); border-color: #00d2ff; color: #fff; }
         .ability-btn { position: absolute; bottom: 85px; right: 15px; z-index: 55; display: none; pointer-events: all; }
         .ability-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; border: 2px solid; position: relative; margin-bottom: 6px; transition: 0.2s; }
         .ability-icon:hover { transform: scale(1.1); }
         .ability-icon.on-cooldown { opacity: 0.4; cursor: not-allowed; }
         .ability-cooldown-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-weight: bold; }
-        .shop-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px; width:90%; max-width:380px; }
-        .card { background:rgba(255,255,255,0.05); border:1px solid #444; padding:6px; border-radius:10px; cursor:pointer; transition:0.2s; font-size:11px; position:relative; }
-        .card:hover { background:rgba(0,210,255,0.1); border-color:#00d2ff; transform:scale(1.02); }
+        .shop-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px; width:90%; max-width:380px; }
+        .card { background:rgba(0,20,40,0.6); border:1px solid rgba(255,255,255,0.1); padding:8px; border-radius:12px; cursor:pointer; transition:transform 0.2s,border-color 0.2s; font-size:11px; position:relative; }
+        .card:hover { background:rgba(0,30,60,0.7); border-color:rgba(0,210,255,0.4); transform:scale(1.02); }
         .card.cant-afford { opacity:0.4; cursor:not-allowed; }
-        .rarity-common { border-color:#4287f5; background:rgba(66,135,245,0.2); }
-        .rarity-rare { border-color:#42f5b6; background:rgba(66,245,182,0.2); }
-        .rarity-epic { border-color:#f5a742; background:rgba(245,167,66,0.2); }
-        .rarity-legendary { border-color:#f542d1; background:rgba(245,66,209,0.2); }
-        .rarity-mythic { border-color:#f54242; background:rgba(245,66,66,0.2); }
-        .rarity-ultra { border-color:#f5e642; background:rgba(245,230,66,0.2); box-shadow:0 0 15px gold; }
+        .card.cant-afford:hover { transform:none; }
+        .rarity-common { border-left:3px solid #4287f5; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-rare { border-left:3px solid #42f5b6; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-epic { border-left:3px solid #f5a742; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-legendary { border-left:3px solid #f542d1; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-mythic { border-left:3px solid #f54242; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-ultra { border-left:3px solid #f5e642; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
         .gem-counter { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); border-radius:20px; padding:5px 12px; font-size:14px; color:#ff66ff; border:1px solid #ff66ff; z-index:200; }
         .gem-counter span { color:#ffcc00; font-weight:bold; }
-        .update-item { background:rgba(0,0,0,0.5); border-radius:10px; padding:10px; margin:8px; text-align:right; border-right:3px solid #00ffaa; width: 90%; max-width: 500px; }
+        .update-item { background:rgba(0,20,40,0.5); border-radius:10px; padding:10px; margin:8px; text-align:right; border-right:3px solid #00ffaa; width: 90%; max-width: 500px; border:1px solid rgba(255,255,255,0.08); border-right:3px solid #00ffaa; }
         .update-version { color:#00ffaa; font-weight:bold; font-size:14px; }
         .update-desc { color:#ccc; font-size:12px; margin-top:5px; }
         #ui-hud { position: absolute; top: 10px; left: 10px; z-index: 50; display: none; pointer-events: none; }
@@ -134,23 +145,23 @@
         #xp-fill { background: linear-gradient(90deg, #00ffaa, #00ffff); width: 0%; }
         #od-fill { background: linear-gradient(90deg, #8e44ad, #ff00ff); width: 0%; }
         #score-hud { position: absolute; top: 10px; right: 10px; z-index: 50; display: none; pointer-events: none; text-align: right; }
-        #score-hud .score-main { font-size: 16px; font-weight: 900; color: #fff; text-shadow: 0 0 5px #00d2ff; }
+        #score-hud .score-main { font-size: 16px; font-weight: 900; color: #fff; text-shadow: none; }
         #score-hud .score-sub { font-size: 9px; color: #aaa; margin-top: 1px; }
-        #combo-small { position: absolute; bottom: 12px; right: 12px; font-size: 16px; font-weight: bold; color: #ffcc00; display: none; z-index: 50; text-shadow: 0 0 3px orange; pointer-events: none; }
+        #combo-small { position: absolute; bottom: 12px; right: 12px; font-size: 16px; font-weight: bold; color: #ffcc00; display: none; z-index: 50; text-shadow: none; pointer-events: none; }
         .combo-meter { position: absolute; bottom: 50px; right: 12px; width: 100px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; display: none; }
         .combo-meter-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ffaa00, #ff6600); transition: width 0.1s; }
         #od-btn { position: absolute; bottom: 15px; right: 15px; width: 60px; height: 60px; background: rgba(142,68,173,0.5); border: 2px solid #8e44ad; border-radius: 50%; display: none; justify-content: center; align-items: center; z-index: 500; color: #fff; font-weight: bold; cursor: pointer; font-size: 9px; line-height: 1.2; }
         #powerup-bar { position:absolute; bottom:85px; left:50%; transform:translateX(-50%); z-index:50; display:none; pointer-events:none; text-align:center; white-space:nowrap; }
         .pu-item { display:inline-block; margin:0 2px; background:rgba(0,0,0,0.7); border-radius:6px; padding:1px 5px; border:1px solid #555; font-size:9px; font-weight:bold; }
-        #wave-banner { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#00d2ff; text-shadow:0 0 15px #00d2ff; display:none; z-index:200; pointer-events:none; text-align:center; white-space:nowrap; background:rgba(0,0,0,0.6); padding:5px 15px; border-radius:30px; }
+        #wave-banner { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#00d2ff; text-shadow:none; display:none; z-index:200; pointer-events:none; text-align:center; white-space:nowrap; background:rgba(0,0,0,0.6); padding:5px 15px; border-radius:30px; border:1px solid rgba(0,210,255,0.3); }
         #event-banner { position:absolute; top:40%; left:50%; transform:translate(-50%,-50%); font-size:24px; font-weight:900; display:none; z-index:200; pointer-events:none; text-align:center; white-space:nowrap; background:rgba(0,0,0,0.7); padding:5px 15px; border-radius:30px; }
-        #boss-warning { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#ff0044; text-shadow:0 0 15px #ff0044; display:none; z-index:200; pointer-events:none; animation:bossWarn 0.3s infinite alternate; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:25px; white-space:nowrap; }
+        #boss-warning { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#ff0044; text-shadow:none; display:none; z-index:200; pointer-events:none; animation:bossWarn 0.3s infinite alternate; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:25px; white-space:nowrap; border:1px solid rgba(255,0,68,0.3); }
         @keyframes bossWarn { from{opacity:0.8;} to{opacity:0.3;} }
         #crosshair { position:fixed; z-index:999; pointer-events:none; display:none; top:0; left:0; }
         #vignette { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:49; display:none; background:radial-gradient(circle,transparent 50%,rgba(255,0,0,0.25) 100%); }
         #nebulaCanvas { position:absolute; top:0; left:0; z-index:0; pointer-events:none; opacity:0.12; }
         .achievements-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:12px; max-width:750px; width: 95%; padding:6px; }
-        .ach-card { background:rgba(0,0,0,0.6); border:1px solid #555; border-radius:6px; padding:8px 10px; text-align:right; font-size:12px; position:relative; transition:0.2s; overflow:hidden; }
+        .ach-card { background:rgba(0,20,40,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 10px; text-align:right; font-size:12px; position:relative; transition:border-color 0.2s; overflow:hidden; }
         .ach-card.locked { opacity:0.5; filter:grayscale(0.3); }
         .ach-name { color:gold; font-weight:bold; font-size:13px; }
         .ach-desc { color:#bbb; font-size:10px; }
@@ -162,9 +173,9 @@
         .ach-card.ach-medium { border-color: #00d2ff; }
         .ach-card.ach-hard { border-color: #ff8800; }
         .ach-card.ach-extreme { border-color: #ff2200; }
-        .ach-card.ach-mythic { border-color: #ff00ff; box-shadow: 0 0 8px rgba(255,0,255,0.4); }
+        .ach-card.ach-mythic { border-color: #ff00ff; box-shadow: none; }
         .ach-card.ach-new-unlock { animation: achGlow 1s ease-out; }
-        @keyframes achGlow { 0% { box-shadow: 0 0 15px gold; } 100% { box-shadow: none; } }
+        @keyframes achGlow { 0% { border-color: gold; } 100% { border-color: #555; } }
         .ach-filter-tabs { display: flex; gap: 4px; margin: 8px 12px; flex-wrap: wrap; justify-content: center; }
         .ach-filter-tab { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 4px 10px; border-radius: 15px; cursor: pointer; font-size: 10px; font-weight: bold; transition: 0.2s; }
         .ach-filter-tab:hover { border-color: #00d2ff; color: #fff; }
@@ -174,34 +185,38 @@
         .ach-progress-bar-total { height: 8px; background: #333; border-radius: 4px; margin: 6px 12px; overflow: hidden; max-width: 750px; }
         .ach-progress-fill-total { height: 100%; background: linear-gradient(90deg, #00ff88, #00d2ff, #ff00ff); transition: width 0.3s; border-radius: 4px; }
         .events-grid { display:grid; grid-template-columns:1fr; gap:8px; margin:15px; max-width:500px; width: 95%; padding:8px; }
-        .event-card { background:rgba(0,0,0,0.7); border:1px solid #ff00ff; border-radius:10px; padding:8px 12px; text-align:right; }
+        .event-card { background:rgba(0,20,40,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:8px 12px; text-align:right; }
         .event-name { color:#ff00ff; font-weight:bold; font-size:14px; }
         .event-chance { color:#ffaa00; font-size:11px; }
         .event-desc { color:#ccc; font-size:11px; margin-top:4px; }
         .skins-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px; max-width:600px; width: 95%; padding:6px; }
-        .skin-card { background:rgba(0,0,0,0.6); border:2px solid #555; border-radius:12px; padding:10px; text-align:center; cursor:pointer; transition:0.2s; }
-        .skin-card.owned { border-color:gold; background:rgba(255,215,0,0.1); }
+        .skin-card { background:rgba(0,20,40,0.6); border:2px solid rgba(255,255,255,0.1); border-radius:12px; padding:10px; text-align:center; cursor:pointer; transition:transform 0.2s,border-color 0.2s; position:relative; }
+        .skin-card:hover { border-color:rgba(0,210,255,0.4); transform:scale(1.02); }
+        .skin-card.owned { border-color:gold; background:rgba(255,215,0,0.08); }
         .skin-card.locked { opacity:0.5; filter:grayscale(0.5); cursor:not-allowed; }
-        .skin-card.equipped { border-color:#ff66ff; box-shadow:0 0 15px #ff66ff; }
+        .skin-card.locked:hover { transform:none; }
+        .skin-card.equipped { border:2px solid #00ffaa; background:rgba(0,255,170,0.08); }
+        .skin-card.equipped::after { content:'✓ EQUIPPED'; position:absolute; top:6px; left:6px; background:#00ffaa; color:#000; font-size:8px; font-weight:bold; padding:2px 6px; border-radius:8px; }
         .skin-icon { font-size:48px; margin-bottom:8px; }
         .skin-name { font-weight:bold; font-size:14px; margin-bottom:4px; }
-        .skin-desc { font-size:10px; color:#aaa; }
+        .skin-desc { font-size:11px; color:#bbb; line-height:1.4; }
         .skin-effect { font-size:9px; color:#ffaa00; margin-top:5px; }
         .quantity-selector { display:flex; gap:4px; margin-top:6px; justify-content:center; }
-        .qty-btn { background:#333; border:none; color:#fff; border-radius:4px; padding:2px 6px; font-size:9px; cursor:pointer; }
+        .qty-btn { background:rgba(0,30,60,0.7); border:1px solid rgba(255,255,255,0.1); color:#fff; border-radius:6px; padding:3px 8px; font-size:9px; cursor:pointer; transition:background 0.2s; }
+        .qty-btn:hover { background:rgba(0,60,100,0.8); }
         #pause-btn { position:absolute; top:10px; right:50%; transform:translateX(50%); z-index:50; display:none; background:rgba(0,0,0,0.5); border:1px solid #666; color:#fff; padding:4px 12px; border-radius:15px; cursor:pointer; font-size:10px; pointer-events:all; }
-        .start-stats { background:rgba(0,0,0,0.4); border:1px solid #00d2ff33; border-radius:12px; padding:8px 15px; margin:10px 0; }
-        .reset-section { margin-top:20px; padding-top:15px; border-top:1px solid #ff0044; }
-        .achievement-popup-fixed { position: fixed; bottom: 20px; left: 20px; background: linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,10,30,0.95)); border: 2px solid gold; border-radius: 12px; padding: 10px 16px; min-width: 220px; max-width: 300px; z-index: 300; display: none; animation: slideIn 0.3s ease; pointer-events: none; }
+        .start-stats { background:rgba(0,20,40,0.5); border:1px solid rgba(0,210,255,0.15); border-radius:12px; padding:8px 15px; margin:10px 0; }
+        .reset-section { margin-top:20px; padding-top:15px; border-top:1px solid rgba(255,0,68,0.3); }
+        .achievement-popup-fixed { position: fixed; bottom: 20px; left: 20px; background: rgba(0,20,40,0.95); border: 1px solid rgba(255,215,0,0.3); border-radius: 12px; padding: 10px 16px; min-width: 220px; max-width: 300px; z-index: 300; display: none; animation: slideIn 0.3s ease; pointer-events: none; }
         .achievement-popup-fixed .title { color: gold; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
         .achievement-popup-fixed .name { font-size: 14px; font-weight: bold; margin-top: 2px; }
         .achievement-popup-fixed .desc { font-size: 11px; color: #ccc; margin-top: 2px; }
         @keyframes slideIn { from { transform: translateX(-120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         .rank-badge { position: absolute; top: 80px; left: 10px; background: linear-gradient(135deg, #ffaa00, #ff6600); border-radius: 20px; padding: 4px 12px; font-size: 10px; font-weight: bold; color: #000; z-index: 55; display: none; }
         .daily-mission-header { background: linear-gradient(135deg, #00d2ff, #00ffaa); border-radius: 10px; padding: 5px 15px; margin-bottom: 10px; color: #000; font-weight: bold; }
-        .stats-panel { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 8px; margin-top: 10px; font-size: 11px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+        .stats-panel { background: rgba(0,20,40,0.5); border-radius: 12px; padding: 10px; margin-top: 10px; font-size: 11px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; border: 1px solid rgba(255,255,255,0.08); }
         .critical-hit { animation: critFlash 0.2s ease-out; }
-        @keyframes critFlash { 0% { text-shadow: 0 0 0px #ffaa00; } 50% { text-shadow: 0 0 20px #ffaa00; } 100% { text-shadow: 0 0 0px #ffaa00; } }
+        @keyframes critFlash { 0% { color: #ffaa00; } 50% { color: #ffdd44; } 100% { color: #ffaa00; } }
         /* === NEW UI/QOL STYLES === */
         .wave-progress { position: absolute; top: 58px; right: 10px; z-index: 50; display: none; pointer-events: none; text-align: right; }
         .wave-progress-bar { width: 100px; height: 5px; background: rgba(0,0,0,0.6); border-radius: 3px; border: 1px solid #444; overflow: hidden; margin-top: 2px; }
@@ -210,7 +225,7 @@
         .auto-fire-btn { position: absolute; bottom: 45px; left: 12px; z-index: 55; display: none; background: rgba(0,30,60,0.7); border: 1px solid #00d2ff; color: #00d2ff; padding: 4px 10px; border-radius: 15px; font-size: 9px; font-weight: bold; cursor: pointer; pointer-events: all; transition: 0.2s; }
         .auto-fire-btn.active { background: rgba(0,210,255,0.3); border-color: #00ffaa; color: #00ffaa; }
         .auto-fire-btn:hover { transform: scale(1.05); }
-        .tutorial-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 200; background: rgba(0,10,30,0.96); backdrop-filter: blur(6px); text-align: center; overflow-y: auto; padding: 20px; border: 1px solid #00d2ff; }
+        .tutorial-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 200; background: rgba(0,10,20,0.95); backdrop-filter: blur(6px); text-align: center; overflow-y: auto; padding: 20px; border: 1px solid rgba(0,210,255,0.3); }
         .tutorial-screen h2 { color: #00d2ff; margin-bottom: 15px; }
         .tutorial-row { display: flex; justify-content: space-between; align-items: center; width: 280px; padding: 6px 10px; margin: 3px 0; background: rgba(0,0,0,0.5); border-radius: 8px; font-size: 12px; }
         .tutorial-key { background: rgba(0,80,120,0.8); border: 1px solid #00d2ff; border-radius: 6px; padding: 2px 10px; font-weight: bold; color: #00d2ff; font-size: 11px; }
@@ -225,7 +240,7 @@
         .controls-section h3 { color: #00ffaa; font-size: 12px; margin-bottom: 8px; }
         .control-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 8px; font-size: 10px; color: #aaa; }
         .control-key { background: rgba(0,80,120,0.5); border: 1px solid #00d2ff44; border-radius: 4px; padding: 1px 8px; color: #00d2ff; font-weight: bold; font-size: 9px; }
-        .reset-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg, #001a33, #000); border: 2px solid #ff0044; border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3500; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 12px; }
+        .reset-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,20,40,0.95); border: 1px solid rgba(255,0,68,0.3); border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3500; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 12px; }
         .reset-modal p { margin: 0; font-size: 12px; color: #ccc; }
         .reset-modal .reset-warning { color: #ff0044; font-weight: bold; }
         .pause-volume-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; width: 260px; justify-content: space-between; }
@@ -235,33 +250,57 @@
         .pause-quick-toggle.music-on { background: #ff66ff; }
         .pause-quick-toggle:after { content: ""; position: absolute; width: 14px; height: 14px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
         .pause-quick-toggle.on:after, .pause-quick-toggle.music-on:after { left: 20px; }
-        .hub-title { animation: hubTitleGlow 3s ease-in-out infinite; }
-@keyframes hubTitleGlow { 0%,100% { text-shadow: 0 0 20px #00d2ff, 0 0 40px #00d2ff; } 50% { text-shadow: 0 0 30px #00d2ff, 0 0 60px #00d2ff, 0 0 80px #0066ff; } }
-.hub-btn-hero { background: linear-gradient(135deg, #00d2ff, #00ffaa); color: #000; font-size: 20px; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; cursor: pointer; margin: 8px; transition: 0.3s; box-shadow: 0 0 20px rgba(0,210,255,0.5); animation: heroBtnPulse 2s ease-in-out infinite; }
-.hub-btn-hero:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(0,255,170,0.7); }
-@keyframes heroBtnPulse { 0%,100% { box-shadow: 0 0 20px rgba(0,210,255,0.5); } 50% { box-shadow: 0 0 30px rgba(0,255,170,0.8); } }
-.hub-stat-card { background: rgba(0,0,0,0.6); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; border-left: 3px solid; }
+        .hub-title { color: #00d2ff; }
+.hub-btn-hero { background: linear-gradient(135deg, #00d2ff, #00ffaa); color: #000; font-size: 20px; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; cursor: pointer; margin: 8px; transition: transform 0.2s, box-shadow 0.2s; }
+.hub-btn-hero:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,210,255,0.2); }
+.hub-stat-card { background: rgba(0,20,40,0.6); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.08); border-left: 3px solid; }
 .hub-stat-card.stat-record { border-left-color: gold; }
 .hub-stat-card.stat-credits { border-left-color: #00ffaa; }
 .hub-stat-card.stat-gems { border-left-color: #ff66ff; }
 .hub-stat-card.stat-kills { border-left-color: #ff4444; }
 .hub-stat-card.stat-skin { border-left-color: #ffaa00; }
-.hub-section { background: rgba(0,0,0,0.4); border-radius: 15px; padding: 15px; margin: 10px auto; width: 90%; max-width: 450px; }
-.hub-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, #00d2ff, transparent); margin: 15px auto; }
-.hub-btn { background: rgba(0,30,60,0.7); color: #fff; border: 1px solid #00d2ff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: 0.3s; }
-.hub-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); box-shadow: 0 0 10px rgba(0,210,255,0.4); }
-.hub-btn-reward { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: 0.3s; }
-.hub-btn-reward:hover { transform: scale(1.05); }
-.hub-version-badge { display: inline-block; background: linear-gradient(135deg, #ff66ff, #8e44ad); border-radius: 15px; padding: 3px 15px; font-size: 12px; font-weight: bold; animation: versionPulse 3s ease-in-out infinite; }
-@keyframes versionPulse { 0%,100% { box-shadow: 0 0 5px #ff66ff; } 50% { box-shadow: 0 0 15px #ff66ff; } }
-.streak-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(255,100,0,0.3), rgba(255,50,0,0.2)); border: 1px solid #ff6600; border-radius: 20px; padding: 6px 14px; font-size: 14px; font-weight: bold; color: #ffaa00; animation: streakGlow 2s ease-in-out infinite; margin: 8px 0; }
-@keyframes streakGlow { 0%,100% { box-shadow: 0 0 8px rgba(255,100,0,0.4); } 50% { box-shadow: 0 0 16px rgba(255,150,0,0.7); } }
-.streak-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg, #1a0800, #000); border: 2px solid #ff6600; border-radius: 16px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; display: none; flex-direction: column; gap: 10px; animation: streakPopIn 0.4s ease-out; }
+.hub-section { background: rgba(0,20,40,0.5); border-radius: 12px; padding: 15px; margin: 10px auto; width: 90%; max-width: 450px; border: 1px solid rgba(255,255,255,0.08); }
+.hub-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,210,255,0.4), transparent); margin: 15px auto; }
+.hub-btn { background: rgba(0,20,40,0.7); color: #fff; border: 1px solid rgba(255,255,255,0.15); padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+.hub-btn:hover { background: rgba(0,50,80,0.8); border-color: rgba(0,210,255,0.5); transform: scale(1.03); }
+.hub-btn-reward { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: transform 0.2s; }
+.hub-btn-reward:hover { transform: scale(1.03); }
+.hub-version-badge { display: inline-block; background: linear-gradient(135deg, #ff66ff, #8e44ad); border-radius: 15px; padding: 3px 15px; font-size: 12px; font-weight: bold; }
+.streak-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(255,100,0,0.3), rgba(255,50,0,0.2)); border: 1px solid #ff6600; border-radius: 20px; padding: 6px 14px; font-size: 14px; font-weight: bold; color: #ffaa00; margin: 8px 0; }
+.streak-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,20,40,0.95); border: 1px solid rgba(255,102,0,0.3); border-radius: 16px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; display: none; flex-direction: column; gap: 10px; animation: streakPopIn 0.4s ease-out; }
 @keyframes streakPopIn { 0% { transform: translate(-50%,-50%) scale(0.5); opacity:0; } 100% { transform: translate(-50%,-50%) scale(1); opacity:1; } }
 .streak-popup h2 { color: #ffaa00; margin: 0; }
 .streak-reward-item { background: rgba(255,100,0,0.15); border: 1px solid #ff660066; border-radius: 8px; padding: 6px 12px; margin: 4px 0; font-size: 13px; color: #ffcc00; }
 .streak-claim-btn { background: linear-gradient(135deg, #ff6600, #ff9900); border: none; color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 900; cursor: pointer; font-size: 14px; transition: 0.2s; margin-top: 5px; }
-.streak-claim-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(255,100,0,0.5); }
+.streak-claim-btn:hover { transform: scale(1.05); }
+        /* === COMBINED EVENTS+ACHIEVEMENTS SCREEN === */
+        #events-achievements-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,102,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        .ea-tab-bar { display: flex; gap: 4px; margin: 8px 0; justify-content: center; }
+        .ea-tab-btn { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .ea-tab-btn:hover { border-color: #ff66ff; color: #fff; }
+        .ea-tab-btn.active { background: rgba(120,0,120,0.7); border-color: #ff66ff; color: #fff; }
+        .ea-tab-panel { display: none; width: 100%; flex-direction: column; align-items: center; }
+        .ea-tab-panel.active { display: flex; }
+        /* === COSMETICS SHOP === */
+        .cosmetic-card { background:rgba(0,20,40,0.6); border:2px solid rgba(255,255,255,0.1); border-radius:12px; padding:10px; text-align:center; cursor:pointer; transition:transform 0.2s,border-color 0.2s; position:relative; }
+        .cosmetic-card:hover { background:rgba(0,30,60,0.7); border-color:rgba(255,102,255,0.4); transform:scale(1.02); }
+        .cosmetic-card.owned { border-color:gold; background:rgba(255,215,0,0.08); }
+        .cosmetic-card.equipped { border:2px solid #00ffaa; background:rgba(0,255,170,0.08); }
+        .cosmetic-card.equipped::after { content:'✓'; position:absolute; top:6px; left:6px; background:#00ffaa; color:#000; font-size:10px; font-weight:bold; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+        .cosmetic-card.cant-afford { opacity: 0.4; cursor: not-allowed; }
+        .cosmetic-card.cant-afford:hover { transform:none; }
+        .cosmetic-icon { font-size: 36px; margin-bottom: 6px; }
+        .cosmetic-name { font-weight: bold; font-size: 12px; margin-bottom: 2px; }
+        .cosmetic-price { color: #ff66ff; font-size: 11px; }
+        /* === TIPS SYSTEM === */
+        .tips-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 10px 0; width: 95%; max-width: 500px; }
+        .tip-card-wrapper { perspective: 600px; width: 140px; height: 120px; }
+        .tip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .tip-card-inner.flipped { transform: rotateY(180deg); }
+        .tip-card-front, .tip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; }
+        .tip-card-front { background:rgba(0,20,40,0.7); border:1px solid rgba(0,210,255,0.3); cursor:pointer; }
+        .tip-card-front:hover { border-color:rgba(0,255,170,0.5); }
+        .tip-card-back { background:rgba(0,20,40,0.7); border:1px solid rgba(0,255,170,0.3); transform: rotateY(180deg); font-size: 10px; color: #ccc; text-align: center; }
     </style>
 </head>
 <body>
@@ -291,8 +330,8 @@
 
 <!-- MAIN HUB -->
 <div id="main-hub" class="overlay">
-    <h1 class="hub-title" style="font-size:52px;margin-bottom:5px;color:#00d2ff;">✨ GALACTIC DEFENDER ✨</h1>
-    <div class="hub-version-badge">UPDATE 11.0</div>
+    <h1 class="hub-title" style="font-size:48px;margin-bottom:5px;color:#00d2ff;">GALACTIC DEFENDER</h1>
+    <div class="hub-version-badge">UPDATE 12.0</div>
     <div class="hub-divider"></div>
     <div style="margin:15px 0;">
         <button class="hub-btn-hero" onclick="openGameSelect()">🚀 PLAY NOW</button>
@@ -300,6 +339,7 @@
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:10px;">
         <button class="hub-btn" onclick="openUpdateLog()" data-i18n="update_log">📜 UPDATE LOG</button>
         <button class="hub-btn" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
+        <button class="hub-btn" style="border-color:rgba(255,204,0,0.5);" onclick="openHomeAbilityPanel()">🎯 ABILITIES</button>
         <button class="hub-btn-reward" onclick="claimDailyReward()" data-i18n="daily_reward">🎁 DAILY REWARD</button>
     </div>
     <div class="hub-divider"></div>
@@ -308,6 +348,7 @@
         <div class="hub-stat-card stat-credits" style="margin:5px 0;font-size:14px;"><span>💰</span> CREDITS: <span id="hub-coins" style="color:#00ffaa;margin-left:auto;">0</span></div>
         <div class="hub-stat-card stat-gems" style="margin:5px 0;font-size:14px;"><span>💎</span> GEMSTONES: <span id="hub-gems" style="color:#ff66ff;margin-left:auto;">0</span></div>
         <div class="hub-stat-card stat-kills" style="margin:5px 0;font-size:14px;"><span>💀</span> KILLS: <span id="hub-kills" style="color:#ff4444;margin-left:auto;">0</span></div>
+        <div id="hub-prestige-info" class="hub-stat-card" style="margin:5px 0;font-size:14px;border-left-color:#ffdd00;"><span>⭐</span> PRESTIGE: <span id="hub-prestige" style="color:#ffdd00;margin-left:auto;">0 (0 pts)</span></div>
         <div class="hub-stat-card stat-skin" style="margin:5px 0;font-size:14px;"><span>🌟</span> SKIN: <span id="hub-skin" style="color:gold;margin-left:auto;">LOCKED</span></div>
         <div id="hub-skin-progress-bar" style="width:100%;height:6px;background:#333;border-radius:3px;margin:8px auto;overflow:hidden;"><div id="hub-skin-progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,gold,#ffcc44);transition:width 0.3s;"></div></div>
         <div id="hub-skin-percent" style="font-size:10px;color:#aaa;">0/40 ACHIEVEMENTS</div>
@@ -327,20 +368,25 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.0 - Language System + Hub Redesign + Space Treasure Event + QOL!</p>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 12.0 - Complete UI Overhaul, Cleaner Design!</p>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
 
+<!-- HOME ABILITIES PANEL OVERLAY -->
+<div id="home-abilities-panel" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,10,20,0.9);z-index:500;display:none;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
+    <div id="home-abilities-content" style="background:rgba(0,20,40,0.95);border:1px solid rgba(0,210,255,0.3);border-radius:16px;padding:20px;min-width:300px;max-width:420px;max-height:85vh;overflow-y:auto;text-align:center;"></div>
+</div>
+
 <div id="game-select-screen" class="overlay">
-    <h1 style="font-size:48px;margin-bottom:10px;text-shadow:0 0 20px #00d2ff;">🎮 GAME SELECT</h1>
+    <h1 style="font-size:48px;margin-bottom:10px;">🎮 GAME SELECT</h1>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin:20px;">
         <div class="game-select-card" onclick="selectGame('defender')">
             <div style="font-size:48px;">🚀</div>
             <h2 style="color:#00d2ff;">GALACTIC DEFENDER</h2>
             <p>המשחק הקלאסי! יריות, בוסים, אירועים והישגים</p>
             <p style="color:#00ffaa;font-size:12px;margin-top:10px;">▶ לחץ כדי לשחק</p>
-            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ עדכון 10.5: 40 אירועים + 310+ הישגים + מערכת סקינים + פרס יומי!</div>
+            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v12.0: Complete UI Overhaul!</div>
         </div>
         <div class="game-select-card coming-soon" onclick="showCustomAlert('משחק זה עדיין בפיתוח! יגיע בקרוב...')">
             <div style="font-size:48px;">❓</div>
@@ -430,36 +476,68 @@
         <div id="skin-percent" style="font-size:9px;color:#aaa;">0/40 ACHIEVEMENTS</div>
     </div>
     <button class="btn" onclick="startGame()" data-i18n="engage">🚀 ENGAGE</button>
-    <button class="btn" style="border-color:#ff00ff;" onclick="openShop()" data-i18n="upgrades">⚙️ UPGRADES</button>
-    <button class="btn" style="border-color:#ff66ff;" onclick="openRNGShop()" data-i18n="lootboxes">🎲 LOOTBOXES</button>
-    <button class="btn" style="border-color:#00d2ff;" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
-    <button class="btn" style="border-color:#888;margin-bottom:30px;" onclick="backToGameSelect()" data-i18n="back">← BACK</button>
+    <button class="btn" style="border-color:rgba(255,0,255,0.5);" onclick="openShop()" data-i18n="upgrades">⚙️ UPGRADES</button>
+    <button class="btn" style="border-color:rgba(255,102,255,0.5);" onclick="openRNGShop()" data-i18n="lootboxes">🎲 LOOTBOXES</button>
+    <button class="btn" style="border-color:rgba(0,210,255,0.5);" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
+    <button class="btn" style="border-color:rgba(255,255,255,0.15);margin-bottom:30px;" onclick="backToGameSelect()" data-i18n="back">← BACK</button>
     <div style="color:#888;font-size:8px;margin-top:8px;margin-bottom:20px;">MOUSE/TOUCH | ESC | Q bomb | O overdrive</div>
-    <div id="ach-side-btn" class="side-btn" onclick="openAchievements()">🏆</div>
-    <div id="events-side-btn" class="side-btn" onclick="openEvents()">📋</div>
+    <div id="ea-combined-side-btn" class="side-btn" onclick="openEventsAchievements()">🏆</div>
     <div id="skins-side-btn" class="side-btn" onclick="openSkins()">🎨</div>
     <div id="settings-side-btn" class="side-btn" onclick="openSettings()">⚙️</div>
+    <div id="skill-tree-side-btn" class="side-btn" style="top:230px;" onclick="openSkillTree()">🌳</div>
 </div>
 
 <div id="skins-screen" class="overlay">
-    <h2 style="color:#ff66ff;" data-i18n="skins">🎨 SKIN COLLECTION 🎨</h2>
+    <h2 style="color:#ff66ff;" data-i18n="skins">🎨 SKIN COLLECTION</h2>
     <div class="skins-grid" id="skins-grid-container"></div>
     <button class="btn" onclick="closeSkins()" style="margin-bottom:30px;">← BACK</button>
 </div>
 
-<div id="rng-shop-screen" class="overlay">
-    <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 LOOTBOXES & REWARDS 🎲</h2>
-    <div style="margin:10px;">💎 <span data-i18n="your_gemstones">YOUR GEMSTONES</span>: <span id="rng-gems" style="color:#ffcc00;font-size:24px;">0</span></div>
-    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;">
-        <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div>COMMON LOOTBOX</div><div style="color:#4287f5;">🔵 COMMON</div><div style="color:gold;">50 💎</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div></div>
-        <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div>RARE LOOTBOX</div><div style="color:#42f5b6;">🟢 RARE</div><div style="color:gold;">150 💎</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div></div>
-        <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div>EPIC LOOTBOX</div><div style="color:#f5a742;">🟡 EPIC</div><div style="color:gold;">400 💎</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div></div>
-        <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div>LEGENDARY LOOTBOX</div><div style="color:#f542d1;">🟠 LEGENDARY</div><div style="color:gold;">1000 💎</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div></div>
-        <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div>MYTHIC LOOTBOX</div><div style="color:#f54242;">🔴 MYTHIC</div><div style="color:gold;">2500 💎</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div></div>
-        <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div>ULTRA MYTHIC BOX</div><div style="color:#f5e642;">💎 ULTRA MYTHIC</div><div style="color:gold;">10000 💎</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div></div>
+<div id="skill-tree-screen" class="overlay">
+    <h2 style="color:#00ffaa;">🌳 SKILL TREE 🌳</h2>
+    <div style="font-size:13px;color:#ffcc00;margin:8px 0;">🌟 Skill Points: <span id="skill-points-display">0</span></div>
+    <div style="font-size:10px;color:#aaa;margin-bottom:12px;">Earn 1 skill point every 5 levels or every 500 kills</div>
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:12px;width:95%;max-width:500px;">
+        <div class="skill-path" id="skill-path-offense"></div>
+        <div class="skill-path" id="skill-path-defense"></div>
+        <div class="skill-path" id="skill-path-utility"></div>
     </div>
-    <h3 style="margin-top:20px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
-    <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
+    <button class="btn" onclick="closeSkillTree()" style="margin-bottom:30px;">← BACK</button>
+</div>
+
+<div id="rng-shop-screen" class="overlay">
+    <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 GEMSTONE SHOP</h2>
+    <div style="margin:10px;">💎 <span data-i18n="your_gemstones">YOUR GEMSTONES</span>: <span id="rng-gems" style="color:#ffcc00;font-size:24px;">0</span></div>
+    <div class="shop-tabs">
+        <button class="shop-tab active" onclick="switchGemShopTab('lootbox')">📦 LOOTBOXES</button>
+        <button class="shop-tab" onclick="switchGemShopTab('cosmetics')">🎨 COSMETICS</button>
+        <button class="shop-tab" onclick="switchGemShopTab('tips')">💡 TIPS</button>
+    </div>
+    <div id="gem-shop-lootbox-section">
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;">
+            <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">COMMON LOOTBOX</div><div style="color:#4287f5;font-size:9px;">🔵 COMMON</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 50</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('common')">📊 PROBS</button></div>
+            <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">RARE LOOTBOX</div><div style="color:#42f5b6;font-size:9px;">🟢 RARE</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 150</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('rare')">📊 PROBS</button></div>
+            <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">EPIC LOOTBOX</div><div style="color:#f5a742;font-size:9px;">🟡 EPIC</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 400</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('epic')">📊 PROBS</button></div>
+            <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">LEGENDARY LOOTBOX</div><div style="color:#f542d1;font-size:9px;">🟠 LEGENDARY</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 1000</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('legendary')">📊 PROBS</button></div>
+            <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">MYTHIC LOOTBOX</div><div style="color:#f54242;font-size:9px;">🔴 MYTHIC</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 2500</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('mythic')">📊 PROBS</button></div>
+            <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div style="font-weight:bold;">ULTRA MYTHIC BOX</div><div style="color:#f5e642;font-size:9px;">💎 ULTRA MYTHIC</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 10000</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('ultra')">📊 PROBS</button></div>
+        </div>
+        <div style="width:90%;max-width:500px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div>
+        <h3 style="margin-top:12px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
+    </div>
+    <div id="gem-shop-cosmetics-section" style="display:none;">
+        <div style="font-size:11px;color:#aaa;margin:4px 0;">✨ Auras & Titles are purely cosmetic - no gameplay effect!</div>
+        <h4 style="color:#ff8800;margin:8px 0 4px;">🔥 SHIP AURAS</h4>
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-auras-grid"></div>
+        <h4 style="color:#ffcc00;margin:12px 0 4px;">🏷️ PLAYER TITLES</h4>
+        <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="cosmetic-titles-grid"></div>
+    </div>
+    <div id="gem-shop-tips-section" style="display:none;">
+        <h3 style="color:#00d2ff;margin:8px 0;">💡 TIPS</h3>
+        <div style="font-size:11px;color:#aaa;margin:4px 0;">Click a card to flip it and reveal the tip for FREE! Then claim the hidden prize!</div>
+        <div id="tips-container" class="tips-container"></div>
+    </div>
     <button class="btn" onclick="closeRNGShop()" style="margin-bottom:30px;" data-i18n="back">← BACK</button>
 </div>
 
@@ -486,6 +564,7 @@
     <div class="stat-group"><div class="stat-label">⭐ XP</div><div class="bar-bg"><div id="xp-fill" class="bar-fill"></div></div></div>
     <div class="stat-group"><div class="stat-label">⚡ OD</div><div class="bar-bg"><div id="od-fill" class="bar-fill"></div></div></div>
     <div style="font-size:9px;">💣 <span id="bomb-count" style="color:#ffcc00;">0</span></div>
+    <div id="prestige-hud" style="font-size:9px;color:#FFD700;display:none;">⭐ P0</div>
 </div>
 <div id="score-hud">
     <div class="score-main">SCORE: <span id="score-val">0</span></div>
@@ -513,6 +592,15 @@
     </div>
 </div>
 
+<div id="prestige-modal" class="reset-modal" style="border-color:rgba(255,215,0,0.3);">
+    <p style="color:#FFD700;font-weight:bold;font-size:16px;">⭐ PRESTIGE ⭐</p>
+    <p id="prestige-modal-text" style="font-size:12px;color:#ccc;"></p>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:8px;">
+        <button class="btn" style="background:linear-gradient(45deg,#8B6914,#FFD700);border-color:rgba(255,215,0,0.5);color:#000;font-weight:bold;" onclick="confirmPrestige()">⭐ CONFIRM PRESTIGE</button>
+        <button class="btn" onclick="closePrestigeModal()">CANCEL</button>
+    </div>
+</div>
+
 <!-- TUTORIAL SCREEN -->
 <div id="tutorial-screen" class="tutorial-screen">
     <h2 data-i18n="how_to_play">🎮 HOW TO PLAY</h2>
@@ -532,12 +620,13 @@
 </div>
 
 <div id="shop-screen" class="overlay">
-    <h2 style="color:#00d2ff;font-size:1.3rem;" data-i18n="shop">🚀 GALACTIC DEFENDER - TECH HANGAR</h2>
-    <div id="shop-money" style="color:gold;font-size:16px;">CREDITS: 0</div>
+    <h2 style="color:#00d2ff;font-size:1.3rem;" data-i18n="shop">🚀 GALACTIC DEFENDER — TECH HANGAR</h2>
+    <div id="shop-money" style="color:gold;font-size:16px;">💰 CREDITS: 0</div>
     <div class="shop-tabs">
         <button class="shop-tab active" onclick="switchShopTab('weapons')" data-i18n="weapons">🔫 Weapons</button>
         <button class="shop-tab" onclick="switchShopTab('shields')" data-i18n="shields">🛡️ Shields</button>
         <button class="shop-tab" onclick="switchShopTab('special')" data-i18n="special_abilities">✨ Special Abilities</button>
+        <button class="shop-tab" onclick="switchShopTab('prestige')" style="border-color:rgba(255,221,0,0.5);color:#ffdd00;">⭐ PRESTIGE</button>
     </div>
     <div class="shop-grid" id="shop-grid-container"></div>
     <div id="shop-special-section"></div>
@@ -564,9 +653,35 @@
 </div>
 
 <div id="events-screen" class="overlay">
-    <h2 style="color:#ff00ff;" data-i18n="events">📋 EVENT LIST (40 EVENTS)</h2>
+    <h2 style="color:#ff00ff;" data-i18n="events">📋 EVENT LIST (42 EVENTS)</h2>
     <div class="events-grid" id="events-list-container"></div>
     <button class="btn" onclick="closeEvents()" style="margin-bottom:30px;">BACK</button>
+</div>
+
+<!-- COMBINED EVENTS & ACHIEVEMENTS SCREEN -->
+<div id="events-achievements-screen" class="overlay">
+    <h2 style="color:#ff66ff;">🏆 EVENTS & ACHIEVEMENTS</h2>
+    <div class="ea-tab-bar">
+        <button class="ea-tab-btn active" onclick="switchEATab('events')">📋 EVENTS</button>
+        <button class="ea-tab-btn" onclick="switchEATab('achievements')">🏆 ACHIEVEMENTS</button>
+    </div>
+    <div id="ea-events-panel" class="ea-tab-panel active">
+        <div class="events-grid" id="ea-events-list-container"></div>
+    </div>
+    <div id="ea-achievements-panel" class="ea-tab-panel">
+        <div class="ach-unlocked-count" id="ea-ach-unlocked-text">🏆 <span id="ea-ach-unlocked-num">0</span> / <span id="ea-ach-total-num">0</span> UNLOCKED</div>
+        <div class="ach-progress-bar-total"><div class="ach-progress-fill-total" id="ea-ach-total-progress-fill"></div></div>
+        <div class="ach-filter-tabs" id="ea-ach-filter-tabs">
+            <button class="ach-filter-tab active" onclick="filterAchievementsEA('all')">ALL</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('easy')">EASY</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('medium')">MEDIUM</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('hard')">HARD</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('extreme')">EXTREME</button>
+            <button class="ach-filter-tab" onclick="filterAchievementsEA('mythic')">MYTHIC</button>
+        </div>
+        <div id="ea-ach-list" class="achievements-grid"></div>
+    </div>
+    <button class="btn" onclick="closeEventsAchievements()" style="margin-bottom:30px;">← BACK</button>
 </div>
 
 <div id="pause-screen" class="overlay">
@@ -587,6 +702,7 @@
     <div id="final-stats" style="font-size:12px;margin-bottom:12px;"></div>
     <button class="btn" onclick="triggerReboot()" data-i18n="re_initialize">RE-INITIALIZE</button>
     <button class="btn" onclick="quitToMenu()" data-i18n="main_menu">MAIN MENU</button>
+    <button id="prestige-btn" class="btn" style="display:none;background:linear-gradient(45deg,#8B6914,#FFD700);border:1px solid rgba(255,215,0,0.5);color:#000;font-weight:900;font-size:14px;padding:10px 25px;" onclick="showPrestigeConfirm()">⭐ PRESTIGE</button>
 </div>
 
 <canvas id="gameCanvas"></canvas>
@@ -674,7 +790,7 @@ const TRANSLATIONS = {
         bosses_slain: "BOSSES SLAIN",
         game_info_desc: "Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.",
         game2_desc: "The second game is in advanced development! Expected soon with new and exciting mechanics.",
-        update_info: "Update 11.0 - Language System + Hub Redesign + Space Treasure Event + QOL!",
+        update_info: "Update 12.0 - Complete UI Overhaul, Cleaner Design!",
         classic_game_desc: "The classic game! Shooting, bosses, events and achievements",
         press_to_play: "Press to play",
         weapons: "Weapons",
@@ -859,7 +975,7 @@ const TRANSLATIONS = {
         bosses_slain: "בוסים הובסו",
         game_info_desc: "משחק יריות בחלל עם בוסים, אירועים מיוחדים, מערכת שדרוגים, הישגים ועוד! הגן על החללית שלך והשמד את כל האויבים.",
         game2_desc: "המשחק השני נמצא בשלבי פיתוח מתקדמים! צפוי לצאת בקרוב עם מכניקות חדשות ומרגשות.",
-        update_info: "עדכון 11.0 - מערכת שפות + עיצוב חדש של מסך הבית + אירוע אוצר חלל + שיפורי QOL!",
+        update_info: "עדכון 12.0 - שיפוץ ממשק מלא, עיצוב נקי יותר!",
         classic_game_desc: "המשחק הקלאסי! יריות, בוסים, אירועים והישגים",
         press_to_play: "לחץ כדי לשחק",
         weapons: "נשקים",
@@ -1044,7 +1160,7 @@ const TRANSLATIONS = {
         bosses_slain: "Боссов убито",
         game_info_desc: "Космический шутер с боссами, особыми событиями, системой улучшений, достижениями и многим другим! Защищайте свой корабль и уничтожайте всех врагов.",
         game2_desc: "Вторая игра находится в продвинутой разработке! Ожидайте скоро новые захватывающие механики.",
-        update_info: "Обновление 11.0 - Система языков + Редизайн главного меню + Событие Космическое Сокровище + Улучшения!",
+        update_info: "Обновление 12.0 - Полный редизайн интерфейса, более чистый дизайн!",
         classic_game_desc: "Классическая игра! Стрельба, боссы, события и достижения",
         press_to_play: "Нажмите чтобы играть",
         weapons: "Оружие",
@@ -1497,8 +1613,14 @@ function setGraphicsQuality(quality){
 }
 
 function openSettings(){
-    settingsOpenedFrom = 'start-screen';
-    document.getElementById('start-screen').style.display='none';
+    // Detect which screen is currently visible
+    if(document.getElementById('pause-screen').style.display === 'flex'){
+        settingsOpenedFrom = 'pause-screen';
+        document.getElementById('pause-screen').style.display='none';
+    } else {
+        settingsOpenedFrom = 'start-screen';
+        document.getElementById('start-screen').style.display='none';
+    }
     document.getElementById('settings-screen').style.display='flex';
     initSettingsUI();
 }
@@ -1506,7 +1628,9 @@ let settingsOpenedFrom = 'start-screen';
 
 function closeSettings(){
     document.getElementById('settings-screen').style.display='none';
-    document.getElementById(settingsOpenedFrom).style.display='flex';
+    const targetScreen = settingsOpenedFrom;
+    settingsOpenedFrom = 'start-screen'; // Reset to default after use
+    document.getElementById(targetScreen).style.display='flex';
     updateMainMenuUI();
 }
 
@@ -1545,7 +1669,7 @@ function openPauseSettings(){
     document.getElementById('settings-screen').style.display='flex';
     initSettingsUI();
 }
-// Normal closeSettings behavior (restored by backToHub when overridden by openPauseSettings)
+// closeSettings uses settingsOpenedFrom to return to the correct screen
 
 // FPS COUNTER
 let fpsFrameCount = 0;
@@ -1614,6 +1738,7 @@ window.showNotification = function(msg, type){
 // ============================================
 let criticalHitsCount = 0;
 let critChance = 0.15;
+let critDamageMultiplier = 2;
 let totalDamageDealt = 0;
 
 function isCriticalHit(){
@@ -1623,9 +1748,9 @@ function isCriticalHit(){
 function applyCriticalHit(power){
     if(isCriticalHit()){
         criticalHitsCount++;
-        totalDamageDealt += power * 2;
+        totalDamageDealt += power * critDamageMultiplier;
         if(player && player.x && player.y) floats.push({txt:'⚡ CRITICAL!', x:player.x-40, y:player.y-50, l:1, c:'#ffaa00', size:20});
-        return power * 2;
+        return power * critDamageMultiplier;
     }
     totalDamageDealt += power;
     return power;
@@ -1684,6 +1809,8 @@ function autoSave(){
     localStorage.setItem('dmgLevel', damageLevel);
     localStorage.setItem('droneCount', droneCount);
     localStorage.setItem('bombCount', bombCount);
+    localStorage.setItem('resourceCollectionLevel', resourceCollectionLevel);
+    localStorage.setItem('weaponEnhancementLevel', weaponEnhancementLevel);
     localStorage.setItem('gemstones', gemstones);
     localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
     localStorage.setItem('achievements', JSON.stringify(achievements));
@@ -1826,6 +1953,8 @@ let guardianAngelUsed = false;
 let damageReduction = ironWillPurchased ? 0.5 : 1;
 let enemySlow = timeDistortionPurchased ? 0.7 : 1;
 let gemMultiplier = crystalHeartPurchased ? 2 : 1;
+let resourceCollectionLevel = parseInt(localStorage.getItem('resourceCollectionLevel')) || 0;
+let weaponEnhancementLevel = parseInt(localStorage.getItem('weaponEnhancementLevel')) || 0;
 
 // ============================================
 // RARE SPECIAL ABILITIES SYSTEM
@@ -1843,7 +1972,7 @@ const RARE_ABILITIES = {
     },
     regenAura: {
         id: 'regenAura', name: '💚 REGENERATION AURA', icon: '💚',
-        desc: 'Passive HP regeneration (+1 HP every 5 seconds)',
+        desc: 'Passive HP regeneration (+1 HP every 3 seconds)',
         cost: 8000, cooldown: 0, category: 'shields',
         unlockReq: () => wave >= 25,
         unlockDesc: 'Reach wave 25',
@@ -1851,7 +1980,7 @@ const RARE_ABILITIES = {
     },
     timeSlow: {
         id: 'timeSlow', name: '👻 TIME SLOW/PHASE', icon: '👻',
-        desc: 'Become intangible for 3 seconds, phasing through enemies and projectiles',
+        desc: 'Become intangible for 5 seconds, phasing through enemies and projectiles',
         cost: 6000, cooldown: 45000, category: 'shields',
         unlockReq: () => perfectWavesCount >= 5,
         unlockDesc: 'Survive 5 boss fights without taking damage (5 perfect waves)',
@@ -1871,6 +2000,30 @@ const RARE_ABILITIES = {
         cost: 5500, cooldown: 45000, category: 'weapons',
         unlockReq: () => wave >= 30,
         unlockDesc: 'Reach wave 30',
+        purchased: false, lastUsed: 0, active: false
+    },
+    resourceMagnet: {
+        id: 'resourceMagnet', name: '🧲 RESOURCE MAGNET', icon: '🧲',
+        desc: 'Automatically attracts all dropped loot on screen for 30 seconds',
+        cost: 3000, cooldown: 45000, category: 'shields',
+        unlockReq: () => totalCoins >= 5000,
+        unlockDesc: 'Accumulate 5000 coins',
+        purchased: false, lastUsed: 0, active: false
+    },
+    timeWarp: {
+        id: 'timeWarp', name: '🕐 TIME WARP', icon: '🕐',
+        desc: 'Slows all enemies by 70% for 15 seconds',
+        cost: 12000, cooldown: 90000, category: 'shields',
+        unlockReq: () => totalKills >= 3000,
+        unlockDesc: 'Accumulate 3000 kills',
+        purchased: false, lastUsed: 0, active: false
+    },
+    ultimateAnnihilation: {
+        id: 'ultimateAnnihilation', name: '💀 ULTIMATE ANNIHILATION', icon: '💀',
+        desc: 'Clears all enemies on screen + invincibility for 8 seconds',
+        cost: 25000, cooldown: 180000, category: 'weapons',
+        unlockReq: () => totalKills >= 10000,
+        unlockDesc: 'Accumulate 10000 kills',
         purchased: false, lastUsed: 0, active: false
     }
 };
@@ -1892,6 +2045,117 @@ let gravityBombCenter = {x:0, y:0};
 let gravityBombPhase = 0; // 0=pull, 1=exploded
 let regenAuraTimer = 0;
 let lightningStrikeEffect = null; // {x, y, timer}
+let resourceMagnetActive = false;
+let resourceMagnetTimer = 0;
+let abilityTimeWarpActive = false;
+let abilityTimeWarpTimer = 0;
+let ultimateAnnihilationActive = false;
+let ultimateAnnihilationTimer = 0;
+
+// Ability Equipment Selection (max 3 per game)
+let selectedAbilities = JSON.parse(localStorage.getItem('selectedAbilities') || '[]');
+if(!Array.isArray(selectedAbilities)) selectedAbilities = [];
+// Validate: only keep purchased abilities
+selectedAbilities = selectedAbilities.filter(key => RARE_ABILITIES[key] && RARE_ABILITIES[key].purchased);
+if(selectedAbilities.length > 3) selectedAbilities = selectedAbilities.slice(0, 3);
+
+function saveSelectedAbilities(){
+    localStorage.setItem('selectedAbilities', JSON.stringify(selectedAbilities));
+}
+
+function toggleAbilitySelection(abilityId){
+    if(!RARE_ABILITIES[abilityId] || !RARE_ABILITIES[abilityId].purchased) return;
+    const idx = selectedAbilities.indexOf(abilityId);
+    if(idx >= 0){
+        selectedAbilities.splice(idx, 1);
+    } else {
+        if(selectedAbilities.length >= 3){
+            showNotification('⚠ Max 3 abilities can be equipped!', 'warning');
+            return;
+        }
+        selectedAbilities.push(abilityId);
+    }
+    saveSelectedAbilities();
+    renderAbilitySelectionPanel();
+}
+
+function renderAbilitySelectionPanel(){
+    renderHomeAbilityPanel();
+}
+
+function openAbilitySelectionPanel(){
+    openHomeAbilityPanel();
+}
+
+function closeAbilitySelectionPanel(){
+    closeHomeAbilityPanel();
+    updateAbilityButtons();
+}
+
+function openHomeAbilityPanel(){
+    const panel = document.getElementById('home-abilities-panel');
+    if(!panel) return;
+    panel.style.display = 'flex';
+    renderHomeAbilityPanel();
+}
+
+function closeHomeAbilityPanel(){
+    const panel = document.getElementById('home-abilities-panel');
+    if(panel) panel.style.display = 'none';
+}
+
+function renderHomeAbilityPanel(){
+    const content = document.getElementById('home-abilities-content');
+    if(!content) return;
+    let html = '<h3 style="color:#00d2ff;margin-bottom:12px;">🎯 ABILITIES</h3>';
+    html += '<div style="font-size:11px;color:#aaa;margin-bottom:12px;">Select up to 3 abilities to equip for your next game</div>';
+    for(let key of Object.keys(RARE_ABILITIES)){
+        const ab = RARE_ABILITIES[key];
+        const isUnlocked = ab.purchased;
+        const isEligible = ab.unlockReq();
+        const isSelected = selectedAbilities.includes(key);
+        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : key === 'resourceMagnet' ? '#ffcc00' : key === 'timeWarp' ? '#00ccff' : key === 'ultimateAnnihilation' ? '#ff0000' : key === 'lightningStrike' ? '#ffff00' : '#42f5b6';
+        if(!isUnlocked){
+            html += `<div style="display:flex;align-items:center;gap:8px;padding:8px;margin:4px 0;background:rgba(0,0,0,0.4);border-radius:10px;border:1px solid #444;opacity:0.5;">
+                <span style="font-size:20px;">🔒</span>
+                <div style="flex:1;text-align:right;">
+                    <div style="font-size:12px;color:#888;">${ab.name}</div>
+                    <div style="font-size:10px;color:#aaa;margin-top:2px;">${ab.desc}</div>
+                    <div style="font-size:9px;color:#ff0044;margin-top:3px;">🔒 ${isEligible ? 'Requirement met - Buy in Upgrades shop!' : ab.unlockDesc}</div>
+                </div>
+            </div>`;
+        } else {
+            html += `<div style="display:flex;align-items:center;gap:8px;padding:8px;margin:4px 0;background:rgba(0,0,0,0.4);border-radius:10px;border:1px solid ${isSelected ? bgColor : '#444'};cursor:pointer;transition:0.2s;" onclick="toggleHomeAbility('${key}')">
+                <input type="checkbox" ${isSelected ? 'checked' : ''} style="pointer-events:none;accent-color:${bgColor};" />
+                <span style="font-size:20px;">${ab.icon}</span>
+                <div style="flex:1;text-align:right;">
+                    <div style="font-size:12px;color:#ccc;">${ab.name.replace(ab.icon+' ','')}</div>
+                    <div style="font-size:10px;color:#aaa;margin-top:2px;">${ab.desc}</div>
+                </div>
+                ${isSelected ? '<span style="font-size:10px;color:#00ffaa;font-weight:bold;">✅ Equipped</span>' : ''}
+            </div>`;
+        }
+    }
+    html += '<div style="font-size:11px;color:#ffcc00;margin-top:12px;">Equipped: ' + selectedAbilities.length + '/3</div>';
+    html += '<button class="btn" style="margin-top:12px;" onclick="closeHomeAbilityPanel()">DONE</button>';
+    content.innerHTML = html;
+}
+
+function toggleHomeAbility(abilityId){
+    if(!RARE_ABILITIES[abilityId] || !RARE_ABILITIES[abilityId].purchased) return;
+    const idx = selectedAbilities.indexOf(abilityId);
+    if(idx >= 0){
+        selectedAbilities.splice(idx, 1);
+    } else {
+        if(selectedAbilities.length >= 3){
+            showNotification('⚠ Max 3 abilities can be equipped!', 'warning');
+            return;
+        }
+        selectedAbilities.push(abilityId);
+    }
+    saveSelectedAbilities();
+    renderHomeAbilityPanel();
+}
 
 function buyRareAbility(id){
     const ability = RARE_ABILITIES[id];
@@ -1930,7 +2194,7 @@ function activateRareAbility(id){
         shockwaveTimer = Date.now() + 800;
         shockwaveRadius = 0;
         // Destroy nearby enemies and projectiles
-        let radius = 200;
+        let radius = 300;
         for(let i = enemies.length-1; i >= 0; i--){
             let e = enemies[i];
             if(player && Math.hypot(e.x - player.x, e.y - player.y) < radius){
@@ -1943,7 +2207,7 @@ function activateRareAbility(id){
             }
         }
         if(boss && player && Math.hypot(boss.x - player.x, boss.y - player.y) < radius){
-            boss.hp -= 500;
+            boss.hp -= 800;
             if(boss.hp <= 0){ boss = null; bossesKilled++; }
         }
         eBullets.length = 0;
@@ -1952,18 +2216,18 @@ function activateRareAbility(id){
     }
     else if(id === 'regenAura'){
         // Passive - no activation needed, handled in game loop
-        showCustomAlert('💚 Regeneration Aura is always active! +1 HP every 5 seconds.');
+        showCustomAlert('💚 Regeneration Aura is always active! +1 HP every 3 seconds.');
     }
     else if(id === 'timeSlow'){
         timeSlowActive = true;
-        timeSlowTimer = Date.now() + 3000;
-        if(player) player.invincibleTimer = 180; // ~3 seconds at 60fps
+        timeSlowTimer = Date.now() + 5000;
+        if(player) player.invincibleTimer = 300; // ~5 seconds at 60fps
         if(player && player.x && player.y) floats.push({txt:'👻 PHASE MODE!',x:player.x-50,y:player.y-40,l:1.5,c:'#aa66ff',size:24});
-        showNotification('👻 Time Slow/Phase activated! Intangible for 3 seconds!', 'success');
+        showNotification('👻 Time Slow/Phase activated! Intangible for 5 seconds!', 'success');
     }
     else if(id === 'gravityBomb'){
         gravityBombActive = true;
-        gravityBombTimer = Date.now() + 3000;
+        gravityBombTimer = Date.now() + 5000;
         gravityBombCenter = player ? {x: player.x, y: player.y} : {x: width/2, y: height/2};
         gravityBombPhase = 0;
         if(player && player.x && player.y) floats.push({txt:'🌀 GRAVITY BOMB!',x:player.x-60,y:player.y-40,l:1.5,c:'#4400aa',size:24});
@@ -1971,21 +2235,56 @@ function activateRareAbility(id){
     }
     else if(id === 'lightningStrike'){
         if(enemies.length > 0){
-            let targetIdx = Math.floor(Math.random() * enemies.length);
-            let target = enemies[targetIdx];
-            lightningStrikeEffect = {x: target.x, y: target.y, timer: Date.now() + 600};
-            let pointBonus = target.isBoss ? 50000 : 5000 * combo;
-            pointBonus *= skinCreditMultiplier;
-            score += pointBonus; kills++; waveKills++;
-            if(target.isBoss){ bossesKilled++; boss = null; }
-            for(let k=0;k<25;k++) particles.push(new Particle(target.x,target.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffff00',1));
-            enemies.splice(targetIdx, 1);
-            if(player && player.x && player.y) floats.push({txt:'⚡ LIGHTNING STRIKE!',x:target.x-60,y:target.y-40,l:1.5,c:'#ffff00',size:24});
-            showNotification('⚡ Lightning Strike! Enemy destroyed!', 'success');
+            let strikeCount = Math.min(3, enemies.length);
+            for(let s=0; s<strikeCount; s++){
+                let targetIdx = Math.floor(Math.random() * enemies.length);
+                let target = enemies[targetIdx];
+                if(s === 0) lightningStrikeEffect = {x: target.x, y: target.y, timer: Date.now() + 600};
+                let pointBonus = target.isBoss ? 80000 : 8000 * combo;
+                pointBonus *= skinCreditMultiplier;
+                score += pointBonus; kills++; waveKills++;
+                if(target.isBoss){ bossesKilled++; boss = null; }
+                for(let k=0;k<25;k++) particles.push(new Particle(target.x,target.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffff00',1));
+                enemies.splice(targetIdx, 1);
+            }
+            if(player && player.x && player.y) floats.push({txt:'⚡ LIGHTNING STRIKE x'+strikeCount+'!',x:player.x-70,y:player.y-40,l:1.5,c:'#ffff00',size:24});
+            showNotification('⚡ Lightning Strike! '+strikeCount+' enemies destroyed!', 'success');
         } else {
             ability.lastUsed = 0; // Refund cooldown if no enemies
             showNotification('⚡ No enemies to strike!', 'warning');
         }
+    }
+    else if(id === 'resourceMagnet'){
+        resourceMagnetActive = true;
+        resourceMagnetTimer = Date.now() + 30000;
+        if(player && player.x && player.y) floats.push({txt:'🧲 RESOURCE MAGNET!',x:player.x-60,y:player.y-40,l:1.5,c:'#ffcc00',size:24});
+        showNotification('🧲 Resource Magnet activated! All loot attracted for 30s!', 'success');
+    }
+    else if(id === 'timeWarp'){
+        abilityTimeWarpActive = true;
+        abilityTimeWarpTimer = Date.now() + 15000;
+        if(player && player.x && player.y) floats.push({txt:'🕐 TIME WARP!',x:player.x-50,y:player.y-40,l:1.5,c:'#00ccff',size:24});
+        showNotification('🕐 Time Warp activated! Enemies slowed 70% for 15s!', 'success');
+    }
+    else if(id === 'ultimateAnnihilation'){
+        ultimateAnnihilationActive = true;
+        ultimateAnnihilationTimer = Date.now() + 8000;
+        if(player) player.invincibleTimer = 480; // ~8 seconds at 60fps
+        // Clear all enemies on screen
+        let annihilatedCount = 0;
+        for(let i = enemies.length-1; i >= 0; i--){
+            let e = enemies[i];
+            let pointBonus = e.isBoss ? 200000 : 20000 * combo;
+            pointBonus *= skinCreditMultiplier;
+            score += pointBonus; kills++; waveKills++; annihilatedCount++;
+            if(e.isBoss) bossesKilled++;
+            for(let k=0;k<15;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ff0000',1));
+            enemies.splice(i,1);
+        }
+        boss = null;
+        eBullets.length = 0;
+        if(player && player.x && player.y) floats.push({txt:'💀 ANNIHILATION! +' + annihilatedCount, x:player.x-70,y:player.y-40,l:2,c:'#ff0000',size:28});
+        showNotification(`💀 Ultimate Annihilation! ${annihilatedCount} enemies destroyed! Invincible for 5s!`, 'success');
     }
     updateAbilityButtons();
 }
@@ -2003,11 +2302,12 @@ function updateAbilityButtons(){
     for(let key of Object.keys(RARE_ABILITIES)){
         const ab = RARE_ABILITIES[key];
         if(!ab.purchased || ab.cooldown === 0) continue; // Skip passive abilities
+        if(selectedAbilities.length > 0 && !selectedAbilities.includes(key)) continue; // Skip non-selected abilities
         hasAny = true;
         const cdRemaining = Math.max(0, ab.cooldown - (now - ab.lastUsed));
         const onCooldown = cdRemaining > 0;
         const cdSec = Math.ceil(cdRemaining / 1000);
-        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : '#ffff00';
+        const bgColor = key === 'shockwave' ? '#ff8800' : key === 'timeSlow' ? '#aa66ff' : key === 'gravityBomb' ? '#4400aa' : key === 'resourceMagnet' ? '#ffcc00' : key === 'timeWarp' ? '#00ccff' : key === 'ultimateAnnihilation' ? '#ff0000' : '#ffff00';
         html += `<div class="ability-icon ${onCooldown ? 'on-cooldown' : ''}" style="border-color:${bgColor};background:rgba(0,0,0,0.6);" onclick="activateRareAbility('${key}')">
             ${ab.icon}
             ${onCooldown ? `<div class="ability-cooldown-overlay">${cdSec}s</div>` : ''}
@@ -2022,8 +2322,137 @@ function updateAbilityButtons(){
 // ============================================
 let updateLogData = [
     {
+        version: 'v12.0',
+        changes: [
+            'Complete shop UI overhaul - all shops redesigned with cleaner card layout, rounded corners, and consistent styling',
+            'Credit Shop: improved card layout, pill-shaped tabs, better price tags, clean quantity selectors, special items section with divider',
+            'Gem Shop: clean grid layout, rarity color coding with left-border accents, organized cosmetics with ownership indicators',
+            'Skins Shop: better card layout with equipped badge indicator and improved description readability',
+            'Hub/Home screen visual improvement: card-based sections, cleaner buttons, organized stat cards, better typography and spacing',
+            'All glowing/shimmer effects removed for a cleaner flat design (except lootbox rarity indicators which are preserved)',
+            'Bug fixes: added missing shieldHp and maxShieldHp declarations, improved consistency across UI overlays',
+            'Consistent overlay backgrounds, border styles, and hover effects across all screens'
+        ]
+    },
+    {
+        version: 'v11.9',
+        changes: [
+            'NEW: Prestige System - reset for permanent bonuses! Earn prestige points based on max wave reached',
+            'Prestige Shop with 4 upgrades: Starting Bonus, Overcharge, Lucky Start, Resilience',
+            'Each prestige point gives +2% to credits, damage, and health permanently',
+            'Prestige button appears on game-over screen at wave 20+',
+            'Prestige multiplier displayed on home hub and in-game HUD',
+            'BUFF: Shockwave Blast radius 200→300, boss damage 500→800',
+            'BUFF: Regeneration Aura +1HP/5s → +1HP/3s',
+            'BUFF: Time Slow/Phase invincibility 3s→5s (180→300 frames)',
+            'BUFF: Gravity Bomb pull duration 3s→5s with explosion damage to all pulled enemies',
+            'BUFF: Lightning Strike now hits 3 enemies (up from 1), boss score 50000→80000, regular 5000→8000/combo',
+            'BUFF: Resource Magnet duration 20s→30s, increased attraction radius and speed',
+            'BUFF: Time Warp duration 10s→15s, slow effect 50%→70% (enemies at 30% speed)',
+            'BUFF: Ultimate Annihilation invincibility 5s→8s (300→480 frames), score 10000→20000/combo, boss 100000→200000'
+        ]
+    },
+    {
+        version: 'v11.8',
+        changes: [
+            'Fixed TypeError with guardian null property access',
+            'Divine Intervention: 90x rarer but INSANELY broken - 2min duration, 200,000x DMG, +100,000💎, +600x coins, full invincibility, golden overlay, 50 particles per enemy',
+            'Tips moved from Hub to Gemstone Shop as a new tab (💡 TIPS)',
+            'Tips are now FREE to flip - claim the hidden prize behind each tip for credits!',
+            'Skill Tree now shows a proper on-screen modal instead of a side notification',
+            'Gemstone Shop split into 3 tabs: 📦 Lootboxes & Rewards, 🎨 Cosmetics, 💡 Tips',
+            'ALL events BUFFED: Apocalypse 3x, Cosmic Collapse 5x, Gold Rush 3x, Bug 8x, Stable 2.5x, Royal Blessing 5x, King\'s Blessing 8x, Primordial Rage 30x, Chaos Realm 5x, Synapse 4x, Void 15x',
+            'Event durations increased ~20% across the board',
+            'Enemy spawn counts in wave events increased by 30%',
+            'Starfall: 15 stars (up from 10) with doubled star values',
+            'Resource Magnet: 20s duration (up from 15s) and larger attraction radius',
+            'Event credit/gemstone bonuses increased by 50%'
+        ]
+    },
+    {
+        version: 'v11.7',
+        changes: [
+            'Skill Tree temporarily disabled for maintenance - will return in a future update',
+            'Events and Achievements combined into one panel with tabs (📋 EVENTS / 🏆 ACHIEVEMENTS)',
+            'NEW: Cosmetics Shop - Ship Auras (Fire, Ice, Lightning, Shadow, Rainbow) and Player Titles',
+            'Auras are purely visual particle effects around your ship during gameplay',
+            'Titles are decorative text shown above your ship - zero gameplay effect',
+            '2 new rare skins: PHANTOM (👻 10,000 total kills) and CELESTIAL (✨ reach wave 50)',
+            'Phantom skin: semi-transparent ghostly appearance - cosmetic only',
+            'Celestial skin: glowing divine appearance - cosmetic only',
+            'Tips system added to the Hub - purchase strategic tips with credits',
+            'Tips reveal with a card-flip animation and offer gameplay advice',
+            'Combined Events & Achievements button replaces separate buttons'
+        ]
+    },
+    {
+        version: 'v11.6',
+        changes: [
+            'Bug fix: SyntaxError - missing closing brace for updateShopUI() function caused Unexpected token error',
+            'Bug fix: TypeError crash - starfallStars contained plain objects instead of StarfallStar class instances',
+            'Bug fix: Golden Jackpot typo (JACKPET→JACKPOT) and Legendary lootbox ultra-rare had 0% probability',
+            'NEW: Skill Tree System with 3 branching paths (Offense/Defense/Utility), 18 total nodes',
+            'Skill Tree: Offense path (Damage +5/10%, Fire Rate +8/15%, Crit Chance +5%, Crit Damage +50%)',
+            'Skill Tree: Defense path (Shield +20, Health +25/50, Dmg Reduce +8/15%, Regen +1hp/5s)',
+            'Skill Tree: Utility path (Move Speed +10/20%, Magnet Range +30/60, Drone Efficiency +10/25%)',
+            'Earn 1 skill point every 5 levels or 500 kills - unlock nodes on the skill tree panel',
+            'Skill tree button added on Home Screen (right side, small circular 🌳 button)',
+            'Lootbox Ultra-Rare Rebalance: drop chances lowered from 1.5-3% to 0.3-0.5%',
+            'Ultra-Rare items now have UNIQUE effects per lootbox type and are MUCH more rewarding',
+            'Basic lootbox: Golden Jackpot - 10000 credits (0.5%)',
+            'Premium lootbox: Legendary Weapon Core - permanent +15% weapon damage (0.4%)',
+            'Epic/Mythic lootbox: Cosmic Shard - instantly unlock any locked ability (0.4-0.5%)',
+            'Ultra lootbox: Cosmic Shard Ultimate - unlock ability + 3 free skill points (0.3%)',
+            'Probability Viewer now displays ultra-rare effect descriptions clearly',
+            'NEW: Event Queue System - queued events no longer overlap, they trigger sequentially',
+            'NEW EVENT: Asteroid Belt - shoot crossing asteroids for bonus coins and gems (~10s)',
+            'NEW EVENT: Supply Drop - fly to a cargo crate before it disappears for random rewards (~8s)',
+            'Starfall nerf: 10→8 initial stars, lower value (20-60 vs 30-60), slower spawn rate (8% vs 12%), 9s duration',
+            'Starfall trigger chance slightly increased (+20%) to compensate for nerfed rewards',
+            'Doomsday buff: 5x trigger chance, 30 enemies spawn (was 20), 5x point bonus, 15% chance for Green Aura',
+            'Green Aura: ship gets green cloak that deals light damage to nearby enemies during Doomsday',
+            'Divine Intervention now MUCH rarer (reduced by ~70%) but astronomically powerful',
+            'Divine: Full health & shield restore, +300% damage for 60s, screen-clear all enemies, 5s invincibility',
+            'Divine: Golden light rays visual, dramatic screen flash, extended 3s flash effect'
+        ]
+    },
+    {
+        version: 'v11.5',
+        changes: [
+            'Bug fix: TypeError crash when accessing guardian.y after guardian was destroyed',
+            'Bug fix: Particle crash when guardian was null after defeat (coordinates captured before null)',
+            'Abilities screen moved to Home Screen - equip up to 3 abilities before starting a game',
+            'All abilities now visible in the panel (locked, unlocked, equipped status)',
+            'Removed ability selection button from game screen - no selection during gameplay',
+            'Lootbox Shop UI cleanup - removed all glow/sparkle/shimmer animations for clean flat design',
+            'Home Screen UI cleanup - removed all glow/shimmer text animations for readable flat typography',
+            'Ultra-Rare items added to every lootbox type with very low drop chance (1-3%)',
+            'Ultra-Rare: Golden Treasure (Basic) - 5000 credits at 1.5% chance',
+            'Ultra-Rare: Legendary Weapon Core (Premium) - permanent weapon damage boost at 2% chance',
+            'Ultra-Rare: Cosmic Shard (Mythic/Ultra) - instantly unlocks a locked ability at 2.5-3% chance',
+            'Probability Viewer updated to display ultra-rare items with distinct purple ULTRA-RARE label',
+            'Cosmic Shard reward type: unlocks first eligible locked ability or gives 2000 gemstones fallback'
+        ]
+    },
+    {
+        version: 'v11.4',
+        changes: [
+            'Fixed Settings Back Button bug - now correctly returns to pause screen when opened from pause menu',
+            'NEW ABILITY: Resource Magnet - attracts all dropped loot for 20s (5000 coins to unlock)',
+            'NEW ABILITY: Time Warp - slows all enemies 50% for 10s (3000 kills to unlock)',
+            'NEW ABILITY: Ultimate Annihilation - clears all enemies + 5s invincibility (10000 kills to unlock)',
+            'Ability Equipment System - select max 3 abilities per game via new selection panel',
+            'Lootbox Probability Viewer - view drop rates and rarity for every lootbox reward',
+            'Drone/Weapon purchase maximum reduced to 180',
+            'NEW UPGRADE: Resource Collection - increases auto-pickup range (+15 per level, max 20)',
+            'NEW UPGRADE: Weapon Enhancement - increases damage and fire rate (+5% per level, max 20)',
+            'Bug fix: Settings back navigation state leak resolved',
+            'Bug fix: closeSettings no longer overridden by backToHub',
+            'Removed date fields from all update log entries'
+        ]
+    },
+    {
         version: 'v11.0',
-        date: new Date().toLocaleDateString(),
         changes: [
             'LANGUAGE SYSTEM! English, Hebrew, Russian!',
             'Main Hub UI completely redesigned!',
@@ -2048,7 +2477,6 @@ let updateLogData = [
     },
     {
         version: 'v2.0',
-        date: '2024-12-01',
         changes: [
             'Site fixed and deployed',
             'Added 5 new rare abilities: Shockwave Blast, Regeneration Aura, Time Slow/Phase, Gravity Bomb, Lightning Strike',
@@ -2058,7 +2486,6 @@ let updateLogData = [
     },
     {
         version: 'v10.5',
-        date: '2025-01-15',
         changes: [
             '2 new events! DOPPELGANGER + SUPERNOVA!',
             '15 new achievements! (310+ total!)',
@@ -2072,7 +2499,6 @@ let updateLogData = [
     },
     {
         version: 'v10.0',
-        date: '2025-01-01',
         changes: [
             '10 new events! STARFALL, INFERNO, CHAIN LIGHTNING, BARRIER, SOUL REAPER, GAMBLER, VORTEX, KING\'S BLESSING, PRISM, ABYSS!',
             '30 new achievements!',
@@ -2082,17 +2508,14 @@ let updateLogData = [
     },
     {
         version: 'v9.1',
-        date: '2024-11-20',
         changes: ['Game crash bug fix']
     },
     {
         version: 'v8.0',
-        date: '2024-11-01',
         changes: ['Daily reward + 3 new events']
     },
     {
         version: 'v1.0',
-        date: '2024-10-01',
         changes: ['Initial launch! 9 events, 100 achievements']
     }
 ];
@@ -2105,13 +2528,13 @@ function renderUpdateLog(){
         const div = document.createElement('div');
         div.className = 'update-item';
         let changesHtml = entry.changes.map(c => '• ' + c).join('<br>');
-        div.innerHTML = `<div class="update-version">⚡ ${entry.version}${entry.date ? ' - ' + entry.date : ''}</div><div class="update-desc">${changesHtml}</div>`;
+        div.innerHTML = `<div class="update-version">⚡ ${entry.version}</div><div class="update-desc">${changesHtml}</div>`;
         container.appendChild(div);
     }
 }
 
 function addUpdateLogEntry(version, changes){
-    updateLogData.unshift({ version, date: new Date().toLocaleDateString(), changes });
+    updateLogData.unshift({ version, changes });
     renderUpdateLog();
 }
 
@@ -2121,10 +2544,82 @@ function addUpdateLogEntry(version, changes){
 function switchShopTab(tab){
     currentShopTab = tab;
     document.querySelectorAll('.shop-tab').forEach(btn => btn.classList.remove('active'));
-    const tabMap = {'weapons':0, 'shields':1, 'special':2};
+    const tabMap = {'weapons':0, 'shields':1, 'special':2, 'prestige':3};
     const tabs = document.querySelectorAll('.shop-tab');
     if(tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
     updateShopUI();
+}
+
+// ============================================
+// PRESTIGE SYSTEM FUNCTIONS
+// ============================================
+function buyPrestigeUpgrade(upgradeId){
+    const upgradeCosts = {startingBonus:1, overcharge:2, luckyStart:3, resilience:2};
+    const cost = upgradeCosts[upgradeId] || 1;
+    const maxLevels = {startingBonus:10, overcharge:5, luckyStart:5, resilience:10};
+    const currentLevel = prestigeUpgrades[upgradeId] || 0;
+    if(currentLevel >= maxLevels[upgradeId]){
+        showCustomAlert('⭐ Already at max level!');
+        return;
+    }
+    if(prestigePoints < cost){
+        showCustomAlert(`Not enough prestige points! Need ⭐${cost}, you have ⭐${prestigePoints}`);
+        return;
+    }
+    prestigePoints -= cost;
+    prestigeUpgrades[upgradeId] = currentLevel + 1;
+    localStorage.setItem('prestigePoints', prestigePoints);
+    localStorage.setItem('prestigeUpgrades', JSON.stringify(prestigeUpgrades));
+    updateSkinEffects();
+    showCustomAlert(`⭐ ${upgradeId.toUpperCase()} upgraded to level ${prestigeUpgrades[upgradeId]}!`);
+    showNotification(`⭐ Prestige upgrade: ${upgradeId} level ${prestigeUpgrades[upgradeId]}!`, 'success');
+    updateShopUI();
+}
+
+function showPrestigeConfirm(){
+    const pointsToEarn = Math.floor(wave / 10);
+    const modal = document.getElementById('prestige-modal');
+    document.getElementById('prestige-modal-text').innerHTML =
+        `PRESTIGE will reset your current game progress.<br><br>` +
+        `You will earn <span style="color:#FFD700;font-weight:bold;">${pointsToEarn}</span> Prestige Points (based on wave ${wave}).<br><br>` +
+        `Each point gives <span style="color:#00ffaa;">+2%</span> to credits, damage, and health permanently!<br><br>` +
+        `Are you sure?`;
+    modal.style.display = 'flex';
+}
+
+function closePrestigeModal(){
+    document.getElementById('prestige-modal').style.display = 'none';
+}
+
+function confirmPrestige(){
+    closePrestigeModal();
+    const pointsToEarn = Math.floor(wave / 10);
+    if(pointsToEarn <= 0){
+        showCustomAlert('Not enough progress to prestige!');
+        return;
+    }
+    prestigePoints += pointsToEarn;
+    prestigeLevel++;
+    prestigeMultiplier = 1 + (prestigePoints * 0.02);
+    localStorage.setItem('prestigeLevel', prestigeLevel);
+    localStorage.setItem('prestigePoints', prestigePoints);
+    localStorage.setItem('prestigeUpgrades', JSON.stringify(prestigeUpgrades));
+    updateSkinEffects();
+    showCustomAlert(`⭐ PRESTIGE LEVEL ${prestigeLevel}! ⭐\nEarned ${pointsToEarn} prestige points!\nTotal: ${prestigePoints} points (+${Math.floor(prestigeMultiplier*100-100)}% bonus)`);
+    showNotification(`⭐ Prestige Level ${prestigeLevel}! +${pointsToEarn} points!`, 'success');
+    // Go back to main hub
+    document.getElementById('game-over').style.display = 'none';
+    document.getElementById('main-hub').style.display = 'flex';
+    updateHubUI();
+    updateMainMenuUI();
+}
+
+function savePrestigeData(){
+    localStorage.setItem('prestigeLevel', prestigeLevel);
+    localStorage.setItem('prestigePoints', prestigePoints);
+    localStorage.setItem('prestigeUpgrades', JSON.stringify(prestigeUpgrades));
+    maxWaveReached = Math.max(maxWaveReached, wave);
+    localStorage.setItem('maxWaveReached', maxWaveReached);
 }
 
 const SPECIAL_ITEMS_DATA = [
@@ -2275,7 +2770,9 @@ const SKINS = [
     { id: 'gold', name: 'GOLDEN LEGEND', icon: '👑', desc: 'סקין זהב אגדי! מראה את השליטה שלך!', effect: '+25% CREDITS, +20% DAMAGE', requirement: 40, owned: false },
     { id: 'rainbow', name: 'RAINBOW MYTHIC', icon: '🌈', desc: 'צבעי הקשת! מסנוור את האויבים ביופי!', effect: null, requirement: 'lootbox', owned: false },
     { id: 'ultra', name: 'ULTRA MYTHIC', icon: '💎', desc: 'הסקין הנדיר ביותר ביקום! רק לעילא ולעלא!', effect: '+50% CREDITS, +50% DAMAGE, +20% FIRE RATE', requirement: 'ultra_lootbox', owned: false, limited: true },
-    { id: 'legend', name: 'LEGEND RANK 50', icon: '🏆', desc: 'סקין אגדי! מושג רק על ידי הטובים ביותר!', effect: '+100% CREDITS, +100% DAMAGE, +50% FIRE RATE', requirement: 'rank50', owned: false }
+    { id: 'legend', name: 'LEGEND RANK 50', icon: '🏆', desc: 'סקין אגדי! מושג רק על ידי הטובים ביותר!', effect: '+100% CREDITS, +100% DAMAGE, +50% FIRE RATE', requirement: 'rank50', owned: false },
+    { id: 'phantom', name: 'PHANTOM', icon: '👻', desc: 'רוח רפאים! מרחף מעבר למוות. 10,000 הריגות.', effect: null, requirement: 'kills10000', owned: false },
+    { id: 'celestial', name: 'CELESTIAL', icon: '✨', desc: 'אלוהי וזוהר! גל קוסמי 50 במשחק אחד.', effect: null, requirement: 'wave50', owned: false }
 ];
 
 // EVENT COUNTERS
@@ -2326,51 +2823,57 @@ function flashScreen(){
 // LOOTBOX REWARDS
 const LOOTBOX_REWARDS = {
     common: [
-        {name:"50 GEMSTONES", type:"gem", amount:50, rarity:"common", icon:"💎"},
-        {name:"100 GEMSTONES", type:"gem", amount:100, rarity:"common", icon:"💎"},
-        {name:"500 CREDITS", type:"credit", amount:500, rarity:"common", icon:"💰"},
-        {name:"TEMPORARY SPEED BOOST", type:"boost", effect:"speed", duration:60, rarity:"common", icon:"⚡"},
-        {name:"1 BOMB", type:"bomb", amount:1, rarity:"common", icon:"💣"}
+        {name:"50 GEMSTONES", type:"gem", amount:50, rarity:"common", icon:"💎", probability:24.5, stars:1},
+        {name:"100 GEMSTONES", type:"gem", amount:100, rarity:"common", icon:"💎", probability:19.5, stars:1},
+        {name:"500 CREDITS", type:"credit", amount:500, rarity:"common", icon:"💰", probability:24.5, stars:1},
+        {name:"TEMPORARY SPEED BOOST", type:"boost", effect:"speed", duration:60, rarity:"common", icon:"⚡", probability:19.5, stars:1},
+        {name:"1 BOMB", type:"bomb", amount:1, rarity:"common", icon:"💣", probability:12, stars:1},
+        {name:"🌟 GOLDEN JACKPOT", type:"credit", amount:10000, rarity:"legendary", icon:"🌟", probability:0.5, stars:4, ultraRare:true, ultraRareEffect:"Golden Jackpot - +10000 CREDITS (0.5%)"}
     ],
     rare: [
-        {name:"150 GEMSTONES", type:"gem", amount:150, rarity:"rare", icon:"💎"},
-        {name:"250 GEMSTONES", type:"gem", amount:250, rarity:"rare", icon:"💎"},
-        {name:"1000 CREDITS", type:"credit", amount:1000, rarity:"rare", icon:"💰"},
-        {name:"TEMPORARY DAMAGE BOOST", type:"boost", effect:"damage", duration:90, rarity:"rare", icon:"💪"},
-        {name:"2 BOMBS", type:"bomb", amount:2, rarity:"rare", icon:"💣"},
-        {name:"COMMON SKIN", type:"skin", skin:"blue", rarity:"rare", icon:"🎨"}
+        {name:"150 GEMSTONES", type:"gem", amount:150, rarity:"rare", icon:"💎", probability:21.5, stars:2},
+        {name:"250 GEMSTONES", type:"gem", amount:250, rarity:"rare", icon:"💎", probability:17.5, stars:2},
+        {name:"1000 CREDITS", type:"credit", amount:1000, rarity:"rare", icon:"💰", probability:21.5, stars:2},
+        {name:"TEMPORARY DAMAGE BOOST", type:"boost", effect:"damage", duration:90, rarity:"rare", icon:"💪", probability:17.5, stars:2},
+        {name:"2 BOMBS", type:"bomb", amount:2, rarity:"rare", icon:"💣", probability:11.5, stars:2},
+        {name:"COMMON SKIN", type:"skin", skin:"blue", rarity:"rare", icon:"🎨", probability:10.1, stars:2},
+        {name:"🌟 LEGENDARY WEAPON CORE", type:"perm_upgrade", stat:"damage", amount:3, rarity:"legendary", icon:"⚔️", probability:0.4, stars:4, ultraRare:true, ultraRareEffect:"Legendary Weapon Core - Permanent +15% weapon damage (+3 damage levels) (0.4%)"}
     ],
     epic: [
-        {name:"300 GEMSTONES", type:"gem", amount:300, rarity:"epic", icon:"💎"},
-        {name:"500 GEMSTONES", type:"gem", amount:500, rarity:"epic", icon:"💎"},
-        {name:"2500 CREDITS", type:"credit", amount:2500, rarity:"epic", icon:"💰"},
-        {name:"PERMANENT DAMAGE UPGRADE", type:"perm_upgrade", stat:"damage", amount:1, rarity:"epic", icon:"🔰"},
-        {name:"3 BOMBS", type:"bomb", amount:3, rarity:"epic", icon:"💣"},
-        {name:"RARE SKIN", type:"skin", skin:"purple", rarity:"epic", icon:"🎨"}
+        {name:"300 GEMSTONES", type:"gem", amount:300, rarity:"epic", icon:"💎", probability:19.5, stars:3},
+        {name:"500 GEMSTONES", type:"gem", amount:500, rarity:"epic", icon:"💎", probability:14.5, stars:3},
+        {name:"2500 CREDITS", type:"credit", amount:2500, rarity:"epic", icon:"💰", probability:19.5, stars:3},
+        {name:"PERMANENT DAMAGE UPGRADE", type:"perm_upgrade", stat:"damage", amount:1, rarity:"epic", icon:"🔰", probability:17.5, stars:3},
+        {name:"3 BOMBS", type:"bomb", amount:3, rarity:"epic", icon:"💣", probability:14.5, stars:3},
+        {name:"RARE SKIN", type:"skin", skin:"purple", rarity:"epic", icon:"🎨", probability:14.1, stars:3},
+        {name:"🌟 COSMIC SHARD", type:"unlock_ability", rarity:"legendary", icon:"💠", probability:0.4, stars:4, ultraRare:true, ultraRareEffect:"Cosmic Shard - Instantly unlock any locked ability (0.4%)"}
     ],
     legendary: [
-        {name:"600 GEMSTONES", type:"gem", amount:600, rarity:"legendary", icon:"💎"},
-        {name:"1000 GEMSTONES", type:"gem", amount:1000, rarity:"legendary", icon:"💎"},
-        {name:"5000 CREDITS", type:"credit", amount:5000, rarity:"legendary", icon:"💰"},
-        {name:"PERMANENT FIRE RATE UPGRADE", type:"perm_upgrade", stat:"fire", amount:2, rarity:"legendary", icon:"🔥"},
-        {name:"5 BOMBS", type:"bomb", amount:5, rarity:"legendary", icon:"💣"},
-        {name:"LEGENDARY SKIN", type:"skin", skin:"gold", rarity:"legendary", icon:"👑"}
+        {name:"600 GEMSTONES", type:"gem", amount:600, rarity:"legendary", icon:"💎", probability:17.5, stars:4},
+        {name:"1000 GEMSTONES", type:"gem", amount:1000, rarity:"legendary", icon:"💎", probability:13.5, stars:4},
+        {name:"5000 CREDITS", type:"credit", amount:5000, rarity:"legendary", icon:"💰", probability:17.5, stars:4},
+        {name:"PERMANENT FIRE RATE UPGRADE", type:"perm_upgrade", stat:"fire", amount:2, rarity:"legendary", icon:"🔥", probability:17.5, stars:4},
+        {name:"5 BOMBS", type:"bomb", amount:5, rarity:"legendary", icon:"💣", probability:15.5, stars:4},
+        {name:"LEGENDARY SKIN", type:"skin", skin:"gold", rarity:"legendary", icon:"👑", probability:18.5, stars:4},
+        {name:"🌟 DIVINE SHARD", type:"perm_upgrade", stat:"damage", amount:5, rarity:"legendary", icon:"✨", probability:0.4, stars:5, ultraRare:true, ultraRareEffect:"Divine Shard - Permanent +5 damage AND full shield upgrade (0.4%)"}
     ],
     mythic: [
-        {name:"1500 GEMSTONES", type:"gem", amount:1500, rarity:"mythic", icon:"💎"},
-        {name:"2500 GEMSTONES", type:"gem", amount:2500, rarity:"mythic", icon:"💎"},
-        {name:"10000 CREDITS", type:"credit", amount:10000, rarity:"mythic", icon:"💰"},
-        {name:"PERMANENT DAMAGE UPGRADE x3", type:"perm_upgrade", stat:"damage", amount:3, rarity:"mythic", icon:"🔰🔰"},
-        {name:"7 BOMBS", type:"bomb", amount:7, rarity:"mythic", icon:"💣"},
-        {name:"MYTHIC SKIN", type:"skin", skin:"rainbow", rarity:"mythic", icon:"🌈"}
+        {name:"1500 GEMSTONES", type:"gem", amount:1500, rarity:"mythic", icon:"💎", probability:15.5, stars:5},
+        {name:"2500 GEMSTONES", type:"gem", amount:2500, rarity:"mythic", icon:"💎", probability:11.5, stars:5},
+        {name:"10000 CREDITS", type:"credit", amount:10000, rarity:"mythic", icon:"💰", probability:15.5, stars:5},
+        {name:"PERMANENT DAMAGE UPGRADE x3", type:"perm_upgrade", stat:"damage", amount:3, rarity:"mythic", icon:"🔰🔰", probability:17.5, stars:5},
+        {name:"7 BOMBS", type:"bomb", amount:7, rarity:"mythic", icon:"💣", probability:17.5, stars:5},
+        {name:"MYTHIC SKIN", type:"skin", skin:"rainbow", rarity:"mythic", icon:"🌈", probability:22, stars:5},
+        {name:"🌟 COSMIC SHARD", type:"unlock_ability", rarity:"legendary", icon:"💠", probability:0.5, stars:6, ultraRare:true, ultraRareEffect:"Cosmic Shard - Instantly unlock any locked ability (0.5%)"}
     ],
     ultra: [
-        {name:"5000 GEMSTONES", type:"gem", amount:5000, rarity:"ultra", icon:"💎💎"},
-        {name:"10000 GEMSTONES", type:"gem", amount:10000, rarity:"ultra", icon:"💎💎"},
-        {name:"50000 CREDITS", type:"credit", amount:50000, rarity:"ultra", icon:"💰💰"},
-        {name:"ULTRA MYTHIC SKIN (LIMITED)", type:"skin", skin:"ultra", rarity:"ultra", icon:"👑👑", limited:true},
-        {name:"15 BOMBS", type:"bomb", amount:15, rarity:"ultra", icon:"💣💣"},
-        {name:"ALL PERMANENT UPGRADES +5", type:"perm_upgrade_all", amount:5, rarity:"ultra", icon:"⭐"}
+        {name:"5000 GEMSTONES", type:"gem", amount:5000, rarity:"ultra", icon:"💎💎", probability:13.5, stars:6},
+        {name:"10000 GEMSTONES", type:"gem", amount:10000, rarity:"ultra", icon:"💎💎", probability:9.5, stars:6},
+        {name:"50000 CREDITS", type:"credit", amount:50000, rarity:"ultra", icon:"💰💰", probability:13.5, stars:6},
+        {name:"ULTRA MYTHIC SKIN (LIMITED)", type:"skin", skin:"ultra", rarity:"ultra", icon:"👑👑", limited:true, probability:11.5, stars:6},
+        {name:"15 BOMBS", type:"bomb", amount:15, rarity:"ultra", icon:"💣💣", probability:19.5, stars:6},
+        {name:"ALL PERMANENT UPGRADES +5", type:"perm_upgrade_all", amount:5, rarity:"ultra", icon:"⭐", probability:32.2, stars:6},
+        {name:"🌟 COSMIC SHARD ULTIMATE", type:"unlock_ability", rarity:"legendary", icon:"💠", probability:0.3, stars:7, ultraRare:true, ultraRareEffect:"Cosmic Shard Ultimate - Unlock ANY locked ability + 3 free skill points (0.3%)"}
     ]
 };
 
@@ -2385,7 +2888,50 @@ const INDIVIDUAL_REWARDS = [
     {name:"5000 CREDITS", type:"credit", amount:5000, price:600, rarity:"epic", icon:"💰"}
 ];
 
-let ownedSkins; try { ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false}; } catch(e) { ownedSkins = {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false}; }
+let ownedSkins; try { ownedSkins = JSON.parse(localStorage.getItem('ownedSkins')) || {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false, phantom:false, celestial:false}; } catch(e) { ownedSkins = {blue:false, purple:false, gold:false, rainbow:false, ultra:false, legend:false, phantom:false, celestial:false}; }
+let maxWaveReached = parseInt(localStorage.getItem('maxWaveReached')) || 0;
+
+// COSMETIC DEFINITIONS
+const COSMETIC_AURAS = [
+    { id: 'fire', name: 'FIRE AURA', icon: '🔥', price: 500, desc: 'Orange/red particles around ship' },
+    { id: 'ice', name: 'ICE AURA', icon: '❄️', price: 800, desc: 'Blue/white frost particles' },
+    { id: 'lightning', name: 'LIGHTNING AURA', icon: '⚡', price: 1200, desc: 'Yellow electric sparks' },
+    { id: 'shadow', name: 'SHADOW AURA', icon: '🌑', price: 2000, desc: 'Dark purple smoke trail' },
+    { id: 'rainbow', name: 'RAINBOW AURA', icon: '🌈', price: 5000, desc: 'Multicolor particle rainbow' }
+];
+const COSMETIC_TITLES = [
+    { id: 'the_brave', name: 'The Brave', icon: '🛡️', price: 200 },
+    { id: 'star_destroyer', name: 'Star Destroyer', icon: '💫', price: 500 },
+    { id: 'cosmic_guardian', name: 'Cosmic Guardian', icon: '🌌', price: 1000 },
+    { id: 'the_legend', name: 'The Legend', icon: '👑', price: 2000 },
+    { id: 'galactic_emperor', name: 'Galactic Emperor', icon: '🏆', price: 3000 }
+];
+let ownedCosmetics; try { ownedCosmetics = JSON.parse(localStorage.getItem('ownedCosmetics')) || {}; } catch(e) { ownedCosmetics = {}; }
+let activeAura = localStorage.getItem('activeAura') || 'none';
+let activeTitle = localStorage.getItem('activeTitle') || 'none';
+
+// TIPS POOL
+const TIPS_POOL = [
+    'Upgrade fire rate first - it gives the best DPS per credit!',
+    'Save gemstones for Epic lootboxes - best value ratio',
+    'Equip Resource Magnet before long runs for more loot (20s duration!)',
+    'Doomsday events spawn more enemies = more loot!',
+    "Don't forget to claim daily streak rewards!",
+    'The Guardian event is rare but gives massive rewards',
+    'Overdrive charges faster with more kills - stay aggressive!',
+    'Combo multiplier affects both score AND credit rewards',
+    'Boss enemies drop Elite items - always fight them!',
+    'Bomb conservation: save bombs for boss waves',
+    'Cosmetic auras are purely visual - no gameplay advantage',
+    'Phantom skin unlocks at 10,000 total kills - keep grinding!',
+    'Celestial skin unlocks at wave 50 - survive that far!',
+    'Rare abilities combo well together - experiment!',
+    'Check achievements for free gemstone rewards',
+    'Auto-fire is great for focusing on dodging',
+    'Daily missions reset every day - complete them for bonus credits',
+    'Spread shot + laser = maximum screen coverage'
+];
+let sessionTipsPurchased = {};
 let ultraMythicCount = parseInt(localStorage.getItem('ultraMythicCount')) || 0;
 const ULTRA_MYTHIC_LIMIT = 5;
 
@@ -2420,6 +2966,8 @@ function updateSkinsUI(){
         else if(skin.id === 'rainbow') isOwned = ownedSkins.rainbow;
         else if(skin.id === 'ultra') isOwned = ownedSkins.ultra;
         else if(skin.id === 'legend') isOwned = currentRank >= 50;
+        else if(skin.id === 'phantom') isOwned = totalKills >= 10000;
+        else if(skin.id === 'celestial') isOwned = maxWaveReached >= 50;
         
         const isEquipped = currentSkin === skin.id;
         const card = document.createElement('div');
@@ -2429,7 +2977,7 @@ function updateSkinsUI(){
             <div class="skin-name">${skin.name}</div>
             <div class="skin-desc">${skin.desc}</div>
             ${skin.effect ? `<div class="skin-effect">✨ ${skin.effect}</div>` : '<div class="skin-effect">😴 ללא יכולת מיוחדת</div>'}
-            ${!isOwned ? `<div style="font-size:9px;color:#ffaa00;margin-top:5px;">🔒 ${skin.requirement === 'lootbox' ? 'נפתח בתיבות' : skin.requirement === 'ultra_lootbox' ? 'נפתח בתיבות ULTRA MYTHIC' : skin.requirement === 'rank50' ? 'דורש RANK 50' : `דורש ${skin.requirement} הישגים`}</div>` : ''}
+            ${!isOwned ? `<div style="font-size:9px;color:#ffaa00;margin-top:5px;">🔒 ${skin.requirement === 'lootbox' ? 'נפתח בתיבות' : skin.requirement === 'ultra_lootbox' ? 'נפתח בתיבות ULTRA MYTHIC' : skin.requirement === 'rank50' ? 'דורש RANK 50' : skin.requirement === 'kills10000' ? 'דורש 10,000 הריגות' : skin.requirement === 'wave50' ? 'דורש WAVE 50' : `דורש ${skin.requirement} הישגים`}</div>` : ''}
             ${isEquipped ? '<div style="font-size:9px;color:#ff66ff;margin-top:5px;">✅ מצויד כעת</div>' : ''}
         `;
         if(isOwned && !isEquipped){
@@ -2594,9 +3142,38 @@ function applyReward(reward){
                 showNotification(`🎨 Duplicate skin! +${duplicateGems} GEMSTONES`, 'info');
             }
             break;
+        case 'unlock_ability':
+            let unlockedOne = false;
+            for(let key of Object.keys(RARE_ABILITIES)){
+                const ab = RARE_ABILITIES[key];
+                if(!ab.purchased && ab.unlockReq()){
+                    ab.purchased = true;
+                    localStorage.setItem('rareAbility_'+key, 'true');
+                    resultText = `💠 COSMIC SHARD unlocked: ${ab.name}! 💠`;
+                    showNotification(`💠 ${ab.name} unlocked by Cosmic Shard!`, 'success');
+                    unlockedOne = true;
+                    break;
+                }
+            }
+            if(!unlockedOne){
+                gemstones += 2000;
+                saveGemstones();
+                resultText = `💠 No locked abilities to unlock - received 2000 GEMSTONES instead! 💠`;
+                showNotification(`💠 Cosmic Shard: +2000 GEMSTONES (no locked abilities)`, 'info');
+            }
+            // Ultra lootbox Cosmic Shard grants 3 skill points too
+            if(reward.name && reward.name.includes('ULTIMATE')){
+                skillPoints += 3;
+                localStorage.setItem('skillPoints', skillPoints);
+                resultText += ' + 3 SKILL POINTS!';
+                showNotification('🌳 +3 Skill Points from Cosmic Shard Ultimate!', 'success');
+            }
+            break;
     }
     let isNewSkin = reward.type === 'skin' && !ownedSkins[reward.skin];
-    document.getElementById('lootbox-result').innerHTML = `<div class="reward-card rarity-${currentLootboxType}"><div style="font-size:28px;margin-bottom:10px;">${reward.icon}</div><div style="font-size:16px;font-weight:bold;">${resultText}</div><div style="font-size:13px;color:#ffaa00;margin-top:10px;">${reward.name}</div><div style="font-size:11px;margin-top:4px;">${reward.rarity.toUpperCase()}</div>${isNewSkin ? '<div style="color:#00ffaa;font-weight:bold;margin-top:8px;font-size:14px;">✨ NEW!</div>' : ''}</div>`;
+    const rewardRarityClass = reward.ultraRare ? 'rarity-ultra' : `rarity-${currentLootboxType}`;
+    const ultraRareLabel = reward.ultraRare ? '<div style="color:#9b59b6;font-weight:bold;margin-top:6px;font-size:12px;">💠 ULTRA-RARE DROP 💠</div>' : '';
+    document.getElementById('lootbox-result').innerHTML = `<div class="reward-card ${rewardRarityClass}"><div style="font-size:28px;margin-bottom:10px;">${reward.icon}</div><div style="font-size:16px;font-weight:bold;">${resultText}</div><div style="font-size:13px;color:#ffaa00;margin-top:10px;">${reward.name}</div><div style="font-size:11px;margin-top:4px;">${reward.rarity.toUpperCase()}</div>${ultraRareLabel}${isNewSkin ? '<div style="color:#00ffaa;font-weight:bold;margin-top:8px;font-size:14px;">✨ NEW!</div>' : ''}</div>`;
     updateShopUI();
     updateIndividualRewardsUI();
     checkAchievements();
@@ -2615,16 +3192,61 @@ function closeLootboxAnimation(){
     currentReward = null;
 }
 
+function viewLootboxProbabilities(type){
+    const rewards = LOOTBOX_REWARDS[type];
+    if(!rewards) return;
+    const rarityColors = {common:'#4287f5',rare:'#42f5b6',epic:'#f5a742',legendary:'#f542d1',mythic:'#f54242',ultra:'#ffd700'};
+    const rarityNames = {common:'COMMON',rare:'RARE',epic:'EPIC',legendary:'LEGENDARY',mythic:'MYTHIC',ultra:'ULTRA MYTHIC'};
+    let html = `<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:2000;display:flex;justify-content:center;align-items:center;" onclick="if(event.target===this)this.remove()">
+        <div style="background:linear-gradient(135deg,#001a33,#000);border:2px solid ${rarityColors[type]||'#00d2ff'};border-radius:16px;padding:20px;min-width:300px;max-width:420px;max-height:80vh;overflow-y:auto;">
+            <h3 style="color:${rarityColors[type]||'#00d2ff'};text-align:center;margin-bottom:12px;">📦 ${rarityNames[type]||type.toUpperCase()} LOOTBOX DROPS</h3>`;
+    for(const r of rewards){
+        const starStr = '⭐'.repeat(r.stars || 1);
+        const isUltraRare = r.ultraRare;
+        const ultraRareTag = isUltraRare ? '<span style="background:#9b59b6;color:#fff;font-size:8px;padding:1px 6px;border-radius:8px;margin-left:4px;">ULTRA-RARE</span>' : '';
+        const ultraRareEffect = isUltraRare && r.ultraRareEffect ? `<div style="font-size:8px;color:#ffcc00;margin-top:2px;">✨ ${r.ultraRareEffect}</div>` : '';
+        const borderStyle = isUltraRare ? 'border:2px solid #9b59b6;' : `border:1px solid ${rarityColors[r.rarity]||'#444'};`;
+        html += `<div style="background:rgba(0,0,0,0.5);${borderStyle}border-radius:8px;padding:8px;margin:6px 0;display:flex;align-items:center;gap:8px;${isUltraRare ? 'background:rgba(155,89,182,0.15);' : ''}">
+            <span style="font-size:18px;">${r.icon}</span>
+            <div style="flex:1;">
+                <div style="font-size:11px;color:#fff;">${r.name} ${ultraRareTag}</div>
+                <div style="font-size:9px;color:${rarityColors[r.rarity]||'#888'};">${starStr} ${rarityNames[r.rarity]||r.rarity.toUpperCase()}</div>
+                ${ultraRareEffect}
+            </div>
+            <div style="font-size:13px;color:${isUltraRare ? '#9b59b6' : '#ffcc00'};font-weight:bold;">${r.probability || '—'}%</div>
+        </div>`;
+    }
+    html += `<button class="btn" style="margin-top:12px;width:100%;" onclick="this.closest('div[style]').parentElement.remove()">CLOSE</button></div></div>`;
+    const overlay = document.createElement('div');
+    overlay.innerHTML = html;
+    document.body.appendChild(overlay);
+}
+
 function openRNGShop(){
     document.getElementById('start-screen').style.display='none';
     document.getElementById('rng-shop-screen').style.display='flex';
     updateGemUI();
     updateIndividualRewardsUI();
+    switchGemShopTab('lootbox');
+    initTips();
 }
 
 function closeRNGShop(){
     document.getElementById('rng-shop-screen').style.display='none';
     document.getElementById('start-screen').style.display='flex';
+}
+
+let currentGemShopTab = 'lootbox';
+function switchGemShopTab(tab){
+    currentGemShopTab = tab;
+    document.getElementById('gem-shop-lootbox-section').style.display = (tab==='lootbox') ? 'block' : 'none';
+    document.getElementById('gem-shop-cosmetics-section').style.display = (tab==='cosmetics') ? 'block' : 'none';
+    document.getElementById('gem-shop-tips-section').style.display = (tab==='tips') ? 'block' : 'none';
+    const tabs = document.querySelectorAll('#rng-shop-screen .shop-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    const tabMap = {'lootbox':0, 'cosmetics':1, 'tips':2};
+    if(tabs[tabMap[tab]]) tabs[tabMap[tab]].classList.add('active');
+    if(tab === 'tips') initTips();
 }
 
 function buyIndividualReward(reward){
@@ -2695,6 +3317,160 @@ function updateIndividualRewardsUI(){
         card.onclick = () => buyIndividualReward(reward);
         container.appendChild(card);
     }
+    updateCosmeticsUI();
+}
+
+// === COSMETICS SHOP ===
+function updateCosmeticsUI(){
+    const aurasGrid = document.getElementById('cosmetic-auras-grid');
+    const titlesGrid = document.getElementById('cosmetic-titles-grid');
+    if(aurasGrid){
+        aurasGrid.innerHTML = '';
+        for(const aura of COSMETIC_AURAS){
+            const isOwned = !!ownedCosmetics['aura_'+aura.id];
+            const isActive = activeAura === aura.id;
+            const card = document.createElement('div');
+            card.className = `cosmetic-card ${isOwned ? (isActive ? 'equipped' : 'owned') : (gemstones < aura.price ? 'cant-afford' : '')}`;
+            card.innerHTML = `<div class="cosmetic-icon">${aura.icon}</div>
+                <div class="cosmetic-name">${aura.name}</div>
+                <div style="font-size:9px;color:#aaa;">${aura.desc}</div>
+                ${isOwned ? (isActive ? '<div style="font-size:9px;color:#00ffaa;">✅ ACTIVE</div>' : '<div style="font-size:9px;color:gold;">OWNED - EQUIP</div>') : `<div class="cosmetic-price">${aura.price} 💎</div>`}`;
+            if(isOwned && !isActive){
+                card.onclick = () => { activeAura = aura.id; localStorage.setItem('activeAura', activeAura); updateCosmeticsUI(); showNotification(`${aura.icon} ${aura.name} equipped!`, 'success'); };
+            } else if(!isOwned) {
+                card.onclick = () => buyCosmetic('aura', aura);
+            }
+            aurasGrid.appendChild(card);
+        }
+    }
+    if(titlesGrid){
+        titlesGrid.innerHTML = '';
+        for(const title of COSMETIC_TITLES){
+            const isOwned = !!ownedCosmetics['title_'+title.id];
+            const isActive = activeTitle === title.id;
+            const card = document.createElement('div');
+            card.className = `cosmetic-card ${isOwned ? (isActive ? 'equipped' : 'owned') : (gemstones < title.price ? 'cant-afford' : '')}`;
+            card.innerHTML = `<div class="cosmetic-icon">${title.icon}</div>
+                <div class="cosmetic-name">${title.name}</div>
+                ${isOwned ? (isActive ? '<div style="font-size:9px;color:#00ffaa;">✅ ACTIVE</div>' : '<div style="font-size:9px;color:gold;">OWNED - EQUIP</div>') : `<div class="cosmetic-price">${title.price} 💎</div>`}`;
+            if(isOwned && !isActive){
+                card.onclick = () => { activeTitle = title.id; localStorage.setItem('activeTitle', activeTitle); updateCosmeticsUI(); showNotification(`${title.icon} "${title.name}" equipped!`, 'success'); };
+            } else if(!isOwned) {
+                card.onclick = () => buyCosmetic('title', title);
+            }
+            titlesGrid.appendChild(card);
+        }
+    }
+}
+
+function buyCosmetic(type, item){
+    if(gemstones < item.price){
+        showNotification(`Not enough GEMSTONES! Need ${item.price} 💎`, 'warning');
+        return;
+    }
+    gemstones -= item.price;
+    saveGemstones();
+    ownedCosmetics[type+'_'+item.id] = true;
+    localStorage.setItem('ownedCosmetics', JSON.stringify(ownedCosmetics));
+    showNotification(`🎨 ${item.name} purchased!`, 'success');
+    if(type === 'aura'){ activeAura = item.id; localStorage.setItem('activeAura', activeAura); }
+    else { activeTitle = item.id; localStorage.setItem('activeTitle', activeTitle); }
+    updateCosmeticsUI();
+}
+
+// === TIPS SYSTEM ===
+let sessionSelectedTips = [];
+const TIP_PRIZES = [
+    { type: 'credits', amount: 3000, label: '3,000 💰 CREDITS', cost: 2000 },
+    { type: 'gemstones', amount: 50, label: '50 💎 GEMSTONES', cost: 30 },
+    { type: 'credits', amount: 5000, label: '5,000 💰 CREDITS', cost: 3500 },
+    { type: 'gemstones', amount: 100, label: '100 💎 GEMSTONES', cost: 60 },
+    { type: 'credits', amount: 10000, label: '10,000 💰 CREDITS', cost: 7000 },
+    { type: 'upgrade', amount: 1, label: 'FREE DAMAGE UPGRADE +1', cost: 4000 },
+    { type: 'upgrade', amount: 1, label: 'FREE FIRE RATE UPGRADE +1', cost: 4000 },
+    { type: 'gemstones', amount: 200, label: '200 💎 GEMSTONES', cost: 100 },
+    { type: 'credits', amount: 20000, label: '20,000 💰 CREDITS', cost: 12000 },
+    { type: 'bombs', amount: 3, label: '3 💣 BOMBS', cost: 1500 }
+];
+
+function initTips(){
+    const container = document.getElementById('tips-container');
+    if(!container) return;
+    container.innerHTML = '';
+    // Pick 3 random tips with prizes
+    let pool = [...TIPS_POOL];
+    let prizePool = [...TIP_PRIZES];
+    sessionSelectedTips = [];
+    for(let i=0;i<3&&pool.length>0;i++){
+        const idx=Math.floor(Math.random()*pool.length);
+        const pidx=Math.floor(Math.random()*prizePool.length);
+        sessionSelectedTips.push({text:pool[idx], prize:prizePool[pidx], flipped:false, claimed:false});
+        pool.splice(idx,1);
+    }
+    for(let i=0;i<sessionSelectedTips.length;i++){
+        const tip = sessionSelectedTips[i];
+        const wrapper = document.createElement('div');
+        wrapper.className = 'tip-card-wrapper';
+        wrapper.innerHTML = `<div class="tip-card-inner" id="tip-card-${i}">
+            <div class="tip-card-front" onclick="flipTip(${i})">
+                <div style="font-size:24px;">💡</div>
+                <div style="font-size:11px;color:#00d2ff;font-weight:bold;">TIP #${i+1}</div>
+                <div style="font-size:10px;color:#ffaa00;margin-top:4px;">CLICK TO FLIP!</div>
+            </div>
+            <div class="tip-card-back">
+                <div style="font-size:11px;color:#00ffaa;">💡 TIP</div>
+                <div style="margin-top:4px;">${tip.text}</div>
+                <div style="margin-top:6px;font-size:10px;color:#ffaa00;">🎁 PRIZE: ${tip.prize.label}</div>
+                <button id="tip-claim-${i}" class="btn" style="padding:3px 8px;font-size:9px;margin-top:6px;" onclick="claimTipPrize(${i})">CLAIM PRIZE - ${tip.prize.cost}💰</button>
+            </div>
+        </div>`;
+        container.appendChild(wrapper);
+    }
+}
+
+function flipTip(idx){
+    if(idx < 0 || idx >= sessionSelectedTips.length) return;
+    const tip = sessionSelectedTips[idx];
+    if(tip.flipped) return;
+    tip.flipped = true;
+    const card = document.getElementById('tip-card-'+idx);
+    if(card) card.classList.add('flipped');
+    showNotification(`💡 Tip #${idx+1} revealed! Check the prize!`, 'success');
+}
+
+function claimTipPrize(idx){
+    if(idx < 0 || idx >= sessionSelectedTips.length) return;
+    const tip = sessionSelectedTips[idx];
+    if(!tip.flipped) return;
+    if(tip.claimed) return;
+    if(totalCoins < tip.prize.cost){
+        showNotification(`Not enough credits! Need ${tip.prize.cost} 💰`, 'warning');
+        return;
+    }
+    totalCoins -= tip.prize.cost;
+    localStorage.setItem('totalCoins', totalCoins);
+    tip.claimed = true;
+    const btn = document.getElementById('tip-claim-'+idx);
+    if(btn){ btn.disabled = true; btn.textContent = '✅ CLAIMED'; btn.style.opacity = '0.5'; }
+    // Grant prize
+    if(tip.prize.type === 'credits'){
+        totalCoins += tip.prize.amount;
+        localStorage.setItem('totalCoins', totalCoins);
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    } else if(tip.prize.type === 'gemstones'){
+        gemstones += tip.prize.amount;
+        saveGemstones();
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    } else if(tip.prize.type === 'upgrade'){
+        damageLevel += tip.prize.amount;
+        localStorage.setItem('dmgLevel', damageLevel);
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    } else if(tip.prize.type === 'bombs'){
+        bombCount += tip.prize.amount;
+        localStorage.setItem('bombCount', bombCount);
+        showNotification(`🎉 Claimed ${tip.prize.label}!`, 'success');
+    }
+    updateHubUI();
 }
 
 // HUB FUNCTIONS
@@ -2715,11 +3491,8 @@ function backToHub(){
     document.getElementById('settings-screen').style.display='none';
     document.getElementById('tutorial-screen').style.display='none';
     document.getElementById('reset-modal').style.display='none';
-    // Restore normal closeSettings behavior
-    closeSettings = function(){
-        document.getElementById('settings-screen').style.display='none';
-        document.getElementById('start-screen').style.display='flex';
-    };
+    // Restore normal settings origin
+    settingsOpenedFrom = 'start-screen';
     updateHubUI();
 }
 function updateHubUI(){
@@ -2727,6 +3500,7 @@ function updateHubUI(){
     document.getElementById('hub-coins').innerText = formatNumber(totalCoins);
     document.getElementById('hub-gems').innerText = formatNumber(gemstones);
     document.getElementById('hub-kills').innerText = formatNumber(totalKills);
+    document.getElementById('hub-prestige').innerText = prestigeLevel + ' (' + prestigePoints + ' pts) | +' + Math.floor(prestigeMultiplier * 100 - 100) + '%';
     document.getElementById('hub-skin').innerText = skinUnlocked ? t('unlocked') + ' (GOLDEN)' : t('locked');
     const unlockedCount = ACHIEVEMENTS_LIST.filter(a => achievements[a.id]===true).length;
     const percent = Math.min(100, (unlockedCount/40)*100);
@@ -2758,6 +3532,7 @@ function backToGameSelect(){
         if(el) el.style.display='none';
     });
     document.getElementById('ability-btns').style.display='none';
+    closeHomeAbilityPanel();
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -2786,6 +3561,8 @@ function resetUpgradesOnly(){
     refund += (damageLevel - 1) * 200;
     refund += droneCount * 500;
     refund += bombCount * 300;
+    refund += resourceCollectionLevel * 350;
+    refund += weaponEnhancementLevel * 450;
     if(hasShieldUpgrade) refund += 250;
     if(hasSpreadShot) refund += 350;
     if(hasLaser) refund += 600;
@@ -2794,6 +3571,8 @@ function resetUpgradesOnly(){
     damageLevel = 1;
     droneCount = 0;
     bombCount = 0;
+    resourceCollectionLevel = 0;
+    weaponEnhancementLevel = 0;
     hasShieldUpgrade = false;
     hasSpreadShot = false;
     hasLaser = false;
@@ -2802,6 +3581,8 @@ function resetUpgradesOnly(){
     localStorage.setItem('dmgLevel', damageLevel);
     localStorage.setItem('droneCount', droneCount);
     localStorage.setItem('bombCount', bombCount);
+    localStorage.setItem('resourceCollectionLevel', resourceCollectionLevel);
+    localStorage.setItem('weaponEnhancementLevel', weaponEnhancementLevel);
     localStorage.setItem('hasShieldUpgrade', hasShieldUpgrade);
     localStorage.setItem('hasSpreadShot', hasSpreadShot);
     localStorage.setItem('hasLaser', hasLaser);
@@ -2823,9 +3604,11 @@ let totalKills=parseInt(localStorage.getItem('totalKills'))||0;
 let fireLevel=parseInt(localStorage.getItem('fireLevel'))||0;
 let damageLevel=parseInt(localStorage.getItem('dmgLevel'))||1;
 let hasShieldUpgrade=localStorage.getItem('hasShieldUpgrade')==='true';
+let shieldHp=0;
+let maxShieldHp=50;
 let hasSpreadShot=localStorage.getItem('hasSpreadShot')==='true';
 let hasLaser=localStorage.getItem('hasLaser')==='true';
-let droneCount=Math.min(400, parseInt(localStorage.getItem('droneCount'))||0);
+let droneCount=Math.min(180, parseInt(localStorage.getItem('droneCount'))||0);
 let bombCount=parseInt(localStorage.getItem('bombCount'))||0;
 let achievements; try { achievements = JSON.parse(localStorage.getItem('achievements')||'{}'); } catch(e) { achievements = {}; }
 let skinUnlocked=localStorage.getItem('skinUnlocked')==='true';
@@ -2834,10 +3617,16 @@ let guardianDefeated=localStorage.getItem('guardianDefeated')==='true';
 let endlessMode=false;
 let gameState='LOADING';
 let score=0,health=100,maxHealth=100,xp=0,level=1;
+// PRESTIGE SYSTEM
+let prestigeLevel = parseInt(localStorage.getItem('prestigeLevel')) || 0;
+let prestigePoints = parseInt(localStorage.getItem('prestigePoints')) || 0;
+let prestigeUpgrades = JSON.parse(localStorage.getItem('prestigeUpgrades')) || {startingBonus:0, overcharge:0, luckyStart:0, resilience:0};
+let prestigeMultiplier = 1 + (prestigePoints * 0.02);
 let odCharge=0,isOD=false,odTimer=0;
 let lastFire=0,shake=0,combo=1,comboTimer=0;
 let bossWarningTimer=0,waveBannerTimer=0;
 let wave=1,waveKillGoal=12,waveKills=0,waveTriggered=false;
+let waveStartTime = Date.now();
 let player=null;
 let stars=[],bullets=[],enemies=[],eBullets=[],particles=[],items=[],floats=[];
 let boss=null,isPaused=false;
@@ -2862,6 +3651,15 @@ let primordialRageCount=0;
 let deathTouchCount=0;
 let chaosRealmCount=0;
 let eventCooldown=0;
+let eventQueue=[];
+let asteroidBeltActive=false;
+let asteroidBeltTimer=0;
+let asteroids=[];
+let supplyDropActive=false;
+let supplyDropTimer=0;
+let supplyDropCrate=null;
+let greenAuraActive=false;
+let divineFlashTimer=0;
 let ascendTriggered=false;
 let timerInterval = null;
 let animationId = null;
@@ -2879,6 +3677,10 @@ function updateSkinEffects(){
     skinCreditMultiplier = 1 + (rankBonus / 100);
     skinDamageMultiplier = 1 + (rankBonus / 100);
     skinFireRateMultiplier = 1 + (rankBonus / 100);
+    // Apply prestige multiplier to credit and damage
+    prestigeMultiplier = 1 + (prestigePoints * 0.02);
+    skinCreditMultiplier *= prestigeMultiplier;
+    skinDamageMultiplier *= prestigeMultiplier;
     if(currentSkin === 'gold'){
         skinCreditMultiplier *= 1.25;
         skinDamageMultiplier *= 1.2;
@@ -3122,7 +3924,7 @@ const ACHIEVEMENTS_LIST = [
     {id:'drone_master', name:'DRONE MASTER', desc:'Own 10 drones', gems:50, difficulty:'hard'},
     {id:'fire_god', name:'FIRE GOD', desc:'Fire Rate level 30', gems:60, difficulty:'hard'},
     {id:'damage_god', name:'DAMAGE GOD', desc:'Damage level 30', gems:60, difficulty:'hard'},
-    {id:'drone_overlord', name:'DRONE OVERLORD', desc:'Own 400 drones (max)', gems:100, difficulty:'extreme'},
+    {id:'drone_overlord', name:'DRONE OVERLORD', desc:'Own 180 drones (max)', gems:100, difficulty:'extreme'},
     {id:'apocalypse_survivor', name:'APOCALYPSE SURVIVOR', desc:'Survive Apocalypse Mode 3 times', gems:60, difficulty:'hard'},
     {id:'void_walker', name:'VOID WALKER', desc:'Trigger Void Mode 5 times', gems:70, difficulty:'hard'},
     {id:'guardian_slayer', name:'GUARDIAN SLAYER', desc:'Defeat The Guardian', gems:200, difficulty:'mythic'},
@@ -3154,7 +3956,7 @@ const ACHIEVEMENTS_LIST = [
     {id:'speed_100', name:'SPEED 100', desc:'Complete 100 waves in under 30 minutes', gems:200, difficulty:'mythic'},
     {id:'overdrive_1000', name:'OVERDRIVE 1000', desc:'Activate Overdrive 1000 times', gems:300, difficulty:'mythic'},
     {id:'bomb_1000', name:'BOMB 1000', desc:'Use 1000 bombs total', gems:200, difficulty:'mythic'},
-    {id:'drone_400', name:'DRONE 400', desc:'Own 400 drones', gems:150, difficulty:'mythic'},
+    {id:'drone_400', name:'DRONE 180', desc:'Own 180 drones (max)', gems:150, difficulty:'mythic'},
     {id:'fire_100', name:'FIRE 100', desc:'Fire Rate level 100', gems:200, difficulty:'mythic'},
     {id:'damage_100', name:'DAMAGE 100', desc:'Damage level 100', gems:200, difficulty:'mythic'},
     {id:'death_touch', name:'DEATH\'S TOUCH', desc:'Experience Death\'s Touch event', gems:250, difficulty:'mythic'},
@@ -3273,7 +4075,7 @@ function getAchievementProgressValue(id){
     if(id==='drone_master') return droneCount>=10;
     if(id==='fire_god') return fireLevel>=30;
     if(id==='damage_god') return damageLevel>=30;
-    if(id==='drone_overlord') return droneCount>=400;
+    if(id==='drone_overlord') return droneCount>=180;
     if(id==='apocalypse_survivor') return apocalypseTriggers>=3;
     if(id==='void_walker') return voidTriggers>=5;
     if(id==='guardian_slayer') return guardianDefeated===true;
@@ -3305,7 +4107,7 @@ function getAchievementProgressValue(id){
     if(id==='speed_100') return (wave>=100 && (Date.now()-startTime)<1800000);
     if(id==='overdrive_1000') return totalOverdriveUses>=1000;
     if(id==='bomb_1000') return totalBombsUsed>=1000;
-    if(id==='drone_400') return droneCount>=400;
+    if(id==='drone_400') return droneCount>=180;
     if(id==='fire_100') return fireLevel>=100;
     if(id==='damage_100') return damageLevel>=100;
     if(id==='endless_master') return endlessMode && wave>=200;
@@ -3407,6 +4209,18 @@ function checkSkinUnlock(){
         showAchievementPopup('🏆 LEGEND SKIN UNLOCKED', 'You reached Rank 50! Legend skin is yours!');
         updateSkinsUI();
     }
+    if(totalKills >= 10000 && !ownedSkins.phantom){
+        ownedSkins.phantom = true;
+        localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
+        showAchievementPopup('👻 PHANTOM SKIN UNLOCKED', '10,000 total kills! Phantom skin is yours!');
+        updateSkinsUI();
+    }
+    if(maxWaveReached >= 50 && !ownedSkins.celestial){
+        ownedSkins.celestial = true;
+        localStorage.setItem('ownedSkins', JSON.stringify(ownedSkins));
+        showAchievementPopup('✨ CELESTIAL SKIN UNLOCKED', 'Reached Wave 50! Celestial skin is yours!');
+        updateSkinsUI();
+    }
 }
 
 function updateSkinProgressUI(){
@@ -3466,8 +4280,8 @@ function getAchievementProgress(achId){
         'damage_100': {current: damageLevel, target: 100},
         'drone_army': {current: droneCount, target: 5},
         'drone_master': {current: droneCount, target: 10},
-        'drone_overlord': {current: droneCount, target: 400},
-        'drone_400': {current: droneCount, target: 400},
+        'drone_overlord': {current: droneCount, target: 180},
+        'drone_400': {current: droneCount, target: 180},
         'shopaholic': {current: totalUpgradesBought, target: 50},
         'legendary': {current: level, target: 15},
         'true_god': {current: level, target: 30},
@@ -3596,27 +4410,102 @@ function closeEvents(){
     document.getElementById('events-screen').style.display='none';
     document.getElementById('start-screen').style.display='flex';
 }
+
+// === COMBINED EVENTS & ACHIEVEMENTS SCREEN ===
+function openEventsAchievements(){
+    document.getElementById('start-screen').style.display='none';
+    document.getElementById('events-achievements-screen').style.display='flex';
+    switchEATab('events');
+}
+function closeEventsAchievements(){
+    document.getElementById('events-achievements-screen').style.display='none';
+    document.getElementById('start-screen').style.display='flex';
+}
+function switchEATab(tab){
+    document.querySelectorAll('.ea-tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ea-tab-panel').forEach(p=>p.classList.remove('active'));
+    if(tab==='events'){
+        document.querySelectorAll('.ea-tab-btn')[0].classList.add('active');
+        document.getElementById('ea-events-panel').classList.add('active');
+        updateEventsUIEA();
+    } else {
+        document.querySelectorAll('.ea-tab-btn')[1].classList.add('active');
+        document.getElementById('ea-achievements-panel').classList.add('active');
+        updateAchievementsUIEA();
+    }
+}
+function updateEventsUIEA(){
+    const container=document.getElementById('ea-events-list-container');
+    if(!container)return;
+    // Reuse the same content as updateEventsUI
+    const origContainer=document.getElementById('events-list-container');
+    if(origContainer && origContainer.innerHTML){
+        container.innerHTML = origContainer.innerHTML;
+    } else {
+        // Build it directly if original hasn't been built yet
+        updateEventsUI();
+        container.innerHTML = origContainer ? origContainer.innerHTML : '';
+    }
+}
+function updateAchievementsUIEA(filter='all'){
+    const container=document.getElementById('ea-ach-list');
+    if(!container)return;
+    container.innerHTML='';
+    let filteredList = ACHIEVEMENTS_LIST;
+    if(filter !== 'all'){
+        filteredList = ACHIEVEMENTS_LIST.filter(a => a.difficulty === filter);
+    }
+    const totalUnlocked = ACHIEVEMENTS_LIST.filter(a => achievements[a.id]===true).length;
+    const totalAchievements = ACHIEVEMENTS_LIST.length;
+    const unlockedNumEl = document.getElementById('ea-ach-unlocked-num');
+    const totalNumEl = document.getElementById('ea-ach-total-num');
+    const progressFillEl = document.getElementById('ea-ach-total-progress-fill');
+    if(unlockedNumEl) unlockedNumEl.textContent = totalUnlocked;
+    if(totalNumEl) totalNumEl.textContent = totalAchievements;
+    if(progressFillEl) progressFillEl.style.width = ((totalUnlocked / totalAchievements) * 100) + '%';
+    for(const a of filteredList){
+        const unlocked=achievements[a.id]===true;
+        const progress = getAchievementProgress(a.id);
+        const percent = Math.min(100, (progress.current/progress.target)*100);
+        const diffClass = a.difficulty ? ' ach-'+a.difficulty : '';
+        const div=document.createElement('div');
+        div.className='ach-card '+(unlocked?'':'locked')+diffClass;
+        div.innerHTML=`<div class="ach-status" style="float:left;">${unlocked?'✅':'🔒'}</div>
+                       <div class="ach-name">${a.name}</div>
+                       <div class="ach-desc">${a.desc}</div>
+                       ${!unlocked && progress.target>1 ? `<div class="ach-progress-bar"><div class="ach-progress-fill" style="width:${percent}%"></div></div>
+                       <div class="ach-progress-text">${formatNumber(progress.current)}/${formatNumber(progress.target)}</div>` : ''}
+                       ${unlocked ? '<div class="ach-progress-text" style="color:gold;">✓ COMPLETED +'+a.gems+'💎</div>' : '<div class="ach-progress-text" style="color:#ffaa00;">🎁 '+a.gems+'💎</div>'}`;
+        container.appendChild(div);
+    }
+}
+function filterAchievementsEA(difficulty){
+    const tabs = document.querySelectorAll('#ea-ach-filter-tabs .ach-filter-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+    if(event && event.target) event.target.classList.add('active');
+    updateAchievementsUIEA(difficulty);
+}
 function updateEventsUI(){
     const container=document.getElementById('events-list-container');
     if(!container)return;
     container.innerHTML=`
         <div class="event-card"><div class="event-name">☄️ METEOR SHOWER</div><div class="event-chance">Chance: 60% every 4 waves (wave≥4)</div><div class="event-desc">Meteors fall from the sky. Destroy them for +200 points each. Meteor hit = 15 damage.</div></div>
-        <div class="event-card"><div class="event-name">🌀 DIMENSION RIFT</div><div class="event-chance">Chance: 3% after wave 10</div><div class="event-desc">Double enemies, 2x points and credits for 15 seconds.</div></div>
-        <div class="event-card"><div class="event-name">🧠 SYNAPSE MODE</div><div class="event-chance">Collect 8 Psychedelia (🧠) items</div><div class="event-desc">Time slows, 2.5x damage, trippy background for 10 seconds.</div></div>
-        <div class="event-card"><div class="event-name">🔴 APOCALYPSE MODE</div><div class="event-chance">~0.5% every 5 waves (rare!)</div><div class="event-desc">Enemies doubled, faster, but 5x points. Lasts 15 seconds.</div></div>
-        <div class="event-card"><div class="event-name">💜 VOID MODE</div><div class="event-chance">~0.3% after wave 15 (ultra rare!)</div><div class="event-desc">Become invincible, 10x damage for 15 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🌀 DIMENSION RIFT</div><div class="event-chance">~3% after wave 10</div><div class="event-desc">Double enemies, 2.5x points and credits for 18 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🧠 SYNAPSE MODE</div><div class="event-chance">Collect 8 Psychedelia (🧠) items</div><div class="event-desc">Time slows, 4x damage, trippy background for 12 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🔴 APOCALYPSE MODE</div><div class="event-chance">~0.5% every 5 waves (rare!)</div><div class="event-desc">Enemies doubled, faster, but 3x points. Lasts 18 seconds.</div></div>
+        <div class="event-card"><div class="event-name">💜 VOID MODE</div><div class="event-chance">~0.3% after wave 15 (ultra rare!)</div><div class="event-desc">Become invincible, 15x damage for 18 seconds.</div></div>
         <div class="event-card"><div class="event-name">👑 THE GUARDIAN</div><div class="event-chance">~0.1% after wave 20 (legendary!)</div><div class="event-desc">Giant golden boss with 10,000 HP. Rewards: 50,000 points, 5,000 credits, and GUARANTEES golden skin!</div></div>
-        <div class="event-card"><div class="event-name">🌌 COSMIC COLLAPSE</div><div class="event-chance">GUARANTEED every 40 waves!</div><div class="event-desc">Screen fills with enemies, 10x points, 5x credits for 20 seconds.</div></div>
-        <div class="event-card"><div class="event-name">⚡ PRIMORDIAL RAGE</div><div class="event-chance">~0.003% (1 in 33,333) - EXTREMELY RARE!</div><div class="event-desc">Become giant red, invincible, massive bullet storms for 10 seconds.</div></div>
+        <div class="event-card"><div class="event-name">🌌 COSMIC COLLAPSE</div><div class="event-chance">GUARANTEED every 40 waves!</div><div class="event-desc">Screen fills with enemies, 5x points, 5x credits for 24 seconds.</div></div>
+        <div class="event-card"><div class="event-name">⚡ PRIMORDIAL RAGE</div><div class="event-chance">~0.003% (1 in 33,333) - EXTREMELY RARE!</div><div class="event-desc">Become giant red, invincible, massive bullet storms for 12 seconds. 30x damage!</div></div>
         <div class="event-card"><div class="event-name">🕳️ BLACK HOLE</div><div class="event-chance">Collect 6 Black Hole pieces (⭐) to activate</div><div class="event-desc">Sucks in all enemies, instantly killing them. All points and credits rewarded!</div></div>
         <div class="event-card"><div class="event-name">💀 DEATH'S TOUCH</div><div class="event-chance">~0.005% (1 in 20,000) - MYTHIC RARE!</div><div class="event-desc">All enemies on screen die instantly! 50x points for each enemy!</div></div>
-        <div class="event-card"><div class="event-name">🌈 CHAOS REALM</div><div class="event-chance">~0.008% (1 in 12,500) - MYTHIC RARE!</div><div class="event-desc">Rainbow bullets, 5x fire rate, trippy rainbow background for 12 seconds!</div></div>
+        <div class="event-card"><div class="event-name">🌈 CHAOS REALM</div><div class="event-chance">~0.008% (1 in 12,500) - MYTHIC RARE!</div><div class="event-desc">Rainbow bullets, 5x fire rate, 5x damage, trippy rainbow background for 14 seconds!</div></div>
         <div class="event-card"><div class="event-name">💀 REAPER'S CALL</div><div class="event-chance">~0.002% (1 in 50,000) - MYTHIC RARE!</div><div class="event-desc">Reapers appear and automatically kill enemies for 10 seconds!</div></div>
         <div class="event-card"><div class="event-name">🌀 TIME WARP</div><div class="event-chance">~0.004% (1 in 25,000) - MYTHIC RARE!</div><div class="event-desc">All enemies slowed by 80% for 10 seconds!</div></div>
-        <div class="event-card"><div class="event-name">💰 GOLD RUSH</div><div class="event-chance">~0.0005% (1 in 200,000) - LEGENDARY RARE!</div><div class="event-desc">10x credits and gemstones from all sources for 15 seconds!</div></div>
-        <div class="event-card"><div class="event-name">⚡ DIVINE INTERVENTION</div><div class="event-chance">~0.00001% (1 in 10,000,000) - GODLY RARE!</div><div class="event-desc">Full heal + 30 seconds invincibility!</div></div>
-        <div class="event-card"><div class="event-name">🐛 BUG EVENT</div><div class="event-chance">~0.001% (1 in 100,000) - MYSTERY EVENT!</div><div class="event-desc">The game glitches out... then rewards you with massive bonuses!</div></div>
-        <div class="event-card"><div class="event-name">💫 STABLE CYCLE</div><div class="event-chance">GUARANTEED every 7 waves!</div><div class="event-desc">3x points and credits for 10 seconds!</div></div>
+        <div class="event-card"><div class="event-name">💰 GOLD RUSH</div><div class="event-chance">~0.0005% (1 in 200,000) - LEGENDARY RARE!</div><div class="event-desc">10x credits, 3x points and gemstones from all sources for 18 seconds!</div></div>
+        <div class="event-card"><div class="event-name">⚡ DIVINE INTERVENTION</div><div class="event-chance">~0.00000001% (1 in 10,000,000,000) - ULTRA GODLY RARE!</div><div class="event-desc">GOD MODE for 2 minutes! Full heal + invincible! 200,000x DMG! +100,000💎! +600x coins! Screen cleared! Golden overlay!</div></div>
+        <div class="event-card"><div class="event-name">🐛 BUG EVENT</div><div class="event-chance">~0.001% (1 in 100,000) - MYSTERY EVENT!</div><div class="event-desc">The game glitches out... then rewards you with 8x damage and massive bonuses!</div></div>
+        <div class="event-card"><div class="event-name">💫 STABLE CYCLE</div><div class="event-chance">GUARANTEED every 7 waves!</div><div class="event-desc">2.5x points and credits for 12 seconds!</div></div>
         <div class="event-card"><div class="event-name">🌊 TIDAL WAVE</div><div class="event-chance">~0.5% after wave 12 (rare!)</div><div class="event-desc">Massive wave of enemies, but 5x points per kill!</div></div>
         <div class="event-card"><div class="event-name">🎭 MASQUERADE</div><div class="event-chance">~0.3% after wave 15 (rare!)</div><div class="event-desc">Enemies disguise as items, but give 10x points!</div></div>
         <div class="event-card"><div class="event-name">💀 SOUL HARVEST</div><div class="event-chance">~0.1% after wave 20 (legendary!)</div><div class="event-desc">Defeated enemies release souls that attack other enemies!</div></div>
@@ -3626,21 +4515,23 @@ function updateEventsUI(){
         <div class="event-card"><div class="event-name">⚡ LIGHTNING STORM</div><div class="event-chance">~0.1% after wave 12 (rare!)</div><div class="event-desc">Lightning strikes random enemies, dealing massive damage!</div></div>
         <div class="event-card"><div class="event-name">🍀 LUCKY DRAW</div><div class="event-chance">~0.05% after wave 15 (rare!)</div><div class="event-desc">Get a random shop item for free!</div></div>
         <div class="event-card"><div class="event-name">🔮 MYSTERY BOX</div><div class="event-chance">~0.03% after wave 18 (rare!)</div><div class="event-desc">Open a mystery box with random rewards!</div></div>
-        <div class="event-card"><div class="event-name">💀 DOOM'S DAY</div><div class="event-chance">~0.01% after wave 20 (legendary!)</div><div class="event-desc">All enemies weakened by 50% and drop 2x points!</div></div>
-        <div class="event-card"><div class="event-name">👑 ROYAL BLESSING</div><div class="event-chance">~0.005% after wave 25 (mythic!)</div><div class="event-desc">3x to everything for 20 seconds!</div></div>
-        <div class="event-card"><div class="event-name">🌟 STARFALL</div><div class="event-chance">~0.12% after wave 10 (rare!)</div><div class="event-desc">Stars fall from the sky! Collect them for bonuses!</div></div>
+        <div class="event-card"><div class="event-name">💀 DOOM'S DAY</div><div class="event-chance">~0.05% after wave 20 (legendary!)</div><div class="event-desc">Massive wave of weakened enemies! 3x points, 15% chance for Green Aura that damages nearby enemies!</div></div>
+        <div class="event-card"><div class="event-name">👑 ROYAL BLESSING</div><div class="event-chance">~0.005% after wave 25 (mythic!)</div><div class="event-desc">5x to everything for 24 seconds!</div></div>
+        <div class="event-card"><div class="event-name">🌟 STARFALL</div><div class="event-chance">~0.14% after wave 10 (rare!)</div><div class="event-desc">Stars fall from the sky! Collect them for gemstones! 15 stars with boosted values!</div></div>
         <div class="event-card"><div class="event-name">🔥 INFERNO</div><div class="event-chance">~0.08% after wave 15 (rare!)</div><div class="event-desc">Flames spread across the screen, burning enemies!</div></div>
         <div class="event-card"><div class="event-name">⚡ CHAIN LIGHTNING</div><div class="event-chance">~0.06% after wave 18 (rare!)</div><div class="event-desc">Lightning chains between enemies, dealing massive damage!</div></div>
         <div class="event-card"><div class="event-name">🛡️ BARRIER</div><div class="event-chance">~0.2% after wave 12 (rare!)</div><div class="event-desc">Create a barrier that absorbs all damage for 10 seconds!</div></div>
         <div class="event-card"><div class="event-name">💀 SOUL REAPER</div><div class="event-chance">~0.02% after wave 25 (legendary!)</div><div class="event-desc">A giant reaper appears and harvests enemy souls!</div></div>
         <div class="event-card"><div class="event-name">🎲 GAMBLER</div><div class="event-chance">~0.01% after wave 20 (legendary!)</div><div class="event-desc">Gamble your credits for a chance to win big!</div></div>
         <div class="event-card"><div class="event-name">🌀 VORTEX</div><div class="event-chance">~0.04% after wave 22 (rare!)</div><div class="event-desc">A vortex sucks in and destroys enemies!</div></div>
-        <div class="event-card"><div class="event-name">👑 KING'S BLESSING</div><div class="event-chance">~0.003% after wave 30 (mythic!)</div><div class="event-desc">The king blesses you with 5x everything for 15 seconds!</div></div>
+        <div class="event-card"><div class="event-name">👑 KING'S BLESSING</div><div class="event-chance">~0.003% after wave 30 (mythic!)</div><div class="event-desc">The king blesses you with 8x everything for 18 seconds!</div></div>
         <div class="event-card"><div class="event-name">🌈 PRISM</div><div class="event-chance">~0.05% after wave 18 (rare!)</div><div class="event-desc">Split your bullets into rainbow colors for massive coverage!</div></div>
         <div class="event-card"><div class="event-name">🕳️ ABYSS</div><div class="event-chance">~0.002% after wave 35 (mythic!)</div><div class="event-desc">An abyss opens, swallowing all enemies!</div></div>
         <div class="event-card"><div class="event-name">🎭 DOPPELGANGER</div><div class="event-chance">~0.06% after wave 22 (rare!)</div><div class="event-desc">A clone of you appears and fights alongside you for 15 seconds!</div></div>
         <div class="event-card"><div class="event-name">💥 SUPERNOVA</div><div class="event-chance">~0.001% after wave 30 (mythic!)</div><div class="event-desc">A massive explosion kills all enemies on screen and drops massive bonuses!</div></div>
         <div class="event-card"><div class="event-name">🎁 SPACE TREASURE</div><div class="event-chance">45% every 9 waves</div><div class="event-desc">Treasure ships warp in dropping valuable loot! Collect golden crates for gems, credits, and bombs!</div></div>
+        <div class="event-card"><div class="event-name">☄️ ASTEROID BELT</div><div class="event-chance">~0.1% after wave 16</div><div class="event-desc">A wave of asteroids crosses the screen! Shoot them for bonus coins and gems. Larger asteroids take more hits but give better rewards!</div></div>
+        <div class="event-card"><div class="event-name">📦 SUPPLY DROP</div><div class="event-chance">~0.08% after wave 14</div><div class="event-desc">A glowing cargo crate appears! Fly to it before it disappears for random coins, gems, or a temporary buff!</div></div>
         <div class="event-card"><div class="event-name" style="color:#ffaa00;">⏱️ EVENT COOLDOWN</div><div class="event-chance">3 seconds between events</div><div class="event-desc">Events cannot trigger one after another - 3 second grace period!</div></div>
         <div class="event-card"><div class="event-name" style="color:gold;">🌟 ENDLESS MODE</div><div class="event-chance">Available after wave 100</div><div class="event-desc">Continue infinitely with progressively stronger enemies!</div></div>
     `;
@@ -3789,6 +4680,7 @@ function tickPowerUps(){
     const now=Date.now();
     for(const k of Object.keys(activePowerUps)) if(activePowerUps[k].endTime<=now) delete activePowerUps[k];
     if(activePowerUps.regen&&Math.random()<0.008) health=Math.min(maxHealth,health+0.5);
+    if(getSkillBonus('regen')>0 && Math.random()<0.003) health=Math.min(maxHealth,health+getSkillBonus('regen'));
     updatePowerUpBar();
 }
 
@@ -3799,6 +4691,21 @@ function canTriggerEvent(){
     return true;
 }
 function startEventCooldown(){ eventCooldown = Date.now() + 3000; }
+
+function queueEvent(triggerFn){
+    if(activeEvent){
+        eventQueue.push(triggerFn);
+    } else {
+        triggerFn();
+    }
+}
+
+function processEventQueue(){
+    if(!activeEvent && eventQueue.length > 0){
+        const nextEvent = eventQueue.shift();
+        nextEvent();
+    }
+}
 
 // EVENT TRIGGER FUNCTIONS (abbreviated - same as before)
 function triggerDoppelganger(){
@@ -3850,22 +4757,22 @@ function triggerSupernova(){
 }
 
 function triggerMeteorShower(){ if(!canTriggerEvent()) return; activeEvent='meteor'; eventTimer=Date.now()+10000; totalEventsTriggered++; sfxEvent(); const banner=document.getElementById('event-banner'); banner.innerHTML='☄️ METEOR SHOWER ☄️'; banner.style.display='block'; banner.style.color='#ffaa44'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<15+Math.floor(Math.random()*15);i++) meteors.push(new Meteor(Math.random()*width, -50)); startEventCooldown(); checkAchievements(); showNotification('☄️ Meteor Shower event started!', 'event'); }
-function triggerDimensionRift(){ if(!canTriggerEvent()) return; activeEvent='rift'; eventTimer=Date.now()+15000; riftActive=true; riftMultiplier=2; totalEventsTriggered++; totalRiftsTriggered++; sfxEvent(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 DIMENSION RIFT 🌀'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<8;i++) enemies.push(new Enemy()); startEventCooldown(); checkAchievements(); showNotification('🌀 Dimension Rift event started! 2x points!', 'event'); }
-function triggerApocalypseMode(){ if(!canTriggerEvent()) return; apocalypseActive=true; activeEvent='apocalypse'; eventTimer=Date.now()+15000; apocalypseTriggers++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='🔴 APOCALYPSE MODE 🔴'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<12;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🔴 APOCALYPSE!',x:width/2-60,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('🔴 Apocalypse Mode event started! 5x points!', 'event'); }
-function triggerVoidMode(){ if(!canTriggerEvent()) return; voidActive=true; voidTimer=Date.now()+15000; activeEvent='void'; eventTimer=Date.now()+15000; voidTriggers++; totalEventsTriggered++; sfxVoid(); const banner=document.getElementById('event-banner'); banner.innerHTML='💜 VOID MODE 💜'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💜 VOID MODE!',x:width/2-50,y:height/2-40,l:1.5,c:'#aa66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💜 Void Mode event started! Invincible!', 'event'); }
+function triggerDimensionRift(){ if(!canTriggerEvent()) return; activeEvent='rift'; eventTimer=Date.now()+18000; riftActive=true; riftMultiplier=2.5; totalEventsTriggered++; totalRiftsTriggered++; sfxEvent(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 DIMENSION RIFT 🌀'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<10;i++) enemies.push(new Enemy()); startEventCooldown(); checkAchievements(); showNotification('🌀 Dimension Rift event started! 2.5x points!', 'event'); }
+function triggerApocalypseMode(){ if(!canTriggerEvent()) return; apocalypseActive=true; activeEvent='apocalypse'; eventTimer=Date.now()+18000; apocalypseTriggers++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='🔴 APOCALYPSE MODE 🔴'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<16;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🔴 APOCALYPSE!',x:width/2-60,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('🔴 Apocalypse Mode event started! 3x points!', 'event'); }
+function triggerVoidMode(){ if(!canTriggerEvent()) return; voidActive=true; voidTimer=Date.now()+18000; activeEvent='void'; eventTimer=Date.now()+18000; voidTriggers++; totalEventsTriggered++; sfxVoid(); const banner=document.getElementById('event-banner'); banner.innerHTML='💜 VOID MODE 💜'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💜 VOID MODE!',x:width/2-50,y:height/2-40,l:1.5,c:'#aa66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💜 Void Mode event started! Invincible!', 'event'); }
 function triggerGuardian(){ if(!canTriggerEvent()) return; guardian=new Guardian(); activeEvent='guardian'; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='👑 THE GUARDIAN AWAKENS 👑'; banner.style.display='block'; banner.style.color='gold'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'👑 GUARDIAN!',x:width/2-50,y:height/2-50,l:2,c:'gold',size:32}); startEventCooldown(); showNotification('👑 The Guardian has awakened!', 'warning'); }
-function triggerCosmicCollapse(){ if(!canTriggerEvent()) return; activeEvent='cosmic'; eventTimer=Date.now()+20000; cosmicCollapseActive=true; cosmicCollapseCount++; totalEventsTriggered++; sfxCosmic(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌌 COSMIC COLLAPSE 🌌'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<30;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌌 COSMIC COLLAPSE!',x:width/2-70,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌌 Cosmic Collapse event started! 10x points!', 'event'); }
-function triggerPrimordialRage(){ if(!canTriggerEvent()) return; activeEvent='primordial'; eventTimer=Date.now()+10000; primordialRageActive=true; primordialRageCount++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ PRIMORDIAL RAGE ⚡'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player) player.r = 60; if(player && player.x && player.y) floats.push({txt:'⚡ PRIMORDIAL RAGE!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('⚡ Primordial Rage event started! Massive damage!', 'event'); }
+function triggerCosmicCollapse(){ if(!canTriggerEvent()) return; activeEvent='cosmic'; eventTimer=Date.now()+24000; cosmicCollapseActive=true; cosmicCollapseCount++; totalEventsTriggered++; sfxCosmic(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌌 COSMIC COLLAPSE 🌌'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<39;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌌 COSMIC COLLAPSE!',x:width/2-70,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌌 Cosmic Collapse event started! 5x points!', 'event'); }
+function triggerPrimordialRage(){ if(!canTriggerEvent()) return; activeEvent='primordial'; eventTimer=Date.now()+12000; primordialRageActive=true; primordialRageCount++; totalEventsTriggered++; sfxApocalypse(); const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ PRIMORDIAL RAGE ⚡'; banner.style.display='block'; banner.style.color='#ff0000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player) player.r = 60; if(player && player.x && player.y) floats.push({txt:'⚡ PRIMORDIAL RAGE!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff0000',size:24}); startEventCooldown(); checkAchievements(); showNotification('⚡ Primordial Rage event started! Massive damage!', 'event'); }
 function triggerBlackHole(){ if(!canTriggerEvent()) return; activeEvent='blackhole'; eventTimer=Date.now()+8000; blackHoleActive=true; blackHoleCenter={x:width/2, y:height/2}; totalEventsTriggered++; sfxCosmic(); const banner=document.getElementById('event-banner'); banner.innerHTML='🕳️ BLACK HOLE 🕳️'; banner.style.display='block'; banner.style.color='#4400aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); let activations=parseInt(localStorage.getItem('blackHoleActivations')||0)+1; localStorage.setItem('blackHoleActivations',activations); if(player && player.x && player.y) floats.push({txt:'🕳️ BLACK HOLE!',x:width/2-50,y:height/2-40,l:1.5,c:'#4400aa',size:24}); startEventCooldown(); checkAchievements(); showNotification('🕳️ Black Hole event started!', 'event'); }
 function triggerDeathTouch(){ if(!canTriggerEvent()) return; activeEvent='deathtouch'; eventTimer=Date.now()+3000; deathTouchCount++; totalEventsTriggered++; sfxDeathTouch(); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 DEATH\'S TOUCH 💀'; banner.style.display='block'; banner.style.color='#440044'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); let enemiesKilled=0; for(let i=0;i<enemies.length;i++){ let e=enemies[i]; let pointBonus = e.isBoss?90000:3500*combo; if(goldRushActive) pointBonus*=10; if(stableCycleActive) pointBonus*=3; if(royalBlessingActive) pointBonus*=3; if(kingsBlessingActive) pointBonus*=5; score+=pointBonus; kills++; waveKills++; if(e.isBoss) bossesKilled++; enemiesKilled++; for(let k=0;k<20;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#440044',0.9)); } enemies=[]; boss=null; if(player && player.x && player.y) floats.push({txt:`💀 ${enemiesKilled} ENEMIES DIED!`,x:width/2-100,y:height/2-40,l:1.8,c:'#440044',size:28}); startEventCooldown(); checkAchievements(); showNotification(`💀 Death's Touch killed ${enemiesKilled} enemies!`, 'event'); }
-function triggerChaosRealm(){ if(!canTriggerEvent()) return; activeEvent='chaos'; eventTimer=Date.now()+12000; chaosRealmActive=true; chaosRealmCount++; totalEventsTriggered++; sfxChaosRealm(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌈 CHAOS REALM 🌈'; banner.style.display='block'; banner.style.color='#ff66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌈 CHAOS REALM!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌈 Chaos Realm event started! Rainbow bullets!', 'event'); }
+function triggerChaosRealm(){ if(!canTriggerEvent()) return; activeEvent='chaos'; eventTimer=Date.now()+14000; chaosRealmActive=true; chaosRealmCount++; totalEventsTriggered++; sfxChaosRealm(); const banner=document.getElementById('event-banner'); banner.innerHTML='🌈 CHAOS REALM 🌈'; banner.style.display='block'; banner.style.color='#ff66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌈 CHAOS REALM!',x:width/2-70,y:height/2-40,l:1.5,c:'#ff66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌈 Chaos Realm event started! Rainbow bullets!', 'event'); }
 function triggerReapersCall(){ if(!canTriggerEvent()) return; activeEvent='reaper'; eventTimer=Date.now()+10000; reaperCalls++; totalEventsTriggered++; sfxReaper(); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 REAPER\'S CALL 💀'; banner.style.display='block'; banner.style.color='#880044'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 REAPER\'S CALL!',x:width/2-70,y:height/2-40,l:1.5,c:'#880044',size:24}); startEventCooldown(); checkAchievements(); showNotification('💀 Reaper\'s Call event started!', 'event'); }
 function triggerTimeWarp(){ if(!canTriggerEvent()) return; activeEvent='timewarp'; eventTimer=Date.now()+10000; timeWarps++; totalEventsTriggered++; sfxTimeWarp(); timeWarpActive=true; timeWarpTimer=Date.now()+10000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 TIME WARP 🌀'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌀 TIME WARP!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌀 Time Warp event started! Enemies slowed!', 'event'); }
-function triggerGoldRush(){ if(!canTriggerEvent()) return; activeEvent='goldrush'; eventTimer=Date.now()+15000; goldRushes++; totalEventsTriggered++; sfxGoldRush(); goldRushActive=true; goldRushTimer=Date.now()+15000; const banner=document.getElementById('event-banner'); banner.innerHTML='💰 GOLD RUSH 💰'; banner.style.display='block'; banner.style.color='#ffaa00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💰 GOLD RUSH!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffaa00',size:24}); startEventCooldown(); checkAchievements(); showNotification('💰 Gold Rush event started! 10x credits!', 'event'); }
-function triggerDivineIntervention(){ if(!canTriggerEvent()) return; activeEvent='divine'; eventTimer=Date.now()+30000; divineInterventions++; totalEventsTriggered++; sfxDivine(); divineActive=true; divineTimer=Date.now()+30000; health = maxHealth; if(player) player.invincibleTimer = 3000; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ DIVINE INTERVENTION ⚡'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'⚡ DIVINE INTERVENTION!',x:width/2-80,y:height/2-40,l:1.5,c:'#ffdd00',size:28}); startEventCooldown(); checkAchievements(); showNotification('⚡ Divine Intervention event started! Full heal!', 'event'); }
-function triggerBugEvent(){ if(!canTriggerEvent()) return; activeEvent='bug'; eventTimer=Date.now()+5000; bugEvents++; totalEventsTriggered++; sfxBug(); bugEventActive=true; bugEventGlitch=true; const banner=document.getElementById('event-banner'); banner.innerHTML='🐛 BUG EVENT 🐛'; banner.style.display='block'; banner.style.color='#00ff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🐛 BUG EVENT!',x:width/2-60,y:height/2-40,l:1.5,c:'#00ff00',size:24}); setTimeout(() => { if(gameState === 'PLAYING'){ let reward = 777 * gemMultiplier; gemstones += reward; saveGemstones(); totalCoins += 7777; localStorage.setItem('totalCoins', totalCoins); showAchievementPopup('🐛 BUG EVENT RESOLVED', `You received ${reward} GEMSTONES and 7,777 CREDITS!`, reward); bugEventActive = false; bugEventGlitch = false; } }, 3000); startEventCooldown(); checkAchievements(); showNotification('🐛 Bug Event triggered! Glitch incoming...', 'event'); }
-function triggerStableCycle(){ if(!canTriggerEvent()) return; activeEvent='stable'; eventTimer=Date.now()+10000; stableCycleCount++; totalEventsTriggered++; sfxStable(); stableCycleActive=true; stableCycleTimer=Date.now()+10000; const banner=document.getElementById('event-banner'); banner.innerHTML='💫 STABLE CYCLE 💫'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💫 STABLE CYCLE!',x:width/2-60,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💫 Stable Cycle event started! 3x points!', 'event'); }
-function triggerTidalWave(){ if(!canTriggerEvent()) return; activeEvent='tidal'; eventTimer=Date.now()+12000; tidalWaveCount++; totalEventsTriggered++; sfxTidal(); tidalWaveActive=true; tidalWaveTimer=Date.now()+12000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌊 TIDAL WAVE 🌊'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<20;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌊 TIDAL WAVE!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌊 Tidal Wave event started! Many enemies!', 'event'); }
+function triggerGoldRush(){ if(!canTriggerEvent()) return; activeEvent='goldrush'; eventTimer=Date.now()+18000; goldRushes++; totalEventsTriggered++; sfxGoldRush(); goldRushActive=true; goldRushTimer=Date.now()+18000; const banner=document.getElementById('event-banner'); banner.innerHTML='💰 GOLD RUSH 💰'; banner.style.display='block'; banner.style.color='#ffaa00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💰 GOLD RUSH!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffaa00',size:24}); startEventCooldown(); checkAchievements(); showNotification('💰 Gold Rush event started! 10x credits!', 'event'); }
+function triggerDivineIntervention(){ if(!canTriggerEvent()) return; activeEvent='divine'; eventTimer=Date.now()+120000; divineInterventions++; totalEventsTriggered++; sfxDivine(); divineActive=true; divineTimer=Date.now()+120000; divineFlashTimer=Date.now()+120000; health = maxHealth; if(hasShieldUpgrade) shieldHp = maxShieldHp; if(player) player.invincibleTimer = 999999; /* Full invincibility for entire duration */ gemstones += 100000; saveGemstones(); totalCoins += Math.floor(score * 600); localStorage.setItem('totalCoins', totalCoins); /* Screen clear all enemies with 50 particles each */ for(let i=0;i<enemies.length;i++){ let e=enemies[i]; let pointBonus = e.isBoss?50000:5000*combo; score+=pointBonus; kills++; waveKills++; if(e.isBoss) bossesKilled++; for(let k=0;k<50;k++) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*15,(Math.random()-0.5)*15,'#ffdd00',1)); } enemies=[]; boss=null; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ DIVINE INTERVENTION ⚡'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},5000); if(player && player.x && player.y) floats.push({txt:'⚡ DIVINE INTERVENTION! GOD MODE ACTIVATED! ⚡',x:width/2-140,y:height/2-40,l:3,c:'#ffdd00',size:36}); showNotification('⚡ DIVINE INTERVENTION! GOD MODE! Full heal + invincible! +200,000x DMG! +100,000💎! +600x coins! Screen cleared!', 'event'); startEventCooldown(); checkAchievements(); }
+function triggerBugEvent(){ if(!canTriggerEvent()) return; activeEvent='bug'; eventTimer=Date.now()+5000; bugEvents++; totalEventsTriggered++; sfxBug(); bugEventActive=true; bugEventGlitch=true; const banner=document.getElementById('event-banner'); banner.innerHTML='🐛 BUG EVENT 🐛'; banner.style.display='block'; banner.style.color='#00ff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🐛 BUG EVENT!',x:width/2-60,y:height/2-40,l:1.5,c:'#00ff00',size:24}); setTimeout(() => { if(gameState === 'PLAYING'){ let reward = 1165 * gemMultiplier; gemstones += reward; saveGemstones(); totalCoins += 11665; localStorage.setItem('totalCoins', totalCoins); showAchievementPopup('🐛 BUG EVENT RESOLVED', `You received ${reward} GEMSTONES and 11,665 CREDITS!`, reward); bugEventActive = false; bugEventGlitch = false; } }, 3000); startEventCooldown(); checkAchievements(); showNotification('🐛 Bug Event triggered! Glitch incoming...', 'event'); }
+function triggerStableCycle(){ if(!canTriggerEvent()) return; activeEvent='stable'; eventTimer=Date.now()+12000; stableCycleCount++; totalEventsTriggered++; sfxStable(); stableCycleActive=true; stableCycleTimer=Date.now()+12000; const banner=document.getElementById('event-banner'); banner.innerHTML='💫 STABLE CYCLE 💫'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💫 STABLE CYCLE!',x:width/2-60,y:height/2-40,l:1.5,c:'#88aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('💫 Stable Cycle event started! 2.5x points!', 'event'); }
+function triggerTidalWave(){ if(!canTriggerEvent()) return; activeEvent='tidal'; eventTimer=Date.now()+14000; tidalWaveCount++; totalEventsTriggered++; sfxTidal(); tidalWaveActive=true; tidalWaveTimer=Date.now()+14000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌊 TIDAL WAVE 🌊'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<26;i++) enemies.push(new Enemy()); if(player && player.x && player.y) floats.push({txt:'🌊 TIDAL WAVE!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🌊 Tidal Wave event started! Many enemies!', 'event'); }
 function triggerMasquerade(){ if(!canTriggerEvent()) return; activeEvent='masquerade'; eventTimer=Date.now()+15000; masqueradeCount++; totalEventsTriggered++; sfxMasquerade(); masqueradeActive=true; masqueradeTimer=Date.now()+15000; const banner=document.getElementById('event-banner'); banner.innerHTML='🎭 MASQUERADE 🎭'; banner.style.display='block'; banner.style.color='#aa66ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🎭 MASQUERADE!',x:width/2-60,y:height/2-40,l:1.5,c:'#aa66ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🎭 Masquerade event started! Disguised enemies!', 'event'); }
 function triggerSoulHarvest(){ if(!canTriggerEvent()) return; activeEvent='soul'; eventTimer=Date.now()+15000; soulHarvestCount++; totalEventsTriggered++; sfxSoul(); soulHarvestActive=true; soulHarvestTimer=Date.now()+15000; soulHarvestSouls = []; const banner=document.getElementById('event-banner'); banner.innerHTML='💀 SOUL HARVEST 💀'; banner.style.display='block'; banner.style.color='#8800aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 SOUL HARVEST!',x:width/2-70,y:height/2-40,l:1.5,c:'#8800aa',size:24}); startEventCooldown(); checkAchievements(); showNotification('💀 Soul Harvest event started! Souls attack!', 'event'); }
 function triggerFrozenTime(){ if(!canTriggerEvent()) return; activeEvent='frozen'; eventTimer=Date.now()+8000; frozenTimeCount++; totalEventsTriggered++; sfxFrozen(); frozenTimeActive=true; frozenTimeTimer=Date.now()+8000; const banner=document.getElementById('event-banner'); banner.innerHTML='❄️ FROZEN TIME ❄️'; banner.style.display='block'; banner.style.color='#88ccff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'❄️ FROZEN TIME!',x:width/2-60,y:height/2-40,l:1.5,c:'#88ccff',size:24}); startEventCooldown(); checkAchievements(); showNotification('❄️ Frozen Time event started! Enemies frozen!', 'event'); }
@@ -3874,16 +4781,16 @@ function triggerShadowClone(){ if(!canTriggerEvent()) return; activeEvent='shado
 function triggerLightningStorm(){ if(!canTriggerEvent()) return; activeEvent='lightning'; eventTimer=Date.now()+8000; lightningStormCount++; totalEventsTriggered++; sfxLightning(); lightningStormActive=true; lightningStormTimer=Date.now()+8000; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ LIGHTNING STORM ⚡'; banner.style.display='block'; banner.style.color='#ffff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'⚡ LIGHTNING STORM!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffff00',size:24}); startEventCooldown(); checkAchievements(); showNotification('⚡ Lightning Storm event started! Lightning strikes enemies!', 'event'); }
 function triggerLuckyDraw(){ if(!canTriggerEvent()) return; activeEvent='lucky'; eventTimer=Date.now()+3000; luckyDrawCount++; totalEventsTriggered++; sfxLucky(); const banner=document.getElementById('event-banner'); banner.innerHTML='🍀 LUCKY DRAW 🍀'; banner.style.display='block'; banner.style.color='#88ff88'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); const shopItems = ['fire', 'dmg', 'shield', 'drone', 'heal', 'spread', 'laser', 'bomb']; const randomItem = shopItems[Math.floor(Math.random() * shopItems.length)]; buyUpgrade(randomItem, 1); if(player && player.x && player.y) floats.push({txt:'🍀 LUCKY DRAW! Free upgrade!',x:width/2-70,y:height/2-40,l:1.5,c:'#88ff88',size:24}); startEventCooldown(); checkAchievements(); showNotification('🍀 Lucky Draw event! Free upgrade!', 'event'); }
 function triggerMysteryBox(){ if(!canTriggerEvent()) return; activeEvent='mystery'; eventTimer=Date.now()+3000; mysteryBoxCount++; totalEventsTriggered++; sfxMystery(); const banner=document.getElementById('event-banner'); banner.innerHTML='🔮 MYSTERY BOX 🔮'; banner.style.display='block'; banner.style.color='#ff88ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); const rewards = [ () => { let reward = 500 * gemMultiplier; gemstones += reward; saveGemstones(); return `${reward} GEMSTONES!`; }, () => { let reward = 10000; totalCoins += reward; localStorage.setItem('totalCoins', totalCoins); return `${reward} CREDITS!`; }, () => { bombCount += 5; localStorage.setItem('bombCount', bombCount); return "5 BOMBS!"; }, () => { damageLevel += 2; localStorage.setItem('dmgLevel', damageLevel); return "PERMANENT DAMAGE +2!"; }, () => { fireLevel += 3; localStorage.setItem('fireLevel', fireLevel); return "PERMANENT FIRE RATE +3!"; } ]; const reward = rewards[Math.floor(Math.random() * rewards.length)](); if(player && player.x && player.y) floats.push({txt:`🔮 MYSTERY BOX! ${reward}`,x:width/2-80,y:height/2-40,l:1.5,c:'#ff88ff',size:24}); startEventCooldown(); checkAchievements(); showNotification('🔮 Mystery Box event! Random reward!', 'event'); }
-function triggerDoomsDay(){ if(!canTriggerEvent()) return; activeEvent='doom'; eventTimer=Date.now()+15000; doomsDayCount++; totalEventsTriggered++; sfxDoom(); doomsDayActive=true; const banner=document.getElementById('event-banner'); banner.innerHTML='💀 DOOM\'S DAY 💀'; banner.style.display='block'; banner.style.color='#440000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 DOOM\'S DAY!',x:width/2-60,y:height/2-40,l:1.5,c:'#440000',size:24}); startEventCooldown(); checkAchievements(); showNotification('💀 Doom\'s Day event started! Enemies weakened!', 'event'); }
-function triggerRoyalBlessing(){ if(!canTriggerEvent()) return; activeEvent='royal'; eventTimer=Date.now()+20000; royalBlessingCount++; totalEventsTriggered++; sfxRoyal(); royalBlessingActive=true; royalBlessingTimer=Date.now()+20000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 ROYAL BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'👑 ROYAL BLESSING!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffdd00',size:24}); startEventCooldown(); checkAchievements(); showNotification('👑 Royal Blessing event started! 3x everything!', 'event'); }
-function triggerStarfall(){ if(!canTriggerEvent()) return; activeEvent='starfall'; eventTimer=Date.now()+10000; starfallCount++; totalEventsTriggered++; sfxStarfall(); starfallActive=true; starfallTimer=Date.now()+10000; starfallStars = []; const banner=document.getElementById('event-banner'); banner.innerHTML='🌟 STARFALL 🌟'; banner.style.display='block'; banner.style.color='#ffffaa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<20;i++){ starfallStars.push({x:Math.random()*width, y:-20, size:8+Math.random()*8, value:50+Math.floor(Math.random()*100)}); } if(player && player.x && player.y) floats.push({txt:'🌟 STARFALL!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffffaa',size:24}); showNotification('🌟 STARFALL event started! Catch falling stars!', 'event'); startEventCooldown(); checkAchievements(); }
+function triggerDoomsDay(){ if(!canTriggerEvent()) return; activeEvent='doom'; eventTimer=Date.now()+18000; doomsDayCount++; totalEventsTriggered++; sfxDoom(); doomsDayActive=true; greenAuraActive=Math.random()<0.15; for(let i=0;i<39;i++) enemies.push(new Enemy()); const banner=document.getElementById('event-banner'); banner.innerHTML='💀 DOOM\'S DAY 💀'; banner.style.display='block'; banner.style.color='#440000'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'💀 DOOM\'S DAY!',x:width/2-60,y:height/2-40,l:1.5,c:'#440000',size:24}); if(greenAuraActive) floats.push({txt:'💚 GREEN AURA!',x:width/2-50,y:height/2+10,l:1.5,c:'#00ff00',size:20}); startEventCooldown(); checkAchievements(); showNotification('💀 Doom\'s Day event started! More enemies = more loot!' + (greenAuraActive ? ' 💚 Green Aura active!' : ''), 'event'); }
+function triggerRoyalBlessing(){ if(!canTriggerEvent()) return; activeEvent='royal'; eventTimer=Date.now()+24000; royalBlessingCount++; totalEventsTriggered++; sfxRoyal(); royalBlessingActive=true; royalBlessingTimer=Date.now()+24000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 ROYAL BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'👑 ROYAL BLESSING!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffdd00',size:24}); startEventCooldown(); checkAchievements(); showNotification('👑 Royal Blessing event started! 5x everything!', 'event'); }
+function triggerStarfall(){ if(!canTriggerEvent()) return; activeEvent='starfall'; eventTimer=Date.now()+11000; starfallCount++; totalEventsTriggered++; sfxStarfall(); starfallActive=true; starfallTimer=Date.now()+11000; starfallStars = []; const banner=document.getElementById('event-banner'); banner.innerHTML='🌟 STARFALL 🌟'; banner.style.display='block'; banner.style.color='#ffffaa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); for(let i=0;i<15;i++){ starfallStars.push(new StarfallStar(Math.random()*width, -20, 8+Math.random()*8, 40+Math.floor(Math.random()*80))); } if(player && player.x && player.y) floats.push({txt:'🌟 STARFALL!',x:width/2-60,y:height/2-40,l:1.5,c:'#ffffaa',size:24}); showNotification('🌟 STARFALL event started! Catch falling stars!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerInferno(){ if(!canTriggerEvent()) return; activeEvent='inferno'; eventTimer=Date.now()+8000; infernoCount++; totalEventsTriggered++; sfxInferno(); infernoActive=true; infernoTimer=Date.now()+8000; const banner=document.getElementById('event-banner'); banner.innerHTML='🔥 INFERNO 🔥'; banner.style.display='block'; banner.style.color='#ff4400'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🔥 INFERNO!',x:width/2-60,y:height/2-40,l:1.5,c:'#ff4400',size:24}); showNotification('🔥 INFERNO event started! Flames will burn enemies!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerChainLightning(){ if(!canTriggerEvent()) return; activeEvent='chain'; eventTimer=Date.now()+10000; chainLightningCount++; totalEventsTriggered++; sfxChain(); chainLightningActive=true; chainLightningTimer=Date.now()+10000; const banner=document.getElementById('event-banner'); banner.innerHTML='⚡ CHAIN LIGHTNING ⚡'; banner.style.display='block'; banner.style.color='#ffff00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'⚡ CHAIN LIGHTNING!',x:width/2-70,y:height/2-40,l:1.5,c:'#ffff00',size:24}); showNotification('⚡ CHAIN LIGHTNING event started! Lightning will chain between enemies!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerBarrier(){ if(!canTriggerEvent()) return; activeEvent='barrier'; eventTimer=Date.now()+10000; barrierCount++; totalEventsTriggered++; sfxBarrier(); barrierActive=true; barrierTimer=Date.now()+10000; barrierHp = 500; const banner=document.getElementById('event-banner'); banner.innerHTML='🛡️ BARRIER 🛡️'; banner.style.display='block'; banner.style.color='#88aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🛡️ BARRIER!',x:width/2-60,y:height/2-40,l:1.5,c:'#88aaff',size:24}); showNotification('🛡️ BARRIER event started! Damage absorption active!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerSoulReaper(){ if(!canTriggerEvent()) return; activeEvent='soulreaper'; eventTimer=Date.now()+12000; soulReaperCount++; totalEventsTriggered++; sfxSoulReaper(); soulReaperActive=true; soulReaperTimer=Date.now()+12000; soulReaperSoul = {x:width/2, y:-100, hp:500, maxHp:500}; const banner=document.getElementById('event-banner'); banner.innerHTML='💀 SOUL REAPER 💀'; banner.style.display='block'; banner.style.color='#8800aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'💀 SOUL REAPER!',x:width/2-70,y:height/2-40,l:1.5,c:'#8800aa',size:28}); showNotification('💀 SOUL REAPER event started! A powerful reaper appears!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerGambler(){ if(!canTriggerEvent()) return; activeEvent='gambler'; eventTimer=Date.now()+5000; gamblerCount++; totalEventsTriggered++; sfxGambler(); gamblerActive=true; const banner=document.getElementById('event-banner'); banner.innerHTML='🎲 GAMBLER 🎲'; banner.style.display='block'; banner.style.color='#ffaa00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); const outcome = Math.random(); if(outcome < 0.3){ totalCoins = Math.floor(totalCoins * 0.5); localStorage.setItem('totalCoins', totalCoins); if(player && player.x && player.y) floats.push({txt:'🎲 GAMBLER: YOU LOST 50% CREDITS!',x:width/2-100,y:height/2-40,l:1.5,c:'#ff0000',size:22}); showNotification('🎲 GAMBLER: You lost 50% of your credits!', 'warning'); } else if(outcome < 0.7){ let win = 5000; totalCoins += win; localStorage.setItem('totalCoins', totalCoins); if(player && player.x && player.y) floats.push({txt:`🎲 GAMBLER: +${win} CREDITS!`,x:width/2-100,y:height/2-40,l:1.5,c:'#00ffaa',size:22}); showNotification(`🎲 GAMBLER: You won ${win} CREDITS!`, 'success'); } else { let win = 20000; totalCoins += win; localStorage.setItem('totalCoins', totalCoins); if(player && player.x && player.y) floats.push({txt:`🎲 GAMBLER: +${win} CREDITS! JACKPOT!`,x:width/2-110,y:height/2-40,l:1.5,c:'#ffaa00',size:24}); showNotification(`🎲 GAMBLER: JACKPOT! +${win} CREDITS!`, 'success'); } startEventCooldown(); checkAchievements(); }
 function triggerVortex(){ if(!canTriggerEvent()) return; activeEvent='vortex'; eventTimer=Date.now()+10000; vortexCount++; totalEventsTriggered++; sfxVortex(); vortexActive=true; vortexTimer=Date.now()+10000; vortexCenter={x:width/2, y:height/2}; const banner=document.getElementById('event-banner'); banner.innerHTML='🌀 VORTEX 🌀'; banner.style.display='block'; banner.style.color='#44aaff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌀 VORTEX!',x:width/2-60,y:height/2-40,l:1.5,c:'#44aaff',size:24}); showNotification('🌀 VORTEX event started! Enemies will be pulled into the vortex!', 'event'); startEventCooldown(); checkAchievements(); }
-function triggerKingsBlessing(){ if(!canTriggerEvent()) return; activeEvent='kings'; eventTimer=Date.now()+15000; kingsBlessingCount++; totalEventsTriggered++; sfxKings(); kingsBlessingActive=true; kingsBlessingTimer=Date.now()+15000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 KING\'S BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'👑 KING\'S BLESSING! 5x EVERYTHING!',x:width/2-100,y:height/2-40,l:1.5,c:'#ffdd00',size:26}); showNotification('👑 KING\'S BLESSING event started! 5x points and credits!', 'event'); startEventCooldown(); checkAchievements(); }
+function triggerKingsBlessing(){ if(!canTriggerEvent()) return; activeEvent='kings'; eventTimer=Date.now()+18000; kingsBlessingCount++; totalEventsTriggered++; sfxKings(); kingsBlessingActive=true; kingsBlessingTimer=Date.now()+18000; const banner=document.getElementById('event-banner'); banner.innerHTML='👑 KING\'S BLESSING 👑'; banner.style.display='block'; banner.style.color='#ffdd00'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},4000); if(player && player.x && player.y) floats.push({txt:'👑 KING\'S BLESSING! 8x EVERYTHING!',x:width/2-100,y:height/2-40,l:1.5,c:'#ffdd00',size:26}); showNotification('👑 KING\'S BLESSING event started! 8x points and credits!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerPrism(){ if(!canTriggerEvent()) return; activeEvent='prism'; eventTimer=Date.now()+12000; prismCount++; totalEventsTriggered++; sfxPrism(); prismActive=true; prismTimer=Date.now()+12000; const banner=document.getElementById('event-banner'); banner.innerHTML='🌈 PRISM 🌈'; banner.style.display='block'; banner.style.color='#ff88ff'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🌈 PRISM! Bullets split into colors!',x:width/2-80,y:height/2-40,l:1.5,c:'#ff88ff',size:24}); showNotification('🌈 PRISM event started! Bullets split into rainbow colors!', 'event'); startEventCooldown(); checkAchievements(); }
 function triggerAbyss(){ if(!canTriggerEvent()) return; activeEvent='abyss'; eventTimer=Date.now()+8000; abyssCount++; totalEventsTriggered++; sfxAbyss(); abyssActive=true; abyssTimer=Date.now()+8000; abyssCenter={x:width/2, y:height/2}; const banner=document.getElementById('event-banner'); banner.innerHTML='🕳️ ABYSS 🕳️'; banner.style.display='block'; banner.style.color='#4400aa'; setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000); if(player && player.x && player.y) floats.push({txt:'🕳️ ABYSS!',x:width/2-60,y:height/2-40,l:1.5,c:'#4400aa',size:24}); showNotification('🕳️ ABYSS event started! Enemies will be swallowed by the abyss!', 'event'); startEventCooldown(); checkAchievements(); }
 
@@ -3898,6 +4805,60 @@ function triggerSpaceTreasure(){
     if(player && player.x && player.y) floats.push({txt:'🎁 SPACE TREASURE!',x:width/2-70,y:height/2-40,l:1.5,c:'#ffd700',size:24});
     startEventCooldown(); checkAchievements();
     showNotification('🎁 Space Treasure event started! Collect falling crates!', 'event');
+}
+
+// ASTEROID BELT CLASS
+class Asteroid {
+    constructor(x, y, size) {
+        this.x = x; this.y = y; this.size = size;
+        this.hp = size === 'large' ? 6 : size === 'medium' ? 3 : 1;
+        this.maxHp = this.hp;
+        this.r = size === 'large' ? 28 : size === 'medium' ? 18 : 10;
+        this.vx = 2 + Math.random() * 3;
+        this.vy = (Math.random() - 0.5) * 1.5;
+        this.coins = size === 'large' ? 500 : size === 'medium' ? 200 : 50;
+        this.gems = size === 'large' ? 30 : size === 'medium' ? 10 : 3;
+    }
+    update() { this.x += this.vx; this.y += this.vy; }
+    draw() {
+        ctx.fillStyle = `hsl(${20 + (this.hp/this.maxHp)*20}, 60%, ${30 + (this.hp/this.maxHp)*20}%)`;
+        ctx.shadowBlur = 6;
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#443322'; ctx.beginPath(); ctx.arc(this.x - this.r*0.2, this.y - this.r*0.1, this.r*0.3, 0, Math.PI*2); ctx.fill();
+        // HP bar
+        if(this.hp < this.maxHp){
+            ctx.fillStyle='#333'; ctx.fillRect(this.x-this.r, this.y-this.r-6, this.r*2, 3);
+            ctx.fillStyle='#ff8844'; ctx.fillRect(this.x-this.r, this.y-this.r-6, (this.hp/this.maxHp)*this.r*2, 3);
+        }
+    }
+}
+
+function triggerAsteroidBelt(){
+    if(!canTriggerEvent()) return;
+    activeEvent='asteroidbelt'; eventTimer=Date.now()+10000; totalEventsTriggered++; sfxEvent();
+    asteroidBeltActive=true; asteroidBeltTimer=Date.now()+10000; asteroids=[];
+    const banner=document.getElementById('event-banner');
+    banner.innerHTML='☄️ ASTEROID BELT ☄️'; banner.style.display='block'; banner.style.color='#aa6644';
+    setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000);
+    if(player && player.x && player.y) floats.push({txt:'☄️ ASTEROID BELT!',x:width/2-70,y:height/2-40,l:1.5,c:'#aa6644',size:24});
+    showNotification('☄️ Asteroid Belt! Shoot asteroids for bonus rewards!', 'event');
+    startEventCooldown(); checkAchievements();
+}
+
+function triggerSupplyDrop(){
+    if(!canTriggerEvent()) return;
+    activeEvent='supplydrop'; eventTimer=Date.now()+8000; totalEventsTriggered++; sfxEvent();
+    supplyDropActive=true; supplyDropTimer=Date.now()+8000;
+    const rx = 80 + Math.random() * (width - 160);
+    const ry = 80 + Math.random() * (height * 0.5);
+    const rType = ['coins','gems','buff'][Math.floor(Math.random()*3)];
+    supplyDropCrate = {x:rx, y:ry, type:rType, claimed:false};
+    const banner=document.getElementById('event-banner');
+    banner.innerHTML='📦 SUPPLY DROP 📦'; banner.style.display='block'; banner.style.color='#44ffaa';
+    setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},3000);
+    if(player && player.x && player.y) floats.push({txt:'📦 SUPPLY DROP! Fly to it!',x:width/2-70,y:height/2-40,l:1.5,c:'#44ffaa',size:24});
+    showNotification('📦 Supply Drop! Fly to the crate before it disappears!', 'event');
+    startEventCooldown(); checkAchievements();
 }
 
 function checkEventTrigger(){
@@ -3916,49 +4877,51 @@ function checkEventTrigger(){
     } else {
         if(wave>0 && wave%40===0 && !activeEvent){ triggerCosmicCollapse(); return; }
     }
-    if(wave>=22 && !activeEvent && Math.random()<0.0006){ triggerDoppelganger(); return; }
-    if(wave>=30 && !activeEvent && Math.random()<0.00001){ triggerSupernova(); return; }
-    if(wave>=10 && !activeEvent && Math.random()<0.0012){ triggerStarfall(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.0008){ triggerInferno(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0006){ triggerChainLightning(); return; }
-    if(wave>=12 && !activeEvent && Math.random()<0.002){ triggerBarrier(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.0002){ triggerSoulReaper(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.0001){ triggerGambler(); return; }
-    if(wave>=22 && !activeEvent && Math.random()<0.0004){ triggerVortex(); return; }
-    if(wave>=30 && !activeEvent && Math.random()<0.00003){ triggerKingsBlessing(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0005){ triggerPrism(); return; }
-    if(wave>=35 && !activeEvent && Math.random()<0.00002){ triggerAbyss(); return; }
-    if(wave>=12 && !activeEvent && Math.random()<0.001){ triggerLightningStorm(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.0005){ triggerLuckyDraw(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0003){ triggerMysteryBox(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.0001){ triggerDoomsDay(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.00005){ triggerRoyalBlessing(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.002){ triggerFrozenTime(); return; }
-    if(wave>=18 && !activeEvent && Math.random()<0.0015){ triggerCrystalRain(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.0008){ triggerShadowClone(); return; }
-    if(wave>=30 && !activeEvent && Math.random()<0.0000001){ triggerDivineIntervention(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.000005){ triggerGoldRush(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.00001){ triggerBugEvent(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.00004){ triggerTimeWarp(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.00002){ triggerReapersCall(); return; }
-    if(wave>=20 && !activeEvent && Math.random()<0.001){ triggerSoulHarvest(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.003){ triggerMasquerade(); return; }
-    if(wave>=12 && !activeEvent && Math.random()<0.005){ triggerTidalWave(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.00005){ triggerDeathTouch(); return; }
-    if(wave>=25 && !activeEvent && Math.random()<0.00008){ triggerChaosRealm(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.00003){ triggerPrimordialRage(); return; }
-    if(wave>0 && wave%9===0 && !activeEvent && Math.random()<0.45){ triggerSpaceTreasure(); return; }
-    if(wave>=4 && wave%4===0 && Math.random()<0.6 && !activeEvent){ triggerMeteorShower(); return; }
-    if(wave>=10 && !activeEvent && Math.random()<0.03){ triggerDimensionRift(); return; }
-    if(wave>=5 && wave%5===0 && !activeEvent && Math.random()<0.005){ triggerApocalypseMode(); return; }
-    if(wave>=15 && !activeEvent && Math.random()<0.003){ triggerVoidMode(); return; }
-    if(!endlessMode && wave>=20 && !activeEvent && !guardian && Math.random()<0.001){ triggerGuardian(); return; }
-    if(endlessMode && wave>=20 && !activeEvent && !guardian && Math.random()<0.0005){ triggerGuardian(); return; }
+    if(wave>=22 && Math.random()<0.0006){ queueEvent(triggerDoppelganger); return; }
+    if(wave>=30 && Math.random()<0.00001){ queueEvent(triggerSupernova); return; }
+    if(wave>=10 && Math.random()<0.00173){ queueEvent(triggerStarfall); return; }
+    if(wave>=15 && Math.random()<0.0008){ queueEvent(triggerInferno); return; }
+    if(wave>=18 && Math.random()<0.0006){ queueEvent(triggerChainLightning); return; }
+    if(wave>=12 && Math.random()<0.002){ queueEvent(triggerBarrier); return; }
+    if(wave>=25 && Math.random()<0.0002){ queueEvent(triggerSoulReaper); return; }
+    if(wave>=20 && Math.random()<0.0001){ queueEvent(triggerGambler); return; }
+    if(wave>=22 && Math.random()<0.0004){ queueEvent(triggerVortex); return; }
+    if(wave>=30 && Math.random()<0.00003){ queueEvent(triggerKingsBlessing); return; }
+    if(wave>=18 && Math.random()<0.0005){ queueEvent(triggerPrism); return; }
+    if(wave>=35 && Math.random()<0.00002){ queueEvent(triggerAbyss); return; }
+    if(wave>=12 && Math.random()<0.001){ queueEvent(triggerLightningStorm); return; }
+    if(wave>=15 && Math.random()<0.0005){ queueEvent(triggerLuckyDraw); return; }
+    if(wave>=18 && Math.random()<0.0003){ queueEvent(triggerMysteryBox); return; }
+    if(wave>=20 && Math.random()<0.0025){ queueEvent(triggerDoomsDay); return; }
+    if(wave>=25 && Math.random()<0.00005){ queueEvent(triggerRoyalBlessing); return; }
+    if(wave>=15 && Math.random()<0.002){ queueEvent(triggerFrozenTime); return; }
+    if(wave>=18 && Math.random()<0.0015){ queueEvent(triggerCrystalRain); return; }
+    if(wave>=25 && Math.random()<0.0008){ queueEvent(triggerShadowClone); return; }
+    if(wave>=30 && Math.random()<0.0000000001){ queueEvent(triggerDivineIntervention); return; }
+    if(wave>=25 && Math.random()<0.000005){ queueEvent(triggerGoldRush); return; }
+    if(wave>=20 && Math.random()<0.00001){ queueEvent(triggerBugEvent); return; }
+    if(wave>=20 && Math.random()<0.00004){ queueEvent(triggerTimeWarp); return; }
+    if(wave>=20 && Math.random()<0.00002){ queueEvent(triggerReapersCall); return; }
+    if(wave>=20 && Math.random()<0.001){ queueEvent(triggerSoulHarvest); return; }
+    if(wave>=15 && Math.random()<0.003){ queueEvent(triggerMasquerade); return; }
+    if(wave>=12 && Math.random()<0.005){ queueEvent(triggerTidalWave); return; }
+    if(wave>=25 && Math.random()<0.00005){ queueEvent(triggerDeathTouch); return; }
+    if(wave>=25 && Math.random()<0.00008){ queueEvent(triggerChaosRealm); return; }
+    if(wave>=15 && Math.random()<0.00003){ queueEvent(triggerPrimordialRage); return; }
+    if(wave>0 && wave%9===0 && Math.random()<0.45){ queueEvent(triggerSpaceTreasure); return; }
+    if(wave>=4 && wave%4===0 && Math.random()<0.6){ queueEvent(triggerMeteorShower); return; }
+    if(wave>=10 && Math.random()<0.03){ queueEvent(triggerDimensionRift); return; }
+    if(wave>=5 && wave%5===0 && Math.random()<0.005){ queueEvent(triggerApocalypseMode); return; }
+    if(wave>=15 && Math.random()<0.003){ queueEvent(triggerVoidMode); return; }
+    if(wave>=16 && Math.random()<0.001){ queueEvent(triggerAsteroidBelt); return; }
+    if(wave>=14 && Math.random()<0.0008){ queueEvent(triggerSupplyDrop); return; }
+    if(!endlessMode && wave>=20 && !guardian && Math.random()<0.001){ queueEvent(triggerGuardian); return; }
+    if(endlessMode && wave>=20 && !guardian && Math.random()<0.0005){ queueEvent(triggerGuardian); return; }
 }
 
 function activateSynapse(){
     if(synapseActive) return;
-    synapseActive=true; synapseTimer=Date.now()+10000; totalSynapseActivations++; sfxSynapse();
+    synapseActive=true; synapseTimer=Date.now()+12000; totalSynapseActivations++; sfxSynapse();
     const banner=document.getElementById('event-banner');
     banner.innerHTML='🌀 SYNAPSE MODE 🌀'; banner.style.display='block'; banner.style.color='#ff66ff';
     setTimeout(()=>{if(document.getElementById('event-banner')) document.getElementById('event-banner').style.display='none';},2500);
@@ -3969,6 +4932,7 @@ function activateSynapse(){
 
 function startWave(n){
     wave=n;waveKills=0;waveNoDamage=true;waveTriggered=false;
+    waveStartTime = Date.now();
     if(endlessMode) waveKillGoal = 5 + wave * 2;
     else waveKillGoal = 5 + wave * 3;
     const banner=document.getElementById('wave-banner');
@@ -4021,6 +4985,156 @@ class ShadowClone {
         ctx.beginPath();ctx.ellipse(0,-5,4,10,0,0,Math.PI*2);ctx.fill();
         ctx.restore();
     }
+}
+
+// ============================================
+// SKILL TREE SYSTEM
+// ============================================
+const SKILL_TREE = {
+    offense: {
+        name: '⚔️ OFFENSE', color: '#ff4444',
+        nodes: [
+            {id:'off1',name:'Damage +5%',icon:'⚔️',desc:'+5% bullet damage',bonus:{type:'damage',value:0.05}},
+            {id:'off2',name:'Damage +10%',icon:'⚔️',desc:'+10% bullet damage',bonus:{type:'damage',value:0.10},requires:'off1'},
+            {id:'off3',name:'Fire Rate +8%',icon:'🔥',desc:'+8% fire rate',bonus:{type:'fireRate',value:0.08}},
+            {id:'off4',name:'Fire Rate +15%',icon:'🔥',desc:'+15% fire rate',bonus:{type:'fireRate',value:0.15},requires:'off3'},
+            {id:'off5',name:'Crit Chance +5%',icon:'💥',desc:'+5% critical hit chance',bonus:{type:'critChance',value:0.05},requires:'off2'},
+            {id:'off6',name:'Crit Damage +50%',icon:'💎',desc:'+50% critical hit damage',bonus:{type:'critDamage',value:0.50},requires:'off5'}
+        ]
+    },
+    defense: {
+        name: '🛡️ DEFENSE', color: '#4488ff',
+        nodes: [
+            {id:'def1',name:'Shield +20',icon:'🛡️',desc:'+20 max shield',bonus:{type:'shield',value:20}},
+            {id:'def2',name:'Health +25',icon:'❤️',desc:'+25 max health',bonus:{type:'maxHealth',value:25},requires:'def1'},
+            {id:'def3',name:'Dmg Reduce +8%',icon:'🔰',desc:'-8% damage taken',bonus:{type:'dmgReduction',value:0.08}},
+            {id:'def4',name:'Health +50',icon:'❤️',desc:'+50 max health',bonus:{type:'maxHealth',value:50},requires:'def2'},
+            {id:'def5',name:'Dmg Reduce +15%',icon:'🔰',desc:'-15% damage taken',bonus:{type:'dmgReduction',value:0.15},requires:'def3'},
+            {id:'def6',name:'Regen +1hp/5s',icon:'💚',desc:'Regenerate 1 HP every 5 seconds',bonus:{type:'regen',value:1},requires:'def4'}
+        ]
+    },
+    utility: {
+        name: '⚡ UTILITY', color: '#ffaa00',
+        nodes: [
+            {id:'ut1',name:'Move Speed +10%',icon:'🏃',desc:'+10% movement speed',bonus:{type:'moveSpeed',value:0.10}},
+            {id:'ut2',name:'Magnet Range +30',icon:'🧲',desc:'+30 coin magnet range',bonus:{type:'magnetRange',value:30}},
+            {id:'ut3',name:'Drone Efficiency +10%',icon:'🤖',desc:'+10% drone damage',bonus:{type:'droneDmg',value:0.10}},
+            {id:'ut4',name:'Move Speed +20%',icon:'🏃',desc:'+20% movement speed',bonus:{type:'moveSpeed',value:0.20},requires:'ut1'},
+            {id:'ut5',name:'Magnet Range +60',icon:'🧲',desc:'+60 coin magnet range',bonus:{type:'magnetRange',value:60},requires:'ut2'},
+            {id:'ut6',name:'Drone Efficiency +25%',icon:'🤖',desc:'+25% drone damage',bonus:{type:'droneDmg',value:0.25},requires:'ut3'}
+        ]
+    }
+};
+
+let skillPoints = parseInt(localStorage.getItem('skillPoints')) || 0;
+let skillTreeState = {};
+try { skillTreeState = JSON.parse(localStorage.getItem('skillTreeState')) || {}; } catch(e) { skillTreeState = {}; }
+
+function getSkillBonus(type) {
+    let total = 0;
+    for (const path of Object.values(SKILL_TREE)) {
+        for (const node of path.nodes) {
+            if (skillTreeState[node.id] && node.bonus.type === type) {
+                total += node.bonus.value;
+            }
+        }
+    }
+    return total;
+}
+
+critChance = 0.15 + getSkillBonus('critChance');
+critDamageMultiplier = 2 + getSkillBonus('critDamage');
+damageReduction *= (1 - getSkillBonus('dmgReduction'));
+
+function awardSkillPoints() {
+    let earned = Math.floor(level / 5) + Math.floor(kills / 500);
+    let alreadyEarned = parseInt(localStorage.getItem('skillPointsEarned')) || 0;
+    let newPts = earned - alreadyEarned;
+    if (newPts > 0) {
+        skillPoints += newPts;
+        localStorage.setItem('skillPoints', skillPoints);
+        localStorage.setItem('skillPointsEarned', earned);
+        const spEl = document.getElementById('skill-points-display');
+        if (spEl) spEl.innerText = skillPoints;
+    }
+}
+
+function canUnlockNode(node) {
+    if (skillTreeState[node.id]) return false;
+    if (skillPoints < 1) return false;
+    if (node.requires && !skillTreeState[node.requires]) return false;
+    return true;
+}
+
+function isNodeAvailable(node) {
+    if (skillTreeState[node.id]) return false;
+    if (node.requires && !skillTreeState[node.requires]) return false;
+    return true;
+}
+
+function unlockSkillNode(nodeId) {
+    for (const path of Object.values(SKILL_TREE)) {
+        for (const node of path.nodes) {
+            if (node.id === nodeId && canUnlockNode(node)) {
+                skillTreeState[nodeId] = true;
+                skillPoints--;
+                localStorage.setItem('skillTreeState', JSON.stringify(skillTreeState));
+                localStorage.setItem('skillPoints', skillPoints);
+                renderSkillTree();
+                showNotification(`🌳 Skill unlocked: ${node.name}!`, 'success');
+                return;
+            }
+        }
+    }
+}
+
+function renderSkillTree() {
+    const spEl = document.getElementById('skill-points-display');
+    if (spEl) spEl.innerText = skillPoints;
+    for (const [pathKey, path] of Object.entries(SKILL_TREE)) {
+        const container = document.getElementById('skill-path-' + pathKey);
+        if (!container) continue;
+        container.innerHTML = `<div class="skill-path-title" style="color:${path.color}">${path.name}</div>`;
+        path.nodes.forEach((node, i) => {
+            const isUnlocked = !!skillTreeState[node.id];
+            const isAvailable = isNodeAvailable(node);
+            const stateClass = isUnlocked ? 'unlocked' : isAvailable ? 'available' : 'locked';
+            if (i > 0) {
+                const conn = document.createElement('div');
+                conn.className = 'skill-connector' + (isUnlocked || isAvailable ? ' active' : '');
+                container.appendChild(conn);
+            }
+            const el = document.createElement('div');
+            el.className = 'skill-node ' + stateClass;
+            el.innerHTML = `${node.icon}<div class="skill-tooltip">${node.name}<br><span style="color:#aaa">${node.desc}</span></div>`;
+            if (isAvailable && skillPoints > 0) {
+                el.onclick = () => unlockSkillNode(node.id);
+            }
+            container.appendChild(el);
+        });
+    }
+}
+
+function openSkillTree() {
+    let modal = document.getElementById('skill-tree-modal');
+    if(!modal){
+        modal = document.createElement('div');
+        modal.id = 'skill-tree-modal';
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;display:flex;justify-content:center;align-items:center;';
+        modal.innerHTML = `<div style="background:linear-gradient(135deg,#001a33,#000);border:2px solid #00ffaa;border-radius:16px;padding:30px 25px;min-width:280px;max-width:400px;text-align:center;">
+            <div style="font-size:48px;margin-bottom:12px;">🌳</div>
+            <h2 style="color:#00ffaa;margin:0 0 12px;">SKILL TREE</h2>
+            <p style="color:#ccc;font-size:14px;margin:0 0 20px;">🌳 Skill Tree is currently under maintenance by the creator. It will return in a future update!</p>
+            <button class="btn" style="border-color:#00ffaa;padding:8px 25px;font-size:14px;" onclick="document.getElementById('skill-tree-modal').style.display='none'">CLOSE</button>
+        </div>`;
+        document.body.appendChild(modal);
+    } else {
+        modal.style.display = 'flex';
+    }
+}
+function closeSkillTree() {
+    document.getElementById('skill-tree-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'flex';
 }
 
 // CRYSTAL CLASS
@@ -4127,15 +5241,19 @@ function useBomb(){
 // SHOP FUNCTIONS
 function buyUpgrade(type, amount=1){
     initAudio();
-    const prices={fire:150,dmg:200,shield:250,drone:500,heal:100,spread:350,laser:600,bomb:300};
+    const prices={fire:150,dmg:200,shield:250,drone:500,heal:100,spread:350,laser:600,bomb:300,resourceCollection:350,weaponEnhancement:450};
     if(type==='shield'&&hasShieldUpgrade) return;
     if(type==='spread'&&hasSpreadShot) return;
     if(type==='laser'&&hasLaser) return;
+    if(type==='resourceCollection'&&resourceCollectionLevel>=20) return;
+    if(type==='weaponEnhancement'&&weaponEnhancementLevel>=20) return;
     let totalCost=0;
     if(type==='fire') totalCost=prices.fire*amount;
     else if(type==='dmg') totalCost=prices.dmg*amount;
     else if(type==='drone') totalCost=prices.drone*amount;
     else if(type==='bomb') totalCost=prices.bomb*amount;
+    else if(type==='resourceCollection') totalCost=prices.resourceCollection*amount;
+    else if(type==='weaponEnhancement') totalCost=prices.weaponEnhancement*amount;
     else totalCost=prices[type];
     if(totalCoins<totalCost) return;
     totalCoins-=totalCost;
@@ -4143,11 +5261,13 @@ function buyUpgrade(type, amount=1){
     if(type==='fire'){fireLevel+=amount;localStorage.setItem('fireLevel',fireLevel);}
     if(type==='dmg'){damageLevel+=amount;localStorage.setItem('dmgLevel',damageLevel);}
     if(type==='shield'){hasShieldUpgrade=true;localStorage.setItem('hasShieldUpgrade',true);}
-    if(type==='drone'){droneCount=Math.min(400, droneCount+amount);localStorage.setItem('droneCount',droneCount);}
+    if(type==='drone'){droneCount=Math.min(180, droneCount+amount);localStorage.setItem('droneCount',droneCount);}
     if(type==='heal'){health=Math.min(maxHealth,health+25);}
     if(type==='spread'){hasSpreadShot=true;localStorage.setItem('hasSpreadShot',true);}
     if(type==='laser'){hasLaser=true;localStorage.setItem('hasLaser',true);}
     if(type==='bomb'){bombCount+=amount;localStorage.setItem('bombCount',bombCount);}
+    if(type==='resourceCollection'){resourceCollectionLevel+=amount;localStorage.setItem('resourceCollectionLevel',resourceCollectionLevel);}
+    if(type==='weaponEnhancement'){weaponEnhancementLevel+=amount;localStorage.setItem('weaponEnhancementLevel',weaponEnhancementLevel);}
     localStorage.setItem('totalCoins',totalCoins);
     localStorage.setItem('totalUpgradesBought',totalUpgradesBought);
     sfxCoin();
@@ -4158,7 +5278,7 @@ function buyUpgrade(type, amount=1){
 function setQuantity(type, qty){ selectedQuantities[type]=Math.max(1, Math.min(99, qty)); updateShopUI(); }
 function maxOutUpgrade(type,pricePer){
     let canBuy=Math.floor(totalCoins/pricePer);
-    if(type==='drone') canBuy=Math.min(canBuy, 400-droneCount);
+    if(type==='drone') canBuy=Math.min(canBuy, 180-droneCount);
     if(canBuy>0) buyUpgrade(type,canBuy);
 }
 function updateShopUI(){
@@ -4170,11 +5290,13 @@ function updateShopUI(){
         {id:'fire', name:'🔥 FIRE RATE', level:fireLevel, price:150, type:'fire', infinite:true, category:'weapons'},
         {id:'dmg', name:'💥 DAMAGE', level:damageLevel, price:200, type:'dmg', infinite:true, category:'weapons'},
         {id:'shield', name:'🛡️ SHIELD', owned:hasShieldUpgrade, price:250, type:'shield', category:'shields'},
-        {id:'drone', name:'🤖 DRONE', level:droneCount, price:500, type:'drone', infinite:true, maxLimit:400, category:'weapons'},
+        {id:'drone', name:'🤖 DRONE', level:droneCount, price:500, type:'drone', infinite:true, maxLimit:180, category:'weapons'},
         {id:'heal', name:'❤️ REPAIR', price:100, type:'heal', category:'shields'},
         {id:'spread', name:'🎯 SPREAD', owned:hasSpreadShot, price:350, type:'spread', category:'weapons'},
         {id:'laser', name:'⚡ LASER', owned:hasLaser, price:600, type:'laser', category:'weapons'},
-        {id:'bomb', name:'💣 BOMB', level:bombCount, price:300, type:'bomb', infinite:true, category:'weapons'}
+        {id:'bomb', name:'💣 BOMB', level:bombCount, price:300, type:'bomb', infinite:true, category:'weapons'},
+        {id:'resourceCollection', name:'📡 RESOURCE COLLECTION', level:resourceCollectionLevel, price:350, type:'resourceCollection', infinite:true, maxLimit:20, category:'shields'},
+        {id:'weaponEnhancement', name:'⚔️ WEAPON ENHANCEMENT', level:weaponEnhancementLevel, price:450, type:'weaponEnhancement', infinite:true, maxLimit:20, category:'weapons'}
     ];
 
     // Filter by tab
@@ -4189,10 +5311,10 @@ function updateShopUI(){
         const card=document.createElement('div');
         card.className='card tooltip';
         if(it.owned===true) card.classList.add('cant-afford');
-        let content=`<div style="font-size:14px;">${it.name}</div>`;
-        if(it.level!==undefined) content+=`<div style="font-size:9px;">LVL: ${it.level}${it.maxLimit?('/'+it.maxLimit):''}</div>`;
-        if(it.owned!==undefined) content+=`<div style="font-size:9px;">${it.owned?'✅':'❌'}</div>`;
-        content+=`<div style="color:gold;">${formatNumber(it.price)}c</div>`;
+        let content=`<div style="font-size:13px;font-weight:bold;">${it.name}</div>`;
+        if(it.level!==undefined) content+=`<div style="font-size:9px;color:#aaa;">LVL: ${it.level}${it.maxLimit?('/'+it.maxLimit):''}</div>`;
+        if(it.owned!==undefined) content+=`<div style="font-size:9px;">${it.owned?'<span style="color:#00ffaa;">✅</span>':'<span style="color:#ff4444;">❌</span>'}</div>`;
+        content+=`<div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(it.price)}c</div>`;
         if(it.infinite){
             let qty=selectedQuantities[it.type]||1;
             content+=`<div class="quantity-selector">
@@ -4203,11 +5325,11 @@ function updateShopUI(){
                 <span style="margin-right:5px;">x${qty}</span>
             </div>`;
         }
-        let tooltipText = it.type==='fire' ? 'מגדיל את מהירות הירי' : it.type==='dmg' ? 'מגדיל את הנזק' : it.type==='shield' ? 'מוסיף מגן סביב החללית' : it.type==='drone' ? 'מוסיף רחפן שיורה אוטומטית' : it.type==='heal' ? 'מרפא 25 נקודות חיים' : it.type==='spread' ? 'מוסיף כדור נוסף לכל ירייה' : it.type==='laser' ? 'מוסיף לייזר חזק' : 'מוסיף פצצות לניקוי מסך';
+        let tooltipText = it.type==='fire' ? 'מגדיל את מהירות הירי' : it.type==='dmg' ? 'מגדיל את הנזק' : it.type==='shield' ? 'מוסיף מגן סביב החללית' : it.type==='drone' ? 'מוסיף רחפן שיורה אוטומטית' : it.type==='heal' ? 'מרפא 25 נקודות חיים' : it.type==='spread' ? 'מוסיף כדור נוסף לכל ירייה' : it.type==='laser' ? 'מוסיף לייזר חזק' : it.type==='resourceCollection' ? 'מגדיל את טווח איסוף אוטומטי של פריטים (+15 לרמה)' : it.type==='weaponEnhancement' ? 'מגדיל נזק וקצב אש (+5% לרמה)' : 'מוסיף פצצות לניקוי מסך';
         card.innerHTML = content + `<div class="tooltip-text">${tooltipText}</div>`;
         if(!(it.owned===true)){
             let qty=selectedQuantities[it.type]||1;
-            let atMax=(it.type==='drone' && droneCount+qty>400);
+            let atMax=(it.type==='drone' && droneCount+qty>180);
             if(!atMax) card.onclick=()=>buyUpgrade(it.type, selectedQuantities[it.type]||1);
             else card.onclick=null;
         }
@@ -4220,14 +5342,14 @@ function updateShopUI(){
         if(currentShopTab === 'weapons'){
             // Special items for weapons tab
             const weaponsSpecial = SPECIAL_ITEMS_DATA.filter(s => s.category === 'weapons');
-            specialHtml += '<h3 style="color:#ffaa00;margin-top:15px;">✨ SPECIAL ITEMS ✨</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml += '<div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#ffaa00;margin-top:12px;">✨ SPECIAL ITEMS</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const si of weaponsSpecial){
                 const owned = si.ownedCheck();
                 const countInfo = si.countHtml ? `<div style="font-size:9px;color:#aaa;">${si.countHtml()}</div>` : '';
                 specialHtml += `<div class="card tooltip ${owned?'cant-afford':''}" onclick="${owned?'':`buySpecialItem('${si.id}')`}">
-                    <div style="font-size:14px;">${si.name}</div>
-                    <div style="color:#ffaa00;font-size:10px;">${si.desc}</div>
-                    <div style="color:gold;">${formatNumber(si.price)}c</div>
+                    <div style="font-size:13px;font-weight:bold;">${si.name}</div>
+                    <div style="color:#ffaa00;font-size:10px;margin-top:2px;">${si.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(si.price)}c</div>
                     ${countInfo}
                     <div class="tooltip-text">${si.tooltip}</div>
                 </div>`;
@@ -4235,16 +5357,16 @@ function updateShopUI(){
             // Rare abilities for weapons tab
             const weaponsAbilities = Object.values(RARE_ABILITIES).filter(a => a.category === 'weapons');
             if(weaponsAbilities.length > 0){
-                specialHtml += '</div><h3 style="color:#f54242;margin-top:15px;">🔥 RARE ABILITIES 🔥</h3><div class="shop-grid" style="margin-top:8px;">';
+                specialHtml += '</div><div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#f54242;margin-top:12px;">🔥 RARE ABILITIES</h3><div class="shop-grid" style="margin-top:8px;">';
                 for(const ab of weaponsAbilities){
                     const unlocked = ab.unlockReq();
                     const purchased = ab.purchased;
                     const canAfford = totalCoins >= ab.cost;
                     specialHtml += `<div class="card tooltip ${purchased?'cant-afford':''} rarity-legendary" onclick="${purchased?'':`buyRareAbility('${ab.id}')`}">
                         <div style="font-size:14px;">${ab.icon}</div>
-                        <div style="font-size:10px;">${ab.name.replace(ab.icon+' ','')}</div>
-                        <div style="color:#ffaa00;font-size:9px;">${ab.desc}</div>
-                        <div style="color:gold;">${formatNumber(ab.cost)}c</div>
+                        <div style="font-size:11px;font-weight:bold;">${ab.name.replace(ab.icon+' ','')}</div>
+                        <div style="color:#ffaa00;font-size:9px;margin-top:2px;">${ab.desc}</div>
+                        <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(ab.cost)}c</div>
                         <div style="font-size:8px;color:${unlocked?'#00ffaa':'#ff4444'};">${purchased?'✅ OWNED':unlocked?'🔓 UNLOCKED':'🔒 '+ab.unlockDesc}</div>
                         ${!unlocked && !purchased ? `<div style="font-size:8px;color:#ff4444;">🔒 LOCKED</div>` : ''}
                         <div class="tooltip-text">Cooldown: ${ab.cooldown/1000}s. ${ab.unlockDesc}</div>
@@ -4256,14 +5378,14 @@ function updateShopUI(){
         else if(currentShopTab === 'shields'){
             // Special items for shields tab
             const shieldsSpecial = SPECIAL_ITEMS_DATA.filter(s => s.category === 'shields');
-            specialHtml += '<h3 style="color:#ffaa00;margin-top:15px;">✨ SPECIAL ITEMS ✨</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml += '<div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#ffaa00;margin-top:12px;">✨ SPECIAL ITEMS</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const si of shieldsSpecial){
                 const owned = si.ownedCheck();
                 const countInfo = si.countHtml ? `<div style="font-size:9px;color:#aaa;">${si.countHtml()}</div>` : '';
                 specialHtml += `<div class="card tooltip ${owned?'cant-afford':''}" onclick="${owned?'':`buySpecialItem('${si.id}')`}">
-                    <div style="font-size:14px;">${si.name}</div>
-                    <div style="color:#ffaa00;font-size:10px;">${si.desc}</div>
-                    <div style="color:gold;">${formatNumber(si.price)}c</div>
+                    <div style="font-size:13px;font-weight:bold;">${si.name}</div>
+                    <div style="color:#ffaa00;font-size:10px;margin-top:2px;">${si.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(si.price)}c</div>
                     ${countInfo}
                     <div class="tooltip-text">${si.tooltip}</div>
                 </div>`;
@@ -4271,15 +5393,15 @@ function updateShopUI(){
             // Rare abilities for shields tab
             const shieldsAbilities = Object.values(RARE_ABILITIES).filter(a => a.category === 'shields');
             if(shieldsAbilities.length > 0){
-                specialHtml += '</div><h3 style="color:#f54242;margin-top:15px;">🔥 RARE ABILITIES 🔥</h3><div class="shop-grid" style="margin-top:8px;">';
+                specialHtml += '</div><div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#f54242;margin-top:12px;">🔥 RARE ABILITIES</h3><div class="shop-grid" style="margin-top:8px;">';
                 for(const ab of shieldsAbilities){
                     const unlocked = ab.unlockReq();
                     const purchased = ab.purchased;
                     specialHtml += `<div class="card tooltip ${purchased?'cant-afford':''} rarity-legendary" onclick="${purchased?'':`buyRareAbility('${ab.id}')`}">
                         <div style="font-size:14px;">${ab.icon}</div>
-                        <div style="font-size:10px;">${ab.name.replace(ab.icon+' ','')}</div>
-                        <div style="color:#ffaa00;font-size:9px;">${ab.desc}</div>
-                        <div style="color:gold;">${formatNumber(ab.cost)}c</div>
+                        <div style="font-size:11px;font-weight:bold;">${ab.name.replace(ab.icon+' ','')}</div>
+                        <div style="color:#ffaa00;font-size:9px;margin-top:2px;">${ab.desc}</div>
+                        <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(ab.cost)}c</div>
                         <div style="font-size:8px;color:${unlocked?'#00ffaa':'#ff4444'};">${purchased?'✅ OWNED':unlocked?'🔓 UNLOCKED':'🔒 '+ab.unlockDesc}</div>
                         ${!unlocked && !purchased ? `<div style="font-size:8px;color:#ff4444;">🔒 LOCKED</div>` : ''}
                         <div class="tooltip-text">${ab.cooldown>0?'Cooldown: '+(ab.cooldown/1000)+'s. ':''} ${ab.unlockDesc}</div>
@@ -4290,31 +5412,59 @@ function updateShopUI(){
         }
         else if(currentShopTab === 'special'){
             // All special/ultimate abilities
-            specialHtml = '<h3 style="color:#f542d1;margin-top:15px;">🌟 ALL SPECIAL ABILITIES 🌟</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml = '<h3 style="color:#f542d1;margin-top:12px;">🌟 ALL SPECIAL ABILITIES</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const ab of Object.values(RARE_ABILITIES)){
                 const unlocked = ab.unlockReq();
                 const purchased = ab.purchased;
                 specialHtml += `<div class="card tooltip ${purchased?'cant-afford':''} rarity-mythic" onclick="${purchased?'':`buyRareAbility('${ab.id}')`}">
                     <div style="font-size:14px;">${ab.icon}</div>
-                    <div style="font-size:10px;">${ab.name.replace(ab.icon+' ','')}</div>
-                    <div style="color:#ffaa00;font-size:9px;">${ab.desc}</div>
-                    <div style="color:gold;">${formatNumber(ab.cost)}c</div>
+                    <div style="font-size:11px;font-weight:bold;">${ab.name.replace(ab.icon+' ','')}</div>
+                    <div style="color:#ffaa00;font-size:9px;margin-top:2px;">${ab.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(ab.cost)}c</div>
                     <div style="font-size:8px;color:${unlocked?'#00ffaa':'#ff4444'};">${purchased?'✅ OWNED':unlocked?'🔓 UNLOCKED':'🔒 '+ab.unlockDesc}</div>
                     ${!unlocked && !purchased ? `<div style="font-size:8px;color:#ff4444;">🔒 LOCKED</div>` : ''}
                     <div class="tooltip-text">${ab.cooldown>0?'Cooldown: '+(ab.cooldown/1000)+'s. ':''}Category: ${ab.category}. ${ab.unlockDesc}</div>
                 </div>`;
             }
             // Also show all special items
-            specialHtml += '</div><h3 style="color:#ffaa00;margin-top:15px;">✨ ALL SPECIAL ITEMS ✨</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml += '</div><div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#ffaa00;margin-top:12px;">✨ ALL SPECIAL ITEMS</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const si of SPECIAL_ITEMS_DATA){
                 const owned = si.ownedCheck();
                 const countInfo = si.countHtml ? `<div style="font-size:9px;color:#aaa;">${si.countHtml()}</div>` : '';
                 specialHtml += `<div class="card tooltip ${owned?'cant-afford':''}" onclick="${owned?'':`buySpecialItem('${si.id}')`}">
-                    <div style="font-size:14px;">${si.name}</div>
-                    <div style="color:#ffaa00;font-size:10px;">${si.desc}</div>
-                    <div style="color:gold;">${formatNumber(si.price)}c</div>
+                    <div style="font-size:13px;font-weight:bold;">${si.name}</div>
+                    <div style="color:#ffaa00;font-size:10px;margin-top:2px;">${si.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(si.price)}c</div>
                     ${countInfo}
                     <div class="tooltip-text">${si.tooltip}</div>
+                </div>`;
+            }
+            specialHtml += '</div>';
+        }
+        else if(currentShopTab === 'prestige'){
+            specialHtml = `<div style="text-align:center;margin:10px 0;">
+                <h3 style="color:#FFD700;">⭐ PRESTIGE SHOP</h3>
+                <div style="color:#FFD700;font-size:14px;">Level: ${prestigeLevel} | Points: ${prestigePoints}</div>
+                <div style="color:#ffaa00;font-size:12px;">Multiplier: +${Math.floor(prestigeMultiplier * 100 - 100)}% to credits, damage & health</div>
+                <div style="color:#aaa;font-size:10px;margin-top:4px;">Max Wave Reached: ${maxWaveReached} | Next prestige at wave ${Math.ceil((Math.floor(maxWaveReached/10)+1)*10)}+</div>
+            </div><div class="shop-grid" style="margin-top:8px;">`;
+            // Prestige upgrades
+            const prestigeShopItems = [
+                {id:'startingBonus', name:'🚀 STARTING BONUS', desc:'+500 credits per level at game start', cost:1, maxLevel:10, currentLevel: prestigeUpgrades.startingBonus||0},
+                {id:'overcharge', name:'⚡ OVERCHARGE', desc:'Overdrive charges 20% faster per level', cost:2, maxLevel:5, currentLevel: prestigeUpgrades.overcharge||0},
+                {id:'luckyStart', name:'🍀 LUCKY START', desc:'10% chance per level to start with a random rare ability', cost:3, maxLevel:5, currentLevel: prestigeUpgrades.luckyStart||0},
+                {id:'resilience', name:'💪 RESILIENCE', desc:'+10% max health per level', cost:2, maxLevel:10, currentLevel: prestigeUpgrades.resilience||0}
+            ];
+            for(const pi of prestigeShopItems){
+                const atMax = pi.currentLevel >= pi.maxLevel;
+                const canAfford = prestigePoints >= pi.cost;
+                specialHtml += `<div class="card tooltip ${atMax?'cant-afford':''}" style="border-left:3px solid #FFD700;background:rgba(255,215,0,0.08);" onclick="${atMax?'':`buyPrestigeUpgrade('${pi.id}')`}">
+                    <div style="font-size:14px;">${pi.name}</div>
+                    <div style="color:#ffaa00;font-size:9px;">${pi.desc}</div>
+                    <div style="color:#FFD700;font-size:10px;">LVL: ${pi.currentLevel}/${pi.maxLevel}</div>
+                    <div style="color:#FFD700;">⭐ ${pi.cost} pts</div>
+                    ${atMax ? '<div style="font-size:9px;color:#00ffaa;">✅ MAX</div>' : (!canAfford ? '<div style="font-size:9px;color:#ff4444;">🔒 Need more pts</div>' : '<div style="font-size:9px;color:#00ffaa;">🔓 Available</div>')}
+                    <div class="tooltip-text">Costs ${pi.cost} prestige points per level. Max ${pi.maxLevel} levels.</div>
                 </div>`;
             }
             specialHtml += '</div>';
@@ -4344,7 +5494,7 @@ class Player{
             this.tx = width/2 + (Math.random() - 0.5) * 200;
             this.ty = height/2 + (Math.random() - 0.5) * 200;
         }
-        this.x+=(this.tx-this.x)*0.2;this.y+=(this.ty-this.y)*0.2;
+        this.x+=(this.tx-this.x)*0.2*(1+getSkillBonus('moveSpeed'));this.y+=(this.ty-this.y)*0.2*(1+getSkillBonus('moveSpeed'));
         this.x=Math.max(this.r,Math.min(width-this.r,this.x));
         this.y=Math.max(this.r,Math.min(height-this.r,this.y));
         if(this.invincibleTimer>0)this.invincibleTimer--;
@@ -4358,7 +5508,7 @@ class Player{
             ctx.translate((Math.random()-0.5)*10, (Math.random()-0.5)*10);
         }
         ctx.translate(this.x,this.y);
-        let maxDrones = Math.min(400, droneCount);
+        let maxDrones = Math.min(180, droneCount);
         for(let i=0;i<maxDrones;i++){
             const a=(Date.now()/400)+(i*Math.PI*2/maxDrones);
             const dx=Math.cos(a)*55,dy=Math.sin(a)*45;
@@ -4380,18 +5530,41 @@ class Player{
         if(currentSkin === 'rainbow' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive && currentSkin !== 'gold' && currentSkin !== 'blue' && currentSkin !== 'purple') col=`hsl(${Date.now()/10 % 360},100%,60%)`;
         if(currentSkin === 'ultra' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive && currentSkin !== 'gold' && currentSkin !== 'blue' && currentSkin !== 'purple' && currentSkin !== 'rainbow') col='#f5e642';
         if(currentSkin === 'legend' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive) col='#ff6600';
-        
+        if(currentSkin === 'phantom' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive) col='#aaaadd';
+        if(currentSkin === 'celestial' && !isOD && !synapseActive && !voidActive && !apocalypseActive && !riftActive && !primordialRageActive && !chaosRealmActive && !bugEventActive && !stableCycleActive && !lightningStormActive && !royalBlessingActive && !kingsBlessingActive && !prismActive && !doppelgangerActive) col='#ffffcc';
+
+        // Aura particles (cosmetic)
+        if(activeAura !== 'none' && Math.random() < 0.4){
+            let ac,as,avx,avy;
+            if(activeAura==='fire'){ ac='#ff4400'; as=3; avx=(Math.random()-0.5)*2; avy=-Math.random()*3-1; }
+            else if(activeAura==='ice'){ ac='#aaddff'; as=2; avx=(Math.random()-0.5)*1.5; avy=-Math.random()*2-0.5; }
+            else if(activeAura==='lightning'){ ac='#ffff00'; as=2; avx=(Math.random()-0.5)*6; avy=(Math.random()-0.5)*6; }
+            else if(activeAura==='shadow'){ ac='#440066'; as=4; avx=(Math.random()-0.5)*1; avy=Math.random()*2+0.5; }
+            else if(activeAura==='rainbow'){ ac=`hsl(${Math.random()*360},100%,60%)`; as=3; avx=(Math.random()-0.5)*3; avy=(Math.random()-0.5)*3; }
+            particles.push(new Particle(this.x+(Math.random()-0.5)*40,this.y+(Math.random()-0.5)*40,avx,avy,ac,0.5+Math.random()*0.3));
+        }
+
         ctx.fillStyle=col;ctx.shadowBlur=15;
+        if(currentSkin === 'celestial' && !isOD && !synapseActive && !voidActive) ctx.shadowBlur=35;
         if(primordialRageActive) ctx.scale(2,2);
+        if(currentSkin === 'phantom' && !isOD && !synapseActive && !voidActive) ctx.globalAlpha=0.45;
         ctx.beginPath();
         ctx.moveTo(0,-32);ctx.lineTo(28,18);ctx.lineTo(10,18);ctx.lineTo(10,32);
         ctx.lineTo(-10,32);ctx.lineTo(-10,18);ctx.lineTo(-28,18);ctx.closePath();ctx.fill();
         ctx.fillStyle='rgba(255,255,255,0.3)';
         ctx.beginPath();ctx.ellipse(0,-6,5,12,0,0,Math.PI*2);ctx.fill();
-        if(currentSkin === 'gold' || currentSkin === 'ultra' || currentSkin === 'legend'){
-            ctx.strokeStyle='gold';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,38,0,Math.PI*2);ctx.stroke();
+        if(currentSkin === 'gold' || currentSkin === 'ultra' || currentSkin === 'legend' || currentSkin === 'celestial'){
+            ctx.strokeStyle= currentSkin==='celestial'?'#ffffaa':'gold';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,38,0,Math.PI*2);ctx.stroke();
         }
         if(primordialRageActive) ctx.scale(0.5,0.5);
+        ctx.globalAlpha=1;
+        // Draw active title above ship
+        if(activeTitle !== 'none'){
+            ctx.font='bold 8px sans-serif';ctx.textAlign='center';ctx.shadowBlur=4;
+            let titleObj = COSMETIC_TITLES.find(t=>t.id===activeTitle);
+            if(titleObj) ctx.fillText(titleObj.icon+' '+titleObj.name, 0, -42);
+            ctx.textAlign='start';ctx.shadowBlur=0;
+        }
         ctx.restore();
     }
 }
@@ -4407,7 +5580,7 @@ class Enemy{
         if(endlessMode && wave>100) lm *= (1 + (wave-100)*0.002);
         if(apocalypseActive) lm *= 1.5;
         if(cosmicCollapseActive) lm *= 1.3;
-        if(doomsDayActive) lm *= 0.5;
+        if(doomsDayActive) lm *= 1.5;
         if(timeDistortionPurchased) lm *= enemySlow;
         if(isBoss){
             this.hp = Math.floor((100 + level*20) * lm);
@@ -4422,8 +5595,9 @@ class Enemy{
         this.r=isBoss?90:this.type==='tank'?35:25;
         let speedMulti = synapseActive ? 0.45 : (cosmicCollapseActive?1.2:(apocalypseActive?1.6:(riftActive?1.2:1)));
         if(timeWarpActive) speedMulti *= 0.2;
+        if(abilityTimeWarpActive) speedMulti *= 0.3;
         if(frozenTimeActive) speedMulti = 0;
-        if(doomsDayActive) speedMulti *= 0.5;
+        if(doomsDayActive) speedMulti *= 0.7;
         if(timeDistortionPurchased) speedMulti *= enemySlow;
         if(endlessMode && wave>100) speedMulti *= (1 + (wave-100)*0.001);
         this.speed=isBoss?0.35*speedMulti:{normal:1.6,zigzag:1.6,fast:3.5,tank:0.8}[this.type]*speedMulti + Math.random()*0.3;
@@ -4449,7 +5623,7 @@ class Enemy{
             if(cosmicCollapseActive) shotDelay*=0.7;
             if(riftActive) shotDelay*=0.8;
             if(frozenTimeActive) shotDelay=999999;
-            if(doomsDayActive) shotDelay*=1.5;
+            if(doomsDayActive) shotDelay*=1.3;
             if(timeDistortionPurchased) shotDelay*=1.3;
             if(Date.now()-this.lastShot>shotDelay){
                 this.lastShot=Date.now();
@@ -4551,7 +5725,7 @@ function startGame(){
     updateMusicBasedOnGameState(); // MUSIC
     
     gameState='PLAYING'; endlessMode=false; ascendTriggered=false;
-    score=0;health=100;xp=0;level=1;odCharge=0;combo=1;kills=0;
+    score=0;health=Math.floor((100+getSkillBonus('maxHealth'))*prestigeMultiplier*(1+0.1*(prestigeUpgrades.resilience||0)));maxHealth=Math.floor((100+getSkillBonus('maxHealth'))*prestigeMultiplier*(1+0.1*(prestigeUpgrades.resilience||0)));xp=0;level=1;odCharge=0;combo=1;kills=0;
     bossWarningTimer=0;waveBannerTimer=0;isPaused=false;
     wave=1;waveKills=0;waveTriggered=false;
     odActivations=0;bossesKilled=0;waveNoDamage=true;perfectWavesCount=0;
@@ -4563,15 +5737,19 @@ function startGame(){
     chaosRealmActive=false;timeWarpActive=false;goldRushActive=false;divineActive=false;bugEventActive=false;bugEventGlitch=false;
     stableCycleActive=false;tidalWaveActive=false;masqueradeActive=false;soulHarvestActive=false;soulHarvestSouls=[];
     frozenTimeActive=false;crystalRainActive=false;shadowCloneActive=false;shadowClone=null;crystals=[];
-    lightningStormActive=false;doomsDayActive=false;royalBlessingActive=false;
+    lightningStormActive=false;doomsDayActive=false;royalBlessingActive=false;greenAuraActive=false;asteroidBeltActive=false;asteroids=[];supplyDropActive=false;supplyDropCrate=null;
     starfallActive=false;starfallStars=[];infernoActive=false;chainLightningActive=false;barrierActive=false;barrierHp=0;
     soulReaperActive=false;soulReaperSoul=null;gamblerActive=false;vortexActive=false;kingsBlessingActive=false;prismActive=false;abyssActive=false;
     doppelgangerActive=false;doppelgangerClone=null;supernovaActive=false;
     spaceTreasureActive=false;spaceTreasureCrates=[];
+    divineFlashTimer=0;eventQueue=[];
     shockwaveActive=false;shockwaveTimer=0;shockwaveRadius=0;
     timeSlowActive=false;timeSlowTimer=0;
     gravityBombActive=false;gravityBombTimer=0;gravityBombPhase=0;
     regenAuraTimer=0;lightningStrikeEffect=null;
+    resourceMagnetActive=false;resourceMagnetTimer=0;
+    abilityTimeWarpActive=false;abilityTimeWarpTimer=0;
+    ultimateAnnihilationActive=false;ultimateAnnihilationTimer=0;
     blackHolePieces=0; eventCooldown=0;
     startTime=Date.now();
     enemies=[];bullets=[];eBullets=[];particles=[];items=[];floats=[];boss=null;activePowerUps={};
@@ -4582,6 +5760,9 @@ function startGame(){
     document.getElementById('od-btn').style.display='none';
     document.getElementById('ability-btns').style.display='none';
     document.getElementById('crosshair').style.display='block';
+    // Show prestige star in HUD if prestiged
+    const prestigeHud = document.getElementById('prestige-hud');
+    if(prestigeHud && prestigeLevel > 0){ prestigeHud.style.display='block'; prestigeHud.innerText='⭐ P'+prestigeLevel; }
     // New UI elements
     document.getElementById('auto-fire-btn').style.display = 'block';
     if(settings.autoFire) document.getElementById('auto-fire-btn').classList.add('active');
@@ -4589,6 +5770,30 @@ function startGame(){
     if(settings.showFPS) document.getElementById('fps-counter').style.display = 'block';
     else document.getElementById('fps-counter').style.display = 'none';
     startWave(1);
+
+    // Prestige starting bonus credits
+    if(prestigeUpgrades.startingBonus > 0){
+        let bonusCredits = prestigeUpgrades.startingBonus * 500;
+        totalCoins += bonusCredits;
+        localStorage.setItem('totalCoins', totalCoins);
+    }
+
+    // Prestige lucky start - chance to start with a random rare ability unlocked
+    if(prestigeUpgrades.luckyStart > 0){
+        let luckyChance = prestigeUpgrades.luckyStart * 0.1;
+        if(Math.random() < luckyChance){
+            let availableAbilities = Object.keys(RARE_ABILITIES).filter(k => !RARE_ABILITIES[k].purchased);
+            if(availableAbilities.length > 0){
+                let luckyKey = availableAbilities[Math.floor(Math.random() * availableAbilities.length)];
+                RARE_ABILITIES[luckyKey].purchased = true;
+                if(!selectedAbilities.includes(luckyKey) && selectedAbilities.length < 3){
+                    selectedAbilities.push(luckyKey);
+                    saveSelectedAbilities();
+                }
+                showNotification(`⭐ Lucky Start! ${RARE_ABILITIES[luckyKey].name} unlocked for this game!`, 'success');
+            }
+        }
+    }
     
     if(timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
@@ -4614,7 +5819,7 @@ function startGame(){
 }
 
 function togglePause(){
-    if(gameState==='PLAYING'){gameState='PAUSED';isPaused=true;document.getElementById('pause-screen').style.display='flex';document.getElementById('pause-btn').innerText='▶';}
+    if(gameState==='PLAYING'){gameState='PAUSED';isPaused=true;document.getElementById('pause-screen').style.display='flex';document.getElementById('pause-btn').innerText='▶';closeHomeAbilityPanel();}
     else if(gameState==='PAUSED'){gameState='PLAYING';isPaused=false;document.getElementById('pause-screen').style.display='none';document.getElementById('pause-btn').innerText='⏸';}
 }
 
@@ -4625,13 +5830,15 @@ function quitToMenu(){
     gameState='MENU';isPaused=false;
 
     // Save earned credits before quitting
-    const earned = Math.floor(score / 10);
+    const earned = Math.floor(score / 10 * (function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })() * prestigeMultiplier);
     totalCoins += earned;
     totalKills += kills;
     if(score > hiScore) hiScore = score;
     localStorage.setItem('totalCoins', totalCoins);
     localStorage.setItem('hiScore', hiScore);
     localStorage.setItem('totalKills', totalKills);
+    maxWaveReached = Math.max(maxWaveReached, wave);
+    localStorage.setItem('maxWaveReached', maxWaveReached);
     if(earned > 0) tn('noti_credits_saved', 'success', formatNumber(earned));
 
     gameLoopRunning = false;
@@ -4643,6 +5850,7 @@ function quitToMenu(){
         if(el) el.style.display='none';
     });
     document.getElementById('ability-btns').style.display='none';
+    closeHomeAbilityPanel();
     document.getElementById('vignette').style.display='none';
     document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
@@ -4702,15 +5910,19 @@ function gameOver(){
     
     gameState='GAMEOVER';
     gameLoopRunning = false;
-    const earned=Math.floor(score/10);
+    const earned=Math.floor(score/10*(function(){ let _wd=Date.now()-waveStartTime; return _wd<15000?(0.5+0.5*(_wd/15000)):1; })()*prestigeMultiplier);
     totalCoins+=earned;totalKills+=kills;
     if(score>hiScore)hiScore=score;
     localStorage.setItem('totalCoins',totalCoins);localStorage.setItem('hiScore',hiScore);localStorage.setItem('totalKills',totalKills);
+    maxWaveReached = Math.max(maxWaveReached, wave);
+    localStorage.setItem('maxWaveReached', maxWaveReached);
     if(timerInterval) clearInterval(timerInterval);
     if(animationId) cancelAnimationFrame(animationId);
     ['ui-hud','score-hud','od-btn','combo-small','pause-btn','powerup-bar','boss-warning','wave-banner','event-banner','ascend-screen','game-timer','rank-badge','combo-meter','wave-progress'].forEach(id=>document.getElementById(id).style.display='none');
     document.getElementById('ability-btns').style.display='none';
+    closeHomeAbilityPanel();
     document.getElementById('vignette').style.display='none';
+    document.getElementById('crosshair').style.display='none';
     document.getElementById('auto-fire-btn').style.display='none';
     document.getElementById('fps-counter').style.display='none';
     document.getElementById('game-over').style.display='flex';
@@ -4721,6 +5933,16 @@ function gameOver(){
          <div>WAVE: <span style="color:#00ffaa">${wave}</span></div>
          <div>RANK: <span style="color:#00ffaa">${level}</span></div>
          <div style="color:gold">CREDITS: +${formatNumber(earned)}</div>`;
+
+    // Show prestige button if wave >= 20
+    const prestigeBtn = document.getElementById('prestige-btn');
+    if(prestigeBtn){
+        if(wave >= 20){
+            prestigeBtn.style.display = 'inline-block';
+        } else {
+            prestigeBtn.style.display = 'none';
+        }
+    }
 }
 
 function fireBullets(){
@@ -4729,18 +5951,22 @@ function fireBullets(){
     let power = damageLevel*(isPower?2:1);
     power = applyCriticalHit(power);
     power *= skinDamageMultiplier;
-    if(synapseActive) power *= 2.5;
-    if(voidActive) power *= 10;
-    if(primordialRageActive) power *= 20;
-    if(chaosRealmActive) power *= 3;
-    if(apocalypseActive) power *= 2;
-    if(cosmicCollapseActive) power *= 3;
+    power *= prestigeMultiplier;
+    power *= (1 + weaponEnhancementLevel * 0.05);
+    power *= (1 + getSkillBonus('damage'));
+    if(synapseActive) power *= 4;
+    if(voidActive) power *= 15;
+    if(divineActive) power *= 200000; // GOD MODE damage during Divine Intervention
+    if(primordialRageActive) power *= 30;
+    if(chaosRealmActive) power *= 5;
+    if(apocalypseActive) power *= 3;
+    if(cosmicCollapseActive) power *= 5;
     if(riftActive) power *= riftMultiplier;
-    if(goldRushActive) power *= 2;
-    if(bugEventActive) power *= 5;
-    if(stableCycleActive) power *= 1.5;
-    if(royalBlessingActive) power *= 3;
-    if(kingsBlessingActive) power *= 5;
+    if(goldRushActive) power *= 3;
+    if(bugEventActive) power *= 8;
+    if(stableCycleActive) power *= 2.5;
+    if(royalBlessingActive) power *= 5;
+    if(kingsBlessingActive) power *= 8;
     if(prismActive) power *= 1.5;
     let color=isOD?'#ff00ff':synapseActive?'#ff66ff':voidActive?'#aa66ff':primordialRageActive?'#ff0000':chaosRealmActive?`hsl(${chaosHue},100%,60%)`:apocalypseActive?'#ff0000':cosmicCollapseActive?'#88aaff':riftActive?'#aa66ff':bugEventActive?'#00ff00':stableCycleActive?'#88aaff':lightningStormActive?'#ffff00':royalBlessingActive?'#ffdd00':kingsBlessingActive?'#ffaa00':prismActive?'#ff88ff':doppelgangerActive?'#ff88ff':isRapid?'#00ffff':'#00d2ff';
     const px=player.x,py=player.y-28;
@@ -4792,7 +6018,7 @@ function loop(){
     if(soulHarvestActive && Date.now()>soulHarvestTimer) soulHarvestActive=false;
     if(timeWarpActive && Date.now()>timeWarpTimer) timeWarpActive=false;
     if(goldRushActive && Date.now()>goldRushTimer) goldRushActive=false;
-    if(divineActive && Date.now()>divineTimer) divineActive=false;
+    if(divineActive && Date.now()>divineTimer){ divineActive=false; if(player) player.invincibleTimer=0; }
     if(bugEventActive && Date.now()>eventTimer) { bugEventActive=false; bugEventGlitch=false; }
     if(frozenTimeActive && Date.now()>eventTimer) frozenTimeActive=false;
     if(crystalRainActive && Date.now()>eventTimer) crystalRainActive=false;
@@ -4812,9 +6038,10 @@ function loop(){
         primordialRageActive=false; blackHoleActive=false; chaosRealmActive=false; timeWarpActive=false; goldRushActive=false; divineActive=false; bugEventActive=false; bugEventGlitch=false;
         stableCycleActive=false; tidalWaveActive=false; masqueradeActive=false; soulHarvestActive=false; frozenTimeActive=false; crystalRainActive=false; shadowCloneActive=false;
         lightningStormActive=false; doomsDayActive=false; royalBlessingActive=false; starfallActive=false; infernoActive=false; chainLightningActive=false; barrierActive=false;
-        soulReaperActive=false; vortexActive=false; kingsBlessingActive=false; prismActive=false; abyssActive=false; doppelgangerActive=false; supernovaActive=false; spaceTreasureActive=false;
+        soulReaperActive=false; vortexActive=false; kingsBlessingActive=false; prismActive=false; abyssActive=false; doppelgangerActive=false; supernovaActive=false; spaceTreasureActive=false; asteroidBeltActive=false; asteroids=[]; supplyDropActive=false; supplyDropCrate=null; greenAuraActive=false;
         riftMultiplier=1;
         document.getElementById('event-banner').style.display='none'; startEventCooldown();
+        processEventQueue();
     }
     
     // Starfall effect (simplified)
@@ -4835,8 +6062,8 @@ function loop(){
                 showNotification(`⭐ Star collected! +${bonus} GEMSTONES!`, 'success');
             }
         }
-        if(Math.random()<0.2){
-            starfallStars.push(new StarfallStar(Math.random()*width, -20, 8+Math.random()*8, 50+Math.floor(Math.random()*100)));
+        if(Math.random()<0.08){
+            starfallStars.push(new StarfallStar(Math.random()*width, -20, 8+Math.random()*8, 30+Math.floor(Math.random()*60)));
         }
     }
 
@@ -4874,7 +6101,80 @@ function loop(){
             if(c.y>height+50){ spaceTreasureCrates.splice(i,1); }
         }
     } else if(spaceTreasureActive){ spaceTreasureActive=false; spaceTreasureCrates=[]; }
-    
+
+    // Asteroid Belt event logic
+    if(asteroidBeltActive && Date.now()<asteroidBeltTimer){
+        // Spawn asteroids periodically
+        if(Math.random()<0.06 && asteroids.length<12){
+            const sizes = ['small','small','small','medium','medium','large'];
+            const sz = sizes[Math.floor(Math.random()*sizes.length)];
+            asteroids.push(new Asteroid(-30, 40+Math.random()*(height-80), sz));
+        }
+        // Update asteroids
+        for(let i=asteroids.length-1;i>=0;i--){
+            let a=asteroids[i]; a.update(); a.draw();
+            // Check bullet collision
+            let destroyed=false;
+            for(let j=0;j<bullets.length;j++){
+                const b=bullets[j];
+                if(Math.hypot(b.x-a.x,b.y-a.y)<a.r){
+                    a.hp-=b.p;
+                    if(!b.isLaser) bullets.splice(j,1);
+                    if(a.hp<=0){
+                        destroyed=true;
+                        totalCoins+=a.coins; localStorage.setItem('totalCoins',totalCoins);
+                        gemstones+=a.gems*gemMultiplier; saveGemstones();
+                        floats.push({txt:'+'+a.coins+'c +'+a.gems+'💎',x:a.x,y:a.y-20,l:1,c:'#ffaa44',size:14});
+                        for(let k=0;k<8;k++) particles.push(new Particle(a.x,a.y,(Math.random()-0.5)*8,(Math.random()-0.5)*8,'#aa6644',0.8));
+                    }
+                    break;
+                }
+            }
+            if(destroyed){ asteroids.splice(i,1); }
+            else if(a.x>width+60){ asteroids.splice(i,1); }
+        }
+    } else if(asteroidBeltActive){ asteroidBeltActive=false; asteroids=[]; }
+
+    // Supply Drop event logic
+    if(supplyDropActive && Date.now()<supplyDropTimer && supplyDropCrate && !supplyDropCrate.claimed){
+        const c = supplyDropCrate;
+        // Pulsing glow
+        ctx.fillStyle=`rgba(0,255,170,${0.3+Math.sin(Date.now()/200)*0.15})`;
+        ctx.shadowBlur=15; ctx.beginPath(); ctx.arc(c.x,c.y,30+Math.sin(Date.now()/150)*5,0,Math.PI*2); ctx.fill();
+        ctx.shadowBlur=0;
+        // Crate
+        ctx.fillStyle='#44ffaa'; ctx.fillRect(c.x-18,c.y-18,36,36);
+        ctx.strokeStyle='#00aa66'; ctx.lineWidth=2; ctx.strokeRect(c.x-18,c.y-18,36,36);
+        ctx.fillStyle='#000'; ctx.font='bold 18px sans-serif'; ctx.textAlign='center'; ctx.fillText('📦',c.x,c.y+7); ctx.textAlign='start';
+        // Timer bar
+        const timeLeft = (supplyDropTimer-Date.now())/8000;
+        ctx.fillStyle='#333'; ctx.fillRect(c.x-20,c.y+24,40,4);
+        ctx.fillStyle='#44ffaa'; ctx.fillRect(c.x-20,c.y+24,40*timeLeft,4);
+        // Collection check
+        if(player && Math.hypot(c.x-player.x,c.y-player.y)<45){
+            c.claimed = true;
+            if(c.type==='coins'){ let amt=3000+Math.floor(Math.random()*7000); totalCoins+=amt; localStorage.setItem('totalCoins',totalCoins); floats.push({txt:'+'+formatNumber(amt)+' 💰',x:c.x,y:c.y-30,l:1.5,c:'#00ffaa',size:16}); }
+            else if(c.type==='gems'){ let amt=100+Math.floor(Math.random()*400); gemstones+=amt*gemMultiplier; saveGemstones(); floats.push({txt:'+'+(amt*gemMultiplier)+' 💎',x:c.x,y:c.y-30,l:1.5,c:'#ff66ff',size:16}); }
+            else { activePowerUps.supplydrop_buff={name:'Supply Boost',endTime:Date.now()+15000}; floats.push({txt:'⚡ SUPPLY BOOST!',x:c.x,y:c.y-30,l:1.5,c:'#ffaa00',size:16}); }
+            for(let k=0;k<15;k++) particles.push(new Particle(c.x,c.y,(Math.random()-0.5)*10,(Math.random()-0.5)*10,'#44ffaa',0.8));
+            showNotification('📦 Supply Drop collected!', 'success');
+        }
+    } else if(supplyDropActive){ supplyDropActive=false; supplyDropCrate=null; }
+
+    // Green Aura effect (Doomsday bonus)
+    if(greenAuraActive && player){
+        ctx.strokeStyle=`rgba(0,255,0,${0.3+Math.sin(Date.now()/100)*0.15})`;
+        ctx.lineWidth=2; ctx.beginPath(); ctx.arc(player.x,player.y,40+Math.sin(Date.now()/120)*5,0,Math.PI*2); ctx.stroke(); ctx.lineWidth=1;
+        // Damage nearby enemies
+        for(let i=0;i<enemies.length;i++){
+            let e=enemies[i];
+            if(Math.hypot(e.x-player.x,e.y-player.y)<50){
+                e.hp -= 0.3;
+                if(Math.random()<0.1) particles.push(new Particle(e.x,e.y,(Math.random()-0.5)*3,(Math.random()-0.5)*3,'#00ff00',0.5));
+            }
+        }
+    }
+
     // Update music based on game state
     updateMusicBasedOnGameState();
     
@@ -4892,7 +6192,11 @@ function loop(){
     } else if(apocalypseActive){ ctx.fillStyle = `rgba(80,20,20,0.5)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(riftActive){ ctx.fillStyle = `rgba(100,30,120,0.3)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(goldRushActive){ ctx.fillStyle = `rgba(80,60,0,0.4)`; ctx.fillRect(0,0,width,height); drawNebula();
-    } else if(divineActive){ ctx.fillStyle = `rgba(255,200,0,0.2)`; ctx.fillRect(0,0,width,height); drawNebula();
+    } else if(divineActive){ ctx.fillStyle = `rgba(255,200,0,0.25)`; ctx.fillRect(0,0,width,height); drawNebula();
+        // Golden light rays
+        ctx.save(); ctx.globalAlpha=0.15;
+        for(let r=0;r<8;r++){ const a=r*Math.PI/4+Date.now()/3000; ctx.fillStyle='#ffdd00'; ctx.beginPath(); ctx.moveTo(width/2,height/2); ctx.lineTo(width/2+Math.cos(a)*width,height/2+Math.sin(a)*width); ctx.lineTo(width/2+Math.cos(a+0.15)*width,height/2+Math.sin(a+0.15)*width); ctx.fill(); }
+        ctx.restore();
     } else if(bugEventActive){ ctx.fillStyle = `rgba(0,255,0,0.1)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(stableCycleActive){ ctx.fillStyle = `rgba(100,150,255,0.2)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(tidalWaveActive){ ctx.fillStyle = `rgba(0,100,150,0.3)`; ctx.fillRect(0,0,width,height); drawNebula();
@@ -4914,11 +6218,30 @@ function loop(){
     } else if(prismActive){ ctx.fillStyle = `rgba(127,68,127,0.2)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(abyssActive){ ctx.fillStyle = `rgba(34,0,85,0.3)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(spaceTreasureActive){ ctx.fillStyle = `rgba(80,60,0,0.3)`; ctx.fillRect(0,0,width,height); drawNebula();
+    } else if(asteroidBeltActive){ ctx.fillStyle = `rgba(80,50,20,0.3)`; ctx.fillRect(0,0,width,height); drawNebula();
+    } else if(supplyDropActive){ ctx.fillStyle = `rgba(0,60,40,0.25)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else if(doppelgangerActive){ ctx.fillStyle = `rgba(127,68,127,0.2)`; ctx.fillRect(0,0,width,height); drawNebula();
     } else { ctx.clearRect(0,0,width,height); ctx.fillStyle='#000'; ctx.fillRect(0,0,width,height); drawNebula(); }
+
+    // Divine flash overlay - golden screen for entire duration
+    if(divineActive && Date.now()<divineTimer){
+        const elapsed = (Date.now() - (divineTimer - 120000)) / 120000;
+        const pulse = 0.15 + Math.sin(Date.now()/300)*0.08;
+        ctx.fillStyle=`rgba(255,220,0,${pulse})`; ctx.fillRect(0,0,width,height);
+        // Golden light rays
+        ctx.save(); ctx.globalAlpha=0.25+Math.sin(Date.now()/500)*0.1;
+        for(let r=0;r<12;r++){ const a=r*Math.PI/6+Date.now()/2000; ctx.fillStyle='#ffdd00'; ctx.beginPath(); ctx.moveTo(width/2,height/2); ctx.lineTo(width/2+Math.cos(a)*width,height/2+Math.sin(a)*width); ctx.lineTo(width/2+Math.cos(a+0.1)*width,height/2+Math.sin(a+0.1)*width); ctx.fill(); }
+        ctx.restore();
+    } else if(divineFlashTimer && Date.now()<divineFlashTimer){
+        const fade = (divineFlashTimer-Date.now())/3000;
+        ctx.fillStyle=`rgba(255,220,0,${fade*0.7})`; ctx.fillRect(0,0,width,height);
+        ctx.save(); ctx.globalAlpha=fade*0.4;
+        for(let r=0;r<12;r++){ const a=r*Math.PI/6+Date.now()/2000; ctx.fillStyle='#ffdd00'; ctx.beginPath(); ctx.moveTo(width/2,height/2); ctx.lineTo(width/2+Math.cos(a)*width,height/2+Math.sin(a)*width); ctx.lineTo(width/2+Math.cos(a+0.1)*width,height/2+Math.sin(a+0.1)*width); ctx.fill(); }
+        ctx.restore();
+    } else { divineFlashTimer=0; }
     
     stars.forEach(s=>{
-        if(gameState==='PLAYING')s.y+= (isOD||synapseActive||apocalypseActive||primordialRageActive||cosmicCollapseActive||chaosRealmActive||bugEventActive||stableCycleActive||lightningStormActive||royalBlessingActive||kingsBlessingActive||prismActive||doppelgangerActive)?s.v*5:s.v;
+        if(gameState==='PLAYING')s.y+=((isOD||synapseActive||apocalypseActive||primordialRageActive||cosmicCollapseActive||chaosRealmActive||bugEventActive||stableCycleActive||lightningStormActive||royalBlessingActive||kingsBlessingActive||prismActive||doppelgangerActive)?s.v*5:s.v);
         if(s.y>height){s.y=0;s.x=Math.random()*width;}
         let starColor=isOD?'#ff00ff':synapseActive?`hsl(${synapseBackgroundHue},80%,55%)`:primordialRageActive?'#ff0000':chaosRealmActive?`hsl(${chaosHue},100%,60%)`:cosmicCollapseActive?'#88aaff':apocalypseActive?'#ff0000':goldRushActive?'#ffaa00':bugEventActive?'#00ff00':stableCycleActive?'#88aaff':frozenTimeActive?'#88ccff':crystalRainActive?'#88ffaa':lightningStormActive?'#ffff00':royalBlessingActive?'#ffdd00':kingsBlessingActive?'#ffaa00':prismActive?'#ff88ff':doppelgangerActive?'#ff88ff':spaceTreasureActive?'#ffd700':s.v>2.5?'#aaddff':'#ffffff';
         ctx.fillStyle=starColor; ctx.globalAlpha=s.v/3; ctx.fillRect(s.x,s.y,isOD?2:1.8,isOD?10:s.v>2.5?2:1.8); ctx.globalAlpha=1;
@@ -4947,11 +6270,12 @@ function loop(){
         let spawnChance = 0.012 + (wave*0.002) + (level*0.0012);
         if(apocalypseActive) spawnChance*=2; if(cosmicCollapseActive) spawnChance*=3; if(riftActive) spawnChance*=1.5;
         if(tidalWaveActive) spawnChance*=2;
-        if(doomsDayActive) spawnChance*=0.5;
+        if(doomsDayActive) spawnChance*=3;
         if(Math.random()<spawnChance && enemies.length<20+wave) enemies.push(new Enemy());
 
         const isRapid=!!activePowerUps.rapidfire;
-        let fr=isOD||isRapid?40:Math.max(65,240-fireLevel*38);
+        let fr=isOD||isRapid?40:Math.max(65,240-fireLevel*38 - weaponEnhancementLevel*2);
+        fr /= (1 + getSkillBonus('fireRate'));
         if(synapseActive) fr*=0.55; if(primordialRageActive) fr*=0.3; if(chaosRealmActive) fr*=0.2;
         if(apocalypseActive) fr*=0.7; if(cosmicCollapseActive) fr*=0.5; if(riftActive) fr*=0.9;
         if(bugEventActive) fr*=0.3; if(stableCycleActive) fr*=0.7;
@@ -4960,7 +6284,7 @@ function loop(){
         if(doppelgangerActive) fr*=0.8;
         fr /= skinFireRateMultiplier;
         // Auto-fire: if enabled, fire automatically; otherwise only fire on click/tap
-        if(settings.autoFire && Date.now()-lastFire>fr){ if(player){fireBullets(); let maxDrones=Math.min(400, droneCount); for(let i=0;i<maxDrones;i++){ const a=(Date.now()/400)+(i*Math.PI*2/maxDrones); if(Math.random()<0.3) bullets.push(new Bullet(player.x+Math.cos(a)*55,player.y+Math.sin(a)*45,Math.ceil(damageLevel*0.55),'#00ffaa')); }} }
+        if(settings.autoFire && Date.now()-lastFire>fr){ if(player){fireBullets(); let maxDrones=Math.min(180, droneCount); for(let i=0;i<maxDrones;i++){ const a=(Date.now()/400)+(i*Math.PI*2/maxDrones); if(Math.random()<0.3) bullets.push(new Bullet(player.x+Math.cos(a)*55,player.y+Math.sin(a)*45,Math.ceil(damageLevel*0.55*(1+weaponEnhancementLevel*0.05)*(1+getSkillBonus('droneDmg'))),'#00ffaa')); }} }
 
         checkEventTrigger();
 
@@ -5028,7 +6352,7 @@ function loop(){
                     if(health>maxHealth) health = maxHealth;
                 }
             }
-            if(guardian.y>height+200){ guardian=null; activeEvent=null; }
+            if(guardian && guardian.y!==undefined && guardian.y>height+200){ guardian=null; activeEvent=null; }
         }
 
         const magnetActive=!!activePowerUps.magnet;
@@ -5038,7 +6362,7 @@ function loop(){
         for(const e of enemies){ e.update(); e.draw(); let dead=false;
             if(player && !voidActive && !primordialRageActive && !chaosRealmActive && !divineActive && !bugEventActive && !stableCycleActive && !frozenTimeActive && !royalBlessingActive && !barrierActive && !timeSlowActive && Math.hypot(e.x-player.x,e.y-player.y)<e.r+18 && player.invincibleTimer===0){
                 if(!isOD && !synapseActive){
-                    let dmg = e.isBoss?15:8; if(apocalypseActive) dmg*=1.5; if(cosmicCollapseActive) dmg*=1.3; if(doomsDayActive) dmg*=0.5;
+                    let dmg = e.isBoss?15:8; if(apocalypseActive) dmg*=1.5; if(cosmicCollapseActive) dmg*=1.3; if(doomsDayActive) dmg*=0.7;
                     dmg *= damageReduction;
                     health-=hasShieldUpgrade?Math.floor(dmg*0.5):dmg; if(settings.shake) shake=15; player.invincibleTimer=45; sfxHit(); waveNoDamage=false;
                     if(health<=0){gameOver();return;}
@@ -5077,13 +6401,13 @@ function loop(){
                         if(stableCycleActive) pointBonus*=3;
                         if(royalBlessingActive) pointBonus*=3;
                         if(kingsBlessingActive) pointBonus*=5;
-                        if(doomsDayActive) pointBonus*=2;
+                        if(doomsDayActive) pointBonus*=5;
                         pointBonus *= skinCreditMultiplier;
                         score+=pointBonus; kills++; waveKills++;
                         if(synapseActive) synapseKills++;
                         xp+=e.isBoss?35:10;
-                        if(xp>=100){ xp=0; level++; sfxLevelUp(); floats.push({txt:'▲ RANK UP!',x:player.x-40,y:player.y-25,l:1.5,c:'#00ffaa',size:20}); }
-                        odCharge=Math.min(100,odCharge+(e.isBoss?45:3));
+                        if(xp>=100){ xp=0; level++; sfxLevelUp(); floats.push({txt:'▲ RANK UP!',x:player.x-40,y:player.y-25,l:1.5,c:'#00ffaa',size:20}); awardSkillPoints(); }
+                        odCharge=Math.min(100,odCharge+(e.isBoss?45:3)*(1+0.2*(prestigeUpgrades.overcharge||0)));
                         if(e.isBoss){ bossesKilled++; boss=null;
                             // Elite rare drop for Gravity Bomb unlock
                             if(Math.random() < 0.3){
@@ -5133,7 +6457,7 @@ function loop(){
         if(guardian){ for(let j=0;j<bullets.length;j++){ if(hitBullets.has(j)) continue; const b=bullets[j];
             if(Math.hypot(b.x-guardian.x,b.y-guardian.y)<guardian.r){
                 hitBullets.add(j); guardian.hp-=b.p;
-                if(guardian.hp<=0){ guardian=null; activeEvent=null; 
+                if(guardian.hp<=0){ let gx=guardian.x,gy=guardian.y; guardian=null; activeEvent=null; 
                     let pointBonus = 50000;
                     if(goldRushActive) pointBonus*=10;
                     if(bugEventActive) pointBonus*=5;
@@ -5144,7 +6468,7 @@ function loop(){
                     score+=pointBonus; totalCoins+=5000;
                     if(!skinUnlocked){ skinUnlocked=true; localStorage.setItem('skinUnlocked','true'); showAchievementPopup('👑 GUARDIAN DEFEATED', 'Golden skin unlocked!'); }
                     let count=parseInt(localStorage.getItem('guardianDefeatedCount')||0)+1; localStorage.setItem('guardianDefeatedCount',count);
-                    guardianDefeated=true; for(let k=0;k<50;k++) particles.push(new Particle(guardian.x,guardian.y,(Math.random()-0.5)*20,(Math.random()-0.5)*20,'gold',1));
+                    guardianDefeated=true; for(let k=0;k<50;k++) particles.push(new Particle(gx,gy,(Math.random()-0.5)*20,(Math.random()-0.5)*20,'gold',1));
                     checkAchievements();
                 } break;
             }}
@@ -5177,7 +6501,7 @@ function loop(){
         eBullets.length=0; eBullets.push(...nextEBullets);
 
         for(const it of items){ it.y+=it.vy||2;
-            const d=Math.hypot(it.x-player.x,it.y-player.y); const pull=magnetActive?280:100;
+            const d=Math.hypot(it.x-player.x,it.y-player.y); const pull=magnetActive?280:(100+resourceCollectionLevel*15+getSkillBonus('magnetRange'));
             if(d<pull){ it.x+=(player.x-it.x)*0.16; it.y+=(player.y-it.y)*0.16; }
             let keep=true;
             if(d<30){
@@ -5193,6 +6517,7 @@ function loop(){
                     if(royalBlessingActive) bonus*=3;
                     if(kingsBlessingActive) bonus*=5;
                     bonus *= skinCreditMultiplier;
+                    { let _wd=Date.now()-waveStartTime; if(_wd<15000) bonus*=(0.5+0.5*(_wd/15000)); }
                     totalCoins+=bonus; sfxCoin(); floats.push({txt:'+'+bonus+'c',x:it.x,y:it.y,l:0.8,c:'gold',size:12}); }
                 keep=false;
             }
@@ -5223,7 +6548,7 @@ function loop(){
         // Regeneration Aura
         if(RARE_ABILITIES.regenAura.purchased){
             regenAuraTimer++;
-            if(regenAuraTimer >= 300){ // ~5 seconds at 60fps
+            if(regenAuraTimer >= 180){ // ~3 seconds at 60fps
                 regenAuraTimer = 0;
                 health = Math.min(maxHealth, health + 1);
                 if(player && player.x && player.y) particles.push(new Particle(player.x, player.y-20, 0, -2, '#00ffaa', 0.6));
@@ -5250,7 +6575,6 @@ function loop(){
         if(gravityBombActive && Date.now() < gravityBombTimer){
             const elapsed = gravityBombTimer - Date.now();
             if(elapsed > 1500){
-                // Pull phase
                 gravityBombPhase = 0;
                 for(let i=0;i<enemies.length;i++){
                     let e=enemies[i];
@@ -5266,7 +6590,7 @@ function loop(){
                 }
                 ctx.fillStyle='rgba(68,0,170,0.4)'; ctx.beginPath(); ctx.arc(gravityBombCenter.x,gravityBombCenter.y,30,0,Math.PI*2); ctx.fill();
             } else if(gravityBombPhase === 0){
-                // Explode!
+                // Explode! Deal damage to all pulled enemies
                 gravityBombPhase = 1;
                 for(let i=enemies.length-1;i>=0;i--){
                     let e=enemies[i];
@@ -5304,6 +6628,42 @@ function loop(){
             }
             ctx.lineWidth=1; ctx.shadowBlur=0;
         } else { lightningStrikeEffect = null; }
+        // Resource Magnet effect - attract all items on screen
+        if(resourceMagnetActive && Date.now() < resourceMagnetTimer){
+            for(const it of items){
+                if(player){
+                    const dx = player.x - it.x, dy = player.y - it.y;
+                    const dist = Math.hypot(dx, dy);
+                    if(dist > 5){ it.x += dx/dist * 20; it.y += dy/dist * 20; }
+                }
+            }
+            if(player){
+                ctx.strokeStyle = `rgba(255,204,0,${0.4 + Math.sin(Date.now()/100)*0.2})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 280+Math.sin(Date.now()/150)*30, 0, Math.PI*2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        } else { resourceMagnetActive = false; }
+        // Time Warp ability effect - slow enemies
+        if(abilityTimeWarpActive && Date.now() < abilityTimeWarpTimer){
+            if(player){
+                ctx.strokeStyle = `rgba(0,204,255,${0.3 + Math.sin(Date.now()/100)*0.2})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 80+Math.sin(Date.now()/150)*10, 0, Math.PI*2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        } else { abilityTimeWarpActive = false; }
+        // Ultimate Annihilation invincibility effect
+        if(ultimateAnnihilationActive && Date.now() < ultimateAnnihilationTimer){
+            if(player){
+                ctx.strokeStyle = `rgba(255,0,0,${0.5 + Math.sin(Date.now()/80)*0.3})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 45+Math.sin(Date.now()/100)*8, 0, Math.PI*2); ctx.stroke();
+                ctx.strokeStyle = `rgba(255,100,0,${0.3 + Math.sin(Date.now()/120)*0.2})`;
+                ctx.beginPath(); ctx.arc(player.x, player.y, 55+Math.sin(Date.now()/80)*10, 0, Math.PI*2); ctx.stroke();
+                ctx.lineWidth = 1;
+            }
+        } else { ultimateAnnihilationActive = false; }
         // Update ability buttons
         updateAbilityButtons();
 
@@ -5370,6 +6730,9 @@ window.addEventListener('keydown',e=>{
     if(e.key==='3' && gameState==='PLAYING') activateRareAbility('timeSlow');
     if(e.key==='4' && gameState==='PLAYING') activateRareAbility('gravityBomb');
     if(e.key==='5' && gameState==='PLAYING') activateRareAbility('lightningStrike');
+    if(e.key==='6' && gameState==='PLAYING') activateRareAbility('resourceMagnet');
+    if(e.key==='7' && gameState==='PLAYING') activateRareAbility('timeWarp');
+    if(e.key==='8' && gameState==='PLAYING') activateRareAbility('ultimateAnnihilation');
 });
 
 // INIT
@@ -5502,6 +6865,5 @@ document.body.addEventListener('touchstart', initMusicOnFirstInteraction);
     <div id="streak-popup-rewards"></div>
     <button class="streak-claim-btn" onclick="claimStreakReward()" id="streak-claim-btn">CLAIM REWARD</button>
 </div>
-</script>
 </body>
 </html>
