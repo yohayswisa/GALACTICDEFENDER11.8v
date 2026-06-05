@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galactic Defender - UPDATE 11.9</title>
+    <title>Galactic Defender - UPDATE 12.0</title>
     <style>
         * { box-sizing: border-box; user-select: none; }
         body { 
@@ -24,33 +24,33 @@
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: flex-start; align-items: center; z-index: 100; text-align: center; backdrop-filter: blur(6px); overflow-y: auto; padding: 20px 10px; }
         #main-hub { display: flex; background: radial-gradient(circle at center, #001533 0%, #010005 100%); z-index: 150; justify-content: flex-start; }
         #game-select-screen { display: none; background: radial-gradient(circle at center, #001533 0%, #010005 100%); z-index: 140; justify-content: flex-start; }
-        #start-screen { display: none; background: radial-gradient(circle at center, #001533 0%, #010005 100%); justify-content: flex-start; position: relative; }
-        #shop-screen { background: rgba(0,10,30,0.96); border: 1px solid #00d2ff; overflow-y: auto; justify-content: flex-start; }
-        #rng-shop-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff00ff; overflow-y: auto; justify-content: flex-start; }
-        #achievements-screen { background: rgba(0,10,30,0.96); border: 1px solid gold; overflow-y: auto; justify-content: flex-start; }
-        #events-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff00ff; overflow-y: auto; justify-content: flex-start; }
-        #skins-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff66ff; overflow-y: auto; justify-content: flex-start; }
-        #settings-screen { background: rgba(0,10,30,0.96); border: 1px solid #00ffaa; overflow-y: auto; justify-content: flex-start; }
-        #update-log-screen { background: rgba(0,10,30,0.96); border: 1px solid #00ffaa; overflow-y: auto; justify-content: flex-start; }
-        #game-over { background: rgba(40,0,0,0.96); justify-content: center; }
-        #pause-screen { background: rgba(0,10,30,0.94); justify-content: center; }
-        #ascend-screen { background: rgba(0,0,0,0.95); border: 2px solid gold; justify-content: center; }
+        #start-screen { display: none; background: radial-gradient(circle at center, #001533 0%, #010005 100%); z-index: 140; justify-content: flex-start; position: relative; }
+        #shop-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(0,210,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #rng-shop-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,0,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #achievements-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,215,0,0.3); overflow-y: auto; justify-content: flex-start; }
+        #events-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,0,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #skins-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,102,255,0.3); overflow-y: auto; justify-content: flex-start; }
+        #settings-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(0,255,170,0.3); overflow-y: auto; justify-content: flex-start; }
+        #update-log-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(0,255,170,0.3); overflow-y: auto; justify-content: flex-start; }
+        #game-over { background: rgba(40,0,0,0.95); justify-content: center; }
+        #pause-screen { background: rgba(0,10,20,0.95); justify-content: center; }
+        #ascend-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,215,0,0.3); justify-content: center; }
         .side-btn { position: absolute; right: 10px; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,30,60,0.8); border: 1px solid #00d2ff; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 60; transition: 0.2s; }
         .side-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); }
         #ea-combined-side-btn { top: 80px; }
         #skins-side-btn { top: 130px; }
         #settings-side-btn { top: 180px; }
-        .settings-option { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px; margin: 8px; display: flex; justify-content: space-between; align-items: center; width: 300px; }
+        .settings-option { background: rgba(0,20,40,0.5); border-radius: 10px; padding: 10px; margin: 8px; display: flex; justify-content: space-between; align-items: center; width: 300px; border: 1px solid rgba(255,255,255,0.08); }
         .settings-toggle { width: 50px; height: 25px; background: #333; border-radius: 25px; cursor: pointer; transition: 0.2s; position: relative; }
         .settings-toggle.on { background: #00ffaa; }
         .settings-toggle.on.music-toggle-on { background: #ff66ff; }
         .settings-toggle:after { content: ""; position: absolute; width: 21px; height: 21px; background: #fff; border-radius: 50%; top: 2px; left: 3px; transition: 0.2s; }
         .settings-toggle.on:after { left: 26px; }
-        .custom-alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #001a33, #000); border: 2px solid #00d2ff; border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 15px; }
+        .custom-alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,20,40,0.95); border: 1px solid rgba(0,210,255,0.3); border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 15px; }
         .custom-alert p { margin: 0; font-size: 16px; }
         .custom-alert button { background: #00d2ff; border: none; padding: 8px 20px; border-radius: 25px; color: #000; font-weight: bold; cursor: pointer; margin-top: 10px; }
         .notification-area { position: fixed; top: 80px; right: 20px; width: 280px; z-index: 2500; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
-        .notification { background: linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,10,30,0.95)); border-right: 4px solid; border-radius: 10px; padding: 10px 15px; animation: slideInRight 0.3s ease-out, fadeOut 0.5s ease-out 4.5s forwards; transform-origin: right; pointer-events: none; }
+        .notification { background: rgba(0,20,40,0.92); border-right: 4px solid; border-radius: 10px; padding: 10px 15px; animation: slideInRight 0.3s ease-out, fadeOut 0.5s ease-out 4.5s forwards; transform-origin: right; pointer-events: none; border: 1px solid rgba(255,255,255,0.08); }
         @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; transform: translateX(100%); } }
         .notification-warning { border-right-color: #ff0044; }
@@ -64,7 +64,7 @@
         @keyframes gemPop { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -80%) scale(0.8); } }
         #game-timer { position: absolute; bottom: 12px; left: 12px; font-size: 10px; color: #aaa; background: rgba(0,0,0,0.5); padding: 2px 8px; border-radius: 10px; z-index: 50; display: none; pointer-events: none; }
         .daily-reward-btn { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 8px 15px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 12px; }
-        .daily-mission-card { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 8px 12px; margin: 5px; border-right: 3px solid #ffaa00; text-align: right; }
+        .daily-mission-card { background: rgba(0,20,40,0.5); border-radius: 10px; padding: 8px 12px; margin: 5px; border-right: 3px solid #ffaa00; text-align: right; border: 1px solid rgba(255,255,255,0.08); border-right: 3px solid #ffaa00; }
         .lootbox-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; justify-content: center; align-items: center; flex-direction: column; }
         .lootbox { width: 200px; height: 200px; background: #8B4513; border-radius: 20px; display: flex; justify-content: center; align-items: center; font-size: 80px; animation: shake 0.5s infinite; cursor: pointer; }
         @keyframes shake { 0%{transform:rotate(0deg);} 25%{transform:rotate(10deg);} 75%{transform:rotate(-10deg);} 100%{transform:rotate(0deg);} }
@@ -82,7 +82,7 @@
         @keyframes rewardReveal { 0%{opacity:0;transform:scale(0.3) rotate(-10deg);} 50%{opacity:1;transform:scale(1.15) rotate(3deg);} 70%{transform:scale(0.95) rotate(-1deg);} 100%{opacity:1;transform:scale(1) rotate(0deg);} }
         .lootbox-particle { position: absolute; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; animation: particleBurst 0.8s ease-out forwards; }
         @keyframes particleBurst { 0%{opacity:1;transform:translate(0,0) scale(1);} 100%{opacity:0;transform:translate(var(--px),var(--py)) scale(0);} }
-        .reward-card { background: linear-gradient(135deg, rgba(0,20,40,0.95), rgba(0,10,30,0.95)); border: 2px solid #00d2ff; border-radius: 16px; padding: 20px 25px; animation: rewardReveal 0.6s ease-out; }
+        .reward-card { background: rgba(0,20,40,0.9); border: 2px solid #00d2ff; border-radius: 16px; padding: 20px 25px; animation: rewardReveal 0.6s ease-out; }
         .reward-card.rarity-common { border-color: #4287f5; }
         .reward-card.rarity-rare { border-color: #42f5b6; }
         .reward-card.rarity-epic { border-color: #f5a742; }
@@ -90,48 +90,50 @@
         .reward-card.rarity-mythic { border-color: #f54242; }
         .reward-card.rarity-ultra { border-color: gold; }
         @keyframes fadeIn { from{opacity:0;transform:scale(0.5);} to{opacity:1;transform:scale(1);} }
-        .btn { background: rgba(0,30,60,0.7); color:#fff; border:1px solid #00d2ff; padding:8px 20px; border-radius:25px; font-weight:bold; cursor:pointer; margin:5px; font-size:12px; transition:0.2s; backdrop-filter:blur(3px); }
-        .btn:hover { background: rgba(0,80,120,0.8); transform:scale(1.02); }
+        .btn { background: rgba(0,20,40,0.7); color:#fff; border:1px solid rgba(255,255,255,0.15); padding:8px 20px; border-radius:25px; font-weight:bold; cursor:pointer; margin:5px; font-size:12px; transition:background 0.2s,border-color 0.2s,transform 0.2s; backdrop-filter:blur(3px); }
+        .btn:hover { background: rgba(0,50,80,0.8); border-color:rgba(0,210,255,0.5); transform:scale(1.02); }
         .btn-danger { border-color:#ff0044; background:rgba(80,0,0,0.7); }
+        .btn-danger:hover { border-color:#ff3366; background:rgba(100,0,0,0.8); }
         .btn-gem { border-color:#ff66ff; background:linear-gradient(45deg,#8e44ad,#ff00ff); }
-        .game-select-card { background:rgba(0,30,60,0.8); border:2px solid #00d2ff; border-radius:20px; padding:25px; margin:15px; width:280px; cursor:pointer; transition:0.3s; }
-        .game-select-card:hover { transform:scale(1.05); border-color:#ff00ff; background:rgba(0,50,100,0.9); }
-        .game-select-card.coming-soon { opacity:0.6; border-color:#888; cursor:not-allowed; }
-        #skill-tree-screen { background:rgba(0,10,30,0.96); border:1px solid #00ffaa; overflow-y:auto; justify-content:flex-start; }
+        .game-select-card { background:rgba(0,20,40,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:25px; margin:15px; width:280px; cursor:pointer; transition:transform 0.2s,border-color 0.2s; }
+        .game-select-card:hover { transform:scale(1.03); border-color:rgba(0,210,255,0.5); background:rgba(0,30,60,0.8); }
+        .game-select-card.coming-soon { opacity:0.6; border-color:rgba(255,255,255,0.05); cursor:not-allowed; }
+        #skill-tree-screen { background:rgba(0,10,20,0.95); border:1px solid rgba(0,255,170,0.3); overflow-y:auto; justify-content:flex-start; }
         .skill-path { display:flex; flex-direction:column; align-items:center; margin:8px; min-width:120px; }
         .skill-path-title { font-size:14px; font-weight:bold; margin-bottom:8px; text-align:center; }
         .skill-node { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer; margin:4px 0; transition:0.2s; position:relative; }
         .skill-node.locked { background:rgba(60,60,60,0.6); border:2px solid #555; opacity:0.5; cursor:not-allowed; }
         .skill-node.available { background:rgba(0,80,120,0.7); border:2px solid #00d2ff; animation:pulse 1.5s infinite; }
-        .skill-node.unlocked { background:rgba(0,180,80,0.6); border:2px solid #00ffaa; box-shadow:0 0 8px rgba(0,255,170,0.4); }
+        .skill-node.unlocked { background:rgba(0,180,80,0.6); border:2px solid #00ffaa; box-shadow:none; }
         .skill-connector { width:2px; height:12px; background:#444; }
         .skill-connector.active { background:#00ffaa; }
-        @keyframes pulse { 0%{box-shadow:0 0 5px rgba(0,210,255,0.3)} 50%{box-shadow:0 0 15px rgba(0,210,255,0.6)} 100%{box-shadow:0 0 5px rgba(0,210,255,0.3)} }
+        @keyframes pulse { 0%{box-shadow:0 0 5px rgba(0,210,255,0.2)} 50%{box-shadow:0 0 8px rgba(0,210,255,0.4)} 100%{box-shadow:0 0 5px rgba(0,210,255,0.2)} }
         .skill-tooltip { position:absolute; bottom:110%; left:50%; transform:translateX(-50%); background:#001a33; border:1px solid #00d2ff; border-radius:8px; padding:6px 10px; font-size:10px; white-space:nowrap; pointer-events:none; z-index:10; display:none; }
         .skill-node:hover .skill-tooltip { display:block; }
         .game-select-card.coming-soon:hover { transform:none; }
-        .shop-tabs { display: flex; gap: 4px; margin: 8px 0; justify-content: center; flex-wrap: wrap; }
-        .shop-tab { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.2s; }
-        .shop-tab:hover { border-color: #00d2ff; color: #fff; }
-        .shop-tab.active { background: rgba(0,80,120,0.9); border-color: #00d2ff; color: #fff; }
+        .shop-tabs { display: flex; gap: 6px; margin: 10px 0; justify-content: center; flex-wrap: wrap; }
+        .shop-tab { background: rgba(0,20,40,0.7); color: #aaa; border: 1px solid rgba(255,255,255,0.1); padding: 7px 16px; border-radius: 20px; cursor: pointer; font-size: 11px; font-weight: bold; transition: background 0.25s, border-color 0.25s, color 0.25s; }
+        .shop-tab:hover { border-color: rgba(0,210,255,0.5); color: #fff; background: rgba(0,40,70,0.7); }
+        .shop-tab.active { background: rgba(0,80,120,0.8); border-color: #00d2ff; color: #fff; }
         .ability-btn { position: absolute; bottom: 85px; right: 15px; z-index: 55; display: none; pointer-events: all; }
         .ability-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; border: 2px solid; position: relative; margin-bottom: 6px; transition: 0.2s; }
         .ability-icon:hover { transform: scale(1.1); }
         .ability-icon.on-cooldown { opacity: 0.4; cursor: not-allowed; }
         .ability-cooldown-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; font-weight: bold; }
-        .shop-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px; width:90%; max-width:380px; }
-        .card { background:rgba(255,255,255,0.05); border:1px solid #444; padding:6px; border-radius:10px; cursor:pointer; transition:0.2s; font-size:11px; position:relative; }
-        .card:hover { background:rgba(0,210,255,0.1); border-color:#00d2ff; transform:scale(1.02); }
+        .shop-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px; width:90%; max-width:380px; }
+        .card { background:rgba(0,20,40,0.6); border:1px solid rgba(255,255,255,0.1); padding:8px; border-radius:12px; cursor:pointer; transition:transform 0.2s,border-color 0.2s; font-size:11px; position:relative; }
+        .card:hover { background:rgba(0,30,60,0.7); border-color:rgba(0,210,255,0.4); transform:scale(1.02); }
         .card.cant-afford { opacity:0.4; cursor:not-allowed; }
-        .rarity-common { border-color:#4287f5; background:rgba(66,135,245,0.2); }
-        .rarity-rare { border-color:#42f5b6; background:rgba(66,245,182,0.2); }
-        .rarity-epic { border-color:#f5a742; background:rgba(245,167,66,0.2); }
-        .rarity-legendary { border-color:#f542d1; background:rgba(245,66,209,0.2); }
-        .rarity-mythic { border-color:#f54242; background:rgba(245,66,66,0.2); }
-        .rarity-ultra { border-color:#f5e642; background:rgba(245,230,66,0.2); }
+        .card.cant-afford:hover { transform:none; }
+        .rarity-common { border-left:3px solid #4287f5; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-rare { border-left:3px solid #42f5b6; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-epic { border-left:3px solid #f5a742; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-legendary { border-left:3px solid #f542d1; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-mythic { border-left:3px solid #f54242; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
+        .rarity-ultra { border-left:3px solid #f5e642; border-top:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1); border-bottom:1px solid rgba(255,255,255,0.1); background:rgba(0,20,40,0.6); }
         .gem-counter { position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); border-radius:20px; padding:5px 12px; font-size:14px; color:#ff66ff; border:1px solid #ff66ff; z-index:200; }
         .gem-counter span { color:#ffcc00; font-weight:bold; }
-        .update-item { background:rgba(0,0,0,0.5); border-radius:10px; padding:10px; margin:8px; text-align:right; border-right:3px solid #00ffaa; width: 90%; max-width: 500px; }
+        .update-item { background:rgba(0,20,40,0.5); border-radius:10px; padding:10px; margin:8px; text-align:right; border-right:3px solid #00ffaa; width: 90%; max-width: 500px; border:1px solid rgba(255,255,255,0.08); border-right:3px solid #00ffaa; }
         .update-version { color:#00ffaa; font-weight:bold; font-size:14px; }
         .update-desc { color:#ccc; font-size:12px; margin-top:5px; }
         #ui-hud { position: absolute; top: 10px; left: 10px; z-index: 50; display: none; pointer-events: none; }
@@ -143,23 +145,23 @@
         #xp-fill { background: linear-gradient(90deg, #00ffaa, #00ffff); width: 0%; }
         #od-fill { background: linear-gradient(90deg, #8e44ad, #ff00ff); width: 0%; }
         #score-hud { position: absolute; top: 10px; right: 10px; z-index: 50; display: none; pointer-events: none; text-align: right; }
-        #score-hud .score-main { font-size: 16px; font-weight: 900; color: #fff; text-shadow: 0 0 5px #00d2ff; }
+        #score-hud .score-main { font-size: 16px; font-weight: 900; color: #fff; text-shadow: none; }
         #score-hud .score-sub { font-size: 9px; color: #aaa; margin-top: 1px; }
-        #combo-small { position: absolute; bottom: 12px; right: 12px; font-size: 16px; font-weight: bold; color: #ffcc00; display: none; z-index: 50; text-shadow: 0 0 3px orange; pointer-events: none; }
+        #combo-small { position: absolute; bottom: 12px; right: 12px; font-size: 16px; font-weight: bold; color: #ffcc00; display: none; z-index: 50; text-shadow: none; pointer-events: none; }
         .combo-meter { position: absolute; bottom: 50px; right: 12px; width: 100px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; display: none; }
         .combo-meter-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ffaa00, #ff6600); transition: width 0.1s; }
         #od-btn { position: absolute; bottom: 15px; right: 15px; width: 60px; height: 60px; background: rgba(142,68,173,0.5); border: 2px solid #8e44ad; border-radius: 50%; display: none; justify-content: center; align-items: center; z-index: 500; color: #fff; font-weight: bold; cursor: pointer; font-size: 9px; line-height: 1.2; }
         #powerup-bar { position:absolute; bottom:85px; left:50%; transform:translateX(-50%); z-index:50; display:none; pointer-events:none; text-align:center; white-space:nowrap; }
         .pu-item { display:inline-block; margin:0 2px; background:rgba(0,0,0,0.7); border-radius:6px; padding:1px 5px; border:1px solid #555; font-size:9px; font-weight:bold; }
-        #wave-banner { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#00d2ff; text-shadow:0 0 15px #00d2ff; display:none; z-index:200; pointer-events:none; text-align:center; white-space:nowrap; background:rgba(0,0,0,0.6); padding:5px 15px; border-radius:30px; }
+        #wave-banner { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#00d2ff; text-shadow:none; display:none; z-index:200; pointer-events:none; text-align:center; white-space:nowrap; background:rgba(0,0,0,0.6); padding:5px 15px; border-radius:30px; border:1px solid rgba(0,210,255,0.3); }
         #event-banner { position:absolute; top:40%; left:50%; transform:translate(-50%,-50%); font-size:24px; font-weight:900; display:none; z-index:200; pointer-events:none; text-align:center; white-space:nowrap; background:rgba(0,0,0,0.7); padding:5px 15px; border-radius:30px; }
-        #boss-warning { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#ff0044; text-shadow:0 0 15px #ff0044; display:none; z-index:200; pointer-events:none; animation:bossWarn 0.3s infinite alternate; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:25px; white-space:nowrap; }
+        #boss-warning { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:28px; font-weight:900; color:#ff0044; text-shadow:none; display:none; z-index:200; pointer-events:none; animation:bossWarn 0.3s infinite alternate; background:rgba(0,0,0,0.5); padding:4px 12px; border-radius:25px; white-space:nowrap; border:1px solid rgba(255,0,68,0.3); }
         @keyframes bossWarn { from{opacity:0.8;} to{opacity:0.3;} }
         #crosshair { position:fixed; z-index:999; pointer-events:none; display:none; top:0; left:0; }
         #vignette { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:49; display:none; background:radial-gradient(circle,transparent 50%,rgba(255,0,0,0.25) 100%); }
         #nebulaCanvas { position:absolute; top:0; left:0; z-index:0; pointer-events:none; opacity:0.12; }
         .achievements-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:12px; max-width:750px; width: 95%; padding:6px; }
-        .ach-card { background:rgba(0,0,0,0.6); border:1px solid #555; border-radius:6px; padding:8px 10px; text-align:right; font-size:12px; position:relative; transition:0.2s; overflow:hidden; }
+        .ach-card { background:rgba(0,20,40,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 10px; text-align:right; font-size:12px; position:relative; transition:border-color 0.2s; overflow:hidden; }
         .ach-card.locked { opacity:0.5; filter:grayscale(0.3); }
         .ach-name { color:gold; font-weight:bold; font-size:13px; }
         .ach-desc { color:#bbb; font-size:10px; }
@@ -171,9 +173,9 @@
         .ach-card.ach-medium { border-color: #00d2ff; }
         .ach-card.ach-hard { border-color: #ff8800; }
         .ach-card.ach-extreme { border-color: #ff2200; }
-        .ach-card.ach-mythic { border-color: #ff00ff; box-shadow: 0 0 8px rgba(255,0,255,0.4); }
+        .ach-card.ach-mythic { border-color: #ff00ff; box-shadow: none; }
         .ach-card.ach-new-unlock { animation: achGlow 1s ease-out; }
-        @keyframes achGlow { 0% { box-shadow: 0 0 15px gold; } 100% { box-shadow: none; } }
+        @keyframes achGlow { 0% { border-color: gold; } 100% { border-color: #555; } }
         .ach-filter-tabs { display: flex; gap: 4px; margin: 8px 12px; flex-wrap: wrap; justify-content: center; }
         .ach-filter-tab { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 4px 10px; border-radius: 15px; cursor: pointer; font-size: 10px; font-weight: bold; transition: 0.2s; }
         .ach-filter-tab:hover { border-color: #00d2ff; color: #fff; }
@@ -183,34 +185,38 @@
         .ach-progress-bar-total { height: 8px; background: #333; border-radius: 4px; margin: 6px 12px; overflow: hidden; max-width: 750px; }
         .ach-progress-fill-total { height: 100%; background: linear-gradient(90deg, #00ff88, #00d2ff, #ff00ff); transition: width 0.3s; border-radius: 4px; }
         .events-grid { display:grid; grid-template-columns:1fr; gap:8px; margin:15px; max-width:500px; width: 95%; padding:8px; }
-        .event-card { background:rgba(0,0,0,0.7); border:1px solid #ff00ff; border-radius:10px; padding:8px 12px; text-align:right; }
+        .event-card { background:rgba(0,20,40,0.6); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:8px 12px; text-align:right; }
         .event-name { color:#ff00ff; font-weight:bold; font-size:14px; }
         .event-chance { color:#ffaa00; font-size:11px; }
         .event-desc { color:#ccc; font-size:11px; margin-top:4px; }
         .skins-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px; max-width:600px; width: 95%; padding:6px; }
-        .skin-card { background:rgba(0,0,0,0.6); border:2px solid #555; border-radius:12px; padding:10px; text-align:center; cursor:pointer; transition:0.2s; }
-        .skin-card.owned { border-color:gold; background:rgba(255,215,0,0.1); }
+        .skin-card { background:rgba(0,20,40,0.6); border:2px solid rgba(255,255,255,0.1); border-radius:12px; padding:10px; text-align:center; cursor:pointer; transition:transform 0.2s,border-color 0.2s; position:relative; }
+        .skin-card:hover { border-color:rgba(0,210,255,0.4); transform:scale(1.02); }
+        .skin-card.owned { border-color:gold; background:rgba(255,215,0,0.08); }
         .skin-card.locked { opacity:0.5; filter:grayscale(0.5); cursor:not-allowed; }
-        .skin-card.equipped { border-color:#ff66ff; box-shadow:0 0 15px #ff66ff; }
+        .skin-card.locked:hover { transform:none; }
+        .skin-card.equipped { border:2px solid #00ffaa; background:rgba(0,255,170,0.08); }
+        .skin-card.equipped::after { content:'✓ EQUIPPED'; position:absolute; top:6px; left:6px; background:#00ffaa; color:#000; font-size:8px; font-weight:bold; padding:2px 6px; border-radius:8px; }
         .skin-icon { font-size:48px; margin-bottom:8px; }
         .skin-name { font-weight:bold; font-size:14px; margin-bottom:4px; }
-        .skin-desc { font-size:10px; color:#aaa; }
+        .skin-desc { font-size:11px; color:#bbb; line-height:1.4; }
         .skin-effect { font-size:9px; color:#ffaa00; margin-top:5px; }
         .quantity-selector { display:flex; gap:4px; margin-top:6px; justify-content:center; }
-        .qty-btn { background:#333; border:none; color:#fff; border-radius:4px; padding:2px 6px; font-size:9px; cursor:pointer; }
+        .qty-btn { background:rgba(0,30,60,0.7); border:1px solid rgba(255,255,255,0.1); color:#fff; border-radius:6px; padding:3px 8px; font-size:9px; cursor:pointer; transition:background 0.2s; }
+        .qty-btn:hover { background:rgba(0,60,100,0.8); }
         #pause-btn { position:absolute; top:10px; right:50%; transform:translateX(50%); z-index:50; display:none; background:rgba(0,0,0,0.5); border:1px solid #666; color:#fff; padding:4px 12px; border-radius:15px; cursor:pointer; font-size:10px; pointer-events:all; }
-        .start-stats { background:rgba(0,0,0,0.4); border:1px solid #00d2ff33; border-radius:12px; padding:8px 15px; margin:10px 0; }
-        .reset-section { margin-top:20px; padding-top:15px; border-top:1px solid #ff0044; }
-        .achievement-popup-fixed { position: fixed; bottom: 20px; left: 20px; background: linear-gradient(135deg, rgba(0,30,60,0.95), rgba(0,10,30,0.95)); border: 2px solid gold; border-radius: 12px; padding: 10px 16px; min-width: 220px; max-width: 300px; z-index: 300; display: none; animation: slideIn 0.3s ease; pointer-events: none; }
+        .start-stats { background:rgba(0,20,40,0.5); border:1px solid rgba(0,210,255,0.15); border-radius:12px; padding:8px 15px; margin:10px 0; }
+        .reset-section { margin-top:20px; padding-top:15px; border-top:1px solid rgba(255,0,68,0.3); }
+        .achievement-popup-fixed { position: fixed; bottom: 20px; left: 20px; background: rgba(0,20,40,0.95); border: 1px solid rgba(255,215,0,0.3); border-radius: 12px; padding: 10px 16px; min-width: 220px; max-width: 300px; z-index: 300; display: none; animation: slideIn 0.3s ease; pointer-events: none; }
         .achievement-popup-fixed .title { color: gold; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
         .achievement-popup-fixed .name { font-size: 14px; font-weight: bold; margin-top: 2px; }
         .achievement-popup-fixed .desc { font-size: 11px; color: #ccc; margin-top: 2px; }
         @keyframes slideIn { from { transform: translateX(-120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         .rank-badge { position: absolute; top: 80px; left: 10px; background: linear-gradient(135deg, #ffaa00, #ff6600); border-radius: 20px; padding: 4px 12px; font-size: 10px; font-weight: bold; color: #000; z-index: 55; display: none; }
         .daily-mission-header { background: linear-gradient(135deg, #00d2ff, #00ffaa); border-radius: 10px; padding: 5px 15px; margin-bottom: 10px; color: #000; font-weight: bold; }
-        .stats-panel { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 8px; margin-top: 10px; font-size: 11px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+        .stats-panel { background: rgba(0,20,40,0.5); border-radius: 12px; padding: 10px; margin-top: 10px; font-size: 11px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; border: 1px solid rgba(255,255,255,0.08); }
         .critical-hit { animation: critFlash 0.2s ease-out; }
-        @keyframes critFlash { 0% { text-shadow: 0 0 0px #ffaa00; } 50% { text-shadow: 0 0 20px #ffaa00; } 100% { text-shadow: 0 0 0px #ffaa00; } }
+        @keyframes critFlash { 0% { color: #ffaa00; } 50% { color: #ffdd44; } 100% { color: #ffaa00; } }
         /* === NEW UI/QOL STYLES === */
         .wave-progress { position: absolute; top: 58px; right: 10px; z-index: 50; display: none; pointer-events: none; text-align: right; }
         .wave-progress-bar { width: 100px; height: 5px; background: rgba(0,0,0,0.6); border-radius: 3px; border: 1px solid #444; overflow: hidden; margin-top: 2px; }
@@ -219,7 +225,7 @@
         .auto-fire-btn { position: absolute; bottom: 45px; left: 12px; z-index: 55; display: none; background: rgba(0,30,60,0.7); border: 1px solid #00d2ff; color: #00d2ff; padding: 4px 10px; border-radius: 15px; font-size: 9px; font-weight: bold; cursor: pointer; pointer-events: all; transition: 0.2s; }
         .auto-fire-btn.active { background: rgba(0,210,255,0.3); border-color: #00ffaa; color: #00ffaa; }
         .auto-fire-btn:hover { transform: scale(1.05); }
-        .tutorial-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 200; background: rgba(0,10,30,0.96); backdrop-filter: blur(6px); text-align: center; overflow-y: auto; padding: 20px; border: 1px solid #00d2ff; }
+        .tutorial-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 200; background: rgba(0,10,20,0.95); backdrop-filter: blur(6px); text-align: center; overflow-y: auto; padding: 20px; border: 1px solid rgba(0,210,255,0.3); }
         .tutorial-screen h2 { color: #00d2ff; margin-bottom: 15px; }
         .tutorial-row { display: flex; justify-content: space-between; align-items: center; width: 280px; padding: 6px 10px; margin: 3px 0; background: rgba(0,0,0,0.5); border-radius: 8px; font-size: 12px; }
         .tutorial-key { background: rgba(0,80,120,0.8); border: 1px solid #00d2ff; border-radius: 6px; padding: 2px 10px; font-weight: bold; color: #00d2ff; font-size: 11px; }
@@ -234,7 +240,7 @@
         .controls-section h3 { color: #00ffaa; font-size: 12px; margin-bottom: 8px; }
         .control-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 8px; font-size: 10px; color: #aaa; }
         .control-key { background: rgba(0,80,120,0.5); border: 1px solid #00d2ff44; border-radius: 4px; padding: 1px 8px; color: #00d2ff; font-weight: bold; font-size: 9px; }
-        .reset-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg, #001a33, #000); border: 2px solid #ff0044; border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3500; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 12px; }
+        .reset-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,20,40,0.95); border: 1px solid rgba(255,0,68,0.3); border-radius: 15px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3500; text-align: center; backdrop-filter: blur(10px); display: none; flex-direction: column; gap: 12px; }
         .reset-modal p { margin: 0; font-size: 12px; color: #ccc; }
         .reset-modal .reset-warning { color: #ff0044; font-weight: bold; }
         .pause-volume-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; width: 260px; justify-content: space-between; }
@@ -245,30 +251,30 @@
         .pause-quick-toggle:after { content: ""; position: absolute; width: 14px; height: 14px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
         .pause-quick-toggle.on:after, .pause-quick-toggle.music-on:after { left: 20px; }
         .hub-title { color: #00d2ff; }
-.hub-btn-hero { background: linear-gradient(135deg, #00d2ff, #00ffaa); color: #000; font-size: 20px; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; cursor: pointer; margin: 8px; transition: 0.3s; }
-.hub-btn-hero:hover { transform: scale(1.08); }
-.hub-stat-card { background: rgba(0,0,0,0.6); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; border-left: 3px solid; }
+.hub-btn-hero { background: linear-gradient(135deg, #00d2ff, #00ffaa); color: #000; font-size: 20px; padding: 14px 40px; border: none; border-radius: 30px; font-weight: 900; cursor: pointer; margin: 8px; transition: transform 0.2s, box-shadow 0.2s; }
+.hub-btn-hero:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,210,255,0.2); }
+.hub-stat-card { background: rgba(0,20,40,0.6); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.08); border-left: 3px solid; }
 .hub-stat-card.stat-record { border-left-color: gold; }
 .hub-stat-card.stat-credits { border-left-color: #00ffaa; }
 .hub-stat-card.stat-gems { border-left-color: #ff66ff; }
 .hub-stat-card.stat-kills { border-left-color: #ff4444; }
 .hub-stat-card.stat-skin { border-left-color: #ffaa00; }
-.hub-section { background: rgba(0,0,0,0.4); border-radius: 15px; padding: 15px; margin: 10px auto; width: 90%; max-width: 450px; }
-.hub-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, #00d2ff, transparent); margin: 15px auto; }
-.hub-btn { background: rgba(0,30,60,0.7); color: #fff; border: 1px solid #00d2ff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: 0.3s; }
-.hub-btn:hover { background: rgba(0,80,120,0.9); transform: scale(1.05); }
-.hub-btn-reward { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: 0.3s; }
-.hub-btn-reward:hover { transform: scale(1.05); }
+.hub-section { background: rgba(0,20,40,0.5); border-radius: 12px; padding: 15px; margin: 10px auto; width: 90%; max-width: 450px; border: 1px solid rgba(255,255,255,0.08); }
+.hub-divider { width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,210,255,0.4), transparent); margin: 15px auto; }
+.hub-btn { background: rgba(0,20,40,0.7); color: #fff; border: 1px solid rgba(255,255,255,0.15); padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+.hub-btn:hover { background: rgba(0,50,80,0.8); border-color: rgba(0,210,255,0.5); transform: scale(1.03); }
+.hub-btn-reward { background: linear-gradient(45deg, #ffaa00, #ff6600); border: none; color: #fff; padding: 10px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; font-size: 14px; transition: transform 0.2s; }
+.hub-btn-reward:hover { transform: scale(1.03); }
 .hub-version-badge { display: inline-block; background: linear-gradient(135deg, #ff66ff, #8e44ad); border-radius: 15px; padding: 3px 15px; font-size: 12px; font-weight: bold; }
 .streak-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, rgba(255,100,0,0.3), rgba(255,50,0,0.2)); border: 1px solid #ff6600; border-radius: 20px; padding: 6px 14px; font-size: 14px; font-weight: bold; color: #ffaa00; margin: 8px 0; }
-.streak-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: linear-gradient(135deg, #1a0800, #000); border: 2px solid #ff6600; border-radius: 16px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; display: none; flex-direction: column; gap: 10px; animation: streakPopIn 0.4s ease-out; }
+.streak-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,20,40,0.95); border: 1px solid rgba(255,102,0,0.3); border-radius: 16px; padding: 20px; min-width: 280px; max-width: 400px; z-index: 3000; text-align: center; display: none; flex-direction: column; gap: 10px; animation: streakPopIn 0.4s ease-out; }
 @keyframes streakPopIn { 0% { transform: translate(-50%,-50%) scale(0.5); opacity:0; } 100% { transform: translate(-50%,-50%) scale(1); opacity:1; } }
 .streak-popup h2 { color: #ffaa00; margin: 0; }
 .streak-reward-item { background: rgba(255,100,0,0.15); border: 1px solid #ff660066; border-radius: 8px; padding: 6px 12px; margin: 4px 0; font-size: 13px; color: #ffcc00; }
 .streak-claim-btn { background: linear-gradient(135deg, #ff6600, #ff9900); border: none; color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 900; cursor: pointer; font-size: 14px; transition: 0.2s; margin-top: 5px; }
 .streak-claim-btn:hover { transform: scale(1.05); }
         /* === COMBINED EVENTS+ACHIEVEMENTS SCREEN === */
-        #events-achievements-screen { background: rgba(0,10,30,0.96); border: 1px solid #ff66ff; overflow-y: auto; justify-content: flex-start; }
+        #events-achievements-screen { background: rgba(0,10,20,0.95); border: 1px solid rgba(255,102,255,0.3); overflow-y: auto; justify-content: flex-start; }
         .ea-tab-bar { display: flex; gap: 4px; margin: 8px 0; justify-content: center; }
         .ea-tab-btn { background: rgba(0,30,60,0.7); color: #aaa; border: 1px solid #444; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
         .ea-tab-btn:hover { border-color: #ff66ff; color: #fff; }
@@ -276,11 +282,13 @@
         .ea-tab-panel { display: none; width: 100%; flex-direction: column; align-items: center; }
         .ea-tab-panel.active { display: flex; }
         /* === COSMETICS SHOP === */
-        .cosmetic-card { background: rgba(0,0,0,0.6); border: 2px solid #555; border-radius: 12px; padding: 10px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
-        .cosmetic-card:hover { background: rgba(100,0,150,0.2); border-color: #ff66ff; transform: scale(1.02); }
-        .cosmetic-card.owned { border-color: gold; background: rgba(255,215,0,0.1); }
-        .cosmetic-card.equipped { border-color: #00ffaa; box-shadow: 0 0 12px #00ffaa; }
+        .cosmetic-card { background:rgba(0,20,40,0.6); border:2px solid rgba(255,255,255,0.1); border-radius:12px; padding:10px; text-align:center; cursor:pointer; transition:transform 0.2s,border-color 0.2s; position:relative; }
+        .cosmetic-card:hover { background:rgba(0,30,60,0.7); border-color:rgba(255,102,255,0.4); transform:scale(1.02); }
+        .cosmetic-card.owned { border-color:gold; background:rgba(255,215,0,0.08); }
+        .cosmetic-card.equipped { border:2px solid #00ffaa; background:rgba(0,255,170,0.08); }
+        .cosmetic-card.equipped::after { content:'✓'; position:absolute; top:6px; left:6px; background:#00ffaa; color:#000; font-size:10px; font-weight:bold; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
         .cosmetic-card.cant-afford { opacity: 0.4; cursor: not-allowed; }
+        .cosmetic-card.cant-afford:hover { transform:none; }
         .cosmetic-icon { font-size: 36px; margin-bottom: 6px; }
         .cosmetic-name { font-weight: bold; font-size: 12px; margin-bottom: 2px; }
         .cosmetic-price { color: #ff66ff; font-size: 11px; }
@@ -290,9 +298,9 @@
         .tip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
         .tip-card-inner.flipped { transform: rotateY(180deg); }
         .tip-card-front, .tip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; }
-        .tip-card-front { background: linear-gradient(135deg, #001a33, #002244); border: 1px solid #00d2ff; cursor: pointer; }
-        .tip-card-front:hover { border-color: #00ffaa; }
-        .tip-card-back { background: linear-gradient(135deg, #002244, #001a33); border: 1px solid #00ffaa; transform: rotateY(180deg); font-size: 10px; color: #ccc; text-align: center; }
+        .tip-card-front { background:rgba(0,20,40,0.7); border:1px solid rgba(0,210,255,0.3); cursor:pointer; }
+        .tip-card-front:hover { border-color:rgba(0,255,170,0.5); }
+        .tip-card-back { background:rgba(0,20,40,0.7); border:1px solid rgba(0,255,170,0.3); transform: rotateY(180deg); font-size: 10px; color: #ccc; text-align: center; }
     </style>
 </head>
 <body>
@@ -322,8 +330,8 @@
 
 <!-- MAIN HUB -->
 <div id="main-hub" class="overlay">
-    <h1 class="hub-title" style="font-size:52px;margin-bottom:5px;color:#00d2ff;">✨ GALACTIC DEFENDER ✨</h1>
-    <div class="hub-version-badge">UPDATE 11.9</div>
+    <h1 class="hub-title" style="font-size:48px;margin-bottom:5px;color:#00d2ff;">GALACTIC DEFENDER</h1>
+    <div class="hub-version-badge">UPDATE 12.0</div>
     <div class="hub-divider"></div>
     <div style="margin:15px 0;">
         <button class="hub-btn-hero" onclick="openGameSelect()">🚀 PLAY NOW</button>
@@ -331,7 +339,7 @@
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:10px;">
         <button class="hub-btn" onclick="openUpdateLog()" data-i18n="update_log">📜 UPDATE LOG</button>
         <button class="hub-btn" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
-        <button class="hub-btn" style="border-color:#ffcc00;" onclick="openHomeAbilityPanel()">🎯 ABILITIES</button>
+        <button class="hub-btn" style="border-color:rgba(255,204,0,0.5);" onclick="openHomeAbilityPanel()">🎯 ABILITIES</button>
         <button class="hub-btn-reward" onclick="claimDailyReward()" data-i18n="daily_reward">🎁 DAILY REWARD</button>
     </div>
     <div class="hub-divider"></div>
@@ -340,7 +348,7 @@
         <div class="hub-stat-card stat-credits" style="margin:5px 0;font-size:14px;"><span>💰</span> CREDITS: <span id="hub-coins" style="color:#00ffaa;margin-left:auto;">0</span></div>
         <div class="hub-stat-card stat-gems" style="margin:5px 0;font-size:14px;"><span>💎</span> GEMSTONES: <span id="hub-gems" style="color:#ff66ff;margin-left:auto;">0</span></div>
         <div class="hub-stat-card stat-kills" style="margin:5px 0;font-size:14px;"><span>💀</span> KILLS: <span id="hub-kills" style="color:#ff4444;margin-left:auto;">0</span></div>
-        <div id="hub-prestige-info" style="margin:5px 0;font-size:14px;"><span>⭐</span> PRESTIGE: <span id="hub-prestige" style="color:#ffdd00;margin-left:auto;">0 (0 pts)</span></div>
+        <div id="hub-prestige-info" class="hub-stat-card" style="margin:5px 0;font-size:14px;border-left-color:#ffdd00;"><span>⭐</span> PRESTIGE: <span id="hub-prestige" style="color:#ffdd00;margin-left:auto;">0 (0 pts)</span></div>
         <div class="hub-stat-card stat-skin" style="margin:5px 0;font-size:14px;"><span>🌟</span> SKIN: <span id="hub-skin" style="color:gold;margin-left:auto;">LOCKED</span></div>
         <div id="hub-skin-progress-bar" style="width:100%;height:6px;background:#333;border-radius:3px;margin:8px auto;overflow:hidden;"><div id="hub-skin-progress-fill" style="height:100%;width:0%;background:linear-gradient(90deg,gold,#ffcc44);transition:width 0.3s;"></div></div>
         <div id="hub-skin-percent" style="font-size:10px;color:#aaa;">0/40 ACHIEVEMENTS</div>
@@ -360,14 +368,14 @@
         <h3 style="color:#00d2ff;margin-bottom:8px;">📋 GAME INFO</h3>
         <p id="game-info-text" style="font-size:12px;color:#ccc;"><strong>🚀 GALACTIC DEFENDER:</strong> Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.</p>
         <p id="game2-info-text" style="font-size:12px;color:#ccc;margin-top:8px;"><strong>❓ GAME 2 (COMING SOON):</strong> The second game is in advanced development! Expected soon with new and exciting mechanics. Stay tuned!</p>
-        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 11.9 - Prestige System, All Special Abilities Buffed!</p>
+        <p id="update-info-text" style="font-size:11px;color:#ffaa00;margin-top:8px;">✨ Update 12.0 - Complete UI Overhaul, Cleaner Design!</p>
     </div>
     <div style="color:#666;font-size:9px;margin-bottom:30px;">© Galactic Defender - All Rights Reserved</div>
 </div>
 
 <!-- HOME ABILITIES PANEL OVERLAY -->
-<div id="home-abilities-panel" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:500;display:none;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
-    <div id="home-abilities-content" style="background:linear-gradient(135deg,#001a33,#000);border:2px solid #00d2ff;border-radius:16px;padding:20px;min-width:300px;max-width:420px;max-height:85vh;overflow-y:auto;text-align:center;"></div>
+<div id="home-abilities-panel" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,10,20,0.9);z-index:500;display:none;justify-content:center;align-items:center;backdrop-filter:blur(6px);">
+    <div id="home-abilities-content" style="background:rgba(0,20,40,0.95);border:1px solid rgba(0,210,255,0.3);border-radius:16px;padding:20px;min-width:300px;max-width:420px;max-height:85vh;overflow-y:auto;text-align:center;"></div>
 </div>
 
 <div id="game-select-screen" class="overlay">
@@ -378,7 +386,7 @@
             <h2 style="color:#00d2ff;">GALACTIC DEFENDER</h2>
             <p>המשחק הקלאסי! יריות, בוסים, אירועים והישגים</p>
             <p style="color:#00ffaa;font-size:12px;margin-top:10px;">▶ לחץ כדי לשחק</p>
-            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v11.9: Prestige System, Ability Buffs!</div>
+            <div style="margin-top:8px;font-size:10px;color:#ffaa00;">✨ v12.0: Complete UI Overhaul!</div>
         </div>
         <div class="game-select-card coming-soon" onclick="showCustomAlert('משחק זה עדיין בפיתוח! יגיע בקרוב...')">
             <div style="font-size:48px;">❓</div>
@@ -468,10 +476,10 @@
         <div id="skin-percent" style="font-size:9px;color:#aaa;">0/40 ACHIEVEMENTS</div>
     </div>
     <button class="btn" onclick="startGame()" data-i18n="engage">🚀 ENGAGE</button>
-    <button class="btn" style="border-color:#ff00ff;" onclick="openShop()" data-i18n="upgrades">⚙️ UPGRADES</button>
-    <button class="btn" style="border-color:#ff66ff;" onclick="openRNGShop()" data-i18n="lootboxes">🎲 LOOTBOXES</button>
-    <button class="btn" style="border-color:#00d2ff;" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
-    <button class="btn" style="border-color:#888;margin-bottom:30px;" onclick="backToGameSelect()" data-i18n="back">← BACK</button>
+    <button class="btn" style="border-color:rgba(255,0,255,0.5);" onclick="openShop()" data-i18n="upgrades">⚙️ UPGRADES</button>
+    <button class="btn" style="border-color:rgba(255,102,255,0.5);" onclick="openRNGShop()" data-i18n="lootboxes">🎲 LOOTBOXES</button>
+    <button class="btn" style="border-color:rgba(0,210,255,0.5);" onclick="openTutorial()" data-i18n="how_to_play">🎮 HOW TO PLAY</button>
+    <button class="btn" style="border-color:rgba(255,255,255,0.15);margin-bottom:30px;" onclick="backToGameSelect()" data-i18n="back">← BACK</button>
     <div style="color:#888;font-size:8px;margin-top:8px;margin-bottom:20px;">MOUSE/TOUCH | ESC | Q bomb | O overdrive</div>
     <div id="ea-combined-side-btn" class="side-btn" onclick="openEventsAchievements()">🏆</div>
     <div id="skins-side-btn" class="side-btn" onclick="openSkins()">🎨</div>
@@ -480,7 +488,7 @@
 </div>
 
 <div id="skins-screen" class="overlay">
-    <h2 style="color:#ff66ff;" data-i18n="skins">🎨 SKIN COLLECTION 🎨</h2>
+    <h2 style="color:#ff66ff;" data-i18n="skins">🎨 SKIN COLLECTION</h2>
     <div class="skins-grid" id="skins-grid-container"></div>
     <button class="btn" onclick="closeSkins()" style="margin-bottom:30px;">← BACK</button>
 </div>
@@ -498,23 +506,24 @@
 </div>
 
 <div id="rng-shop-screen" class="overlay">
-    <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 GEMSTONE SHOP 🎲</h2>
+    <h2 style="color:#ff66ff;" data-i18n="lootboxes">🎲 GEMSTONE SHOP</h2>
     <div style="margin:10px;">💎 <span data-i18n="your_gemstones">YOUR GEMSTONES</span>: <span id="rng-gems" style="color:#ffcc00;font-size:24px;">0</span></div>
     <div class="shop-tabs">
-        <button class="shop-tab active" onclick="switchGemShopTab('lootbox')">📦 LOOTBOXES & REWARDS</button>
+        <button class="shop-tab active" onclick="switchGemShopTab('lootbox')">📦 LOOTBOXES</button>
         <button class="shop-tab" onclick="switchGemShopTab('cosmetics')">🎨 COSMETICS</button>
         <button class="shop-tab" onclick="switchGemShopTab('tips')">💡 TIPS</button>
     </div>
     <div id="gem-shop-lootbox-section">
         <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;">
-            <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div>COMMON LOOTBOX</div><div style="color:#4287f5;">🔵 COMMON</div><div style="color:gold;">50 💎</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('common')">📊 PROBS</button></div>
-            <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div>RARE LOOTBOX</div><div style="color:#42f5b6;">🟢 RARE</div><div style="color:gold;">150 💎</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('rare')">📊 PROBS</button></div>
-            <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div>EPIC LOOTBOX</div><div style="color:#f5a742;">🟡 EPIC</div><div style="color:gold;">400 💎</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('epic')">📊 PROBS</button></div>
-            <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div>LEGENDARY LOOTBOX</div><div style="color:#f542d1;">🟠 LEGENDARY</div><div style="color:gold;">1000 💎</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('legendary')">📊 PROBS</button></div>
-            <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div>MYTHIC LOOTBOX</div><div style="color:#f54242;">🔴 MYTHIC</div><div style="color:gold;">2500 💎</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('mythic')">📊 PROBS</button></div>
-            <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div>ULTRA MYTHIC BOX</div><div style="color:#f5e642;">💎 ULTRA MYTHIC</div><div style="color:gold;">10000 💎</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('ultra')">📊 PROBS</button></div>
+            <div class="card rarity-common" onclick="openLootbox('common')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">COMMON LOOTBOX</div><div style="color:#4287f5;font-size:9px;">🔵 COMMON</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 50</div><div style="font-size:9px;color:#aaa;">פריטים נדירים בסיסיים</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('common')">📊 PROBS</button></div>
+            <div class="card rarity-rare" onclick="openLootbox('rare')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">RARE LOOTBOX</div><div style="color:#42f5b6;font-size:9px;">🟢 RARE</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 150</div><div style="font-size:9px;color:#aaa;">סיכוי לפריטים טובים יותר</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('rare')">📊 PROBS</button></div>
+            <div class="card rarity-epic" onclick="openLootbox('epic')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">EPIC LOOTBOX</div><div style="color:#f5a742;font-size:9px;">🟡 EPIC</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 400</div><div style="font-size:9px;color:#aaa;">פריטים אפיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('epic')">📊 PROBS</button></div>
+            <div class="card rarity-legendary" onclick="openLootbox('legendary')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">LEGENDARY LOOTBOX</div><div style="color:#f542d1;font-size:9px;">🟠 LEGENDARY</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 1000</div><div style="font-size:9px;color:#aaa;">פריטים אגדיים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('legendary')">📊 PROBS</button></div>
+            <div class="card rarity-mythic" onclick="openLootbox('mythic')"><div style="font-size:20px;">📦</div><div style="font-weight:bold;">MYTHIC LOOTBOX</div><div style="color:#f54242;font-size:9px;">🔴 MYTHIC</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 2500</div><div style="font-size:9px;color:#aaa;">פריטים מיתיים נדירים!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('mythic')">📊 PROBS</button></div>
+            <div class="card rarity-ultra" onclick="openLootbox('ultra')"><div style="font-size:20px;">👑</div><div style="font-weight:bold;">ULTRA MYTHIC BOX</div><div style="color:#f5e642;font-size:9px;">💎 ULTRA MYTHIC</div><div style="color:gold;font-size:11px;margin-top:4px;">💎 10000</div><div style="font-size:9px;color:#aaa;">הפריטים הנדירים ביותר! כמות מוגבלת!</div><button class="btn" style="padding:2px 8px;font-size:8px;margin-top:4px;" onclick="event.stopPropagation();viewLootboxProbabilities('ultra')">📊 PROBS</button></div>
         </div>
-        <h3 style="margin-top:20px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
+        <div style="width:90%;max-width:500px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div>
+        <h3 style="margin-top:12px;color:#ffaa00;" data-i18n="buy_rewards">🎁 BUY INDIVIDUAL REWARDS</h3>
         <div class="shop-grid" style="grid-template-columns:1fr 1fr;max-width:500px;" id="individual-rewards"></div>
     </div>
     <div id="gem-shop-cosmetics-section" style="display:none;">
@@ -583,11 +592,11 @@
     </div>
 </div>
 
-<div id="prestige-modal" class="reset-modal" style="border-color:#FFD700;">
+<div id="prestige-modal" class="reset-modal" style="border-color:rgba(255,215,0,0.3);">
     <p style="color:#FFD700;font-weight:bold;font-size:16px;">⭐ PRESTIGE ⭐</p>
     <p id="prestige-modal-text" style="font-size:12px;color:#ccc;"></p>
     <div style="display:flex;gap:10px;justify-content:center;margin-top:8px;">
-        <button class="btn" style="background:linear-gradient(45deg,#8B6914,#FFD700);border-color:#FFD700;color:#000;font-weight:bold;" onclick="confirmPrestige()">⭐ CONFIRM PRESTIGE</button>
+        <button class="btn" style="background:linear-gradient(45deg,#8B6914,#FFD700);border-color:rgba(255,215,0,0.5);color:#000;font-weight:bold;" onclick="confirmPrestige()">⭐ CONFIRM PRESTIGE</button>
         <button class="btn" onclick="closePrestigeModal()">CANCEL</button>
     </div>
 </div>
@@ -611,13 +620,13 @@
 </div>
 
 <div id="shop-screen" class="overlay">
-    <h2 style="color:#00d2ff;font-size:1.3rem;" data-i18n="shop">🚀 GALACTIC DEFENDER - TECH HANGAR</h2>
-    <div id="shop-money" style="color:gold;font-size:16px;">CREDITS: 0</div>
+    <h2 style="color:#00d2ff;font-size:1.3rem;" data-i18n="shop">🚀 GALACTIC DEFENDER — TECH HANGAR</h2>
+    <div id="shop-money" style="color:gold;font-size:16px;">💰 CREDITS: 0</div>
     <div class="shop-tabs">
         <button class="shop-tab active" onclick="switchShopTab('weapons')" data-i18n="weapons">🔫 Weapons</button>
         <button class="shop-tab" onclick="switchShopTab('shields')" data-i18n="shields">🛡️ Shields</button>
         <button class="shop-tab" onclick="switchShopTab('special')" data-i18n="special_abilities">✨ Special Abilities</button>
-        <button class="shop-tab" onclick="switchShopTab('prestige')" style="border-color:#ffdd00;color:#ffdd00;">⭐ PRESTIGE</button>
+        <button class="shop-tab" onclick="switchShopTab('prestige')" style="border-color:rgba(255,221,0,0.5);color:#ffdd00;">⭐ PRESTIGE</button>
     </div>
     <div class="shop-grid" id="shop-grid-container"></div>
     <div id="shop-special-section"></div>
@@ -651,7 +660,7 @@
 
 <!-- COMBINED EVENTS & ACHIEVEMENTS SCREEN -->
 <div id="events-achievements-screen" class="overlay">
-    <h2 style="color:#ff66ff;">🏆 EVENTS & ACHIEVEMENTS 🏆</h2>
+    <h2 style="color:#ff66ff;">🏆 EVENTS & ACHIEVEMENTS</h2>
     <div class="ea-tab-bar">
         <button class="ea-tab-btn active" onclick="switchEATab('events')">📋 EVENTS</button>
         <button class="ea-tab-btn" onclick="switchEATab('achievements')">🏆 ACHIEVEMENTS</button>
@@ -693,7 +702,7 @@
     <div id="final-stats" style="font-size:12px;margin-bottom:12px;"></div>
     <button class="btn" onclick="triggerReboot()" data-i18n="re_initialize">RE-INITIALIZE</button>
     <button class="btn" onclick="quitToMenu()" data-i18n="main_menu">MAIN MENU</button>
-    <button id="prestige-btn" class="btn" style="display:none;background:linear-gradient(45deg,#8B6914,#FFD700);border:2px solid #FFD700;color:#000;font-weight:900;font-size:14px;padding:10px 25px;" onclick="showPrestigeConfirm()">⭐ PRESTIGE</button>
+    <button id="prestige-btn" class="btn" style="display:none;background:linear-gradient(45deg,#8B6914,#FFD700);border:1px solid rgba(255,215,0,0.5);color:#000;font-weight:900;font-size:14px;padding:10px 25px;" onclick="showPrestigeConfirm()">⭐ PRESTIGE</button>
 </div>
 
 <canvas id="gameCanvas"></canvas>
@@ -781,7 +790,7 @@ const TRANSLATIONS = {
         bosses_slain: "BOSSES SLAIN",
         game_info_desc: "Space shooter with bosses, special events, upgrade system, achievements and more! Defend your ship and destroy all enemies.",
         game2_desc: "The second game is in advanced development! Expected soon with new and exciting mechanics.",
-        update_info: "Update 11.0 - Language System + Hub Redesign + Space Treasure Event + QOL!",
+        update_info: "Update 12.0 - Complete UI Overhaul, Cleaner Design!",
         classic_game_desc: "The classic game! Shooting, bosses, events and achievements",
         press_to_play: "Press to play",
         weapons: "Weapons",
@@ -966,7 +975,7 @@ const TRANSLATIONS = {
         bosses_slain: "בוסים הובסו",
         game_info_desc: "משחק יריות בחלל עם בוסים, אירועים מיוחדים, מערכת שדרוגים, הישגים ועוד! הגן על החללית שלך והשמד את כל האויבים.",
         game2_desc: "המשחק השני נמצא בשלבי פיתוח מתקדמים! צפוי לצאת בקרוב עם מכניקות חדשות ומרגשות.",
-        update_info: "עדכון 11.0 - מערכת שפות + עיצוב חדש של מסך הבית + אירוע אוצר חלל + שיפורי QOL!",
+        update_info: "עדכון 12.0 - שיפוץ ממשק מלא, עיצוב נקי יותר!",
         classic_game_desc: "המשחק הקלאסי! יריות, בוסים, אירועים והישגים",
         press_to_play: "לחץ כדי לשחק",
         weapons: "נשקים",
@@ -1151,7 +1160,7 @@ const TRANSLATIONS = {
         bosses_slain: "Боссов убито",
         game_info_desc: "Космический шутер с боссами, особыми событиями, системой улучшений, достижениями и многим другим! Защищайте свой корабль и уничтожайте всех врагов.",
         game2_desc: "Вторая игра находится в продвинутой разработке! Ожидайте скоро новые захватывающие механики.",
-        update_info: "Обновление 11.0 - Система языков + Редизайн главного меню + Событие Космическое Сокровище + Улучшения!",
+        update_info: "Обновление 12.0 - Полный редизайн интерфейса, более чистый дизайн!",
         classic_game_desc: "Классическая игра! Стрельба, боссы, события и достижения",
         press_to_play: "Нажмите чтобы играть",
         weapons: "Оружие",
@@ -2312,6 +2321,19 @@ function updateAbilityButtons(){
 // DYNAMIC UPDATE LOG SYSTEM
 // ============================================
 let updateLogData = [
+    {
+        version: 'v12.0',
+        changes: [
+            'Complete shop UI overhaul - all shops redesigned with cleaner card layout, rounded corners, and consistent styling',
+            'Credit Shop: improved card layout, pill-shaped tabs, better price tags, clean quantity selectors, special items section with divider',
+            'Gem Shop: clean grid layout, rarity color coding with left-border accents, organized cosmetics with ownership indicators',
+            'Skins Shop: better card layout with equipped badge indicator and improved description readability',
+            'Hub/Home screen visual improvement: card-based sections, cleaner buttons, organized stat cards, better typography and spacing',
+            'All glowing/shimmer effects removed for a cleaner flat design (except lootbox rarity indicators which are preserved)',
+            'Bug fixes: added missing shieldHp and maxShieldHp declarations, improved consistency across UI overlays',
+            'Consistent overlay backgrounds, border styles, and hover effects across all screens'
+        ]
+    },
     {
         version: 'v11.9',
         changes: [
@@ -3582,6 +3604,8 @@ let totalKills=parseInt(localStorage.getItem('totalKills'))||0;
 let fireLevel=parseInt(localStorage.getItem('fireLevel'))||0;
 let damageLevel=parseInt(localStorage.getItem('dmgLevel'))||1;
 let hasShieldUpgrade=localStorage.getItem('hasShieldUpgrade')==='true';
+let shieldHp=0;
+let maxShieldHp=50;
 let hasSpreadShot=localStorage.getItem('hasSpreadShot')==='true';
 let hasLaser=localStorage.getItem('hasLaser')==='true';
 let droneCount=Math.min(180, parseInt(localStorage.getItem('droneCount'))||0);
@@ -5287,10 +5311,10 @@ function updateShopUI(){
         const card=document.createElement('div');
         card.className='card tooltip';
         if(it.owned===true) card.classList.add('cant-afford');
-        let content=`<div style="font-size:14px;">${it.name}</div>`;
-        if(it.level!==undefined) content+=`<div style="font-size:9px;">LVL: ${it.level}${it.maxLimit?('/'+it.maxLimit):''}</div>`;
-        if(it.owned!==undefined) content+=`<div style="font-size:9px;">${it.owned?'✅':'❌'}</div>`;
-        content+=`<div style="color:gold;">${formatNumber(it.price)}c</div>`;
+        let content=`<div style="font-size:13px;font-weight:bold;">${it.name}</div>`;
+        if(it.level!==undefined) content+=`<div style="font-size:9px;color:#aaa;">LVL: ${it.level}${it.maxLimit?('/'+it.maxLimit):''}</div>`;
+        if(it.owned!==undefined) content+=`<div style="font-size:9px;">${it.owned?'<span style="color:#00ffaa;">✅</span>':'<span style="color:#ff4444;">❌</span>'}</div>`;
+        content+=`<div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(it.price)}c</div>`;
         if(it.infinite){
             let qty=selectedQuantities[it.type]||1;
             content+=`<div class="quantity-selector">
@@ -5318,14 +5342,14 @@ function updateShopUI(){
         if(currentShopTab === 'weapons'){
             // Special items for weapons tab
             const weaponsSpecial = SPECIAL_ITEMS_DATA.filter(s => s.category === 'weapons');
-            specialHtml += '<h3 style="color:#ffaa00;margin-top:15px;">✨ SPECIAL ITEMS ✨</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml += '<div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#ffaa00;margin-top:12px;">✨ SPECIAL ITEMS</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const si of weaponsSpecial){
                 const owned = si.ownedCheck();
                 const countInfo = si.countHtml ? `<div style="font-size:9px;color:#aaa;">${si.countHtml()}</div>` : '';
                 specialHtml += `<div class="card tooltip ${owned?'cant-afford':''}" onclick="${owned?'':`buySpecialItem('${si.id}')`}">
-                    <div style="font-size:14px;">${si.name}</div>
-                    <div style="color:#ffaa00;font-size:10px;">${si.desc}</div>
-                    <div style="color:gold;">${formatNumber(si.price)}c</div>
+                    <div style="font-size:13px;font-weight:bold;">${si.name}</div>
+                    <div style="color:#ffaa00;font-size:10px;margin-top:2px;">${si.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(si.price)}c</div>
                     ${countInfo}
                     <div class="tooltip-text">${si.tooltip}</div>
                 </div>`;
@@ -5333,16 +5357,16 @@ function updateShopUI(){
             // Rare abilities for weapons tab
             const weaponsAbilities = Object.values(RARE_ABILITIES).filter(a => a.category === 'weapons');
             if(weaponsAbilities.length > 0){
-                specialHtml += '</div><h3 style="color:#f54242;margin-top:15px;">🔥 RARE ABILITIES 🔥</h3><div class="shop-grid" style="margin-top:8px;">';
+                specialHtml += '</div><div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#f54242;margin-top:12px;">🔥 RARE ABILITIES</h3><div class="shop-grid" style="margin-top:8px;">';
                 for(const ab of weaponsAbilities){
                     const unlocked = ab.unlockReq();
                     const purchased = ab.purchased;
                     const canAfford = totalCoins >= ab.cost;
                     specialHtml += `<div class="card tooltip ${purchased?'cant-afford':''} rarity-legendary" onclick="${purchased?'':`buyRareAbility('${ab.id}')`}">
                         <div style="font-size:14px;">${ab.icon}</div>
-                        <div style="font-size:10px;">${ab.name.replace(ab.icon+' ','')}</div>
-                        <div style="color:#ffaa00;font-size:9px;">${ab.desc}</div>
-                        <div style="color:gold;">${formatNumber(ab.cost)}c</div>
+                        <div style="font-size:11px;font-weight:bold;">${ab.name.replace(ab.icon+' ','')}</div>
+                        <div style="color:#ffaa00;font-size:9px;margin-top:2px;">${ab.desc}</div>
+                        <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(ab.cost)}c</div>
                         <div style="font-size:8px;color:${unlocked?'#00ffaa':'#ff4444'};">${purchased?'✅ OWNED':unlocked?'🔓 UNLOCKED':'🔒 '+ab.unlockDesc}</div>
                         ${!unlocked && !purchased ? `<div style="font-size:8px;color:#ff4444;">🔒 LOCKED</div>` : ''}
                         <div class="tooltip-text">Cooldown: ${ab.cooldown/1000}s. ${ab.unlockDesc}</div>
@@ -5354,14 +5378,14 @@ function updateShopUI(){
         else if(currentShopTab === 'shields'){
             // Special items for shields tab
             const shieldsSpecial = SPECIAL_ITEMS_DATA.filter(s => s.category === 'shields');
-            specialHtml += '<h3 style="color:#ffaa00;margin-top:15px;">✨ SPECIAL ITEMS ✨</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml += '<div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#ffaa00;margin-top:12px;">✨ SPECIAL ITEMS</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const si of shieldsSpecial){
                 const owned = si.ownedCheck();
                 const countInfo = si.countHtml ? `<div style="font-size:9px;color:#aaa;">${si.countHtml()}</div>` : '';
                 specialHtml += `<div class="card tooltip ${owned?'cant-afford':''}" onclick="${owned?'':`buySpecialItem('${si.id}')`}">
-                    <div style="font-size:14px;">${si.name}</div>
-                    <div style="color:#ffaa00;font-size:10px;">${si.desc}</div>
-                    <div style="color:gold;">${formatNumber(si.price)}c</div>
+                    <div style="font-size:13px;font-weight:bold;">${si.name}</div>
+                    <div style="color:#ffaa00;font-size:10px;margin-top:2px;">${si.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(si.price)}c</div>
                     ${countInfo}
                     <div class="tooltip-text">${si.tooltip}</div>
                 </div>`;
@@ -5369,15 +5393,15 @@ function updateShopUI(){
             // Rare abilities for shields tab
             const shieldsAbilities = Object.values(RARE_ABILITIES).filter(a => a.category === 'shields');
             if(shieldsAbilities.length > 0){
-                specialHtml += '</div><h3 style="color:#f54242;margin-top:15px;">🔥 RARE ABILITIES 🔥</h3><div class="shop-grid" style="margin-top:8px;">';
+                specialHtml += '</div><div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#f54242;margin-top:12px;">🔥 RARE ABILITIES</h3><div class="shop-grid" style="margin-top:8px;">';
                 for(const ab of shieldsAbilities){
                     const unlocked = ab.unlockReq();
                     const purchased = ab.purchased;
                     specialHtml += `<div class="card tooltip ${purchased?'cant-afford':''} rarity-legendary" onclick="${purchased?'':`buyRareAbility('${ab.id}')`}">
                         <div style="font-size:14px;">${ab.icon}</div>
-                        <div style="font-size:10px;">${ab.name.replace(ab.icon+' ','')}</div>
-                        <div style="color:#ffaa00;font-size:9px;">${ab.desc}</div>
-                        <div style="color:gold;">${formatNumber(ab.cost)}c</div>
+                        <div style="font-size:11px;font-weight:bold;">${ab.name.replace(ab.icon+' ','')}</div>
+                        <div style="color:#ffaa00;font-size:9px;margin-top:2px;">${ab.desc}</div>
+                        <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(ab.cost)}c</div>
                         <div style="font-size:8px;color:${unlocked?'#00ffaa':'#ff4444'};">${purchased?'✅ OWNED':unlocked?'🔓 UNLOCKED':'🔒 '+ab.unlockDesc}</div>
                         ${!unlocked && !purchased ? `<div style="font-size:8px;color:#ff4444;">🔒 LOCKED</div>` : ''}
                         <div class="tooltip-text">${ab.cooldown>0?'Cooldown: '+(ab.cooldown/1000)+'s. ':''} ${ab.unlockDesc}</div>
@@ -5388,29 +5412,29 @@ function updateShopUI(){
         }
         else if(currentShopTab === 'special'){
             // All special/ultimate abilities
-            specialHtml = '<h3 style="color:#f542d1;margin-top:15px;">🌟 ALL SPECIAL ABILITIES 🌟</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml = '<h3 style="color:#f542d1;margin-top:12px;">🌟 ALL SPECIAL ABILITIES</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const ab of Object.values(RARE_ABILITIES)){
                 const unlocked = ab.unlockReq();
                 const purchased = ab.purchased;
                 specialHtml += `<div class="card tooltip ${purchased?'cant-afford':''} rarity-mythic" onclick="${purchased?'':`buyRareAbility('${ab.id}')`}">
                     <div style="font-size:14px;">${ab.icon}</div>
-                    <div style="font-size:10px;">${ab.name.replace(ab.icon+' ','')}</div>
-                    <div style="color:#ffaa00;font-size:9px;">${ab.desc}</div>
-                    <div style="color:gold;">${formatNumber(ab.cost)}c</div>
+                    <div style="font-size:11px;font-weight:bold;">${ab.name.replace(ab.icon+' ','')}</div>
+                    <div style="color:#ffaa00;font-size:9px;margin-top:2px;">${ab.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(ab.cost)}c</div>
                     <div style="font-size:8px;color:${unlocked?'#00ffaa':'#ff4444'};">${purchased?'✅ OWNED':unlocked?'🔓 UNLOCKED':'🔒 '+ab.unlockDesc}</div>
                     ${!unlocked && !purchased ? `<div style="font-size:8px;color:#ff4444;">🔒 LOCKED</div>` : ''}
                     <div class="tooltip-text">${ab.cooldown>0?'Cooldown: '+(ab.cooldown/1000)+'s. ':''}Category: ${ab.category}. ${ab.unlockDesc}</div>
                 </div>`;
             }
             // Also show all special items
-            specialHtml += '</div><h3 style="color:#ffaa00;margin-top:15px;">✨ ALL SPECIAL ITEMS ✨</h3><div class="shop-grid" style="margin-top:8px;">';
+            specialHtml += '</div><div style="width:90%;max-width:380px;height:1px;background:rgba(255,255,255,0.1);margin:12px auto;"></div><h3 style="color:#ffaa00;margin-top:12px;">✨ ALL SPECIAL ITEMS</h3><div class="shop-grid" style="margin-top:8px;">';
             for(const si of SPECIAL_ITEMS_DATA){
                 const owned = si.ownedCheck();
                 const countInfo = si.countHtml ? `<div style="font-size:9px;color:#aaa;">${si.countHtml()}</div>` : '';
                 specialHtml += `<div class="card tooltip ${owned?'cant-afford':''}" onclick="${owned?'':`buySpecialItem('${si.id}')`}">
-                    <div style="font-size:14px;">${si.name}</div>
-                    <div style="color:#ffaa00;font-size:10px;">${si.desc}</div>
-                    <div style="color:gold;">${formatNumber(si.price)}c</div>
+                    <div style="font-size:13px;font-weight:bold;">${si.name}</div>
+                    <div style="color:#ffaa00;font-size:10px;margin-top:2px;">${si.desc}</div>
+                    <div style="color:gold;font-size:11px;margin-top:4px;">💰 ${formatNumber(si.price)}c</div>
                     ${countInfo}
                     <div class="tooltip-text">${si.tooltip}</div>
                 </div>`;
@@ -5419,7 +5443,7 @@ function updateShopUI(){
         }
         else if(currentShopTab === 'prestige'){
             specialHtml = `<div style="text-align:center;margin:10px 0;">
-                <h3 style="color:#FFD700;">⭐ PRESTIGE SHOP ⭐</h3>
+                <h3 style="color:#FFD700;">⭐ PRESTIGE SHOP</h3>
                 <div style="color:#FFD700;font-size:14px;">Level: ${prestigeLevel} | Points: ${prestigePoints}</div>
                 <div style="color:#ffaa00;font-size:12px;">Multiplier: +${Math.floor(prestigeMultiplier * 100 - 100)}% to credits, damage & health</div>
                 <div style="color:#aaa;font-size:10px;margin-top:4px;">Max Wave Reached: ${maxWaveReached} | Next prestige at wave ${Math.ceil((Math.floor(maxWaveReached/10)+1)*10)}+</div>
@@ -5434,7 +5458,7 @@ function updateShopUI(){
             for(const pi of prestigeShopItems){
                 const atMax = pi.currentLevel >= pi.maxLevel;
                 const canAfford = prestigePoints >= pi.cost;
-                specialHtml += `<div class="card tooltip ${atMax?'cant-afford':''}" style="border-color:#FFD700;background:rgba(255,215,0,0.1);" onclick="${atMax?'':`buyPrestigeUpgrade('${pi.id}')`}">
+                specialHtml += `<div class="card tooltip ${atMax?'cant-afford':''}" style="border-left:3px solid #FFD700;background:rgba(255,215,0,0.08);" onclick="${atMax?'':`buyPrestigeUpgrade('${pi.id}')`}">
                     <div style="font-size:14px;">${pi.name}</div>
                     <div style="color:#ffaa00;font-size:9px;">${pi.desc}</div>
                     <div style="color:#FFD700;font-size:10px;">LVL: ${pi.currentLevel}/${pi.maxLevel}</div>
